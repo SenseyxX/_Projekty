@@ -1,0 +1,7 @@
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.csprojAssemblyReference.cache
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.AssemblyInfoInputs.cache
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.AssemblyInfo.cs
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.csproj.CoreCompileInputs.cache
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Oskar\source\repos\Manmeg\Manmeg\obj\Debug\net5.0\Manmeg.MvcApplicationPartsAssemblyInfo.cache
