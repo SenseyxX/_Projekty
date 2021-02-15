@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Manmeg.Entities
 {
-        public class Users
+        public class User
         {
                 public int Id { get; set; }
                 public string Name { get; set; }
@@ -14,6 +14,11 @@ namespace Manmeg.Entities
                 public string Email { get; set; }
                 public string PhoneNumber { get; set; }
                 public int SquadId { get; set; }
+
+
+                public virtual Squad Squad { get; set; }
+                public virtual Item Item { get; set; }
+                public virtual LoanHistory LoanHistory { get; set; }
 
         }
 }

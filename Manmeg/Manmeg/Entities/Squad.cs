@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Manmeg.Entities
 {
-        public class Squads
+        public class Squad
         {
                 public int Id { get; set; }
                 public string SquadName { get; set; }
