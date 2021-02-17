@@ -1,4 +1,5 @@
 using Manmeg.Entities;
+using MeetupAPI.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,7 +35,7 @@ namespace Manmeg
                                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Manmeg", Version = "v1" });
                         });
                         services.AddAutoMapper(this.GetType().Assembly)
-                               .AddDbContext<ManmegContext>();
+                                .AddDbContext<ManmegContext>();
                 }
 
                 // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

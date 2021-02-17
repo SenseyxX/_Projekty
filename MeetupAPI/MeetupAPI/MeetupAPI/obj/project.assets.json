@@ -6173,25 +6173,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Oskar\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\ogacki\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ogacki\\source\\Projekty\\MeetupAPI_Home\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
       "projectName": "MeetupAPI",
-      "projectPath": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
-      "packagesPath": "C:\\Users\\Oskar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\MeetupAPI\\MeetupAPI\\obj\\",
+      "projectPath": "C:\\Users\\ogacki\\source\\Projekty\\MeetupAPI_Home\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
+      "packagesPath": "C:\\Users\\ogacki\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ogacki\\source\\Projekty\\MeetupAPI_Home\\MeetupAPI\\MeetupAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Oskar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\ogacki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

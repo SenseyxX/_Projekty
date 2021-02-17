@@ -12,5 +12,8 @@ namespace Manmeg.Entities
                 public string SquadOwner { get; set; }
                 public string City { get; set; }
 
+                public virtual User User { get; set; }
+                public int UserId { get; set; }
+
         }
 }
