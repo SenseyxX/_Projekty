@@ -38,7 +38,9 @@ namespace Mag
 
             services
                 .AddTransient<IItemService, ItemService>()
-                .AddTransient<IItemRepository, ItemRepository>() 
+                .AddTransient<IItemRepository, ItemRepository>()
+                .AddTransient<IUserService, UserService>()
+                .AddTransient<IUserRepository, UserRepository>()
                 .AddAutoMapper(this.GetType().Assembly)
                 .AddDbContext<MagContext>();
         }

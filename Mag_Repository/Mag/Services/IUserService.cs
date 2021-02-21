@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mag.Services
 {
-        public class IUserService
+        public interface IUserService
         {
                 Task<IEnumerable<UserDto>>GetRangeAsync();
         }

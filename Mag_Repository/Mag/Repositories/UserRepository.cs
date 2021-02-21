@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mag.Repositories
 {
-        public class UserRepository :IUserRepository
+        public sealed class UserRepository :IUserRepository
         {
                 private readonly MagContext _context;
         
@@ -16,11 +16,12 @@ namespace Mag.Repositories
                         _context = context;
                 }
 
-                public async Task<ICollection<User>> GetUsersAsync()
-
+                public async Task<ICollection<User>> GetRangeAsync()
                 {
                         return await _context.users.ToListAsync();
                 }
+
+             
 
         }
 }

@@ -7,30 +7,29 @@ using System.Threading.Tasks;
 
 namespace Mag.Services
 {
-        public class UserService:IUserService
+        public sealed class UserService:IUserService
         {
-                private readonly IUserService _userService;
-                private object _userRepository;
+                private readonly IUserRepository _userRepository;
+               
 
                 public UserService(IUserRepository userRepository)
-                { 
-                        _userRepository=userRepository;
+                {
+                        _userRepository = userRepository;
                 }
 
 
                 public async Task<IEnumerable<UserDto>> GetRangeAsync()
-
                 {
                         var users = await _userRepository.GetRangeAsync();
 
-
                         return users.Select(x => new UserDto
                         {
-                                Id=x.Id,
-                                Name=x.Name,
-                        });
-                }
+                                Id = x.Id,
+                                Name = x.Name,
 
-                
+                        });
+
+
+                }
         }
 }

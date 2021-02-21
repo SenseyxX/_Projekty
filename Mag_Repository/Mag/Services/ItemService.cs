@@ -19,21 +19,7 @@ namespace Mag.Services
         public async Task<IEnumerable<ItemDto>> GetRangeAsync()
         {
             var items = await _itemRepository.GetRangeAsync();
-
-            //var result = new List<ItemDto>();
-
-            //foreach (var item in items)
-            //{
-            //    var newItem = new ItemDto
-            //    {
-            //        Id = item.Id,
-            //        ItemName = item.ItemName,
-            //    };
-
-            //    result.Add(newItem);
-            //}
-
-            //return result;
+          
 
             return items.Select(x => new ItemDto
             {
