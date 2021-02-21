@@ -47,7 +47,7 @@ namespace Mag.Migrations
                     b.Property<int>("ActualOwnerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryForeignKey")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -76,8 +76,9 @@ namespace Mag.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
+                    b.HasIndex("CategoryForeignKey")
+                        .IsUnique()
+                        .HasFilter("[CategoryForeignKey] IS NOT NULL");
 
                     b.HasIndex("LoansHistoriesId");
 
@@ -197,9 +198,7 @@ namespace Mag.Migrations
                 {
                     b.HasOne("Mag.Entities.Category", "Category")
                         .WithOne("Item")
-                        .HasForeignKey("Mag.Entities.Item", "CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Mag.Entities.Item", "CategoryForeignKey");
 
                     b.HasOne("Mag.Entities.LoanHistory", "LoansHistories")
                         .WithMany("items")

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+HoR7NK1bzeA7VhNfVo836IXJmduJh+qz2UYsf4OLMMAcQWEf0zj/cxUcdEfYHogmL5CpRzlSdq4x8P/8w64lw==",
+  "dgSpecHash": "Akz3j4aSVc69ap2t3K/i1AtIqYFejdabbsV7cXihdhPelyrbiGiNBDLKCtUF13EOvkH1B55VJuSBsTNsNjZh5w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\Mag\\Mag\\Mag.csproj",
+  "projectFilePath": "C:\\Users\\Oskar\\source\\repos\\Repo_ess\\MeetupAPI\\Mag\\Mag\\Mag.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oskar\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Oskar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

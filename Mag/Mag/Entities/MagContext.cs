@@ -13,12 +13,12 @@ namespace Mag.Entities
     {
         string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=MagDb;Trusted_Connection=True;";
 
-        DbSet<User> users { get; set; }
-        DbSet<Squad> squads { get; set; }                                                       
-        DbSet<Category> categories { get; set; }
-        DbSet<Quality> qualities { get; set; }       
-        DbSet<LoanHistory> loanHistories { get; set; }
-        DbSet<Item> items { get; set; }
+        public DbSet<User> users { get; set; }
+        public DbSet<Squad> squads { get; set; }                                                       
+        public DbSet<Category> categories { get; set; }
+        public DbSet<Quality> qualities { get; set; }       
+        public DbSet<LoanHistory> loanHistories { get; set; }
+        public DbSet<Item> items { get; set; }
 
         /*
         Users<->Squads -Jeden do Jeden  *
@@ -36,13 +36,6 @@ namespace Mag.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-      
-                
-
-                
-                
-
-
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

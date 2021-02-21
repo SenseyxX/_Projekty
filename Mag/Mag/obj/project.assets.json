@@ -6053,11 +6053,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\Mag\\Mag\\Mag.csproj",
+      "projectUniqueName": "C:\\Users\\Oskar\\source\\repos\\Repo_ess\\MeetupAPI\\Mag\\Mag\\Mag.csproj",
       "projectName": "Mag",
-      "projectPath": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\Mag\\Mag\\Mag.csproj",
+      "projectPath": "C:\\Users\\Oskar\\source\\repos\\Repo_ess\\MeetupAPI\\Mag\\Mag\\Mag.csproj",
       "packagesPath": "C:\\Users\\Oskar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Oskar\\source\\repos\\MeetupAPI\\Mag\\Mag\\obj\\",
+      "outputPath": "C:\\Users\\Oskar\\source\\repos\\Repo_ess\\MeetupAPI\\Mag\\Mag\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
