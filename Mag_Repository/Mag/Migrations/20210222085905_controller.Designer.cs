@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mag.Migrations
 {
     [DbContext(typeof(MagContext))]
-    [Migration("20210220142257_AddRepository")]
-    partial class AddRepository
+    [Migration("20210222085905_controller")]
+    partial class controller
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

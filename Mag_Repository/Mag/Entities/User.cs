@@ -12,8 +12,7 @@ namespace Mag.Entities
         public string LastName { get; set; }
         public string PasswordHash { get; set; }
         public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public int SquadId { get; set; }
+        public string PhoneNumber { get; set; }       
 
 
         public virtual Squad Squad { get; set; }
