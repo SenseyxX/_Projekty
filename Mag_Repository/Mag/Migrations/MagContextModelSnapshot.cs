@@ -32,7 +32,12 @@ namespace Mag.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("categories");
                 });
@@ -47,9 +52,6 @@ namespace Mag.Migrations
                     b.Property<int>("ActualOwnerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryForeignKey")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -58,9 +60,6 @@ namespace Mag.Migrations
 
                     b.Property<byte[]>("ItemPhoto")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<int?>("LoansHistoriesId")
-                        .HasColumnType("int");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -76,11 +75,7 @@ namespace Mag.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryForeignKey")
-                        .IsUnique()
-                        .HasFilter("[CategoryForeignKey] IS NOT NULL");
-
-                    b.HasIndex("LoansHistoriesId");
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("QualityId")
                         .IsUnique();
@@ -108,6 +103,9 @@ namespace Mag.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId")
+                        .IsUnique();
 
                     b.ToTable("loanHistories");
                 });
@@ -161,14 +159,8 @@ namespace Mag.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ItemId")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("LoansHistoriesId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -179,30 +171,27 @@ namespace Mag.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SquadId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("LoansHistoriesId");
-
-                    b.HasIndex("SquadId")
-                        .IsUnique();
 
                     b.ToTable("users");
                 });
 
+            modelBuilder.Entity("Mag.Entities.Category", b =>
+                {
+                    b.HasOne("Mag.Entities.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId");
+
+                    b.Navigation("Item");
+                });
+
             modelBuilder.Entity("Mag.Entities.Item", b =>
                 {
-                    b.HasOne("Mag.Entities.Category", "Category")
-                        .WithOne("Item")
-                        .HasForeignKey("Mag.Entities.Item", "CategoryForeignKey");
-
-                    b.HasOne("Mag.Entities.LoanHistory", "LoansHistories")
-                        .WithMany("items")
-                        .HasForeignKey("LoansHistoriesId");
+                    b.HasOne("Mag.Entities.User", "User")
+                        .WithMany("Items")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Mag.Entities.Quality", "Quality")
                         .WithOne("Item")
@@ -210,51 +199,23 @@ namespace Mag.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-
-                    b.Navigation("LoansHistories");
-
                     b.Navigation("Quality");
-                });
 
-            modelBuilder.Entity("Mag.Entities.User", b =>
-                {
-                    b.HasOne("Mag.Entities.Item", "Item")
-                        .WithMany("Users")
-                        .HasForeignKey("ItemId");
-
-                    b.HasOne("Mag.Entities.LoanHistory", "LoansHistories")
-                        .WithMany("users")
-                        .HasForeignKey("LoansHistoriesId");
-
-                    b.HasOne("Mag.Entities.Squad", "Squad")
-                        .WithOne("User")
-                        .HasForeignKey("Mag.Entities.User", "SquadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
-
-                    b.Navigation("LoansHistories");
-
-                    b.Navigation("Squad");
-                });
-
-            modelBuilder.Entity("Mag.Entities.Category", b =>
-                {
-                    b.Navigation("Item");
-                });
-
-            modelBuilder.Entity("Mag.Entities.Item", b =>
-                {
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Mag.Entities.LoanHistory", b =>
                 {
-                    b.Navigation("items");
+                    b.HasOne("Mag.Entities.Item", null)
+                        .WithOne("LoansHistories")
+                        .HasForeignKey("Mag.Entities.LoanHistory", "ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Navigation("users");
+            modelBuilder.Entity("Mag.Entities.Item", b =>
+                {
+                    b.Navigation("LoansHistories");
                 });
 
             modelBuilder.Entity("Mag.Entities.Quality", b =>
@@ -262,9 +223,9 @@ namespace Mag.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("Mag.Entities.Squad", b =>
+            modelBuilder.Entity("Mag.Entities.User", b =>
                 {
-                    b.Navigation("User");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

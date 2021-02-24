@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mag.Repositories
 {
-        public sealed class UserRepository :IUserRepository
+        public sealed class UserRepository : IUserRepository
         {
                 private readonly MagContext _context;
         

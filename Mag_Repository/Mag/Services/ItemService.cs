@@ -18,6 +18,7 @@ namespace Mag.Services
 
         public async Task<IEnumerable<ItemDto>> GetRangeAsync()
         {
+            var test = await _itemRepository.FindByIdAsync(5);
             var items = await _itemRepository.GetRangeAsync();
           
 
@@ -25,6 +26,7 @@ namespace Mag.Services
             {
                 Id = x.Id,
                 ItemName = x.ItemName,
+                QualityId = x.QualityId,
             });
         }
     }

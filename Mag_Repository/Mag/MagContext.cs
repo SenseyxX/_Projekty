@@ -36,6 +36,33 @@ namespace Mag.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<User>()
+            //    .HasMany(x => x.Items)
+            //    .WithOne(x => x.User);
+
+            //modelBuilder.Entity<User>()
+            //    .HasMany(x => x.MyItems)
+            //    .WithOne(x => x.ActualUser);
+
+            modelBuilder.Entity<Item>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.OwnerId);
+
+            //modelBuilder.Entity<Item>()
+            //    .HasOne(x => x.ActualUser)
+            //    .WithMany(x => x.MyItems)
+            //    .HasForeignKey(x => x.ActualOwnerId);
+
+            //modelBuilder.Entity<Item>()
+            //    .HasOne(x => x.ActualUser)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Item>()
+            //    .HasOne(x => x.User)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

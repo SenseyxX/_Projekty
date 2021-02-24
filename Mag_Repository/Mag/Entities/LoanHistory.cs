@@ -14,7 +14,7 @@ namespace Mag.Entities
         public DateTime LoanDate { get; set; }
 
 
-        public ICollection<Item> items { get; set; }
-        public ICollection<User> users { get; set; }
+        // public ICollection<Item> items { get; set; }
+        // public ICollection<User> users { get; set; }
     }
 }

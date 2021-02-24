@@ -7,18 +7,21 @@ using System.Threading.Tasks;
 
 namespace Mag.Repositories
 {
-    public sealed class ItemRepository : IItemRepository
+    public sealed class ItemRepository : BaseRepository<Item>, IItemRepository
     {
-        private readonly MagContext _context;
-
         public ItemRepository(MagContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         public async Task<ICollection<Item>> GetRangeAsync()
         {
-            return await _context.items.ToListAsync();
+            return await Context.items.ToListAsync();
+        }
+
+        public async override Task<Item> FindByIdAsync(int id)
+        {
+            return null;
         }
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mag.Repositories
 {
-    public interface IItemRepository : IBaseRepository<Item>
+    public interface IBaseRepository<T> where T : BaseEntity
     {
-        Task<ICollection<Item>> GetRangeAsync();
+        Task<T> FindByIdAsync(int id);
     }
 }

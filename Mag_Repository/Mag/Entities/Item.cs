@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Mag.Entities
 {
-        public class Item
+        public class Item : BaseEntity
         {
-                public int Id { get; set; }
                 public string ItemName { get; set; }
                // public int CategoryId { get; set; }
                 public int QualityId { get; set; }
@@ -21,11 +20,13 @@ namespace Mag.Entities
 
                
 
-                [ForeignKey("CategoryForeignKey")]
-                public virtual Category Category { get; set; }
+                //[ForeignKey("CategoryForeignKey")]
+                //public virtual Category Category { get; set; }
                 public virtual Quality Quality { get; set; }
-                public virtual LoanHistory LoansHistories { get; set; }                
-                public ICollection<User> Users { get; set; }
+                public virtual LoanHistory LoansHistories { get; set; } 
+
+                public virtual User User { get; set; }
+                // public virtual User ActualUser { get; set; }
 
     }
 }
