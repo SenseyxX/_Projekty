@@ -1,4 +1,5 @@
 ﻿using Mag.Dtos;
+using Mag.Entities;
 using Mag.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,17 @@ namespace Mag.Services
                         _userRepository = userRepository;
                 }
 
+                public async Task<User> GetByIdAsync(int id)
+                    => await _userRepository.GetByIdAsync(id);
 
                 public async Task<IEnumerable<UserDto>> GetRangeAsync()
                 {
-                        var users = await _userRepository.GetRangeAsync();
+                        var users = await _userRepository.GetAllAsync();
 
                         return users.Select(x => new UserDto
                         {
                                 Id = x.Id,
                                 Name = x.Name,
-
                         });
 
 

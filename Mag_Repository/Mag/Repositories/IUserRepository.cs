@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mag.Repositories
 {
-        public interface IUserRepository
-        {
-                Task<ICollection<User>> GetRangeAsync();
+        public interface IUserRepository : IBaseRepository<User>
+        {       
         }
 }

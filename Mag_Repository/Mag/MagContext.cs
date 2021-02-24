@@ -18,6 +18,12 @@ namespace Mag.Entities
         public DbSet<Category> categories { get; set; }
         public DbSet<Quality> qualities { get; set; }       
         public DbSet<LoanHistory> loanHistories { get; set; }
+
+        internal Task<Item> Find(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Item> items { get; set; }
 
         /*

@@ -8,6 +8,11 @@ namespace Mag.Repositories
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        Task<T> FindByIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
+        Task<ICollection<T>> GetAllAsync();       
+        void Create(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+        void Save(T entity);
     }
 }

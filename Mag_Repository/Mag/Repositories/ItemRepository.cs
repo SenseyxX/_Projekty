@@ -19,9 +19,6 @@ namespace Mag.Repositories
             return await Context.items.ToListAsync();
         }
 
-        public async override Task<Item> FindByIdAsync(int id)
-        {
-            return null;
-        }
+       
     }
 }
