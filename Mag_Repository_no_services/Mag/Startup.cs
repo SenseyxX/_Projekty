@@ -32,20 +32,25 @@ namespace Mag
         {
 
             services.AddControllers();
+                       
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mag", Version = "v1" });
             });
 
-            services
-                .AddTransient<ICategoryRepository, CategoryRepository>()
-                .AddTransient<IItemService, ItemService>()
-                .AddTransient<IItemRepository, ItemRepository>()
-                .AddTransient<ISquadRepository, SquadRepository>()
-                .AddTransient<IUserService, UserService>()
-                .AddTransient<IUserRepository, UserRepository>()              
-                .AddTransient<ILoanHistoryRepository, LoanHistoryRepository>() 
-                .AddDbContext<MagContext>();
+                        services
+                            .AddTransient<ICategoryRepository, CategoryRepository>()
+                            .AddTransient<IItemService, ItemService>()
+                            .AddTransient<IItemRepository, ItemRepository>()
+                            .AddTransient<ISquadRepository, SquadRepository>()
+                            .AddTransient<IUserService, UserService>()
+                            .AddTransient<IUserRepository, UserRepository>()
+                            .AddTransient<ILoanHistoryRepository, LoanHistoryRepository>()
+                            .AddDbContext<MagContext>()
+                            .AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+                        
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

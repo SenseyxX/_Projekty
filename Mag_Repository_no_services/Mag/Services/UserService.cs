@@ -32,7 +32,7 @@ namespace Mag.Services
                         var users = await _userRepository.GetAllUsersAsync();
                         return users.Select(x => new UserDto 
                         { 
-                        Id=x.Id,
+                        //Id=x.Id,
                         Name=x.Name,
                         LastName=x.LastName,
                         SquadId=x.SquadId,

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mag.Services;
+using AutoMapper;
 
 namespace Mag.Controllers
 {
@@ -16,10 +17,12 @@ namespace Mag.Controllers
         public sealed class UserController : Controller
         {
                 private readonly IUserRepository _userRepository;
+                private readonly IMapper _mapper;
 
-                public UserController(IUserRepository userRepository)
+                public UserController(IUserRepository userRepository,IMapper mapper)
                 {
                         this._userRepository = userRepository;
+                        this._mapper = mapper;
                 }
 
                 [HttpGet]
@@ -29,7 +32,8 @@ namespace Mag.Controllers
                         try
                         {
                                 var result = await _userRepository.GetAllUsersAsync();
-                                return Ok(result);
+                                var resultDto = _mapper.Map<IEnumerable<UserDto>>(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -40,19 +44,20 @@ namespace Mag.Controllers
                 }
 
                 [HttpGet("{Id:int}")]
-                public async Task<ActionResult<User>> GetUser(int Id)
+                public async Task<ActionResult<UserDto>> GetUser(int Id)
                 {
 
                         try
                         {
                                 var result = await _userRepository.GetUserAsync(Id);
+                                var resultDto = _mapper.Map<UserDto>(result);
 
                                 if (result == null)
                                 {
                                         return NotFound();
                                 }
 
-                                return Ok(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -63,8 +68,9 @@ namespace Mag.Controllers
                 }
 
                 [HttpPost]
-                public async Task<ActionResult<User>> AddUser(User user)
+                public async Task<ActionResult> AddUser(UserDto userDto)
                 {
+                        var user = _mapper.Map<User>(userDto);
                         try
                         {
                                 if (user == null)
@@ -85,8 +91,7 @@ namespace Mag.Controllers
 
                 }
 
-                [HttpPut("{Id:int}")]
-
+                [HttpPut("{Id:int}")]// Dodać Mapper do http put
                 public async Task<ActionResult<User>> UpdateUser(int Id, User user)
                 {
                         try
@@ -113,8 +118,7 @@ namespace Mag.Controllers
                         }
                 }
 
-                [HttpDelete("{Id:int}")]
-
+                [HttpDelete("{Id:int}")] //Dodać Mapper do http delete
                 public async Task<ActionResult<User>> DeleteUser(int Id, User user)
                 {
                         try
