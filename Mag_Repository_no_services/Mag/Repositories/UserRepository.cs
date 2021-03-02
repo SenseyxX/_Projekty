@@ -1,4 +1,6 @@
-﻿using Mag.Entities;
+﻿using Mag.Dtos;
+using Mag.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,5 +68,7 @@ namespace Mag.Repositories
                         }
                         return null;
                 }
+
+                
         }
 }

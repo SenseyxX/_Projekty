@@ -1,4 +1,6 @@
-﻿using Mag.Entities;
+﻿using Mag.Dtos;
+using Mag.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +15,6 @@ namespace Mag.Repositories
                 Task<User> AddUserAsync(User user);
                 Task<User> UpdateUserAsync(User user);
                 Task<User> DelateUserAsync(int userId);
+                
         }
 }

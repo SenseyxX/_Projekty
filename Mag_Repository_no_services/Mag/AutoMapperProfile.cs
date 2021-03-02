@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Mag.Dtos;
+using Mag.Dtos.UserDtos;
 using Mag.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace Mag
         {
                 public AutoMapperProfile()
                 {
-                        CreateMap<User, UserDto>().ReverseMap();
+                        CreateMap<User, UserGetDto>().ReverseMap();
+                        CreateMap<User, UserDeleteDto>().ReverseMap();
                 }
         }
 }

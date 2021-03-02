@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Mag.Entities
 {
-    public class User : BaseEntity         
+    public class User          
     {
-      
+
+        public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public int SquadId { get; set; }
@@ -21,7 +22,7 @@ namespace Mag.Entities
         // public virtual Squad Squad { get; set; }
         // public virtual LoanHistory LoansHistories { get; set; }
         public ICollection<Item> Items { get; set; }
-        // public ICollection<Item> MyItems { get; set; }
+        public ICollection<Item> MyItems { get; set; }
 
         }
 }

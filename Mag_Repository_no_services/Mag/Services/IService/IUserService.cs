@@ -8,11 +8,11 @@ namespace Mag.Services
 {
         public interface IUserService
         {
-                Task<IEnumerable<UserDto>> GetAllUsersAsync();
+                Task<IEnumerable<UserGetDto>> GetAllUsersAsync();
                 // ?????????????????????????????????????????????????????
-                Task<IEnumerable<UserDto>> GetUserAsync(int userId);
-                Task<IEnumerable<UserDto>> AddUserAsync(UserDto user);
-                Task<IEnumerable<UserDto>> UpdateUserAsync(UserDto user);
-                Task<IEnumerable<UserDto>> DelateUserAsync(int userId); 
+                Task<IEnumerable<UserGetDto>> GetUserAsync(int userId);
+                Task<IEnumerable<UserGetDto>> AddUserAsync(UserGetDto user);
+                Task<IEnumerable<UserGetDto>> UpdateUserAsync(UserGetDto user);
+                Task<IEnumerable<UserGetDto>> DelateUserAsync(int userId); 
         }
 }
