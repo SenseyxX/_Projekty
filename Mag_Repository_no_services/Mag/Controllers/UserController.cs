@@ -69,9 +69,9 @@ namespace Mag.Controllers
                 }
 
                 [HttpPost]
-                public async Task<ActionResult> AddUser(UserGetDto userDto)
+                public async Task<ActionResult> AddUser(UserAddDto userAddDto)
                 {
-                        var user = _mapper.Map<User>(userDto);
+                        var user = _mapper.Map<User>(userAddDto);
                         try
                         {
                                 if (user == null)
@@ -92,16 +92,11 @@ namespace Mag.Controllers
 
                 }
 
-                [HttpPut("{Id:int}")]// Dodać Mapper do http put
-                public async Task<ActionResult<User>> UpdateUser(int Id, UserGetDto userDto)
+                [HttpPut("{Id:int}")]
+                public async Task<ActionResult<User>> UpdateUser(int Id, UserUpdateDto userUpdateDto)
                 {
                         try
                         {
-                                if (Id != userDto.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
-
                                 var userToUpdate = await _userRepository.GetUserAsync(Id);
 
                                 if (userToUpdate == null)
@@ -109,7 +104,7 @@ namespace Mag.Controllers
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
-                                _mapper.Map(userDto, userToUpdate);
+                                _mapper.Map(userUpdateDto, userToUpdate);
                                 await _userRepository.UpdateUserAsync(userToUpdate);
                                 return NoContent(); 
 

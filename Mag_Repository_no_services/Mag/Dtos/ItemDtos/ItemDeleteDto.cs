@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mag.Dtos.UserDtos
+namespace Mag.Dtos.ItemDtos
 {
-        public class UserDeleteDto
+    public class ItemDeleteDto
     {
-                
-        }
+    }
 }

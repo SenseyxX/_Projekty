@@ -1,4 +1,6 @@
-﻿using Mag.Dtos;
+﻿using AutoMapper;
+using Mag.Dtos;
+using Mag.Dtos.ItemDtos;
 using Mag.Entities;
 using Mag.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -15,11 +17,13 @@ namespace Mag.Controllers
         public sealed class ItemController : Controller
         {
                 private readonly IItemRepository _itemRepository;
+                private readonly IMapper _mapper;
 
-                public ItemController(IItemRepository itemRepository)
+        public ItemController(IItemRepository itemRepository, IMapper mapper)
                 {
                         _itemRepository = itemRepository;
-                }
+                        _mapper = mapper;
+        }
 
                 [HttpGet]
                 public async Task<ActionResult> GetAllItems()
@@ -27,7 +31,8 @@ namespace Mag.Controllers
                         try
                         {
                                 var result = await _itemRepository.GetAllItemsAsync();
-                                return Ok(result);
+                                var resultDto = _mapper.Map<IEnumerable<ItemGetDto>>(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -37,12 +42,13 @@ namespace Mag.Controllers
                 }
 
                 [HttpGet("{Id:int}")]
-                public async Task<ActionResult<Item>> GetItemAsync(int Id)
+                public async Task<ActionResult<ItemGetIdDto>> GetItemAsync(int Id)
                 {
                         try
                         {
                                 var result = await _itemRepository.GetItemAsync(Id);
-                                return Ok(result);
+                                var resultDto = _mapper.Map<ItemGetIdDto>(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -53,8 +59,9 @@ namespace Mag.Controllers
                 }
 
                 [HttpPost("{Id:int}")]
-                public async Task<ActionResult<Item>> AddItem(Item item)
+                public async Task<ActionResult> AddItem(ItemGetDto itemDto)
                 {
+                        var item = _mapper.Map<Item>(itemDto);
                         try
                         {
                                 if (item == null)
@@ -73,23 +80,24 @@ namespace Mag.Controllers
                 }
 
                 [HttpPut("{Id:int}")]
-                public async Task<ActionResult<Item>> UpdateItem(int Id, Item item)
+                public async Task<ActionResult<Item>> UpdateItem(int Id, ItemGetDto itemGetDto)
                 {
                         try
                         {
-                                if (Id != item.Id)
+                                if (Id != itemGetDto.Id)
                                 {
                                         return BadRequest("User ID missmatch");
                                 }
-                                var userToUpdate = await _itemRepository.GetItemAsync(Id);
+                                var itemToUpdate = await _itemRepository.GetItemAsync(Id);
 
-                                if (userToUpdate == null)
+                                if (itemToUpdate == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
-                                return await _itemRepository.UpdateItemAsync(item);
-
+                                _mapper.Map(itemGetDto, itemToUpdate);
+                                await _itemRepository.UpdateItemAsync(itemToUpdate);
+                                return NoContent();
                         }
                         catch (Exception)
                         {
@@ -105,17 +113,19 @@ namespace Mag.Controllers
                 {
                         try
                         {
-                                if (Id != item.Id)
+                                var itemToDelete = await _itemRepository.GetItemAsync(Id);
+                                if (Id != itemToDelete.Id)
                                 {
                                         return BadRequest("User ID missmatch");
                                 }
-                                var userToDelete = await _itemRepository.GetItemAsync(Id);
+                                
 
-                                if (userToDelete == null)
+                                if (itemToDelete == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
+                                _mapper.Map<ItemDeleteDto>(itemToDelete);
                                 return await _itemRepository.DelateItemAsync(Id);
 
                         }

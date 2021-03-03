@@ -17,20 +17,20 @@ namespace Mag.Services
                         _userRepository = userRepository;
                 }
 
-                public Task<IEnumerable<UserGetDto>> AddUserAsync(UserGetDto user)
+                public Task<IEnumerable<SquadGetDto>> AddUserAsync(SquadGetDto user)
                 {
                         throw new NotImplementedException();
                 }
 
-                public Task<IEnumerable<UserGetDto>> DelateUserAsync(int userId)
+                public Task<IEnumerable<SquadGetDto>> DelateUserAsync(int userId)
                 {
                         throw new NotImplementedException();
                 }
 
-                public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
+                public async Task<IEnumerable<SquadGetDto>> GetAllUsersAsync()
                 {
                         var users = await _userRepository.GetAllUsersAsync();
-                        return users.Select(x => new UserGetDto 
+                        return users.Select(x => new SquadGetDto 
                         { 
                         //Id=x.Id,
                         Name=x.Name,
@@ -43,7 +43,7 @@ namespace Mag.Services
                         });
                 }
 
-                public async Task<IEnumerable<UserGetDto>> GetUserAsync(int userId)
+                public async Task<IEnumerable<SquadGetDto>> GetUserAsync(int userId)
                 {
                    /*      var user = await _userRepository.GetUserAsync(userId);
                           return user.Select(x => new UserDto 
@@ -61,7 +61,7 @@ namespace Mag.Services
                         throw  new NotImplementedException();
                 }
 
-                public Task<IEnumerable<UserGetDto>> UpdateUserAsync(UserGetDto user)
+                public Task<IEnumerable<SquadGetDto>> UpdateUserAsync(SquadGetDto user)
                 {
                         throw new NotImplementedException();
                 }

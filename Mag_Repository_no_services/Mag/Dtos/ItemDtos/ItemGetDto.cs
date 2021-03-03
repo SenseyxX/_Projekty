@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace Mag.Dtos
 {
-    public sealed class ItemDto
+    public sealed class ItemGetDto
     {
-                public string ItemName { get; set; }                
+                public int Id { get; set; }
+                public string ItemName { get; set; }
+                public int CategoryId { get; set; }
                 public int QualityId { get; set; }
                 public int Quantity { get; set; }
                 public int OwnerId { get; set; }

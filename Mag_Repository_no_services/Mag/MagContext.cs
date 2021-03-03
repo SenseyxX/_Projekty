@@ -12,6 +12,7 @@ namespace Mag.Entities
     public class MagContext : DbContext
     {
         string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=MagDb;Trusted_Connection=True;";
+       // string _connectionString = "Server=O-GACKI-N;Database=MagDb;Trusted_Connection=True;";
 
         public DbSet<User> users { get; set; }
         public DbSet<Squad> squads { get; set; }                                                       
