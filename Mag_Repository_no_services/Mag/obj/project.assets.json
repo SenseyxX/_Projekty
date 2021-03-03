@@ -6047,24 +6047,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ogacki\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Oskar\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj",
+      "projectUniqueName": "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj",
       "projectName": "Mag",
-      "projectPath": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj",
-      "packagesPath": "C:\\Users\\ogacki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\obj\\",
+      "projectPath": "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj",
+      "packagesPath": "C:\\Users\\Oskar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\ogacki\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Oskar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

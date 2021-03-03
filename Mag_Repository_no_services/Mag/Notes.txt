@@ -1,0 +1,1 @@
+﻿Czy robić folder na np: Seedera,Context,Profil Mappera ?

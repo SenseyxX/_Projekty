@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mag.Dtos
+namespace Mag.Dtos.CategoryDtos
 {
-        public class SquadDto
+        public class CategoryDeleteDto
         {
         }
 }

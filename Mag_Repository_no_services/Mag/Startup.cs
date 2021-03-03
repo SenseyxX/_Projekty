@@ -39,13 +39,13 @@ namespace Mag
             });
 
                         services
-                            .AddTransient<ICategoryRepository, CategoryRepository>()
-                            .AddTransient<IItemService, ItemService>()
+                            .AddTransient<ICategoryRepository, CategoryRepository>()                            
                             .AddTransient<IItemRepository, ItemRepository>()
-                            .AddTransient<ISquadRepository, SquadRepository>()
-                            .AddTransient<IUserService, UserService>()
-                            .AddTransient<IUserRepository, UserRepository>()
                             .AddTransient<ILoanHistoryRepository, LoanHistoryRepository>()
+                            .AddTransient<IQualityRepository,QualityRepository>()
+                            .AddTransient<ISquadRepository, SquadRepository>()                            
+                            .AddTransient<IUserRepository, UserRepository>()
+                            
                             .AddDbContext<MagContext>()
                             .AddAutoMapper(typeof(AutoMapperProfile).Assembly);
                         

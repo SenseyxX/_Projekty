@@ -1,4 +1,7 @@
-﻿using Mag.Entities;
+﻿using AutoMapper;
+using Mag.Dtos;
+using Mag.Dtos.SquadDtos;
+using Mag.Entities;
 using Mag.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +17,12 @@ namespace Mag.Controllers
         public class SquadController : Controller
         {
                 private readonly ISquadRepository _squadRepository;
+                private readonly IMapper _mapper;
 
-                public SquadController(ISquadRepository squadRepository)
+                public SquadController(ISquadRepository squadRepository,IMapper mapper)
                 {
-                        _squadRepository = squadRepository;
+                        this._squadRepository = squadRepository;
+                        this._mapper = mapper;
                 }
 
                 [HttpGet]
@@ -27,6 +32,7 @@ namespace Mag.Controllers
                         try
                         {
                                 var result = await _squadRepository.GetAllSquadsAsync();
+                                var resultDto = _mapper.Map<SquadGetDto>(result);
                                 return Ok(result);
                         }
                         catch (Exception)
@@ -38,19 +44,20 @@ namespace Mag.Controllers
                 }
 
                 [HttpGet("{Id:int}")]
-                public async Task<ActionResult<Squad>> GetSquad(int Id)
+                public async Task<ActionResult<SquadGetIdDto>> GetSquad(int Id)
                 {
 
                         try
                         {
                                 var result = await _squadRepository.GetSquadAsync(Id);
+                                var resultDto = _mapper.Map<SquadGetIdDto>(result);
 
                                 if (result == null)
                                 {
                                         return NotFound();
                                 }
 
-                                return Ok(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -61,10 +68,11 @@ namespace Mag.Controllers
                 }
 
                 [HttpPost]
-                public async Task<ActionResult<Squad>> AddSquad(Squad squad)
+                public async Task<ActionResult> AddSquad(SquadAddDto squadAddDto)
                 {
                         try
                         {
+                                var squad = _mapper.Map<Squad>(squadAddDto);
                                 if (squad == null)
                                 {
                                         return BadRequest();
@@ -85,14 +93,10 @@ namespace Mag.Controllers
 
                 [HttpPut("{Id:int}")]
 
-                public async Task<ActionResult<Squad>> UpdateSquad(int Id, Squad squad)
+                public async Task<ActionResult<Squad>> UpdateSquad(int Id, SquadUpdateDto squadUpdateDto)
                 {
                         try
-                        {
-                                if (Id != squad.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
+                        {                                
                                 var squadToUpdate = await _squadRepository.GetSquadAsync(Id);
 
                                 if (squadToUpdate == null)
@@ -100,7 +104,9 @@ namespace Mag.Controllers
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
-                                return await _squadRepository.UpdateSquadAsync(squad);
+                                _mapper.Map(squadUpdateDto, squadToUpdate);
+                                await _squadRepository.UpdateSquadAsync(squadToUpdate);
+                                return NoContent();
 
                         }
                         catch (Exception)
@@ -113,21 +119,18 @@ namespace Mag.Controllers
 
                 [HttpDelete("{Id:int}")]
 
-                public async Task<ActionResult<Squad>> DeleteSquad(int Id, Squad squad)
+                public async Task<ActionResult<Squad>> DeleteSquad(int Id)
                 {
                         try
                         {
-                                if (Id != squad.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
+                                
                                 var squadToDelete = await _squadRepository.GetSquadAsync(Id);
 
                                 if (squadToDelete == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
-
+                                _mapper.Map<SquadDeleteDto>(squadToDelete);
                                 return await _squadRepository.DelateSquadAsync(Id);
 
                         }

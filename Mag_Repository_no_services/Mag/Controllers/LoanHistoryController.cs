@@ -1,4 +1,7 @@
-﻿using Mag.Entities;
+﻿using AutoMapper;
+using Mag.Dtos;
+using Mag.Dtos.LoanHistoryDtos;
+using Mag.Entities;
 using Mag.Repositories.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +17,12 @@ namespace Mag.Controllers
         public class LoanHistoryController : Controller
         {
                 private readonly ILoanHistoryRepository _loanHistoryRepository;
+                private readonly IMapper _mapper;
 
-                public LoanHistoryController(ILoanHistoryRepository loanHistoryRepository)
+                public LoanHistoryController(ILoanHistoryRepository loanHistoryRepository,IMapper mapper)
                 {
                         this._loanHistoryRepository = loanHistoryRepository;
+                        this._mapper = mapper;
                 }
 
                 [HttpGet]
@@ -27,7 +32,8 @@ namespace Mag.Controllers
                         try
                         {
                                 var result = await _loanHistoryRepository.GetAllLoanHistoriesAsync();
-                                return Ok(result);
+                                var resultDto = _mapper.Map<IEnumerable<LoanHistoryGetDto>>(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -44,13 +50,14 @@ namespace Mag.Controllers
                         try
                         {
                                 var result = await _loanHistoryRepository.GetLoanHistoryAsync(Id);
+                                var resultDto = _mapper.Map<LoanHistoryGetIdDto>(result);
 
                                 if (result == null)
                                 {
                                         return NotFound();
                                 }
 
-                                return Ok(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -61,10 +68,11 @@ namespace Mag.Controllers
                 }
 
                 [HttpPost]
-                public async Task<ActionResult<LoanHistory>> AddloanHistory(LoanHistory loanHistory)
+                public async Task<ActionResult> AddloanHistory(LoanHistoryAddDto loanHistoryAddDto)
                 {
                         try
                         {
+                                var loanHistory = _mapper.Map<LoanHistory>(loanHistoryAddDto);
                                 if (loanHistory == null)
                                 {
                                         return BadRequest();
@@ -85,22 +93,21 @@ namespace Mag.Controllers
 
                 [HttpPut("{Id:int}")]
 
-                public async Task<ActionResult<LoanHistory>> UpdateloanHistory(int Id, LoanHistory loanHistory)
+                public async Task<ActionResult<LoanHistory>> UpdateloanHistory(int Id, LoanHistoryUpdateDto loanHistoryUpdateDto)
                 {
                         try
                         {
-                                if (Id != loanHistory.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
-                                var userToUpdate = await _loanHistoryRepository.GetLoanHistoryAsync(Id);
+                                
+                                var loanHistoryToUpdate = await _loanHistoryRepository.GetLoanHistoryAsync(Id);
 
-                                if (userToUpdate == null)
+                                if (loanHistoryToUpdate == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
-                                return await _loanHistoryRepository.UpdateLoanHistoryAsync(loanHistory);
+                                _mapper.Map(loanHistoryUpdateDto, loanHistoryToUpdate);
+                                await _loanHistoryRepository.UpdateLoanHistoryAsync(loanHistoryToUpdate);
+                                return NoContent();
 
                         }
                         catch (Exception)
@@ -113,14 +120,11 @@ namespace Mag.Controllers
 
                 [HttpDelete("{Id:int}")]
 
-                public async Task<ActionResult<LoanHistory>> DeleteloanHistory(int Id, LoanHistory loanHistory)
+                public async Task<ActionResult<LoanHistory>> DeleteloanHistory(int Id)
                 {
                         try
                         {
-                                if (Id != loanHistory.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
+                               
                                 var loanHistoryToDelete = await _loanHistoryRepository.GetLoanHistoryAsync(Id);
 
                                 if (loanHistoryToDelete == null)
@@ -128,6 +132,7 @@ namespace Mag.Controllers
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
+                                _mapper.Map<LoanHistoryDeleteDto>(loanHistoryToDelete);
                                 return await _loanHistoryRepository.DelateLoanHisotryAsync(Id);
 
                         }

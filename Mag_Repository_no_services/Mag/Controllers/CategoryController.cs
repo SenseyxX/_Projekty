@@ -1,4 +1,7 @@
-﻿using Mag.Entities;
+﻿using AutoMapper;
+using Mag.Dtos;
+using Mag.Dtos.CategoryDtos;
+using Mag.Entities;
 using Mag.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +17,23 @@ namespace Mag.Controllers
         public class CategoryController:Controller
         {
                 private readonly ICategoryRepository _categoryRepository;
+                private readonly IMapper _mapper;
 
-                public CategoryController(ICategoryRepository categoryRepository)
+                public CategoryController(ICategoryRepository categoryRepository,IMapper mapper)
                 {
                         this._categoryRepository = categoryRepository;
+                        this._mapper = mapper;
                 }
 
                 [HttpGet]
-                public async Task<ActionResult> GetAllUsers()
+                public async Task<ActionResult> GetAllCategories()
                 {
 
                         try
                         {
                                 var result = await _categoryRepository.GetAllCategoriesAsync();
-                                return Ok(result);
+                                var resultDto = _mapper.Map<IEnumerable<CategoryGetDto>>(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -38,19 +44,19 @@ namespace Mag.Controllers
                 }
 
                 [HttpGet("{Id:int}")]
-                public async Task<ActionResult<Category>> GetUser(int Id)
+                public async Task<ActionResult<CategoryGetDto>> GetCategory(int Id)
                 {
 
                         try
                         {
                                 var result = await _categoryRepository.GetCategoryAsync(Id);
-
+                                var resultDto = _mapper.Map<CategoryGetIdDto>(result);
                                 if (result == null)
                                 {
                                         return NotFound();
                                 }
 
-                                return Ok(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -61,17 +67,18 @@ namespace Mag.Controllers
                 }
 
                 [HttpPost]
-                public async Task<ActionResult<Category>> AddUser(Category user)
+                public async Task<ActionResult> AddCategory(CategoryAddDto categoryAddDto)
                 {
+                        var category = _mapper.Map<Category>(categoryAddDto);
                         try
                         {
-                                if (user == null)
+                                if (categoryAddDto == null)
                                 {
                                         return BadRequest();
                                 }
 
-                                var createdCategory = await _categoryRepository.AddCategoryAsync    (user);
-                                return CreatedAtAction(nameof(GetUser), new { Id = createdCategory.Id },
+                                var createdCategory = await _categoryRepository.AddCategoryAsync(category);
+                                return CreatedAtAction(nameof(GetCategory), new { Id = createdCategory.Id },
                                         createdCategory);
                         }
                         catch (Exception)
@@ -85,22 +92,20 @@ namespace Mag.Controllers
 
                 [HttpPut("{Id:int}")]
 
-                public async Task<ActionResult<Category>> UpdateUser(int Id, Category user)
+                public async Task<ActionResult<Category>> UpdateCategory(int Id, CategoryUpdateDto categoryUpdateDto)
                 {
                         try
-                        {
-                                if (Id != user.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
-                                var userToUpdate = await _categoryRepository.GetCategoryAsync(Id);
+                        {                                     
+                               
+                                var categoryToUpdate = await _categoryRepository.GetCategoryAsync(Id);
 
-                                if (userToUpdate == null)
+                                if (categoryToUpdate == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
-                                return await _categoryRepository.UpdateCategoryAsync(user);
+                                _mapper.Map(categoryToUpdate, categoryUpdateDto);
+                                return await _categoryRepository.UpdateCategoryAsync(categoryToUpdate);
 
                         }
                         catch (Exception)
@@ -113,21 +118,18 @@ namespace Mag.Controllers
 
                 [HttpDelete("{Id:int}")]
 
-                public async Task<ActionResult<Category>> DeleteUser(int Id, Category user)
+                public async Task<ActionResult<Category>> DeleteCategory(int Id)
                 {
                         try
-                        {
-                                if (Id != user.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
-                                var userToDelete = await _categoryRepository.GetCategoryAsync(Id);
+                        {                                
+                                var categoryToDelete = await _categoryRepository.GetCategoryAsync(Id);
 
-                                if (userToDelete == null)
+                                if (categoryToDelete == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
+                                _mapper.Map<CategoryDeleteDto>(categoryToDelete);
                                 return await _categoryRepository.DelateCategoryAsync(Id);
 
                         }

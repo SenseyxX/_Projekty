@@ -45,13 +45,13 @@ namespace Mag.Controllers
                 }
 
                 [HttpGet("{Id:int}")]
-                public async Task<ActionResult<UserGetDto>> GetUser(int Id)
+                public async Task<ActionResult<UserGetIdDto>> GetUser(int Id)
                 {
 
                         try
                         {
                                 var result = await _userRepository.GetUserAsync(Id);
-                                var resultDto = _mapper.Map<UserGetDto>(result);
+                                var resultDto = _mapper.Map<UserGetIdDto>(result);
 
                                 if (result == null)
                                 {
@@ -71,9 +71,10 @@ namespace Mag.Controllers
                 [HttpPost]
                 public async Task<ActionResult> AddUser(UserAddDto userAddDto)
                 {
-                        var user = _mapper.Map<User>(userAddDto);
+                        
                         try
                         {
+                                var user = _mapper.Map<User>(userAddDto);
                                 if (user == null)
                                 {
                                         return BadRequest();
@@ -117,7 +118,7 @@ namespace Mag.Controllers
                         }
                 }
 
-                [HttpDelete("{Id:int}")] //Dodać Mapper do http delete
+                [HttpDelete("{Id:int}")] 
                 public async Task<ActionResult<User>> DeleteUser(int Id)
                 {
                         try

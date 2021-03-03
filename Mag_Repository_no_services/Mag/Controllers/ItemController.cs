@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Mag.Dtos;
-using Mag.Dtos.ItemDtos;
+﻿using Mag.Dtos;
 using Mag.Entities;
 using Mag.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -9,25 +7,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mag.Services;
+using AutoMapper;
+using Mag.Dtos.ItemDtos;
 
 namespace Mag.Controllers
 {
         [ApiController]
         [Route("api/[controller]")]
-        public sealed class ItemController : Controller
+        public sealed class ItemController:Controller
         {
                 private readonly IItemRepository _itemRepository;
                 private readonly IMapper _mapper;
 
-        public ItemController(IItemRepository itemRepository, IMapper mapper)
+                public ItemController(IItemRepository itemRepository,IMapper mapper)
                 {
-                        _itemRepository = itemRepository;
-                        _mapper = mapper;
-        }
+                        this._itemRepository = itemRepository;
+                        this._mapper = mapper;
+                }
 
                 [HttpGet]
-                public async Task<ActionResult> GetAllItems()
+                public async Task<ActionResult> GetAllItem()
                 {
+
                         try
                         {
                                 var result = await _itemRepository.GetAllItemsAsync();
@@ -39,15 +41,23 @@ namespace Mag.Controllers
                                 return StatusCode(StatusCodes.Status500InternalServerError,
                                          "Erorr retrieving data from the database");
                         }
+
                 }
 
                 [HttpGet("{Id:int}")]
-                public async Task<ActionResult<ItemGetIdDto>> GetItemAsync(int Id)
+                public async Task<ActionResult<ItemGetIdDto>> GetItem(int Id)
                 {
+
                         try
                         {
                                 var result = await _itemRepository.GetItemAsync(Id);
-                                var resultDto = _mapper.Map<ItemGetIdDto>(result);
+                                var resultDto = _mapper.Map<ItemGetDto>(result);
+
+                                if (result == null)
+                                {
+                                        return NotFound();
+                                }
+
                                 return Ok(resultDto);
                         }
                         catch (Exception)
@@ -58,36 +68,35 @@ namespace Mag.Controllers
                         }
                 }
 
-                [HttpPost("{Id:int}")]
-                public async Task<ActionResult> AddItem(ItemGetDto itemDto)
+                [HttpPost]
+                public async Task<ActionResult> AddItem(ItemAddDto itemAddDto)
                 {
-                        var item = _mapper.Map<Item>(itemDto);
+                        var item = _mapper.Map<Item>(itemAddDto);
                         try
                         {
                                 if (item == null)
                                 {
                                         return BadRequest();
                                 }
-                                var createItem = await _itemRepository.AddItemAsync(item);
-                                return CreatedAtAction(nameof(GetItemAsync), new { Id = createItem.Id },
-                                        createItem);
+
+                                var createdUser = await _itemRepository.AddItemAsync(item);
+                                return CreatedAtAction(nameof(GetItem), new { Id = createdUser.Id },
+                                        createdUser);
                         }
                         catch (Exception)
                         {
+
                                 return StatusCode(StatusCodes.Status500InternalServerError,
-                                          "Erorr retrieving data from the database");
+                                         "Erorr retrieving data from the database");
                         }
+
                 }
 
                 [HttpPut("{Id:int}")]
-                public async Task<ActionResult<Item>> UpdateItem(int Id, ItemGetDto itemGetDto)
+                public async Task<ActionResult<Item>> UpdateItem(int Id, ItemAddDto itemAddDto)
                 {
                         try
                         {
-                                if (Id != itemGetDto.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
                                 var itemToUpdate = await _itemRepository.GetItemAsync(Id);
 
                                 if (itemToUpdate == null)
@@ -95,9 +104,10 @@ namespace Mag.Controllers
                                         return NotFound($"User with Id={Id} not found");
                                 }
 
-                                _mapper.Map(itemGetDto, itemToUpdate);
+                                _mapper.Map(itemAddDto, itemToUpdate);
                                 await _itemRepository.UpdateItemAsync(itemToUpdate);
                                 return NoContent();
+
                         }
                         catch (Exception)
                         {
@@ -107,24 +117,17 @@ namespace Mag.Controllers
                         }
                 }
 
-                [HttpDelete("{Id:int}")]
-
-                public async Task<ActionResult<Item>> DeleteItem(int Id, Item item)
+                [HttpDelete("{Id:int}")] //Dodać Mapper do http delete
+                public async Task<ActionResult<Item>> DeleteItem(int Id)
                 {
                         try
                         {
                                 var itemToDelete = await _itemRepository.GetItemAsync(Id);
-                                if (Id != itemToDelete.Id)
-                                {
-                                        return BadRequest("User ID missmatch");
-                                }
-                                
 
                                 if (itemToDelete == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
                                 }
-
                                 _mapper.Map<ItemDeleteDto>(itemToDelete);
                                 return await _itemRepository.DelateItemAsync(Id);
 
