@@ -13,5 +13,5 @@ namespace Mag.Entities
 
         public virtual Item Item { get; set; }
 
-        }
+    }
 }

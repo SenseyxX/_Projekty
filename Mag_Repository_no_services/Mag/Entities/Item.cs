@@ -21,11 +21,11 @@ namespace Mag.Entities
                
 
                 //[ForeignKey("CategoryForeignKey")]
-                //public virtual Category Category { get; set; }
-            //    public virtual Quality Quality { get; set; }
+               public virtual Category Category { get; set; }
+               public virtual Quality Quality { get; set; }
             //    public virtual LoanHistory LoansHistories { get; set; } 
 
-                public virtual User User { get; set; }
+               public virtual User User { get; set; }
                 // public virtual User ActualUser { get; set; }
 
     }

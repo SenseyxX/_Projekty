@@ -19,10 +19,10 @@ namespace Mag.Entities
 
 
 
-        // public virtual Squad Squad { get; set; }
+        public virtual Squad Squad { get; set; }
         // public virtual LoanHistory LoansHistories { get; set; }
         public ICollection<Item> Items { get; set; }
-        public ICollection<Item> MyItems { get; set; }
+        // public ICollection<Item> MyItems { get; set; }
 
         }
 }
