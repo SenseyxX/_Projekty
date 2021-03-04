@@ -11,8 +11,8 @@ namespace Mag.Entities
 {
     public class MagContext : DbContext
     {
-       // string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=MagDb;Trusted_Connection=True;";
-        string _connectionString = "Server=O-GACKI-N;Database=MagDb;Trusted_Connection=True;";
+        string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=MagDb;Trusted_Connection=True;";
+        //string _connectionString = "Server=O-GACKI-N;Database=MagDb;Trusted_Connection=True;";
 
         public DbSet<User> users { get; set; }
         public DbSet<Squad> squads { get; set; }                                                       
@@ -37,18 +37,18 @@ namespace Mag.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<User>()
-            //    .HasMany(x => x.Items)
-            //    .WithOne(x => x.User);
+                        //modelBuilder.Entity<User>()
+                        //    .HasMany(x => x.Items)
+                        //    .WithOne(x => x.User);
 
-            //modelBuilder.Entity<User>()
-            //    .HasMany(x => x.MyItems)
-            //    .WithOne(x => x.ActualUser);
+                        //modelBuilder.Entity<User>()
+                        //    .HasMany(x => x.MyItems)
+                        //    .WithOne(x => x.ActualUser);
 
-            modelBuilder.Entity<Item>()
-              .HasOne(x => x.User)
-              .WithMany(x => x.Items)
-              .HasForeignKey(x => x.OwnerId);
+                        modelBuilder.Entity<Item>()
+                          .HasOne(x => x.User)
+                          .WithMany(x => x.Items)
+                          .HasForeignKey(x => x.OwnerId);
 
             //modelBuilder.Entity<Item>()
             //    .HasOne(x => x.ActualUser)

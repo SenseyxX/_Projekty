@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mag.Migrations
 {
     [DbContext(typeof(MagContext))]
-    [Migration("20210304151935_init")]
+    [Migration("20210304191621_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,12 +34,7 @@ namespace Mag.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ItemId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("categories");
                 });
@@ -52,6 +47,9 @@ namespace Mag.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ActualOwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -76,6 +74,9 @@ namespace Mag.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
 
                     b.HasIndex("OwnerId");
 
@@ -107,9 +108,6 @@ namespace Mag.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId")
-                        .IsUnique();
 
                     b.ToTable("loanHistories");
                 });
@@ -183,24 +181,21 @@ namespace Mag.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("Mag.Entities.Category", b =>
-                {
-                    b.HasOne("Mag.Entities.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId");
-
-                    b.Navigation("Item");
-                });
-
             modelBuilder.Entity("Mag.Entities.Item", b =>
                 {
+                    b.HasOne("Mag.Entities.Category", null)
+                        .WithOne("Item")
+                        .HasForeignKey("Mag.Entities.Item", "CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Mag.Entities.User", "User")
                         .WithMany("Items")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mag.Entities.Quality", "Quality")
+                    b.HasOne("Mag.Entities.Quality", null)
                         .WithOne("Item")
                         .HasForeignKey("Mag.Entities.Item", "QualityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -210,23 +205,12 @@ namespace Mag.Migrations
                         .WithMany("MyItems")
                         .HasForeignKey("UserId1");
 
-                    b.Navigation("Quality");
-
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Mag.Entities.LoanHistory", b =>
+            modelBuilder.Entity("Mag.Entities.Category", b =>
                 {
-                    b.HasOne("Mag.Entities.Item", null)
-                        .WithOne("LoansHistories")
-                        .HasForeignKey("Mag.Entities.LoanHistory", "ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Mag.Entities.Item", b =>
-                {
-                    b.Navigation("LoansHistories");
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("Mag.Entities.Quality", b =>

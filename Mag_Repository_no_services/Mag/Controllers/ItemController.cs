@@ -74,7 +74,7 @@ namespace Mag.Controllers
                         
                         try
                         {
-                                 var item = _mapper.Map<Item>(itemAddDto);
+                                var item = _mapper.Map<Item>(itemAddDto);
                                 if (item == null)
                                 {
                                         return BadRequest();

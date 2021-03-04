@@ -1,3 +1,4 @@
+using Mag.Controllers;
 using Mag.Entities;
 using Mag.Repositories;
 using Mag.Repositories.IRepository;
@@ -39,23 +40,21 @@ namespace Mag
             });
 
                         services
-                            .AddTransient<ICategoryRepository, CategoryRepository>()                            
+                            .AddTransient<ICategoryRepository, CategoryRepository>()
                             .AddTransient<IItemRepository, ItemRepository>()
                             .AddTransient<ILoanHistoryRepository, LoanHistoryRepository>()
-                            .AddTransient<IQualityRepository,QualityRepository>()
-                            .AddTransient<ISquadRepository, SquadRepository>()                            
+                            .AddTransient<IQualityRepository, QualityRepository>()
+                            .AddTransient<ISquadRepository, SquadRepository>()
                             .AddTransient<IUserRepository, UserRepository>()
-                            
+                            .AddScoped<QualitySeeder>()
                             .AddDbContext<MagContext>()
-                            .AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-                        
-
-
+                            .AddAutoMapper(typeof(AutoMapperProfile).Assembly);         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,QualitySeeder seeder)
         {
+            seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

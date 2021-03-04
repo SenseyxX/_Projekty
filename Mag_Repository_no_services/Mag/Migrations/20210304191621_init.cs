@@ -8,6 +8,36 @@ namespace Mag.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "loanHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    LastOwnerId = table.Column<int>(type: "int", nullable: false),
+                    ActualOwnerId = table.Column<int>(type: "int", nullable: false),
+                    LoanDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_loanHistories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "qualities",
                 columns: table => new
                 {
@@ -61,6 +91,7 @@ namespace Mag.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ItemName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     QualityId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     OwnerId = table.Column<int>(type: "int", nullable: false),
@@ -72,6 +103,12 @@ namespace Mag.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_items_categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_items_qualities_QualityId",
                         column: x => x.QualityId,
@@ -92,53 +129,11 @@ namespace Mag.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ItemId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_categories_items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "items",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "loanHistories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    LastOwnerId = table.Column<int>(type: "int", nullable: false),
-                    ActualOwnerId = table.Column<int>(type: "int", nullable: false),
-                    LoanDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_loanHistories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_loanHistories_items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "items",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_categories_ItemId",
-                table: "categories",
-                column: "ItemId");
+                name: "IX_items_CategoryId",
+                table: "items",
+                column: "CategoryId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_items_OwnerId",
@@ -155,18 +150,12 @@ namespace Mag.Migrations
                 name: "IX_items_UserId1",
                 table: "items",
                 column: "UserId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_loanHistories_ItemId",
-                table: "loanHistories",
-                column: "ItemId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "categories");
+                name: "items");
 
             migrationBuilder.DropTable(
                 name: "loanHistories");
@@ -175,7 +164,7 @@ namespace Mag.Migrations
                 name: "squads");
 
             migrationBuilder.DropTable(
-                name: "items");
+                name: "categories");
 
             migrationBuilder.DropTable(
                 name: "qualities");
