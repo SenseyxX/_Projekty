@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mag.Migrations
 {
     [DbContext(typeof(MagContext))]
-    [Migration("20210227142835_init")]
+    [Migration("20210304151935_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,9 +60,6 @@ namespace Mag.Migrations
                     b.Property<string>("ItemName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ItemPhoto")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
@@ -75,12 +72,17 @@ namespace Mag.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("QualityId")
                         .IsUnique();
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("items");
                 });
@@ -204,6 +206,10 @@ namespace Mag.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Mag.Entities.User", null)
+                        .WithMany("MyItems")
+                        .HasForeignKey("UserId1");
+
                     b.Navigation("Quality");
 
                     b.Navigation("User");
@@ -231,6 +237,8 @@ namespace Mag.Migrations
             modelBuilder.Entity("Mag.Entities.User", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("MyItems");
                 });
 #pragma warning restore 612, 618
         }

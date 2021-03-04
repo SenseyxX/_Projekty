@@ -71,9 +71,10 @@ namespace Mag.Controllers
                 [HttpPost]
                 public async Task<ActionResult> AddItem(ItemAddDto itemAddDto)
                 {
-                        var item = _mapper.Map<Item>(itemAddDto);
+                        
                         try
                         {
+                                 var item = _mapper.Map<Item>(itemAddDto);
                                 if (item == null)
                                 {
                                         return BadRequest();
@@ -83,11 +84,11 @@ namespace Mag.Controllers
                                 return CreatedAtAction(nameof(GetItem), new { Id = createdUser.Id },
                                         createdUser);
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
 
                                 return StatusCode(StatusCodes.Status500InternalServerError,
-                                         "Erorr retrieving data from the database");
+                                         "Erorr adding data to the database");
                         }
 
                 }

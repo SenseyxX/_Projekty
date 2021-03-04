@@ -88,7 +88,7 @@ namespace Mag.Controllers
                         {
 
                                 return StatusCode(StatusCodes.Status500InternalServerError,
-                                         "Erorr retrieving data from the database");
+                                         "Erorr adding data to the database");
                         }
 
                 }

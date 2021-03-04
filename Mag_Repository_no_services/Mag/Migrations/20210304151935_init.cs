@@ -66,8 +66,8 @@ namespace Mag.Migrations
                     OwnerId = table.Column<int>(type: "int", nullable: false),
                     ActualOwnerId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ItemPhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,6 +84,12 @@ namespace Mag.Migrations
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_items_users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,6 +150,11 @@ namespace Mag.Migrations
                 table: "items",
                 column: "QualityId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_items_UserId1",
+                table: "items",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_loanHistories_ItemId",
