@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mag.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,6 +82,12 @@ namespace Mag.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_users_squads_SquadId",
+                        column: x => x.SquadId,
+                        principalTable: "squads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,8 +103,7 @@ namespace Mag.Migrations
                     OwnerId = table.Column<int>(type: "int", nullable: false),
                     ActualOwnerId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId1 = table.Column<int>(type: "int", nullable: true)
+                    QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,19 +126,12 @@ namespace Mag.Migrations
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_items_users_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_items_CategoryId",
                 table: "items",
-                column: "CategoryId",
-                unique: true);
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_items_OwnerId",
@@ -143,13 +141,12 @@ namespace Mag.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_items_QualityId",
                 table: "items",
-                column: "QualityId",
-                unique: true);
+                column: "QualityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_items_UserId1",
-                table: "items",
-                column: "UserId1");
+                name: "IX_users_SquadId",
+                table: "users",
+                column: "SquadId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -161,9 +158,6 @@ namespace Mag.Migrations
                 name: "loanHistories");
 
             migrationBuilder.DropTable(
-                name: "squads");
-
-            migrationBuilder.DropTable(
                 name: "categories");
 
             migrationBuilder.DropTable(
@@ -171,6 +165,9 @@ namespace Mag.Migrations
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "squads");
         }
     }
 }

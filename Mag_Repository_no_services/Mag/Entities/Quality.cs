@@ -12,6 +12,6 @@ namespace Mag.Entities
                 public string Description { get; set; }
 
 
-                public virtual Item Item { get; set; }
+                public virtual ICollection<Item> Items { get; set; }
         }
 }

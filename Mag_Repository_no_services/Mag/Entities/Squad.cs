@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace Mag.Entities
                 public string SquadOwner { get; set; }
                 public string City { get; set; }
 
-                public virtual User User { get; set; }
+                public virtual Collection<User> Users { get; set; }
 
         }
 }

@@ -18,7 +18,7 @@ namespace Mag.Repositories
 
                 public async Task<Item> AddItemAsync(Item item)
                 {
-                        var result= await _magContext.items.AddAsync(item);
+                        var result = await _magContext.items.AddAsync(item);
                         await _magContext.SaveChangesAsync();
                         return result.Entity;
                 }

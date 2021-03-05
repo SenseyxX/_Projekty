@@ -68,20 +68,13 @@ namespace Mag.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("OwnerId");
 
-                    b.HasIndex("QualityId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("QualityId");
 
                     b.ToTable("items");
                 });
@@ -176,14 +169,16 @@ namespace Mag.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SquadId");
+
                     b.ToTable("users");
                 });
 
             modelBuilder.Entity("Mag.Entities.Item", b =>
                 {
-                    b.HasOne("Mag.Entities.Category", null)
-                        .WithOne("Item")
-                        .HasForeignKey("Mag.Entities.Item", "CategoryId")
+                    b.HasOne("Mag.Entities.Category", "Category")
+                        .WithMany("Items")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -193,34 +188,48 @@ namespace Mag.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mag.Entities.Quality", null)
-                        .WithOne("Item")
-                        .HasForeignKey("Mag.Entities.Item", "QualityId")
+                    b.HasOne("Mag.Entities.Quality", "Quality")
+                        .WithMany("Items")
+                        .HasForeignKey("QualityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Mag.Entities.User", null)
-                        .WithMany("MyItems")
-                        .HasForeignKey("UserId1");
+                    b.Navigation("Category");
+
+                    b.Navigation("Quality");
 
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Mag.Entities.User", b =>
+                {
+                    b.HasOne("Mag.Entities.Squad", "Squad")
+                        .WithMany("Users")
+                        .HasForeignKey("SquadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Squad");
+                });
+
             modelBuilder.Entity("Mag.Entities.Category", b =>
                 {
-                    b.Navigation("Item");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Mag.Entities.Quality", b =>
                 {
-                    b.Navigation("Item");
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Mag.Entities.Squad", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Mag.Entities.User", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("MyItems");
                 });
 #pragma warning restore 612, 618
         }
