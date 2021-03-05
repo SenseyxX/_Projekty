@@ -10,7 +10,7 @@ namespace Mag.Entities
         {
                 public int Id { get; set; }
                 public string SquadName { get; set; }
-                public string SquadOwner { get; set; }
+                public int SquadOwner { get; set; }
                 public string City { get; set; }
 
                 public virtual Collection<User> Users { get; set; }

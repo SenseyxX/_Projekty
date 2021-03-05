@@ -8,7 +8,7 @@ namespace Mag.Dtos.SquadDtos
         public class SquadAddDto
         {
                 public string SquadName { get; set; }
-                public string SquadOwner { get; set; }
+                public int SquadOwner { get; set; }
                 public string City { get; set; }
         }
 }

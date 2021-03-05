@@ -22,7 +22,7 @@ namespace Mag.Entities
         public DbSet<Item> items { get; set; }
 
         /*
-        Users<->Squads -Jeden do Jeden  *
+        Users<->Squads -Wiele do Jeden  *
 
         Users<->LoanHistory jeden do wielu 
 
@@ -30,33 +30,33 @@ namespace Mag.Entities
 
         Items<->Categories- Jeden do jeden  *
 
-        Items<->Quality- Jeden do jeden  *  
+        Items<->Quality- Wiele do jeden  *  
 
         Items<->LoanHistory- Jeden do wielu 
         */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-              .HasOne(x => x.Squad)
-              .WithMany(x => x.Users)
-              .HasForeignKey(x => x.SquadId);
+                        modelBuilder.Entity<User>()
+                          .HasOne(x => x.Squad)
+                          .WithMany(x => x.Users)
+                          .HasForeignKey(x => x.SquadId);                     
+                
 
                         modelBuilder.Entity<Item>()
                           .HasOne(x => x.User)
                           .WithMany(x => x.Items)
                           .HasForeignKey(x => x.OwnerId);
 
-            modelBuilder.Entity<Item>()
-              .HasOne(x => x.Quality)
-              .WithMany(x => x.Items)
-              .HasForeignKey(x => x.QualityId);
+                        modelBuilder.Entity<Item>()
+                          .HasOne(x => x.Quality)
+                          .WithMany(x => x.Items)
+                          .HasForeignKey(x => x.QualityId);
 
-
-            modelBuilder.Entity<Item>()
-              .HasOne(x => x.Category)
-              .WithMany(x => x.Items)
-              .HasForeignKey(x => x.CategoryId);
+                        modelBuilder.Entity<Item>()
+                          .HasOne(x => x.Category)
+                          .WithMany(x => x.Items)
+                          .HasForeignKey(x => x.CategoryId);
 
 
 

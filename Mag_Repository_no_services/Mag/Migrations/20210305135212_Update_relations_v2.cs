@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mag.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Update_relations_v2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,7 +58,7 @@ namespace Mag.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SquadName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SquadOwner = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SquadOwner = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -96,7 +96,7 @@ namespace Mag.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ItemName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     QualityId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),

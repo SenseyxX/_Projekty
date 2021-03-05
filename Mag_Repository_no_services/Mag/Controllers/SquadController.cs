@@ -32,8 +32,8 @@ namespace Mag.Controllers
                         try
                         {
                                 var result = await _squadRepository.GetAllSquadsAsync();
-                                var resultDto = _mapper.Map<SquadGetDto>(result);
-                                return Ok(result);
+                                var resultDto = _mapper.Map<IEnumerable<SquadGetDto>>(result);
+                                return Ok(resultDto);
                         }
                         catch (Exception)
                         {
@@ -70,6 +70,7 @@ namespace Mag.Controllers
                 [HttpPost]
                 public async Task<ActionResult> AddSquad(SquadAddDto squadAddDto)
                 {
+
                         try
                         {
                                 var squad = _mapper.Map<Squad>(squadAddDto);
@@ -82,7 +83,7 @@ namespace Mag.Controllers
                                 return CreatedAtAction(nameof(GetSquad), new { Id = createdsquad.Id },
                                         createdsquad);
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
 
                                 return StatusCode(StatusCodes.Status500InternalServerError,
@@ -98,7 +99,6 @@ namespace Mag.Controllers
                         try
                         {                                
                                 var squadToUpdate = await _squadRepository.GetSquadAsync(Id);
-
                                 if (squadToUpdate == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");
@@ -125,7 +125,6 @@ namespace Mag.Controllers
                         {
                                 
                                 var squadToDelete = await _squadRepository.GetSquadAsync(Id);
-
                                 if (squadToDelete == null)
                                 {
                                         return NotFound($"User with Id={Id} not found");

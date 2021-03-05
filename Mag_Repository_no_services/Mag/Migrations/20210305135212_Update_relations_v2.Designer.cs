@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mag.Migrations
 {
     [DbContext(typeof(MagContext))]
-    [Migration("20210305085539_Initial")]
-    partial class Initial
+    [Migration("20210305135212_Update_relations_v2")]
+    partial class Update_relations_v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,7 +56,8 @@ namespace Mag.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -136,8 +137,8 @@ namespace Mag.Migrations
                     b.Property<string>("SquadName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SquadOwner")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SquadOwner")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

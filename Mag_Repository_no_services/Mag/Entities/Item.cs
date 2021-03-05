@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Mag.Entities
 {
         public class Item : BaseEntity
         {
+                [MaxLength(20)]
                 public string ItemName { get; set; }
                 public int CategoryId { get; set; }
                 public int QualityId { get; set; }

@@ -46,11 +46,14 @@ namespace Mag
                         CreateMap<LoanHistory, LoanHistoryGetDto>().ReverseMap();
                         CreateMap<LoanHistory, LoanHistoryGetIdDto>().ReverseMap();
                         CreateMap<LoanHistory, LoanHistoryUpdateDto>().ReverseMap();
-                    #endregion
+            #endregion
 
                     #region SquadDtos
-                        CreateMap<Squad, SquadGetDto>().ReverseMap();
+                        CreateMap<Squad, SquadAddDto>().ReverseMap();
+                        CreateMap<Squad, SquadDeleteDto>().ReverseMap();
+                        CreateMap<Squad, SquadGetDto>().ReverseMap();                        
                         CreateMap<Squad, SquadGetIdDto>().ReverseMap();
+                        CreateMap<Squad, SquadUpdateDto>().ReverseMap();
                     #endregion
 
                     #region UserDtos

@@ -54,7 +54,8 @@ namespace Mag.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -134,8 +135,8 @@ namespace Mag.Migrations
                     b.Property<string>("SquadName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SquadOwner")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SquadOwner")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
