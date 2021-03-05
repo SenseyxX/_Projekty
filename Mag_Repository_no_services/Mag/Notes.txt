@@ -1,3 +1,4 @@
 ﻿Czy robić folder na np: Seedera,Context,Profil Mappera ?
 Podzielić Dto na Query/Command/Dto
 Określić prawidłowo ilość znaków w encjach
+Dodać servisy do obsługi controllerów
