@@ -17,6 +17,7 @@ namespace Mag.Entities
                 public int Quantity { get; set; }
                 public int OwnerId { get; set; }
                 public int ActualOwnerId { get; set; }
+                [MaxLength(100)]
                 public string Description { get; set; }
                 //public byte[] ItemPhoto { get; set; }
                 public string QrCode { get; set; }
@@ -31,5 +32,5 @@ namespace Mag.Entities
                public virtual User User { get; set; }
                 // public virtual User ActualUser { get; set; }
 
-    }
+        }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Mag.Entities
 {
@@ -9,6 +11,7 @@ namespace Mag.Entities
         {
                 public int Id { get; set; }
                 public int QualityNumber { get; set; }
+                [MaxLength(20)]
                 public string Description { get; set; }
 
 

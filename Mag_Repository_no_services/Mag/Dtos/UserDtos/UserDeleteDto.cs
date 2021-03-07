@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 namespace Mag.Dtos.UserDtos
 {
         public class UserDeleteDto
-    {
-                
+        {                
         }
 }

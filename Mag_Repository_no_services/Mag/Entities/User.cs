@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Mag.Entities
 {
@@ -10,11 +12,15 @@ namespace Mag.Entities
     {
 
         public int Id { get; set; }
+        [MaxLength(20)]
         public string Name { get; set; }
+        [MaxLength(20)]
         public string LastName { get; set; }
         public int SquadId { get; set; }
         public string PasswordHash { get; set; }
+        [MaxLength(20)]
         public string Email { get; set; }
+        [MaxLength(20)]
         public string PhoneNumber { get; set; }       
 
 
