@@ -11,8 +11,10 @@ namespace Mag.Entities
 {
     public class MagContext : DbContext
     {
-        // string _connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=MagDb;Trusted_Connection=True;";
-        string _connectionString = "Server=O-GACKI-N;Database=MagDb;Trusted_Connection=True;";
+                public MagContext(DbContextOptions<MagContext> options) : base(options)
+                {
+                }
+                
 
         public DbSet<User> users { get; set; }
         public DbSet<Squad> squads { get; set; }
@@ -79,9 +81,6 @@ namespace Mag.Entities
                         //    .WithMany()
                         //    .OnDelete(DeleteBehavior.Restrict);
                 }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
+               
         }
-    }
 }

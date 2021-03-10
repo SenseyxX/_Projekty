@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,9 +32,9 @@ namespace Mag
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-                       
+                
+            
+            services.AddControllers();                       
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mag", Version = "v1" });
@@ -47,7 +48,7 @@ namespace Mag
                             .AddTransient<ISquadRepository, SquadRepository>()
                             .AddTransient<IUserRepository, UserRepository>()
                             .AddScoped<QualitySeeder>()
-                            .AddDbContext<MagContext>()
+                            .AddDbContext<MagContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("MyConnection")))
                             .AddAutoMapper(typeof(AutoMapperProfile).Assembly);         
         }
 
