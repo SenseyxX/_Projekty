@@ -15,5 +15,13 @@ namespace Mag.Dtos
                 public string Email { get; set; }                
                 public string PhoneNumber { get; set; }
 
-        }
+        public static explicit operator UserGetDto(User user) => new UserGetDto
+        {
+            Name = user.Name,
+            LastName = user.LastName,
+            SquadId = user.SquadId,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+        };
+    }
 }

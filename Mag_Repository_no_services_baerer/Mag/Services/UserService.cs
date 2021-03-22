@@ -1,4 +1,7 @@
-﻿using Mag.Dtos;
+﻿using AutoMapper;
+using Mag.Dtos;
+using Mag.Dtos.UserDtos;
+using Mag.Entities;
 using Mag.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,58 +14,54 @@ namespace Mag.Services
 
         {
                 private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-                public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository,IMapper mapper)
                 {
                         _userRepository = userRepository;
+                        _mapper = mapper;
                 }
 
-                public Task<IEnumerable<UserGetDto>> AddUserAsync(UserGetDto user)
+                public async Task<UserGetDto> AddUserAsync(UserAddDto userAddDto)
                 {
-                        throw new NotImplementedException();
+                     var user = _mapper.Map<User>(userAddDto);
+                     var createdUser = await _userRepository.AddUserAsync(user);
+                    return (UserGetDto) createdUser;
                 }
 
-                public Task<IEnumerable<UserGetDto>> DelateUserAsync(int userId)
+                public async Task DelateUserAsync(int userId)
                 {
-                        throw new NotImplementedException();
+                    var userToDelete = await _userRepository.GetUserAsync(userId);                    
+                    _mapper.Map<UserDeleteDto>(userToDelete);
+                    await _userRepository.DelateUserAsync(userId);
                 }
 
                 public async Task<IEnumerable<UserGetDto>> GetAllUsersAsync()
                 {
-                        var users = await _userRepository.GetAllUsersAsync();
-                        return users.Select(x => new UserGetDto
-                        { 
-                        //Id=x.Id,
-                        Name=x.Name,
-                        LastName=x.LastName,
-                        SquadId=x.SquadId,                        
-                        Email=x.Email,
-                        PhoneNumber=x.PhoneNumber
-                        
-                        });
-                }
+                    var result = await _userRepository.GetAllUsersAsync();
+                    var resultDto = _mapper.Map<IEnumerable<UserGetDto>>(result);
+                    return resultDto;
+                 }
 
-                public async Task<IEnumerable<UserGetDto>> GetUserAsync(int userId)
+                public async Task<UserGetDto> GetUserAsync(int userId)
                 {
-                   /*      var user = await _userRepository.GetUserAsync(userId);
-                          return user.Select(x => new UserDto 
-                          { 
-                                 Id=x.Id,
-                                 Name=x.Name,
-                                 LastName=x.LastName,
-                                 SquadId=x.SquadId,
-                                 PasswordHash=x.PasswordHash,
-                                 Email=x.Email,
-                                 PhoneNumber=x.PhoneNumber
+            var result = await _userRepository.GetUserAsync(userId);
 
-                          });
-                   */
-                        throw  new NotImplementedException();
-                }
+                        if (result == null)
+                        {
+                            return null;
+                        }
 
-                public Task<IEnumerable<UserGetDto>> UpdateUserAsync(UserGetDto user)
+                        return (UserGetDto) result;
+
+                }                
+
+                public async Task<UserGetDto> UpdateUserAsync(int userId, UserUpdateDto userUpdateDto)
                 {
-                        throw new NotImplementedException();
+                    var userToUpdate = await _userRepository.GetUserAsync(userId);
+                    await _userRepository.UpdateUssserAsync(userToUpdate);
+                    return null;
                 }
-        }       
+               
+    }       
 }

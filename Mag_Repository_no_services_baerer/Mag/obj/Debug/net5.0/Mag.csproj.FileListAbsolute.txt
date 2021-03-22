@@ -568,3 +568,13 @@ C:\Users\Oskar\source\_Projekty\Mag_Repository_no_services\Mag\bin\Debug\net5.0\
 C:\Users\Oskar\source\_Projekty\Mag_Repository_no_services\Mag\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
 C:\Users\Oskar\source\_Projekty\Mag_Repository_no_services\Mag\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\Oskar\source\_Projekty\Mag_Repository_no_services\Mag\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.csprojAssemblyReference.cache
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.AssemblyInfoInputs.cache
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.AssemblyInfo.cs
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.csproj.CoreCompileInputs.cache
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.dll
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\ref\Mag.dll
+C:\Users\ogacki\source\_Projekty\_Projekty\Mag_Repository_no_services_baerer\Mag\obj\Debug\net5.0\Mag.pdb

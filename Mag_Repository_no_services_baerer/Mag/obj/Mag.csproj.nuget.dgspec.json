@@ -1,27 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj": {}
+    "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj": {
+    "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj",
+        "projectUniqueName": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
         "projectName": "Mag",
-        "projectPath": "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\Mag.csproj",
-        "packagesPath": "C:\\Users\\Oskar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oskar\\source\\_Projekty\\Mag_Repository_no_services\\Mag\\obj\\",
+        "projectPath": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
+        "packagesPath": "C:\\Users\\ogacki\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Oskar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\ogacki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -95,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

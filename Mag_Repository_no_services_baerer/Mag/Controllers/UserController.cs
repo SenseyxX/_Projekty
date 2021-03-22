@@ -22,16 +22,9 @@ namespace Mag.Controllers
 
                 public UserController(IUserRepository userRepository, IMapper mapper)
                 {
-                        this._userRepository = userRepository;
-                        this._mapper = mapper;
-                }
-
-                [HttpPost("login")]
-                public async Task<ActionResult> Login([FromBody]UserLoginDto userLoginDto)
-                { 
-                        
-                }
-
+                        _userRepository = userRepository;
+                        _mapper = mapper;
+                }                     
 
 
                 [HttpGet]

@@ -69,35 +69,15 @@ namespace Mag.Repositories
                         return result;
                 }
 
-                public async Task<User> Login(UserLoginDto userLoginDto)
+                public async Task<User> Login(UserLoginDto userLoginDto) => await _magContext.users
+                    .Include(user => user.Role)
+                    .FirstOrDefaultAsync(user => user.Email == userLoginDto.Email);
+
+
+                public async Task UpdateUserAsync(User user)
                 {
-                       var user = _magContext.users
-                                .Include(user=>user.Role)
-                                .FirstOrDefaultAsync(user => user.Email == userLoginDto.Email);
-                       var passwordVerificationResult=_passwordHasher.VerifyHashedPassword(await user,user.Result.PasswordHash,userLoginDto.Pasword);
-                       return  passwordVerificationResult;
-                       
-                        
+                    _magContext.users.Update(user);
+                    await _magContext.SaveChangesAsync();
                 }
-
-                public async Task<User> UpdateUserAsync(User user)
-                {
-                        var result = await _magContext.users
-                                .FirstOrDefaultAsync(m => m.Id == user.Id);
-                        if (result != null)
-                        {
-                                result.Name = user.Name;
-                                result.LastName = user.LastName;
-                                result.SquadId = user.SquadId;
-                                result.Email = user.Email;
-                                result.PhoneNumber = user.PhoneNumber;
-
-                                await _magContext.SaveChangesAsync();
-                                return result;
-                        }
-                        return null;
-                }
-
-                
         }
 }

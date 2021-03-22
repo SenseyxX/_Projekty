@@ -14,7 +14,7 @@ namespace Mag.Repositories
                 Task<IEnumerable<User>> GetAllUsersAsync();
                 Task<User> GetUserAsync(int userId);
                 Task<User> AddUserAsync(User user);
-                Task<User> UpdateUserAsync(User user);
+                Task UpdateUserAsync(User user);
                 Task<User> DelateUserAsync(int userId);
                 Task<User> Login(UserLoginDto userLoginDto);
                 
