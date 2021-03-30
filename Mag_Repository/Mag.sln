@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mag", "Mag\Mag.csproj", "{E227F16F-3CFF-40F0-9D51-B4CCDEC02100}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mag.Api", "Mag.Api\Mag.Api.csproj", "{E227F16F-3CFF-40F0-9D51-B4CCDEC02100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mag.Services", "Mag.Services\Mag.Services.csproj", "{A8DD22FC-4151-4682-A781-AB202AA09B3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mag.Persistance", "Mag.Persistance\Mag.Persistance.csproj", "{C776E8F4-21F4-4563-8234-36B6EB40FB1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E227F16F-3CFF-40F0-9D51-B4CCDEC02100}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E227F16F-3CFF-40F0-9D51-B4CCDEC02100}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E227F16F-3CFF-40F0-9D51-B4CCDEC02100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8DD22FC-4151-4682-A781-AB202AA09B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8DD22FC-4151-4682-A781-AB202AA09B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8DD22FC-4151-4682-A781-AB202AA09B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8DD22FC-4151-4682-A781-AB202AA09B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C776E8F4-21F4-4563-8234-36B6EB40FB1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C776E8F4-21F4-4563-8234-36B6EB40FB1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C776E8F4-21F4-4563-8234-36B6EB40FB1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C776E8F4-21F4-4563-8234-36B6EB40FB1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

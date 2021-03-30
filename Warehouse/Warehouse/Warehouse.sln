@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Api", "Warehouse.Api\Warehouse.Api.csproj", "{055074DC-25B4-4C89-930C-8C63BE588BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Model", "Warehouse.Model\Warehouse.Model.csproj", "{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Persistence", "Warehouse.Persistence\Warehouse.Persistence.csproj", "{1AD7F3CA-EF58-4836-9F09-160E08F5B489}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{055074DC-25B4-4C89-930C-8C63BE588BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055074DC-25B4-4C89-930C-8C63BE588BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055074DC-25B4-4C89-930C-8C63BE588BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055074DC-25B4-4C89-930C-8C63BE588BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
