@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace Mag.Services
 {
-        public sealed class UserService : IUserService
+            public sealed class UserService : IUserService
 
-        {
-                private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
+            {
+                    private readonly IUserRepository _userRepository;
+                    private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository,IMapper mapper)
+                public UserService(IUserRepository userRepository,IMapper mapper)
                 {
-                        _userRepository = userRepository;
-                        _mapper = mapper;
+                    _userRepository = userRepository;
+                    _mapper = mapper;
                 }
 
                 public async Task<UserGetDto> AddUserAsync(UserAddDto userAddDto)
                 {
-                     var user = _mapper.Map<User>(userAddDto);
-                     var createdUser = await _userRepository.AddUserAsync(user);
+                    var user = _mapper.Map<User>(userAddDto);
+                    var createdUser = await _userRepository.AddUserAsync(user);
                     return (UserGetDto) createdUser;
                 }
 
@@ -45,7 +45,7 @@ namespace Mag.Services
 
                 public async Task<UserGetDto> GetUserAsync(int userId)
                 {
-            var result = await _userRepository.GetUserAsync(userId);
+                var result = await _userRepository.GetUserAsync(userId);
 
                         if (result == null)
                         {
@@ -59,7 +59,7 @@ namespace Mag.Services
                 public async Task<UserGetDto> UpdateUserAsync(int userId, UserUpdateDto userUpdateDto)
                 {
                     var userToUpdate = await _userRepository.GetUserAsync(userId);
-                    await _userRepository.UpdateUssserAsync(userToUpdate);
+                    await _userRepository.UpdateUserAsync(userToUpdate);
                     return null;
                 }
                

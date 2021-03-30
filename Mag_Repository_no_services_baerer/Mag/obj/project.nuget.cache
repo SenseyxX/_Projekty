@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ruUViEb8Af6jLMihkQFuXNI60h0b2hkX59BHbwQj6MK6Vne57DvTaUouLSAk434WleNTS5iOOwSeIyt2FUW1cA==",
+  "dgSpecHash": "ElB1poRNytLt0NtFjSiouTFgAAnieNzOJSCS4sFsmA59WEX6QTG90WbCh3+tfRnjtTndtRt5Rm3wKfFoWl/cgA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
+  "projectFilePath": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ogacki\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\ogacki\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

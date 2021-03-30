@@ -13,13 +13,11 @@ namespace Mag.Repositories
 {
         public sealed class UserRepository : IUserRepository
         {
-                private readonly MagContext _magContext;
-                private readonly IPasswordHasher<User> _passwordHasher;
+                private readonly MagContext _magContext;                
 
-                public UserRepository(MagContext magContext,IPasswordHasher<User> passwordHasher)
+                public UserRepository(MagContext magContext)
                 {
-                        _magContext = magContext;
-                        _passwordHasher = passwordHasher;
+                        _magContext = magContext;                        
                 }
 
                 public async Task<User> AddUserAsync(User user)
@@ -32,10 +30,7 @@ namespace Mag.Repositories
                                 SquadId = user.SquadId,
                                 Email = user.Email,                                
                                 PhoneNumber = user.PhoneNumber
-                        };
-
-                        var passwordHash = _passwordHasher.HashPassword(newUser, user.PasswordHash);
-                        newUser.PasswordHash = passwordHash;
+                        };                     
 
 
                         var result = await _magContext.users.AddAsync(newUser);
@@ -67,11 +62,7 @@ namespace Mag.Repositories
                         var result = await _magContext.users
                                 .FirstOrDefaultAsync(m => m.Id == userId);
                         return result;
-                }
-
-                public async Task<User> Login(UserLoginDto userLoginDto) => await _magContext.users
-                    .Include(user => user.Role)
-                    .FirstOrDefaultAsync(user => user.Email == userLoginDto.Email);
+                }               
 
 
                 public async Task UpdateUserAsync(User user)

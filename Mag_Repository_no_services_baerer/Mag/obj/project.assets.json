@@ -5716,11 +5716,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
+      "projectUniqueName": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
       "projectName": "Mag",
-      "projectPath": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
+      "projectPath": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\Mag.csproj",
       "packagesPath": "C:\\Users\\ogacki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ogacki\\source\\_Projekty\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\obj\\",
+      "outputPath": "C:\\Users\\ogacki\\source\\_Projekty\\Mag_Repository_no_services_baerer\\Mag\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -15,8 +15,7 @@ namespace Mag.Repositories
                 Task<User> GetUserAsync(int userId);
                 Task<User> AddUserAsync(User user);
                 Task UpdateUserAsync(User user);
-                Task<User> DelateUserAsync(int userId);
-                Task<User> Login(UserLoginDto userLoginDto);
+                Task<User> DelateUserAsync(int userId);               
                 
         }
 }
