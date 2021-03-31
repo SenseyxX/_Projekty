@@ -13,12 +13,27 @@ namespace Warehouse.Persistence.Context
         {
         }
 
+        public DbSet<Category> Categories { get; init; }
         public DbSet<Item> Items { get; init; }
+        public DbSet<LoanHistory> LoanHistories { get; init; }    
+        public DbSet<Quality>Qualities  { get; init; }
+        public DbSet<Role>Roles  { get; init; }
+        public DbSet<Squad>Squads  { get; init; }
+        public DbSet<User> Users { get; init; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .ApplyConfiguration(new ItemTypeConfiguration());
+                .ApplyConfiguration(new CategoryTypeConfiguration())
+                .ApplyConfiguration(new ItemTypeConfiguration())
+                .ApplyConfiguration(new LoanHistoryTypeConfiguration())
+                .ApplyConfiguration(new QualityTypeConfiguration())
+                .ApplyConfiguration(new RoleTypeConfiguration())
+                .ApplyConfiguration(new SquadTypeConfiguration())
+                .ApplyConfiguration(new RoleTypeConfiguration())
+                .ApplyConfiguration(new UserTypeConfiguration());                
         }
     }
 }
