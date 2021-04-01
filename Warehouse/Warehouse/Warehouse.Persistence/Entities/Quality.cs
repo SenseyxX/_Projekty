@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Persistence.Entities
 {
-    class Quality : Entity
+    public sealed class Quality : Entity
     {
         public string Description { get; set; }
     }

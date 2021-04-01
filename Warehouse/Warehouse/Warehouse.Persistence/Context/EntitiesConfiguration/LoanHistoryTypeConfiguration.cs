@@ -20,7 +20,7 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .HasKey(loanhistory => loanhistory.Id);
 
             entityTypeBuilder
-                .Property<string>(nameof(LoanHistory.LoanDate))
+                .Property<DateTime>(nameof(LoanHistory.LoanDate))
                 .HasColumnName(nameof(LoanHistory.LoanDate));                
         }
     }

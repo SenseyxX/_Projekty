@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Persistence.Entities
 {
-    class Category:Entity   
+    public sealed class Category : Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }
