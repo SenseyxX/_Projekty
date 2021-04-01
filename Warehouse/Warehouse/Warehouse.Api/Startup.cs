@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Warehouse.Api.Infrastructure;
 using Warehouse.Model;
 using Warehouse.Persistence;
 
@@ -29,9 +31,14 @@ namespace Warehouse.Api
             });
 
             services
-                .AddControllers();
-
-            services
+                .AddControllers(options => options
+                    .Filters
+                    .Add<ExceptionFilter>())
+                .AddNewtonsoftJson(options =>
+                    options
+                        .SerializerSettings
+                        .ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                .Services
                 .RegisterModelDependencies()
                 .RegisterPersistenceDependencies(_configuration);
         }

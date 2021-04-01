@@ -7,6 +7,7 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
     internal sealed class SquadTypeConfiguration : IEntityTypeConfiguration<Squad>
     {
         private const string TableName = "Squads";
+
         public void Configure(EntityTypeBuilder<Squad> entityTypeBuilder)
         {
             entityTypeBuilder

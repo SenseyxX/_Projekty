@@ -8,6 +8,7 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
     internal sealed class UserTypeConfiguration : IEntityTypeConfiguration<User>
     {
         private const string TableName = "Users";
+
         public void Configure(EntityTypeBuilder<User> entityTypeBuilder)
         {
             entityTypeBuilder
