@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Persistence.Context;
+using Warehouse.Persistence.Repositories;
 
 namespace Warehouse.Persistence
 {
@@ -20,7 +21,8 @@ namespace Warehouse.Persistence
                 .AddDbContext<WarehouseContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString(WarehouseContextSectionKey),
                         migrationsConfiguration =>
-                            migrationsConfiguration.MigrationsAssembly("Warehouse.Api")));
+                            migrationsConfiguration.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)))
+                .RegisterRepositories();
         }
 
         public static IApplicationBuilder UseMigrationsOfContext(
@@ -50,5 +52,9 @@ namespace Warehouse.Persistence
 
             return applicationBuilder;
         }
+
+        private static IServiceCollection RegisterRepositories(this IServiceCollection serviceCollection)
+            => serviceCollection
+                .AddTransient<IUserRepository, UserRepository>();
     }
 }

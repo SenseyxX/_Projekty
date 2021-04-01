@@ -7,4 +7,13 @@
     <ItemGroup>
         <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.3" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contracts\Commands" />
+      <Folder Include="Contracts\Queries" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Warehouse.Persistence\Warehouse.Persistence.csproj" />
+    </ItemGroup>
 </Project>

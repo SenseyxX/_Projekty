@@ -1,5 +1,0 @@
-﻿Add exception filter
-Add relations between entities
-Add migrations
-Add base controller
-Add base repository

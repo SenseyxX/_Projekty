@@ -1,15 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
-    class CategoryTypeConfiguration:IEntityTypeConfiguration<Category>
+    internal sealed class CategoryTypeConfiguration : IEntityTypeConfiguration<Category>
     {
         private const string TableName = "Category";
 
@@ -30,6 +25,11 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .HasMaxLength(1000)
                 .HasColumnName(nameof(Category.Description))
                 .IsRequired();
+
+            entityTypeBuilder
+                .HasMany(category => category.Items)
+                .WithOne()
+                .HasForeignKey(item => item.CategoryId);
         }
     }
 }

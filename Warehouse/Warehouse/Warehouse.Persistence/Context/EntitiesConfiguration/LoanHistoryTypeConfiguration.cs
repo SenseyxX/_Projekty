@@ -1,27 +1,36 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
-    class LoanHistoryTypeConfiguration:IEntityTypeConfiguration<LoanHistory>
+    internal sealed class LoanHistoryTypeConfiguration : IEntityTypeConfiguration<LoanHistory>
     {
-        private const string TableName = "LoanHistory";
+        private const string TableName = "LoanHistories";
 
         public void Configure(EntityTypeBuilder<LoanHistory> entityTypeBuilder)
         {
             entityTypeBuilder
                 .ToTable(TableName, WarehouseContext.DefaultSchemaName)
-                .HasKey(loanhistory => loanhistory.Id);
+                .HasKey(loanHistory => loanHistory.Id);
 
             entityTypeBuilder
-                .Property<DateTime>(nameof(LoanHistory.LoanDate))
-                .HasColumnName(nameof(LoanHistory.LoanDate));                
+                .Property<DateTime>(nameof(LoanHistory.Timestamp))
+                .HasColumnName(nameof(LoanHistory.Timestamp));
+
+            entityTypeBuilder
+                .Property<Guid>(nameof(LoanHistory.ItemId))
+                .HasColumnName(nameof(LoanHistory.ItemId));
+
+            entityTypeBuilder
+                .Property<Guid>(nameof(LoanHistory.BorrowerId))
+                .HasColumnName(nameof(LoanHistory.BorrowerId));
+
+            entityTypeBuilder
+                .Property<Guid>(nameof(LoanHistory.ReceiverId))
+                .HasColumnName(nameof(LoanHistory.ReceiverId));
+
         }
     }
 }
