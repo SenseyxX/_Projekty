@@ -1,15 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
-    public sealed class UserTypeConfiguration : IEntityTypeConfiguration<User>
+    internal sealed class UserTypeConfiguration : IEntityTypeConfiguration<User>
     {
         private const string TableName = "Users";
         public void Configure(EntityTypeBuilder<User> entityTypeBuilder)
@@ -48,6 +44,27 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .HasColumnName(nameof(User.PhoneNumber))
                 .IsRequired();
 
+            entityTypeBuilder
+                .Property<Guid>(nameof(User.RoleId))
+                .HasColumnName(nameof(User.RoleId))
+                .IsRequired();
+
+            entityTypeBuilder
+                .HasOne(user => user.Role)
+                .WithMany()
+                .HasForeignKey(user => user.RoleId);
+
+            entityTypeBuilder
+                .HasMany(user => user.OwnedItems)
+                .WithOne()
+                .HasForeignKey(item => item.ActualOwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entityTypeBuilder
+                .HasMany(user => user.StoredItems)
+                .WithOne()
+                .HasForeignKey(item => item.OwnerId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
