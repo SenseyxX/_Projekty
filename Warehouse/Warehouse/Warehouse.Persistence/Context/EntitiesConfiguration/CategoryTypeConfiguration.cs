@@ -9,7 +9,7 @@ using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
-    class CategoryTypeConfiguration:IEntityTypeConfiguration<Category>
+    internal sealed class CategoryTypeConfiguration : IEntityTypeConfiguration<Category>
     {
         private const string TableName = "Category";
 

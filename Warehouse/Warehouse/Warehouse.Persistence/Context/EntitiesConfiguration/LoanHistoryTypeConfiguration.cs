@@ -17,11 +17,11 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
         {
             entityTypeBuilder
                 .ToTable(TableName, WarehouseContext.DefaultSchemaName)
-                .HasKey(loanhistory => loanhistory.Id);
+                .HasKey(loanHistory => loanHistory.Id);
 
             entityTypeBuilder
                 .Property<DateTime>(nameof(LoanHistory.LoanDate))
-                .HasColumnName(nameof(LoanHistory.LoanDate));                
+                .HasColumnName(nameof(LoanHistory.LoanDate));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Warehouse.Persistence
                 .AddDbContext<WarehouseContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString(WarehouseContextSectionKey),
                         migrationsConfiguration =>
-                            migrationsConfiguration.MigrationsAssembly("Warehouse.Api")));
+                            migrationsConfiguration.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
         }
 
         public static IApplicationBuilder UseMigrationsOfContext(
