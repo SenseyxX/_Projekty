@@ -6,7 +6,8 @@ namespace Warehouse.Persistence.Entities
     public sealed class Item : Entity
     {
         public string Name { get; set; }
-        public string Description { get; set; }        
+        public string Description { get; set; }
+        public string QrCode { get; set; }
         public Guid CategoryId { get; set; }
         public Guid QualityId { get; set; }
         public Quality.Quality Quality { get; set; }
