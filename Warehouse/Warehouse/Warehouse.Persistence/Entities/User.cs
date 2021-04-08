@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace Warehouse.Persistence.Entities
 {
     public sealed class User : Entity
@@ -12,7 +13,7 @@ namespace Warehouse.Persistence.Entities
         public string PhoneNumber { get; set; }
         public Guid SquadId { get; set; }
         public Guid RoleId { get; set; }
-        public Role Role { get; set; }
+        public Role.Role Role { get; set; }
         public ICollection<Item> OwnedItems { get; set; }
         public ICollection<Item> StoredItems { get; set; }
     }
