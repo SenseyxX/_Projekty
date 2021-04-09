@@ -8,12 +8,12 @@ using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Persistence.Repositories
 {
-        public interface IItemRepository
-        {
-                Task<IEnumerable<Item>> GetAllItemsAsync(CancellationToken cancellationToken);
-                Task<Item> GetItemAsync(Guid Id);
-                Task<Item> AddItemAsync(Item item);
-                Task<Item> UpdateItemAsync(Item item);
-                Task<Item> DelateItemAsync(Guid Id);
-        }
+    public interface IItemRepository
+    {
+        Task<IEnumerable<Item>> GetItemsAsync(CancellationToken cancellationToken);
+        Task<Item> GetItemAsync(Guid Id);
+        Task<Item> AddItemAsync(Item item);
+        Task<Item> UpdateItemAsync(Item item);
+        Task<Item> DeleteItemAsync(Guid Id);
+    }
 }

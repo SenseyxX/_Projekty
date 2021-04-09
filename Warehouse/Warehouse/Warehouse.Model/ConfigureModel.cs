@@ -8,7 +8,13 @@ namespace Warehouse.Model
         public static IServiceCollection RegisterModelDependencies(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddTransient<IUserService, UserService>();
+                .AddTransient<ICategoryService, CategoryService>()
+                .AddTransient<IItemService,ItemService>()
+                .AddTransient<IUserService, UserService>()
+                .AddTransient<IQualityService, QualityService>()
+                .AddTransient<ILoanHistoryService,LoanHistoryService>()
+                .AddTransient<IRoleService, RoleService>()
+                .AddTransient<ISquadService, SquadService>();
         }
     }
 }

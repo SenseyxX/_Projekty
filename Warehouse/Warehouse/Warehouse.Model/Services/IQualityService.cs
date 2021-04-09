@@ -8,9 +8,9 @@ using Warehouse.Model.Dtos;
 
 namespace Warehouse.Model.Services
 {
-        public interface IQualityService
-        {
-                Task<IEnumerable<QualityDto>> GetQualitiesAsync(CancellationToken cancellationToken);
-                Task<QualityDto> GetQualityAsync(Guid Id);
-        }
+    public interface IQualityService
+    {
+        Task<IEnumerable<QualityDto>> GetQualitiesAsync(CancellationToken cancellationToken);
+        Task<QualityDto> GetQualityAsync(Guid Id);
+    }
 }

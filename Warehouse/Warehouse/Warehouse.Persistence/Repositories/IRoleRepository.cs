@@ -7,8 +7,8 @@ using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Repositories
 {
-        public interface IRoleRepository
-        {
-                Task<Role> GetRoelAsync(Guid Id);
-        }
+    public interface IRoleRepository
+    {
+        Task<Role> GetRoleAsync(Guid Id);
+    }
 }

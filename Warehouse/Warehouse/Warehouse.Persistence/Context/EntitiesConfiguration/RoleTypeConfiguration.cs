@@ -29,8 +29,8 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
             entityTypeBuilder
                  .Property<PerrmissionLevel>(nameof(Role.PermissionLevel))
                  .HasColumnType("tinyint")
-                 .HasColumnName(nameof(Role.PermissionLevel));
-
+                 .HasColumnName(nameof(Role.PermissionLevel))
+                 .IsRequired();
         }
     }
 }

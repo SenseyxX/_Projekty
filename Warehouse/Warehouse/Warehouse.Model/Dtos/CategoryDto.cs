@@ -7,19 +7,19 @@ using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Dtos
 {
-        class CategoryDto
+    public sealed class CategoryDto
+    {
+        private CategoryDto(string name, string description)
         {
-                private CategoryDto(string name, string description)
-                {
-                        Name = name;
-                        Description = description;
-                }
-
-                public string Name { get;}
-                public string Description { get;}
-               // public ICollection<Item> Items { get;}
-
-                public static explicit operator CategoryDto(Category category)
-                        => new (category.Name,category.Description);
+            Name = name;
+            Description = description;
         }
+
+        public string Name { get; }
+        public string Description { get; }
+        // ToDo public ICollection<Item> Items { get;}
+
+        public static explicit operator CategoryDto(Category category)
+                => new(category.Name, category.Description);
+    }
 }

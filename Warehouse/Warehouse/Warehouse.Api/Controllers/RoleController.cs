@@ -3,16 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Warehouse.Model.Dtos;
+using Warehouse.Model.Services;
 
 namespace Warehouse.Api.Controllers
 {
-        [ApiController]
-        [Microsoft.AspNetCore.Components.Route(RoutePattern)]
-        public class RoleController : Controller
-        {
-                public RoleController()
-                {
+    [ApiController]
+    [Route(RoutePattern)]
+    public sealed class RoleController : Controller
+    {
+        private readonly IRoleService _roleService;
 
-                }
+        public RoleController(IRoleService roleService)
+        {
+            _roleService = roleService;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<RoleDto>> GetRoleAsync(Guid Id)
+        {
+            var result = await _roleService.GetRoleAsync(Id);
+            return Ok(result);
+        }
+    }
 }

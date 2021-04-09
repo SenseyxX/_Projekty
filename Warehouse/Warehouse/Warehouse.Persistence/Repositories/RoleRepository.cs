@@ -9,19 +9,19 @@ using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Repositories
 {
-        class RoleRepository : IRoleRepository
+    class RoleRepository : IRoleRepository
+    {
+        private readonly WarehouseContext _warehouseContext;
+
+        public RoleRepository(WarehouseContext warehouseContext)
         {
-                private readonly WarehouseContext _warehouseContext;
-
-                public RoleRepository(WarehouseContext warehouseContext)
-                {
-                        _warehouseContext = warehouseContext;
-                }
-
-                public async Task<Role> GetRoelAsync(Guid Id)
-                {                       
-                        return  await _warehouseContext.Roles
-                                .FirstOrDefaultAsync(role => role.Id == Id);
-                }
+            _warehouseContext = warehouseContext;
         }
+
+        public async Task<Role> GetRoleAsync(Guid Id)
+        {
+            return await _warehouseContext.Roles
+                    .FirstOrDefaultAsync(role => role.Id == Id);
+        }
+    }
 }
