@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Warehouse.Persistence.Entities;
-using Warehouse.Persistence.Entities.Quality;
+﻿using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Dtos
 {

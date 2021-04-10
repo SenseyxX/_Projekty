@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
 using Warehouse.Persistence.Entities;
-using Warehouse.Persistence.Repositories;
 
 namespace Warehouse.Api.Controllers
 {

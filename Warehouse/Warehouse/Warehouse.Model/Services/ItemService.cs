@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Dtos;
@@ -27,7 +26,7 @@ namespace Warehouse.Model.Services
 
         public async Task DeleteItemAsync(Guid Id)
         {
-            await _itemRepository.DelateItemAsync(Id);
+            // await _itemRepository.DelateItemAsync(Id);
         }
 
         public async Task<ItemDto> GetItemAsync(Guid Id)
@@ -45,6 +44,6 @@ namespace Warehouse.Model.Services
         public  Task UpdateItemAsync(User user, Guid Id)
         {
             throw new NotImplementedException();
-        }         
+        }
     }
 }

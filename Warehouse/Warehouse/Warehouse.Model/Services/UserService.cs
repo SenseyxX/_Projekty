@@ -26,7 +26,7 @@ namespace Warehouse.Model.Services
 
         public async Task DeleteUserAsync(Guid Id)
         {
-            await _userRepository.DelateUserAsync(Id);
+            // await _userRepository.DelateUserAsync(Id);
         }
 
         public async Task<UserDto> GetUserAsync(Guid Id)

@@ -1,2 +1,12 @@
-﻿Add base repository
-Add swagger configuration
+﻿Add swagger configuration
+Add jwt
+Sort out startup into configuration files
+Add cors + request redirection
+Add authentication
+Add mini etigrant
+Probably frontend
+
+ToDo:
+Przerobić repozytoria
+Poprawić kontrolery i serwisy (REST, commandy/query, dto)
+Poprawić encję

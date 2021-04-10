@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Api.Controllers
 {
@@ -22,24 +21,42 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(CancellationToken cancellationToken)
         {
             var result = await _categoryService.GetCategoriesAsync(cancellationToken);
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<CategoryDto>> GetCategoryAsync(Guid Id)
+        [HttpGet("{categoryId}")]
+        public async Task<ActionResult<FullCategoryDto>> GetCategoryAsync(
+            [FromRoute] Guid categoryId,
+            CancellationToken cancellationToken)
         {
-            var result = await _categoryService.GetCategoryAsync(Id);
+            var result = await _categoryService.GetCategoryAsync(categoryId, cancellationToken);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<CategoryDto>> AddCategoryAsync(Category category )
+        public async Task<IActionResult> AddCategoryAsync(
+            [FromBody] AddCategoryCommand addCategoryCommand,
+            CancellationToken cancellationToken)
         {
-            var result = await _categoryService.AddCategoryAsync(category);
-            return Ok(result);
+            await _categoryService.AddCategoryAsync(addCategoryCommand, cancellationToken);
+            return Ok();
         }
+
+        [HttpPut("{categoryId}")]
+        public async Task<IActionResult> UpdateCategoryAsync(
+            [FromRoute] Guid categoryId,
+            [FromBody] UpdateCategoryCommand updateCategoryCommand,
+            CancellationToken cancellationToken)
+        {
+            updateCategoryCommand.CategoryId = categoryId;
+
+            await _categoryService.UpdateCategoryAsync(updateCategoryCommand, cancellationToken);
+            return Ok();
+        }
+
+        // [HttpDelete("{categoryId}")]
     }
 }

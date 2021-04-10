@@ -1,6 +1,4 @@
-﻿using System;
-using Warehouse.Persistence.Entities.Role;
-namespace Warehouse.Persistence.Entities.Role
+﻿namespace Warehouse.Persistence.Entities.Role
 {
     public sealed class Role : Entity
     {
