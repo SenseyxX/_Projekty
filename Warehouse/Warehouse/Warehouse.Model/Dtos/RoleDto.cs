@@ -1,25 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Model.Dtos
 {
-        class RoleDto
+    public sealed class RoleDto
+    {
+        
+        public RoleDto(
+        Guid id,
+        string name,
+        string description)
         {
-                public RoleDto(string name, string description)
-                {
-                        Name = name;
-                        Description = description;
-                }
-
-                public string Name { get; set; }        
-                public string Description { get; set; }
-                //public PerrmissionLevel PermissionLevel { get; set; }
-
-                public static explicit operator RoleDto(Role role)
-                        =>new (role.Name,role.Description);
+            Name = name;
+            Description = description;
         }
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        //ToDo
+        //public PerrmissionLevel PermissionLevel { get; set; }
+
+        public static explicit operator RoleDto(Role role)
+                => new (
+                role.Id,
+                role.Name,
+                role.Description);
+    }
 }

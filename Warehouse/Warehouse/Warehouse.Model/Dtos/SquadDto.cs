@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Dtos
 {
-        class SquadDto
+    public class SquadDto
+    {
+        private SquadDto(Guid id,string name)
         {
-                private SquadDto(string name)
-                {
-                        Name = name;
-                }
-                public string Name { get; set; }
-                //public ICollection<User> Users { get; set; }
-
-                public static explicit operator SquadDto(Squad squad)
-                        => new (squad.Name);
+            Id = id;
+            Name = name;
         }
+        public Guid Id { get; }
+        public string Name { get; set; }
+        //ToDo
+        //public ICollection<User> Users { get; set; }
+
+        public static explicit operator SquadDto(Squad squad)
+                =>new (squad.Id,
+                       squad.Name);
+    }
 }

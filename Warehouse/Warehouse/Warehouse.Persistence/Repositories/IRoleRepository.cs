@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Repositories
 {
-        public interface IRoleRepository
-        {
-                Task<Role> GetRoelAsync(Guid Id);
-        }
+    public interface IRoleRepository : IRepository<Role>
+    {
+    }
 }

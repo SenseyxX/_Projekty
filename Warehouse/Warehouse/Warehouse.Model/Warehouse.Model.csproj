@@ -9,7 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contracts\Commands" />
       <Folder Include="Contracts\Queries" />
     </ItemGroup>
 

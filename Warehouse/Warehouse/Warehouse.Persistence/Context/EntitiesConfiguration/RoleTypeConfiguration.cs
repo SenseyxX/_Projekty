@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
@@ -29,8 +28,8 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
             entityTypeBuilder
                  .Property<PerrmissionLevel>(nameof(Role.PermissionLevel))
                  .HasColumnType("tinyint")
-                 .HasColumnName(nameof(Role.PermissionLevel));
-
+                 .HasColumnName(nameof(Role.PermissionLevel))
+                 .IsRequired();
         }
     }
 }

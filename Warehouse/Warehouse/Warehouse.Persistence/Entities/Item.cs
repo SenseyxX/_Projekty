@@ -5,6 +5,13 @@ namespace Warehouse.Persistence.Entities
 {
     public sealed class Item : Entity
     {
+        public Item(Guid id, string name, string description)
+            : base(id)
+        {
+            Name = name;
+            Description = description;
+        }
+        
         public string Name { get; set; }
         public string Description { get; set; }        
         public Guid CategoryId { get; set; }
