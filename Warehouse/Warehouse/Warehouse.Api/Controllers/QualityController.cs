@@ -26,10 +26,12 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<QualityDto>> GetQualityAsync(Guid Id)
+        [HttpGet("{gualityId}")]
+        public async Task<ActionResult<FullQualityDto>> GetQualityAsync(
+            [FromRoute] Guid qualityId,
+            CancellationToken cancellationToken)
         {
-            var result = await _qualityService.GetQualityAsync(Id);
+            var result = await _qualityService.GetQualityAsync(qualityId,cancellationToken);
             return Ok(result);
         }
     }

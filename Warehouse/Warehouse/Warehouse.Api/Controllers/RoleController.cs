@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
@@ -17,10 +18,12 @@ namespace Warehouse.Api.Controllers
             _roleService = roleService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<RoleDto>> GetRoleAsync(Guid Id)
+        [HttpGet("{roleId}")]
+        public async Task<ActionResult<RoleDto>> GetRoleAsync(
+            [FromRoute]Guid roleId,
+            CancellationToken cancellationToken)
         {
-            var result = await _roleService.GetRoleAsync(Id);
+            var result = await _roleService.GetRoleAsync(roleId,cancellationToken);
             return Ok(result);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
 using Warehouse.Persistence.Entities;
@@ -27,20 +28,37 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<UserDto>> GetUserAsync(Guid id)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<UserDto>> GetUserAsync(
+            [FromRoute]Guid userId,
+            CancellationToken cancellationToken)
         {
-            var result = await _userService.GetUserAsync(id);
+            var result = await _userService.GetUserAsync(userId,cancellationToken);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDto>> AddUserAsync(User user)
+        public async Task<ActionResult> AddUserAsync(
+            AddUserCommand addUserCommand,
+            CancellationToken cancellationToken)
         {
-            var result = await _userService.AddUserAsync(user);
-            return Ok(result);
+            await _userService.AddUserAsync(addUserCommand,cancellationToken);
+            return Ok();
         }
 
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUserAsync(
+            [FromRoute] Guid userId,
+            [FromBody] UpdateUserCommand updateUserCommand,
+            CancellationToken cancellationToken)
+        {
+            updateUserCommand.UserId = userId;
+
+            await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
+            return Ok();
+        }
+
+        //ToDo
         [HttpDelete]
         public async Task<ActionResult> DeleteUserAsync(Guid id)
         {

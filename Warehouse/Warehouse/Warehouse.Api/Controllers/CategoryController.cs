@@ -56,7 +56,6 @@ namespace Warehouse.Api.Controllers
             await _categoryService.UpdateCategoryAsync(updateCategoryCommand, cancellationToken);
             return Ok();
         }
-
         // [HttpDelete("{categoryId}")]
     }
 }

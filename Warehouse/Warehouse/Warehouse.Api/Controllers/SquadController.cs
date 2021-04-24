@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
 using Warehouse.Persistence.Entities;
@@ -27,20 +28,24 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<SquadDto>> GetUserAsync(Guid id)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<SquadDto>> GetSquadAsync(
+            [FromRoute]Guid squadId,
+            CancellationToken cancellationToken)
         {
-            var result = await _squadService.GetSquadAsync(id);
+            var result = await _squadService.GetSquadAsync(squadId,cancellationToken);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<SquadDto>> AddUserAsync(Squad squad)
+        public async Task<ActionResult> AddSquadAsync(
+            AddSquadCommand addSquadCommand,
+            CancellationToken cancellationToken)
         {
-            var result = await _squadService.AddSquadAsync(squad);
-            return Ok(result);
+            await _squadService.AddSquadAsync(addSquadCommand,cancellationToken);
+            return Ok();
         }
-
+        //ToDo
         [HttpDelete]
         public async Task<ActionResult> DeleteUserAsync(Guid id)
         {

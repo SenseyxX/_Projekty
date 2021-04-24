@@ -8,6 +8,7 @@ namespace Warehouse.Model.Contracts.Commands
 {
     public sealed class UpdateItemCommand
     {
+        public Guid itemId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

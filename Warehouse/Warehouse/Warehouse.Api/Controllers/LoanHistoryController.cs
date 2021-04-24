@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
 using Warehouse.Persistence.Entities;
@@ -20,25 +21,29 @@ namespace Warehouse.Api.Controllers
             _loanHistoryService = loanHistoryService;
         }
 
-        [HttpGet]
+        [HttpGet("{loanhistoryId}")]
         public async Task<ActionResult<IEnumerable<LoanHistoryDto>>> GetLoanHistories(CancellationToken cancelationToken)
         {
             var result = await _loanHistoryService.GetLoanHistoriesAsync(cancelationToken);
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<LoanHistoryDto>> GetLoanHistory(Guid Id)
+    [HttpGet]
+    public async Task<ActionResult<LoanHistoryDto>> GetLoanHistoryAsync(
+        [FromRoute] Guid loanhistoryId,
+        CancellationToken cancellationToken)
         {
-            var result = await _loanHistoryService.GetLoanHistory(Id);
+            var result = await _loanHistoryService.GetLoanHistory(loanhistoryId,cancellationToken);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<LoanHistoryDto>> AddLoanHistory(LoanHistory loanHistory)
+        public async Task<ActionResult> AddLoanHistory(            
+            AddLoanHistoryCommand addLoanHistoryCommand,
+            CancellationToken cancellationToken)
         {
-            var result = await _loanHistoryService.AddLoanHistory(loanHistory);
-            return Ok(result);
+            await _loanHistoryService.AddLoanHistory(addLoanHistoryCommand,cancellationToken);
+            return Ok();
         }
     }
 }
