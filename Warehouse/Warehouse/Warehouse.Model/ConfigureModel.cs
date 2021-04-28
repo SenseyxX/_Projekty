@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Warehouse.Model.DomainServices;
 using Warehouse.Model.Services;
 
 namespace Warehouse.Model
@@ -9,12 +10,11 @@ namespace Warehouse.Model
         {
             return serviceCollection
                 .AddTransient<ICategoryService, CategoryService>()
-                .AddTransient<IItemService,ItemService>()
+                .AddTransient<IItemService, ItemService>()
                 .AddTransient<IUserService, UserService>()
-                .AddTransient<IQualityService, QualityService>()
-                .AddTransient<ILoanHistoryService,LoanHistoryService>()
                 .AddTransient<IRoleService, RoleService>()
-                .AddTransient<ISquadService, SquadService>();
+                .AddTransient<ISquadService, SquadService>()
+                .AddTransient<ItemDomainService>();
         }
     }
 }

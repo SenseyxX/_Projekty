@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Warehouse.Persistence.Entities
+namespace Warehouse.Persistence.Entities.Abstractions
 {
     public abstract class Entity
     {

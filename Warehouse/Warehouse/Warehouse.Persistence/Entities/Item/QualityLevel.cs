@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Persistence.Entities.Quality
+﻿namespace Warehouse.Persistence.Entities.Item
 {
     public enum QualityLevel
     {

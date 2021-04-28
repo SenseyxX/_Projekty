@@ -4,11 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Abstractions;
 
 namespace Warehouse.Persistence.Repositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity>
-        where TEntity : Entity
+    public abstract class Repository<TAggregate> : IRepository<TAggregate>
+        where TAggregate : Aggregate
     {
         protected DbContext DbContext;
 
@@ -17,19 +18,19 @@ namespace Warehouse.Persistence.Repositories
             DbContext = dbContext;
         }
 
-        public virtual async Task<TEntity> GetAsync(Guid id, CancellationToken cancellationToken)
+        public virtual async Task<TAggregate> GetAsync(Guid id, CancellationToken cancellationToken)
             => await DbContext
-                .Set<TEntity>()
+                .Set<TAggregate>()
                 .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
 
-        public virtual async Task<ICollection<TEntity>> GetRangeAsync(CancellationToken cancellationToken)
+        public virtual async Task<ICollection<TAggregate>> GetRangeAsync(CancellationToken cancellationToken)
             => await DbContext
-                .Set<TEntity>()
+                .Set<TAggregate>()
                 .ToListAsync(cancellationToken);
 
-        public virtual async Task CreateAsync(TEntity entity, CancellationToken cancellationToken)
+        public virtual async Task CreateAsync(TAggregate entity, CancellationToken cancellationToken)
             => await DbContext
-                .Set<TEntity>()
+                .Set<TAggregate>()
                 .AddAsync(entity, cancellationToken);
 
         public virtual async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
@@ -41,17 +42,17 @@ namespace Warehouse.Persistence.Repositories
             }
 
             DbContext
-                .Set<TEntity>()
+                .Set<TAggregate>()
                 .Remove(entityToRemove);
         }
 
         public virtual async Task SaveAsync(CancellationToken cancellationToken)
             => await DbContext.SaveChangesAsync(cancellationToken);
 
-        public virtual void Update(TEntity entity)
+        public virtual void Update(TAggregate entity)
         {
             DbContext
-                .Set<TEntity>()
+                .Set<TAggregate>()
                 .Update(entity);
         }
     }

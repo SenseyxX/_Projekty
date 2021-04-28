@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Api.Controllers
 {
@@ -45,11 +44,11 @@ namespace Warehouse.Api.Controllers
             await _squadService.AddSquadAsync(addSquadCommand,cancellationToken);
             return Ok();
         }
-        //ToDo
-        [HttpDelete]
-        public async Task<ActionResult> DeleteUserAsync(Guid id)
+        // ToDo: change
+        [HttpDelete("{userId}")]
+        public async Task<ActionResult> DeleteUserAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            await _squadService.DeleteSquadAsync(id);
+            await _squadService.DeleteSquadAsync(id, cancellationToken);
             return Ok();
         }
     }

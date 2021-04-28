@@ -4,16 +4,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Services
 {
     public interface ISquadService
     {
         Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken);
-        Task<FullSquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken);
+        Task<SquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken);
         Task AddSquadAsync(AddSquadCommand addSquadCommand, CancellationToken cancellationToken);
         Task UpdateSquadAsync(UpdateSquadCommand updateSquadCommand, CancellationToken cancellationToken);
-        Task DeleteSquadAsync(Guid Id);        
+        Task DeleteSquadAsync(Guid id, CancellationToken cancellationToken);
     }
 }

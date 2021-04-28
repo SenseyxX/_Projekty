@@ -15,6 +15,6 @@ namespace Warehouse.Model.Services
             _roleRepository = roleRepository;
         }
         public async Task<RoleDto> GetRoleAsync(Guid id, CancellationToken cancellationToken)
-            => (RoleDto)await _roleRepository.GetAsync(id, cancellationToken);        
+            => (RoleDto) await _roleRepository.GetAsync(id, cancellationToken);
     }
 }

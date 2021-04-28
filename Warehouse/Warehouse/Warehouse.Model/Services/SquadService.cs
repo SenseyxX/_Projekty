@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Factories;
 using Warehouse.Persistence.Repositories;
 
@@ -28,11 +27,11 @@ namespace Warehouse.Model.Services
             await _squadRepository.SaveAsync(cancellationToken);
         }
 
-        public async Task DeleteSquadAsync(Guid Id)
+        public async Task DeleteSquadAsync(Guid id, CancellationToken cancellationToken)
             => throw new NotImplementedException();
 
-        public async Task<FullSquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
-            => (FullSquadDto)await _squadRepository.GetAsync(id, cancellationToken);
+        public async Task<SquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
+            => (SquadDto) await _squadRepository.GetAsync(id, cancellationToken);
 
         public async Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken)
         {

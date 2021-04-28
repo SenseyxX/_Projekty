@@ -1,10 +1,9 @@
 ﻿namespace Warehouse.Persistence.Entities.Role
 {
-    public enum PerrmissionLevel
+    public enum PermissionLevel
     {
         Admin,
         SquadOwner,
         User,
     }
-
 }

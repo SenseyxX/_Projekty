@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Model.Dtos
 {
@@ -13,11 +10,12 @@ namespace Warehouse.Model.Dtos
             Guid id,
             string name,
             string description)
-        { }
+            : base(id, name, description)
+        {
+        }
 
+        // ToDo: Verify if needed.
         public static explicit operator FullItemDto(Item item)
-            => new(item.Id,
-            item.Name,
-            item.Description);
+            => new(item.Id, item.Name, item.Description);
     }
 }

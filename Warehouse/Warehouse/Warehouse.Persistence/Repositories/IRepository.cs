@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Abstractions;
 
 namespace Warehouse.Persistence.Repositories
 {
-    public interface IRepository<TEntity>
-        where TEntity : Entity
+    public interface IRepository<TAggregate>
+        where TAggregate : Aggregate
     {
-        Task<TEntity> GetAsync(Guid id, CancellationToken cancellationToken);
-        Task<ICollection<TEntity>> GetRangeAsync(CancellationToken cancellationToken);
-        Task CreateAsync(TEntity entity, CancellationToken cancellationToken);
+        Task<TAggregate> GetAsync(Guid id, CancellationToken cancellationToken);
+        Task<ICollection<TAggregate>> GetRangeAsync(CancellationToken cancellationToken);
+        Task CreateAsync(TAggregate entity, CancellationToken cancellationToken);
         Task DeleteAsync(Guid id, CancellationToken cancellationToken);
         Task SaveAsync(CancellationToken cancellationToken);
-        void Update(TEntity entity);
+        void Update(TAggregate entity);
     }
 }

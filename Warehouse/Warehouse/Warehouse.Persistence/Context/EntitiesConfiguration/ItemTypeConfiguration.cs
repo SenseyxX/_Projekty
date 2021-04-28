@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item;
+using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
@@ -28,14 +30,16 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .Property<Guid>(nameof(Item.QualityId))
-                .HasColumnName(nameof(Item.QualityId))
+                .Property<QualityLevel>(nameof(Item.QualityLevel))
+                .HasColumnType("tinyint")
+                .HasColumnName(nameof(Item.QualityLevel))
                 .IsRequired();
 
             entityTypeBuilder
-                .HasOne(item => item.Quality)
-                .WithMany()
-                .HasForeignKey(item => item.QualityId);
+                .Property<ItemState>(nameof(Item.ItemState))
+                .HasColumnType("tinyint")
+                .HasColumnName(nameof(Item.ItemState))
+                .IsRequired();
 
             entityTypeBuilder
                 .Property<Guid?>(nameof(Item.OwnerId))
@@ -51,6 +55,8 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .HasMany(item => item.LoanHistories)
                 .WithOne()
                 .HasForeignKey(loadHistory => loadHistory.ItemId);
+
+            entityTypeBuilder.HasQueryFilter(item => item.ItemState != ItemState.Deleted);
         }
     }
 }

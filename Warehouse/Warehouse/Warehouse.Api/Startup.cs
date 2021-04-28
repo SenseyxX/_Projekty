@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Warehouse.Api.Infrastructure;
 using Warehouse.Model;
@@ -24,35 +21,25 @@ namespace Warehouse.Api
 
                 public void ConfigureServices(IServiceCollection services)
                 {
-                        services.AddSwaggerGen(c =>
-                        {
-                                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mag.Api", Version = DefaultVersionName });
-                        });
-
-                        services
-                            .AddControllers(options => options
-                                .Filters
-                                .Add<ExceptionFilter>())
-                            .AddNewtonsoftJson(options =>
-                                options
-                                    .SerializerSettings
-                                    .ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
-                            .Services
-                            .RegisterModelDependencies()
-                            .RegisterPersistenceDependencies(_configuration);
+                    services
+                        .AddControllers(options => options
+                            .Filters
+                            .Add<ExceptionFilter>())
+                        .AddNewtonsoftJson(options =>
+                            options
+                                .SerializerSettings
+                                .ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                        .Services
+                        .RegisterModelDependencies()
+                        .RegisterPersistenceDependencies(_configuration)
+                        .ConfigureSwagger(_configuration);
                 }
 
-                public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-                {
-                        if (env.IsDevelopment())
-                        {
-                                app.UseDeveloperExceptionPage();
-                        }
-
-                        app.UseRouting()
-                            .UseMigrationsOfContext();
-
-                        app.UseEndpoints(builder => builder.MapControllers());
-                }
+                public void Configure(IApplicationBuilder app)
+                    => app
+                        .UseRouting()
+                        .UseMigrationsOfContext()
+                        .UseSwaggerMiddleware(_configuration)
+                        .UseEndpoints(builder => builder.MapControllers());
         }
 }

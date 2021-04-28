@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Api.Controllers
 {
@@ -54,15 +53,15 @@ namespace Warehouse.Api.Controllers
         {
             updateUserCommand.UserId = userId;
 
-            await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
+            // await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
             return Ok();
         }
 
-        //ToDo
+        //ToDo: Change
         [HttpDelete]
-        public async Task<ActionResult> DeleteUserAsync(Guid id)
+        public async Task<ActionResult> DeleteUserAsync(Guid id, CancellationToken cancellationToken)
         {
-            await _userService.DeleteUserAsync(id);
+            await _userService.DeleteUserAsync(id, cancellationToken);
             return Ok();
         }
     }

@@ -13,6 +13,6 @@ namespace Warehouse.Model.Services
         Task<FullCategoryDto> GetCategoryAsync(Guid id, CancellationToken cancellationToken);
         Task AddCategoryAsync(AddCategoryCommand addCategoryCommand, CancellationToken cancellationToken);
         Task UpdateCategoryAsync(UpdateCategoryCommand updateCategoryCommand, CancellationToken cancellationToken);
-        Task DeleteCategoryAsync(Guid Id);
+        Task DeleteCategoryAsync(Guid id, CancellationToken cancellationToken);
     }
 }

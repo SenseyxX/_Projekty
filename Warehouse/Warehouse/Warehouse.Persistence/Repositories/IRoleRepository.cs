@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Warehouse.Persistence.Entities.Role;
+﻿using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Repositories
 {

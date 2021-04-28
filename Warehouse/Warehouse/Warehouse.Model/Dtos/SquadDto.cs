@@ -11,12 +11,9 @@ namespace Warehouse.Model.Dtos
             Name = name;
         }
         public Guid Id { get; }
-        public string Name { get; set; }
-        //ToDo
-        //public ICollection<User> Users { get; set; }
+        public string Name { get;  }
 
         public static explicit operator SquadDto(Squad squad)
-                =>new (squad.Id,
-                       squad.Name);
+            => new (squad.Id, squad.Name);
     }
 }

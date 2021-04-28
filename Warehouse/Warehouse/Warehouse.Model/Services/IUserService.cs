@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Services
 {
@@ -13,7 +12,7 @@ namespace Warehouse.Model.Services
         Task<IEnumerable<UserDto>>GetUsersAsync(CancellationToken cancellationToken);
         Task<UserDto>GetUserAsync(Guid id, CancellationToken cancellationToken);
         Task AddUserAsync(AddUserCommand addUserCommand, CancellationToken cancellationToken);
-        Task UpdateUserAsync(UpdateUserCommand updateUserCommand, CancellationToken cancellationToken);
-        Task DeleteUserAsync(Guid id);        
+        // Task UpdateUserAsync(UpdateUserCommand updateUserCommand, CancellationToken cancellationToken);
+        Task DeleteUserAsync(Guid id, CancellationToken cancellationToken);
     }
 }

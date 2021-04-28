@@ -53,7 +53,7 @@ namespace Warehouse.Model.Services
             }
         }
 
-        public async Task DeleteCategoryAsync(Guid Id)
-            => throw new NotImplementedException();       
+        public async Task DeleteCategoryAsync(Guid id, CancellationToken cancellationToken)
+            => throw new NotImplementedException();
     }
 }

@@ -1,19 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using Warehouse.Persistence.Entities.Abstractions;
 
 
 namespace Warehouse.Persistence.Entities
 {
-    public sealed class User : Entity
+    public sealed class User : Aggregate
     {
-        public User(Guid id, string name, string lastname, string passwordhash, string email, string phonenumber)
+        public User(
+            Guid id,
+            string name,
+            string lastName,
+            string passwordHash,
+            string email,
+            string phoneNumber,
+            Guid squadId,
+            Guid roleId)
             : base(id)
         {
             Name = name;
-            LastName = lastname;
-            PasswordHash = passwordhash;
+            LastName = lastName;
+            PasswordHash = passwordHash;
             Email = email;
-            PhoneNumber = phonenumber;
+            PhoneNumber = phoneNumber;
+            SquadId = squadId;
+            RoleId = roleId;
+            OwnedItems = new List<Item.Entities.Item>();
+            StoredItems = new List<Item.Entities.Item>();
         }
 
         public string Name { get; private set; }
@@ -23,9 +36,9 @@ namespace Warehouse.Persistence.Entities
         public string PhoneNumber { get; private set; }
         public Guid SquadId { get; }
         public Guid RoleId { get; }
-        public Role.Role Role { get; } // error przy braku :	'Role' is a namespace but is used like a type Warehouse.Persistence C:\Users\Oskar\source\_Projekty\Warehouse\Warehouse\Warehouse.Persistence\Entities\User.cs	16	Active
-        public ICollection<Item> OwnedItems { get; }
-        public ICollection<Item> StoredItems { get; }
+        public Role.Role Role { get; }
+        public ICollection<Item.Entities.Item> OwnedItems { get; }
+        public ICollection<Item.Entities.Item> StoredItems { get; }
 
         public bool UpdateName(string name)
         {

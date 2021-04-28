@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
-using Warehouse.Persistence.Entities;
-
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
@@ -30,39 +28,86 @@ namespace Warehouse.Api.Controllers
 
         [HttpGet("{itemId}")]
         public async Task<ActionResult<FullItemDto>> GetItemAsync(
-        [FromRoute] Guid Id,
+        [FromRoute] Guid id,
         CancellationToken cancellationToken)
         {
-            var result = await _itemService.GetItemAsync(Id,cancellationToken);
+            var result = await _itemService.GetItemAsync(id,cancellationToken);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddItemAsync(
-        Item item,
+        public async Task<ActionResult> CreateItemAsync(
+        [FromBody] CreateItemCommand createItemCommand,
         CancellationToken cancellationToken)
         {
-            await _itemService.AddItemAsync(item,cancellationToken);
-            return Ok();
-        }
-        //ToDo
-        [HttpDelete]        
-        public async Task<ActionResult<ItemDto>> DeleteItemAsync(Guid Id)
-        {
-            await _itemService.DeleteItemAsync(Id);
+            await _itemService.CreateItemAsync(createItemCommand, cancellationToken);
             return Ok();
         }
 
+        [HttpDelete("{itemId}")]
+        public async Task<IActionResult> DeleteItemAsync([FromRoute] Guid itemId, CancellationToken cancellationToken)
+        {
+            await _itemService.DeleteItemAsync(itemId, cancellationToken);
+            return Ok();
+        }
+
+        // ToDo: Update
         [HttpPut("{itemId}")]
         public async Task<IActionResult> UpdateItemAsync(
             [FromRoute] Guid categoryId,
-            [FromBody] UpdateItemCommand updateItemCommand,
+            // [FromBody] UpdateCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
-            updateItemCommand.itemId = categoryId;
+            // updateItemCommand.itemId = categoryId;
 
-            await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
+            // await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
             return Ok();
         }
+
+        [HttpGet("{itemId}/loan-history")]
+        public async Task<ActionResult<IEnumerable<LoanHistoryDto>>> GetItemLoanHistoryAsync(
+            [FromRoute] Guid itemId,
+            CancellationToken cancellationToken)
+        {
+            var result = await _itemService.GetItemLoanHistoriesAsync(itemId, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpPost("{itemId}/loan")]
+        public async Task<IActionResult> LoanItemAsync(
+            [FromRoute] Guid itemId,
+            [FromBody] LoanItemCommand loanItemCommand,
+            CancellationToken cancellationToken)
+        {
+            loanItemCommand.ItemId = itemId;
+
+            await _itemService.LoanItemAsync(loanItemCommand, cancellationToken);
+            return Ok();
+        }
+
+        // [HttpGet("{loanhistoryId}")]
+        // public async Task<ActionResult<IEnumerable<LoanHistoryDto>>> GetLoanHistories(CancellationToken cancelationToken)
+        // {
+        //     var result = await _loanHistoryService.GetLoanHistoriesAsync(cancelationToken);
+        //     return Ok(result);
+        // }
+        //
+        // [HttpGet]
+        // public async Task<ActionResult<LoanHistoryDto>> GetLoanHistoryAsync(
+        //     [FromRoute] Guid loanhistoryId,
+        //     CancellationToken cancellationToken)
+        // {
+        //     var result = await _loanHistoryService.GetLoanHistory(loanhistoryId,cancellationToken);
+        //     return Ok(result);
+        // }
+        //
+        // [HttpPost]
+        // public async Task<ActionResult> AddLoanHistory(
+        //     AddLoanHistoryCommand addLoanHistoryCommand,
+        //     CancellationToken cancellationToken)
+        // {
+        //     await _loanHistoryService.AddLoanHistory(addLoanHistoryCommand,cancellationToken);
+        //     return Ok();
+        // }
     }
 }

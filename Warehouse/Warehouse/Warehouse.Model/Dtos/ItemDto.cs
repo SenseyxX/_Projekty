@@ -1,17 +1,22 @@
-﻿using Warehouse.Persistence.Entities;
+﻿using System;
+using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Model.Dtos
 {
     public class ItemDto
     {
-        protected ItemDto(string name, string description)
+        protected ItemDto(Guid id, string name, string description)
         {
+            Id = id;
             Name = name;
             Description = description;
         }
 
+        public Guid Id { get; }
         public string Name { get; }
         public string Description { get; }
+
         //ToDo
         //public Guid CategoryId { get; set; }
         //public Guid QualityId { get; set; }
@@ -21,7 +26,6 @@ namespace Warehouse.Model.Dtos
         //public Guid ActualOwnerId { get; set; }
 
         public static explicit operator ItemDto(Item item)
-                => new (item.Name, 
-                    item.Description);
+                => new (item.Id, item.Name, item.Description);
     }
 }

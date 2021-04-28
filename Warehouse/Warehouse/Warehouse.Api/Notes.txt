@@ -8,4 +8,4 @@ Probably frontend
 
 ToDo:
 Poprawić kontrolery i serwisy (REST, commandy/query, dto)
-Poprawić encję
+Poprawić encję - dodać wszystkie propertiesy encji do konstruktorów
