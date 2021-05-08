@@ -58,7 +58,6 @@ namespace Warehouse.Persistence
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<IItemRepository, ItemRepository>()
-                .AddTransient<ISquadRepository, SquadRepository>()
-                .AddTransient<IRoleRepository, RoleRepository>();
+                .AddTransient<ISquadRepository, SquadRepository>();
     }
 }

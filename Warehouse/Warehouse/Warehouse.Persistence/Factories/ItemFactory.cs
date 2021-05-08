@@ -20,7 +20,7 @@ namespace Warehouse.Persistence.Factories
                 description,
                 categoryId,
                 qualityLevel,
-                ItemState.Active,
+                State.Active,
                 ownerId,
                 actualOwnerId);
     }

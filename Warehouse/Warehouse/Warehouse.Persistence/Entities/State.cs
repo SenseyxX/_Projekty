@@ -1,6 +1,6 @@
 ﻿namespace Warehouse.Persistence.Entities.Item
 {
-    public enum ItemState
+    public enum State
     {
         Active,
         Deleted,

@@ -12,7 +12,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             string description,
             Guid categoryId,
             QualityLevel qualityLevel,
-            ItemState itemState,
+            State State,
             Guid? ownerId,
             Guid actualOwnerId)
             : base(id)
@@ -21,7 +21,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             Description = description;
             CategoryId = categoryId;
             QualityLevel = qualityLevel;
-            ItemState = itemState;
+            State = State;
             OwnerId = ownerId;
             ActualOwnerId = actualOwnerId;
             LoanHistories = new List<LoanHistory>();
@@ -31,7 +31,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
         public string Description { get; private set; }
         public Guid CategoryId { get; }
         public QualityLevel QualityLevel { get; }
-        public ItemState ItemState { get; private set; }
+        public State State { get; private set; }
         public Guid? OwnerId { get; private set; }
         public Guid ActualOwnerId { get; }
         public ICollection<LoanHistory> LoanHistories { get; }
@@ -79,23 +79,23 @@ namespace Warehouse.Persistence.Entities.Item.Entities
 
         public bool Activate()
         {
-            if (ItemState == ItemState.Active)
+            if (State == State.Active)
             {
                 return false;
             }
 
-            ItemState = ItemState.Active;
+            State = State.Active;
             return true;
         }
 
         public bool Delete()
         {
-            if (ItemState == ItemState.Deleted)
+            if (State == State.Deleted)
             {
                 return false;
             }
 
-            ItemState = ItemState.Deleted;
+            State = State.Deleted;
             return true;
         }
     }

@@ -36,9 +36,9 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .Property<ItemState>(nameof(Item.ItemState))
+                .Property<State>(nameof(Item.State))
                 .HasColumnType("tinyint")
-                .HasColumnName(nameof(Item.ItemState))
+                .HasColumnName(nameof(Item.State))
                 .IsRequired();
 
             entityTypeBuilder
@@ -56,7 +56,7 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .WithOne()
                 .HasForeignKey(loadHistory => loadHistory.ItemId);
 
-            entityTypeBuilder.HasQueryFilter(item => item.ItemState != ItemState.Deleted);
+            entityTypeBuilder.HasQueryFilter(item => item.State != State.Deleted);
         }
     }
 }

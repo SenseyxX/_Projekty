@@ -1,5 +1,7 @@
 ﻿using System;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item;
+using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Factories
 {
@@ -11,8 +13,17 @@ namespace Warehouse.Persistence.Factories
             string passwordHash,
             string email,
             string phoneNumber,
-            Guid squadId,
-            Guid roleId)
-            => new (Guid.NewGuid(), name, lastname, passwordHash, email, phoneNumber, squadId, roleId);
+            PermissionLevel permissionLevel,    
+            Guid squadId)
+            => new (
+                Guid.NewGuid(),
+                name,
+                lastname,
+                passwordHash,
+                email,
+                phoneNumber,
+                permissionLevel,
+                State.Active,
+                squadId);
     }
 }

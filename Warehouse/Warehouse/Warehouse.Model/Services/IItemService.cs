@@ -13,7 +13,7 @@ namespace Warehouse.Model.Services
         Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken);
         Task<ItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken);
         Task CreateItemAsync(CreateItemCommand createItemCommand, CancellationToken cancellationToken);
-        Task UpdateItemAsync(User user, CancellationToken cancellationToken);
+        Task UpdateItemAsync(UpdateItemCommand updateItemCommand, CancellationToken cancellationToken);
         Task DeleteItemAsync(Guid id, CancellationToken cancellationToken);
 
         Task<IEnumerable<LoanHistoryDto>> GetItemLoanHistoriesAsync(

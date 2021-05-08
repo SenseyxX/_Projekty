@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using Warehouse.Persistence.Entities.Abstractions;
-
+using Warehouse.Persistence.Entities.Item;
+using Warehouse.Persistence.Entities.Role;
 
 namespace Warehouse.Persistence.Entities
 {
-    public sealed class User : Aggregate
-    {
-        public User(
-            Guid id,
+    public sealed class User : Aggregate  
+    {    
+        public User(Guid id,
             string name,
-            string lastName,
+            string lastname,
             string passwordHash,
             string email,
             string phoneNumber,
-            Guid squadId,
-            Guid roleId)
+            PermissionLevel permissionLevel,
+            State State,
+            Guid squadId) 
             : base(id)
         {
             Name = name;
-            LastName = lastName;
+            LastName = lastname;
             PasswordHash = passwordHash;
             Email = email;
             PhoneNumber = phoneNumber;
-            SquadId = squadId;
-            RoleId = roleId;
+            PermissionLevel = permissionLevel;
+            State = State;
+            SquadId = squadId; 
             OwnedItems = new List<Item.Entities.Item>();
             StoredItems = new List<Item.Entities.Item>();
         }
@@ -35,8 +37,8 @@ namespace Warehouse.Persistence.Entities
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public Guid SquadId { get; }
-        public Guid RoleId { get; }
-        public Role.Role Role { get; }
+        public State State { get; private set; }
+        public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }
         public ICollection<Item.Entities.Item> StoredItems { get; }
 
@@ -91,6 +93,28 @@ namespace Warehouse.Persistence.Entities
             }
 
             PhoneNumber = phonenumber;
+            return true;
+        }
+
+        public bool Activate()
+        {
+            if (State == State.Active)
+            {
+                return false;
+            }
+
+            State = State.Active;
+            return true;
+        }
+
+        public bool Delete()
+        {
+            if (State == State.Deleted)
+            {
+                return false;
+            }
+
+            State = State.Deleted;
             return true;
         }
     }

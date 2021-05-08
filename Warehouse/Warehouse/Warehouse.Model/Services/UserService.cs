@@ -30,14 +30,23 @@ namespace Warehouse.Model.Services
                 addUserCommand.PasswordHash,
                 addUserCommand.Email,
                 addUserCommand.PhoneNumber,
-                Guid.Empty,
+                addUserCommand.PermissionLevel,                
                 Guid.Empty);
             await _userRepository.CreateAsync(user, cancellationToken);
             await _userRepository.SaveAsync(cancellationToken);
         }
 
         public async Task DeleteUserAsync(Guid id, CancellationToken cancellationToken)
-             => throw new NotImplementedException();
+        {
+            var user = await _userRepository.GetAsync(id, cancellationToken);
+            var updated = user.Delete();
+
+            if (updated)
+            {
+                _userRepository.Update(user);
+                await _userRepository.SaveAsync(cancellationToken);
+            }
+        }
 
         public async Task<UserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
            => (UserDto)await _userRepository.GetAsync(id, cancellationToken);

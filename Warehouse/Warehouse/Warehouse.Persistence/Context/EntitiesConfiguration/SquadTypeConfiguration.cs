@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
@@ -18,6 +19,12 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .Property<string>(nameof(Squad.Name))
                 .HasMaxLength(30)
                 .HasColumnName(nameof(Squad.Name))
+                .IsRequired();
+
+            entityTypeBuilder
+                .Property<State>(nameof(Squad.State))
+                .HasColumnType("tinyint")
+                .HasColumnName(nameof(Squad.State))
                 .IsRequired();
 
             entityTypeBuilder

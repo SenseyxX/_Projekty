@@ -45,10 +45,10 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
         // ToDo: change
-        [HttpDelete("{userId}")]
-        public async Task<ActionResult> DeleteUserAsync([FromRoute] Guid id, CancellationToken cancellationToken)
+        [HttpDelete("{squadId}")]
+        public async Task<ActionResult> DeleteSquadAsync([FromRoute] Guid squadId, CancellationToken cancellationToken)
         {
-            await _squadService.DeleteSquadAsync(id, cancellationToken);
+            await _squadService.DeleteSquadAsync(squadId, cancellationToken);
             return Ok();
         }
     }

@@ -54,6 +54,15 @@ namespace Warehouse.Model.Services
         }
 
         public async Task DeleteCategoryAsync(Guid id, CancellationToken cancellationToken)
-            => throw new NotImplementedException();
+        {
+            var category = await _categoryRepository.GetAsync(id, cancellationToken);
+            var updated = category.Delete();
+
+            if (updated)
+            {
+                _categoryRepository.Update(category);
+                await _categoryRepository.SaveAsync(cancellationToken);
+            }
+        }
     }
 }

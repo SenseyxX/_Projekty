@@ -12,7 +12,6 @@ namespace Warehouse.Model
                 .AddTransient<ICategoryService, CategoryService>()
                 .AddTransient<IItemService, ItemService>()
                 .AddTransient<IUserService, UserService>()
-                .AddTransient<IRoleService, RoleService>()
                 .AddTransient<ISquadService, SquadService>()
                 .AddTransient<ItemDomainService>();
         }

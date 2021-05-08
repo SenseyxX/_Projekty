@@ -56,6 +56,12 @@ namespace Warehouse.Api.Controllers
             await _categoryService.UpdateCategoryAsync(updateCategoryCommand, cancellationToken);
             return Ok();
         }
-        // [HttpDelete("{categoryId}")]
+
+        [HttpDelete("{categoryId}")]
+        public async Task<IActionResult> DeleteCategoryAsync([FromRoute] Guid categoryId, CancellationToken cancellationToken)
+        {
+            await _categoryService.DeleteCategoryAsync(categoryId, cancellationToken);
+            return Ok();
+        }
     }
 }

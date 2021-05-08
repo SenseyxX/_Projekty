@@ -48,7 +48,7 @@ namespace Warehouse.Model.Services
             await _itemRepository.SaveAsync(cancellationToken);
         }
 
-        public Task UpdateItemAsync(User user, CancellationToken cancellationToken)
+        public Task UpdateItemAsync(UpdateItemCommand updateItemCommand, CancellationToken cancellationToken)
         {
             // ToDo: Add endpoint that allows for modifying name and description and quality.
             throw new NotImplementedException();

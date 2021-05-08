@@ -28,7 +28,16 @@ namespace Warehouse.Model.Services
         }
 
         public async Task DeleteSquadAsync(Guid id, CancellationToken cancellationToken)
-            => throw new NotImplementedException();
+        {
+            var squad = await _squadRepository.GetAsync(id,cancellationToken);
+            var updated = squad.Delete();
+
+            if (updated)
+            {
+                _squadRepository.Update(squad);
+                await _squadRepository.SaveAsync(cancellationToken);
+            }
+        }
 
         public async Task<SquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
             => (SquadDto) await _squadRepository.GetAsync(id, cancellationToken);
