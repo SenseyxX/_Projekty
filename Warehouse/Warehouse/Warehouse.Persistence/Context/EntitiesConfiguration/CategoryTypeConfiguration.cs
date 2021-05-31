@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
@@ -24,6 +25,12 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .Property<string>(nameof(Category.Description))
                 .HasMaxLength(1000)
                 .HasColumnName(nameof(Category.Description))
+                .IsRequired();
+
+            entityTypeBuilder
+                .Property<State>(nameof(Category.State))
+                .HasColumnType("tinyint")
+                .HasColumnName(nameof(Category.State))
                 .IsRequired();
 
             entityTypeBuilder

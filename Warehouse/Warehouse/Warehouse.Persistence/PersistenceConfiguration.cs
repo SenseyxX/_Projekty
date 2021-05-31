@@ -55,6 +55,9 @@ namespace Warehouse.Persistence
 
         private static IServiceCollection RegisterRepositories(this IServiceCollection serviceCollection)
             => serviceCollection
-                .AddTransient<IUserRepository, UserRepository>();
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<ICategoryRepository, CategoryRepository>()
+                .AddTransient<IItemRepository, ItemRepository>()
+                .AddTransient<ISquadRepository, SquadRepository>();
     }
 }

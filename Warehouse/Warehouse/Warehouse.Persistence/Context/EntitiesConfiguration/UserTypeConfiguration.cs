@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
@@ -46,14 +47,10 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .Property<Guid>(nameof(User.RoleId))
-                .HasColumnName(nameof(User.RoleId))
+                .Property<State>(nameof(User.State))
+                .HasColumnType("tinyint")
+                .HasColumnName(nameof(User.State))
                 .IsRequired();
-
-            entityTypeBuilder
-                .HasOne(user => user.Role)
-                .WithMany()
-                .HasForeignKey(user => user.RoleId);
 
             entityTypeBuilder
                 .HasMany(user => user.OwnedItems)

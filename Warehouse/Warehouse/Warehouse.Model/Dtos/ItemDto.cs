@@ -1,31 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Persistence.Entities;
-using Warehouse.Persistence.Entities.Quality;
+using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Model.Dtos
 {
-        class ItemDto
+    public class ItemDto
+    {
+        protected ItemDto(Guid id, string name, string description)
         {
-                private ItemDto(string name,string description)
-                {
-                        Name = name;
-                        Description = description;
-                }
-
-                public string Name { get;}
-                public string Description { get;}
-                //public Guid CategoryId { get; set; }
-                //public Guid QualityId { get; set; }
-                //public Quality Quality { get; set; }
-                //public ICollection<LoanHistory> LoanHistories { get; set; }
-                //public Guid? OwnerId { get; set; }
-                //public Guid ActualOwnerId { get; set; }
-
-                public static explicit operator ItemDto(Item item)
-                        =>new (item.Name,item.Description);
+            Id = id;
+            Name = name;
+            Description = description;
         }
+
+        public Guid Id { get; }
+        public string Name { get; }
+        public string Description { get; }
+
+        //ToDo
+        //public Guid CategoryId { get; set; }
+        //public Guid QualityId { get; set; }
+        //public Quality Quality { get; set; }
+        //public ICollection<LoanHistory> LoanHistories { get; set; }
+        //public Guid? OwnerId { get; set; }
+        //public Guid ActualOwnerId { get; set; }
+
+        public static explicit operator ItemDto(Item item)
+                => new (item.Id, item.Name, item.Description);
+    }
 }
