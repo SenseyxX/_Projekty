@@ -53,7 +53,7 @@ namespace Warehouse.Api.Controllers
         {
             updateUserCommand.UserId = userId;
 
-            // await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
+            await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
             return Ok();
         }
 
@@ -65,6 +65,5 @@ namespace Warehouse.Api.Controllers
             await _userService.DeleteUserAsync(userId, cancellationToken);
             return Ok();
         }
-        
     }
 }

@@ -9,6 +9,5 @@ namespace Warehouse.Model.Contracts.Commands
         public string LastName { get; }
         public string Email { get; }
         public string PhoneNumber { get; }
-        public string PasswordHash { get; set; }
     }
 }

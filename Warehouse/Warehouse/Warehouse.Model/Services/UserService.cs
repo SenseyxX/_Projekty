@@ -62,23 +62,21 @@ namespace Warehouse.Model.Services
             return users.Select(user => (UserDto)user);
         }
 
-        // ToDo: Update
         public async Task UpdateUserAsync(
-            // UpdateUserCommand updateItemCommand,
+            UpdateUserCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
-            // var user = await _userRepository.GetAsync(updateItemCommand.UserId, cancellationToken);
-            // var isNameUpdated = user.UpdateName(updateItemCommand.Name);
-            // var isLastNameUpdated = user.UpdateLastName(updateItemCommand.LastName);
-            // var isPasswordHashUpdated = user.UpdatePasswordHash(updateItemCommand.PasswordHash);
-            // var isEmailUpdated = user.UpdatePasswordHash(updateItemCommand.Email);
-            // var isPhoneNumberUpdated = user.UpdatePhoneNumber(updateItemCommand.Email);
+            var user = await _userRepository.GetAsync(updateItemCommand.UserId, cancellationToken);
+            var isUpdated = user.UpdateName(updateItemCommand.Name);
+            isUpdated = user.UpdateLastName(updateItemCommand.LastName) || isUpdated;
+            isUpdated = user.UpdateEmail(updateItemCommand.Email) || isUpdated;
+            isUpdated = user.UpdatePhoneNumber(updateItemCommand.PhoneNumber) || isUpdated;
 
-            // if (isNameUpdated || isLastNameUpdated || isPasswordHashUpdated || isEmailUpdated || isPhoneNumberUpdated)
-            // {
-            //     _userRepository.Update(user);
-            //     await _userRepository.SaveAsync(cancellationToken);
-            // }
+            if (isUpdated)
+            {
+                _userRepository.Update(user);
+                await _userRepository.SaveAsync(cancellationToken);
+            }
         }
     }
 }

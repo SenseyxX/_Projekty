@@ -84,14 +84,14 @@ namespace Warehouse.Persistence.Entities.User.Entities
             return true;
         }
 
-        public bool UpdatePhoneNumber(string phonenumber)
+        public bool UpdatePhoneNumber(string phoneNumber)
         {
-            if (PhoneNumber == phonenumber || string.IsNullOrEmpty(phonenumber))
+            if (PhoneNumber == phoneNumber || string.IsNullOrEmpty(phoneNumber))
             {
                 return false;
             }
 
-            PhoneNumber = phonenumber;
+            PhoneNumber = phoneNumber;
             return true;
         }
 
