@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Warehouse.Api.Infrastructure.Authorization;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
+
 namespace Warehouse.Api.Controllers
 {
     [ApiController]

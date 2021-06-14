@@ -1,7 +1,4 @@
-﻿Add swagger configuration
-Add jwt
-Sort out startup into configuration files
-Add cors + request redirection
+﻿Add cors + request redirection
 Add authentication
 Add mini etigrant
 Probably frontend

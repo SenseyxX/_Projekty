@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Warehouse.Api.Infrastructure;
+using Warehouse.Api.Infrastructure.Authorization;
 using Warehouse.Model;
 using Warehouse.Persistence;
 
@@ -30,14 +31,17 @@ namespace Warehouse.Api
                 .Services
                 .RegisterModelDependencies(_configuration)
                 .RegisterPersistenceDependencies(_configuration)
-                .ConfigureSwagger(_configuration);
+                .ConfigureSwagger(_configuration)
+                .RegisterAuthorizationDependencies();
         }
 
         public void Configure(IApplicationBuilder app)
             => app
-                .UseRouting()
                 .UseMigrationsOfContext()
                 .UseSwaggerMiddleware(_configuration)
+                .UseRouting()
+                .UseAuthentication()
+                .UseAuthorization()
                 .UseEndpoints(builder => builder.MapControllers());
     }
 }

@@ -10,8 +10,8 @@ namespace Warehouse.Model.Helpers
 {
     public sealed class TokenService
     {
+        public const string TokenOwnerKey = "TokenOwner";
         private const string SecretKey = "jalhdkagASdlh212312";
-        private const string TokenOwnerKey = "TokenOwner";
 
         private readonly TokenSettings _tokenSettings;
 
