@@ -4,7 +4,4 @@ Add mini etigrant
 Probably frontend
 
 ToDo:
-Poprawić kontrolery i serwisy (REST, commandy/query, dto)
-Poprawić encję - dodać wszystkie propertiesy encji do konstruktorów
-
-Wykonaj migrację
+Dokończyc kontrolery i dodać politykę squadOwner
