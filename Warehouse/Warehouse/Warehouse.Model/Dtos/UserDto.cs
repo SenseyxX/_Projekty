@@ -1,4 +1,5 @@
 ﻿using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.User.Entities;
 
 namespace Warehouse.Model.Dtos
 {
@@ -23,7 +24,7 @@ namespace Warehouse.Model.Dtos
         //public ICollection<Item> OwnedItems { get; set; }
         //public ICollection<Item> StoredItems { get; set; }
 
-                public static explicit operator UserDto(User user)
+        public static explicit operator UserDto(User user)
             => new (user.Name, user.LastName,user.Email,user.PhoneNumber);
     }
 }

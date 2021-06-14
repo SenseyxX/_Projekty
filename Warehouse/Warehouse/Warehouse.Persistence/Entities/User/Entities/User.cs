@@ -1,39 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using Warehouse.Persistence.Entities.Abstractions;
-using Warehouse.Persistence.Entities.Item;
-using Warehouse.Persistence.Entities.Role;
 
-namespace Warehouse.Persistence.Entities
+namespace Warehouse.Persistence.Entities.User.Entities
 {
-    public sealed class User : Aggregate  
-    {    
+    public sealed class User : Aggregate
+    {
         public User(Guid id,
             string name,
-            string lastname,
-            string passwordHash,
+            string lastName,
+            byte[] passwordHash,
             string email,
             string phoneNumber,
             PermissionLevel permissionLevel,
-            State State,
-            Guid squadId) 
+            State state,
+            Guid squadId)
             : base(id)
         {
             Name = name;
-            LastName = lastname;
+            LastName = lastName;
             PasswordHash = passwordHash;
             Email = email;
             PhoneNumber = phoneNumber;
             PermissionLevel = permissionLevel;
-            State = State;
-            SquadId = squadId; 
+            State = state;
+            SquadId = squadId;
             OwnedItems = new List<Item.Entities.Item>();
             StoredItems = new List<Item.Entities.Item>();
         }
 
         public string Name { get; private set; }
         public string LastName { get; private set; }
-        public string PasswordHash { get; private set; }
+        public byte[] PasswordHash { get; private set; }
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public Guid SquadId { get; }
@@ -64,14 +62,14 @@ namespace Warehouse.Persistence.Entities
             return true;
         }
 
-        public bool UpdatePasswordHash(string passwordhash)
+        public bool UpdatePasswordHash(byte[] passwordHash)
         {
-            if (PasswordHash == passwordhash || string.IsNullOrEmpty(passwordhash))
+            if (PasswordHash == passwordHash || passwordHash.Length <= 0)
             {
                 return false;
             }
 
-            PasswordHash = passwordhash;
+            PasswordHash = passwordHash;
             return true;
         }
 
@@ -85,6 +83,7 @@ namespace Warehouse.Persistence.Entities
             Email = email;
             return true;
         }
+
         public bool UpdatePhoneNumber(string phonenumber)
         {
             if (PhoneNumber == phonenumber || string.IsNullOrEmpty(phonenumber))

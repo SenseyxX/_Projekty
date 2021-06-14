@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Persistence.Entities.Role
+﻿namespace Warehouse.Persistence.Entities.User
 {
     public enum PermissionLevel
     {

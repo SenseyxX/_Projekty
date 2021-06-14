@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Persistence.Entities.Item
+﻿namespace Warehouse.Persistence.Entities
 {
     public enum State
     {

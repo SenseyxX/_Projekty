@@ -1,8 +1,10 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.Item;
+using Warehouse.Persistence.Entities.User.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
@@ -29,8 +31,8 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .Property<string>(nameof(User.PasswordHash))
-                .HasMaxLength(100)
+                .Property<byte[]>(nameof(User.PasswordHash))
+                .HasMaxLength(256)
                 .HasColumnName(nameof(User.PasswordHash))
                 .IsRequired();
 
@@ -50,6 +52,12 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .Property<State>(nameof(User.State))
                 .HasColumnType("tinyint")
                 .HasColumnName(nameof(User.State))
+                .IsRequired();
+
+            entityTypeBuilder
+                .Property(nameof(User.PermissionLevel))
+                .HasColumnType("tinyint")
+                .HasColumnName(nameof(User.PermissionLevel))
                 .IsRequired();
 
             entityTypeBuilder

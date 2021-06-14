@@ -2,7 +2,7 @@
 using Warehouse.Persistence.Context.EntitiesConfiguration;
 using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.Item.Entities;
-using Warehouse.Persistence.Entities.Role;
+using Warehouse.Persistence.Entities.User.Entities;
 
 namespace Warehouse.Persistence.Context
 {

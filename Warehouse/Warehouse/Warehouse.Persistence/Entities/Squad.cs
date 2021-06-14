@@ -13,11 +13,11 @@ namespace Warehouse.Persistence.Entities
             : base(id)
         {
             Name = name;
-            Users = new List<User>();
+            Users = new List<User.Entities.User>();
         }
         public string Name { get; private set; }
         public State State { get;private set; }
-        public ICollection<User> Users { get; }
+        public ICollection<User.Entities.User> Users { get; }
 
         public bool UpdateName(string name)
         {

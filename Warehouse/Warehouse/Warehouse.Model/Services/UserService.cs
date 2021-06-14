@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
+using Warehouse.Model.Helpers;
 using Warehouse.Persistence.Factories;
 using Warehouse.Persistence.Repositories;
 
@@ -13,25 +14,29 @@ namespace Warehouse.Model.Services
     public sealed class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly EncryptionService _encryptionService;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, EncryptionService encryptionService)
         {
             _userRepository = userRepository;
+            _encryptionService = encryptionService;
         }
 
         public async Task AddUserAsync(
             AddUserCommand addUserCommand,
             CancellationToken cancellationToken)
         {
-            // ToDo: Use actual data for squad and role ids.
+            var passwordHash = _encryptionService.EncodePassword(addUserCommand.Password);
+
             var user = UserFactory.Create(
                 addUserCommand.Name,
                 addUserCommand.LastName,
-                addUserCommand.PasswordHash,
+                passwordHash,
                 addUserCommand.Email,
                 addUserCommand.PhoneNumber,
-                addUserCommand.PermissionLevel,                
-                Guid.Empty);
+                addUserCommand.PermissionLevel,
+                addUserCommand.SquadId);
+
             await _userRepository.CreateAsync(user, cancellationToken);
             await _userRepository.SaveAsync(cancellationToken);
         }

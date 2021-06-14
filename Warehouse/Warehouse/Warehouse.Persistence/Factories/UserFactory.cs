@@ -1,7 +1,8 @@
 ﻿using System;
 using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.Item;
-using Warehouse.Persistence.Entities.Role;
+using Warehouse.Persistence.Entities.User;
+using Warehouse.Persistence.Entities.User.Entities;
 
 namespace Warehouse.Persistence.Factories
 {
@@ -10,10 +11,10 @@ namespace Warehouse.Persistence.Factories
         public static User Create(
             string name,
             string lastname,
-            string passwordHash,
+            byte[] passwordHash,
             string email,
             string phoneNumber,
-            PermissionLevel permissionLevel,    
+            PermissionLevel permissionLevel,
             Guid squadId)
             => new (
                 Guid.NewGuid(),
