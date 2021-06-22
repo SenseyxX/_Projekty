@@ -23,9 +23,10 @@ namespace Warehouse.Model.Services
             _itemDomainService = itemDomainService;
         }
 
-        public Task<ItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<ItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var item = await _itemRepository.GetAsync(id, cancellationToken);
+            return (ItemDto) item;
         }
 
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken)

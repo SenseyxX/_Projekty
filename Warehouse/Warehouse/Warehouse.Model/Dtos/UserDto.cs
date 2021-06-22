@@ -1,11 +1,13 @@
-﻿using Warehouse.Persistence.Entities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.User.Entities;
 
 namespace Warehouse.Model.Dtos
 {
-    public sealed class UserDto
+    public class UserDto
     {
-        private UserDto(string name, string lastName,string email,string phonenumber)
+        protected UserDto(string name, string lastName,string email,string phonenumber)
         {
             Name = name;
             LastName = lastName;
@@ -21,7 +23,6 @@ namespace Warehouse.Model.Dtos
         //public Guid SquadId { get; set; }
         //public Guid RoleId { get; set; }
         //public Role.Role Role { get; set; }
-        //public ICollection<Item> OwnedItems { get; set; }
         //public ICollection<Item> StoredItems { get; set; }
 
         public static explicit operator UserDto(User user)

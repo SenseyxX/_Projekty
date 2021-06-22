@@ -50,7 +50,7 @@ namespace Warehouse.Model.Services
 
         public Task UpdateSquadAsync(UpdateSquadCommand updateSquadCommand, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException()
         }
     }
 }

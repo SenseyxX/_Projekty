@@ -26,6 +26,6 @@ namespace Warehouse.Model.Dtos
         //public Guid ActualOwnerId { get; set; }
 
         public static explicit operator ItemDto(Item item)
-                => new (item.Id, item.Name, item.Description);
+                => new ItemDto(item.Id, item.Name, item.Description);
     }
 }
