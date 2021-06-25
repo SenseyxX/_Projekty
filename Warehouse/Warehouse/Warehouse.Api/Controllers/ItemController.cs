@@ -23,7 +23,8 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ItemDto>>> GetItemsAsync(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<ItemDto>>> GetItemsAsync(
+            CancellationToken cancellationToken)
         {
             var result = await _itemService.GetItemsAsync(cancellationToken);
             return Ok(result);
@@ -48,7 +49,9 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpDelete("{itemId}")]
-        public async Task<IActionResult> DeleteItemAsync([FromRoute] Guid itemId, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteItemAsync(
+            [FromRoute] Guid itemId,
+            CancellationToken cancellationToken)
         {
             await _itemService.DeleteItemAsync(itemId, cancellationToken);
             return Ok();
@@ -58,12 +61,11 @@ namespace Warehouse.Api.Controllers
         [HttpPut("{itemId}")]
         public async Task<IActionResult> UpdateItemAsync(
             [FromRoute] Guid categoryId,
-            // [FromBody] UpdateCommand updateItemCommand,
+            [FromBody] UpdateItemCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
-            // updateItemCommand.itemId = categoryId;
-
-            // await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
+            updateItemCommand.Id = categoryId;
+            await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
             return Ok();
         }
 
@@ -87,30 +89,5 @@ namespace Warehouse.Api.Controllers
             await _itemService.LoanItemAsync(loanItemCommand, cancellationToken);
             return Ok();
         }
-
-        // [HttpGet("{loanhistoryId}")]
-        // public async Task<ActionResult<IEnumerable<LoanHistoryDto>>> GetLoanHistories(CancellationToken cancelationToken)
-        // {
-        //     var result = await _loanHistoryService.GetLoanHistoriesAsync(cancelationToken);
-        //     return Ok(result);
-        // }
-        //
-        // [HttpGet]
-        // public async Task<ActionResult<LoanHistoryDto>> GetLoanHistoryAsync(
-        //     [FromRoute] Guid loanhistoryId,
-        //     CancellationToken cancellationToken)
-        // {
-        //     var result = await _loanHistoryService.GetLoanHistory(loanhistoryId,cancellationToken);
-        //     return Ok(result);
-        // }
-        //
-        // [HttpPost]
-        // public async Task<ActionResult> AddLoanHistory(
-        //     AddLoanHistoryCommand addLoanHistoryCommand,
-        //     CancellationToken cancellationToken)
-        // {
-        //     await _loanHistoryService.AddLoanHistory(addLoanHistoryCommand,cancellationToken);
-        //     return Ok();
-        // }
     }
 }

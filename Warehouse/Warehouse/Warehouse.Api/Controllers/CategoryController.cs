@@ -21,7 +21,8 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
+            CancellationToken cancellationToken)
         {
             var result = await _categoryService.GetCategoriesAsync(cancellationToken);
             return Ok(result);
@@ -58,7 +59,9 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpDelete("{categoryId}")]
-        public async Task<IActionResult> DeleteCategoryAsync([FromRoute] Guid categoryId, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteCategoryAsync(
+            [FromRoute] Guid categoryId,
+            CancellationToken cancellationToken)
         {
             await _categoryService.DeleteCategoryAsync(categoryId, cancellationToken);
             return Ok();

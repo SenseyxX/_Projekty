@@ -48,9 +48,18 @@ namespace Warehouse.Model.Services
             return result.Select(squad => (SquadDto)squad);
         }
 
-        public Task UpdateSquadAsync(UpdateSquadCommand updateSquadCommand, CancellationToken cancellationToken)
+        public async Task UpdateSquadAsync(
+            UpdateSquadCommand updateSquadCommand,
+            CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var squad = await _squadRepository.GetAsync(updateSquadCommand.SquadId, cancellationToken);
+            var isUpdated = squad.UpdateName(updateSquadCommand.Name);
+
+            if (isUpdated)
+            {
+                _squadRepository.Update(squad);
+                await _squadRepository.SaveAsync(cancellationToken);
+            }
         }
     }
 }
