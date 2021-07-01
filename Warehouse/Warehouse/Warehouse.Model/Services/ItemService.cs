@@ -23,10 +23,10 @@ namespace Warehouse.Model.Services
             _itemDomainService = itemDomainService;
         }
 
-        public async Task<ItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
         {
             var item = await _itemRepository.GetAsync(id, cancellationToken);
-            return (ItemDto) item;
+            return (FullItemDto) item;
         }
 
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken)

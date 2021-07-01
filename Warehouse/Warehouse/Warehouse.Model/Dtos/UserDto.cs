@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.User.Entities;
@@ -7,15 +8,17 @@ namespace Warehouse.Model.Dtos
 {
     public class UserDto
     {
-        protected UserDto(string name, string lastName,string email,string phonenumber)
+        protected UserDto(Guid id,string name, string lastName,string email,string phonenumber)
         {
+            Id = id;     
             Name = name;
             LastName = lastName;
             Email = email;
             PhoneNumber = phonenumber;
         }
 
-        public string Name { get; }
+	   public Guid Id { get; set; }
+	   public string Name { get; }
         public string LastName { get; }
         public string Email { get; }
         public string PhoneNumber { get;}
@@ -26,6 +29,10 @@ namespace Warehouse.Model.Dtos
         //public ICollection<Item> StoredItems { get; set; }
 
         public static explicit operator UserDto(User user)
-            => new (user.Name, user.LastName,user.Email,user.PhoneNumber);
+            => new (user.Id,
+                    user.Name,
+                    user.LastName,
+                    user.Email,
+                    user.PhoneNumber);
     }
 }

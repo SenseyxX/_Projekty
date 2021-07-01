@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.Item;
 using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Model.Dtos
@@ -9,13 +13,39 @@ namespace Warehouse.Model.Dtos
         private FullItemDto(
             Guid id,
             string name,
-            string description)
+            string description,
+            Guid categoryId,
+            QualityLevel qualityLevel,
+            State state,
+            Guid? ownerId,
+            Guid actualOwnerId,
+            IEnumerable<LoanHistoryDto>loanHistoryDtos)
             : base(id, name, description)
-        {
-        }
+            {
+                  CategoryId = categoryId;
+                  QualityLevel = qualityLevel;
+                  State = State;
+                  OwnerId = ownerId;
+                  ActualOwnerId = actualOwnerId;
+                  LoanHistoryDtos = loanHistoryDtos;
+            }
+            public Guid CategoryId { get; }
+            public QualityLevel QualityLevel { get; }
+            public State State { get; private set; }
+            public Guid? OwnerId { get; private set; }
+            public Guid ActualOwnerId { get; }
+            public IEnumerable<LoanHistoryDto> LoanHistoryDtos { get; }
 
-        // ToDo: Verify if needed.
-        public static explicit operator FullItemDto(Item item)
-            => new(item.Id, item.Name, item.Description);
+
+            public static explicit operator FullItemDto(Item item)
+            => new(item.Id,
+                   item.Name,
+                   item.Description,
+                   item.CategoryId,
+                   item.QualityLevel,
+                   item.State,
+                   item.OwnerId,
+                   item.ActualOwnerId,
+                   item.LoanHistories.Select(loanhistory => (LoanHistoryDto)loanhistory));            
     }
 }
