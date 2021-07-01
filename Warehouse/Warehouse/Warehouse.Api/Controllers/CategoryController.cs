@@ -27,7 +27,7 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{categoryId}")]
+        [HttpGet("{categoryId:guid}")]
         public async Task<ActionResult<FullCategoryDto>> GetCategoryAsync(
             [FromRoute] Guid categoryId,
             CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("{categoryId}")]
+        [HttpPut("{categoryId:guid}")]
         public async Task<IActionResult> UpdateCategoryAsync(
             [FromRoute] Guid categoryId,
             [FromBody] UpdateCategoryCommand updateCategoryCommand,
@@ -57,7 +57,7 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("{categoryId}")]
+        [HttpDelete("{categoryId:guid}")]
         public async Task<IActionResult> DeleteCategoryAsync([FromRoute] Guid categoryId, CancellationToken cancellationToken)
         {
             await _categoryService.DeleteCategoryAsync(categoryId, cancellationToken);

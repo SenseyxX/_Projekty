@@ -22,7 +22,7 @@ namespace Warehouse.Model.DomainServices
                        ?? throw new NullReferenceException();
 
             var item = await _itemRepository.GetAsync(itemId, cancellationToken);
-            var updated = item.ChangeOwner(receiverId);
+            var updated = item.UpdateOwner(receiverId);
 
             if (updated)
             {

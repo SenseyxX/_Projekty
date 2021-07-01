@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Persistence.Entities;
-using Warehouse.Persistence.Entities.Item;
 using Warehouse.Persistence.Entities.User.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration

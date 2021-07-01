@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.Abstractions;
 
 namespace Warehouse.Persistence.Repositories

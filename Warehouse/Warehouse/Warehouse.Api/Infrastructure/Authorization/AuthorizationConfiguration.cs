@@ -8,10 +8,10 @@ namespace Warehouse.Api.Infrastructure.Authorization
         {
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            return serviceCollection.AddAuthorization(
-                options => options.AddPolicy(
+            return serviceCollection.AddAuthorization(options => options.AddPolicy(
                     AuthorizationConstants.AdminRequirementPolicy,
-                    policy => policy.Requirements.Add((new AdminRequirement(serviceProvider)))));
+                    policy => policy.Requirements.Add(new AdminRequirement(serviceProvider))))
+                .AddAuthorization(); // ToDo: Add squad owner policy.
         }
     }
 }

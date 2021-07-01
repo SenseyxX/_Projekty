@@ -1,5 +1,4 @@
-﻿using Warehouse.Persistence.Entities;
-using Warehouse.Persistence.Entities.Item.Entities;
+﻿using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Persistence.Repositories
 {

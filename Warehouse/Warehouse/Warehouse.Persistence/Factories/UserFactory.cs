@@ -1,6 +1,5 @@
 ﻿using System;
 using Warehouse.Persistence.Entities;
-using Warehouse.Persistence.Entities.Item;
 using Warehouse.Persistence.Entities.User;
 using Warehouse.Persistence.Entities.User.Entities;
 

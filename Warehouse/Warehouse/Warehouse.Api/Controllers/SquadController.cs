@@ -27,7 +27,7 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{squadId:guid}")]
         public async Task<ActionResult<SquadDto>> GetSquadAsync(
             [FromRoute]Guid squadId,
             CancellationToken cancellationToken)
@@ -44,8 +44,8 @@ namespace Warehouse.Api.Controllers
             await _squadService.AddSquadAsync(addSquadCommand,cancellationToken);
             return Ok();
         }
-        // ToDo: change
-        [HttpDelete("{squadId}")]
+
+        [HttpDelete("{squadId:guid}")]
         public async Task<ActionResult> DeleteSquadAsync([FromRoute] Guid squadId, CancellationToken cancellationToken)
         {
             await _squadService.DeleteSquadAsync(squadId, cancellationToken);

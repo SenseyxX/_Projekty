@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Services
 {

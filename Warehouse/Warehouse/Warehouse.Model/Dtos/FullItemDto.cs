@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Warehouse.Persistence.Entities;
@@ -20,22 +19,22 @@ namespace Warehouse.Model.Dtos
             Guid? ownerId,
             Guid actualOwnerId,
             IEnumerable<LoanHistoryDto>loanHistoryDtos)
-            : base(id, name, description)
+                : base(id, name, description)
             {
                   CategoryId = categoryId;
                   QualityLevel = qualityLevel;
-                  State = State;
+                  State = state;
                   OwnerId = ownerId;
                   ActualOwnerId = actualOwnerId;
                   LoanHistoryDtos = loanHistoryDtos;
             }
+
             public Guid CategoryId { get; }
             public QualityLevel QualityLevel { get; }
-            public State State { get; private set; }
-            public Guid? OwnerId { get; private set; }
+            public State State { get; }
+            public Guid? OwnerId { get; }
             public Guid ActualOwnerId { get; }
             public IEnumerable<LoanHistoryDto> LoanHistoryDtos { get; }
-
 
             public static explicit operator FullItemDto(Item item)
             => new(item.Id,
@@ -46,6 +45,6 @@ namespace Warehouse.Model.Dtos
                    item.State,
                    item.OwnerId,
                    item.ActualOwnerId,
-                   item.LoanHistories.Select(loanhistory => (LoanHistoryDto)loanhistory));            
+                   item.LoanHistories.Select(loanHistory => (LoanHistoryDto)loanHistory));
     }
 }

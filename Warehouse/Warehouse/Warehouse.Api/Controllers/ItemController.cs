@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Warehouse.Api.Infrastructure.Authorization;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
 using Warehouse.Model.Services;
@@ -47,27 +45,26 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("{itemId}")]
+        [HttpDelete("{itemId:guid}")]
         public async Task<IActionResult> DeleteItemAsync([FromRoute] Guid itemId, CancellationToken cancellationToken)
         {
             await _itemService.DeleteItemAsync(itemId, cancellationToken);
             return Ok();
         }
 
-        // ToDo: Update
-        [HttpPut("{itemId}")]
+        [HttpPut("{itemId:guid}")]
         public async Task<IActionResult> UpdateItemAsync(
-            [FromRoute] Guid categoryId,
-            // [FromBody] UpdateCommand updateItemCommand,
+            [FromRoute] Guid itemId,
+            [FromBody] UpdateItemCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
-            // updateItemCommand.itemId = categoryId;
+            updateItemCommand.ItemId = itemId;
 
-            // await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
+            await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
             return Ok();
         }
 
-        [HttpGet("{itemId}/loan-history")]
+        [HttpGet("{itemId:guid}/loan-history")]
         public async Task<ActionResult<IEnumerable<LoanHistoryDto>>> GetItemLoanHistoryAsync(
             [FromRoute] Guid itemId,
             CancellationToken cancellationToken)
@@ -76,7 +73,7 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("{itemId}/loan")]
+        [HttpPost("{itemId:guid}/loan")]
         public async Task<IActionResult> LoanItemAsync(
             [FromRoute] Guid itemId,
             [FromBody] LoanItemCommand loanItemCommand,
@@ -87,30 +84,5 @@ namespace Warehouse.Api.Controllers
             await _itemService.LoanItemAsync(loanItemCommand, cancellationToken);
             return Ok();
         }
-
-        // [HttpGet("{loanhistoryId}")]
-        // public async Task<ActionResult<IEnumerable<LoanHistoryDto>>> GetLoanHistories(CancellationToken cancelationToken)
-        // {
-        //     var result = await _loanHistoryService.GetLoanHistoriesAsync(cancelationToken);
-        //     return Ok(result);
-        // }
-        //
-        // [HttpGet]
-        // public async Task<ActionResult<LoanHistoryDto>> GetLoanHistoryAsync(
-        //     [FromRoute] Guid loanhistoryId,
-        //     CancellationToken cancellationToken)
-        // {
-        //     var result = await _loanHistoryService.GetLoanHistory(loanhistoryId,cancellationToken);
-        //     return Ok(result);
-        // }
-        //
-        // [HttpPost]
-        // public async Task<ActionResult> AddLoanHistory(
-        //     AddLoanHistoryCommand addLoanHistoryCommand,
-        //     CancellationToken cancellationToken)
-        // {
-        //     await _loanHistoryService.AddLoanHistory(addLoanHistoryCommand,cancellationToken);
-        //     return Ok();
-        // }
     }
 }

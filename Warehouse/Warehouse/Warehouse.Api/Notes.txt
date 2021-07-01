@@ -1,7 +1,4 @@
-﻿Add cors + request redirection
-Add authentication
-Add mini etigrant
-Probably frontend
+﻿ToDo:
+    Dodać politykę squadOwner
+    Dodać/ zmienić sety na inity w kontraktach
 
-ToDo:
-Dokończyc kontrolery i dodać politykę squadOwner

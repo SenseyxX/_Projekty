@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.DomainServices;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Factories;
 using Warehouse.Persistence.Repositories;
 
@@ -49,10 +48,18 @@ namespace Warehouse.Model.Services
             await _itemRepository.SaveAsync(cancellationToken);
         }
 
-        public Task UpdateItemAsync(UpdateItemCommand updateItemCommand, CancellationToken cancellationToken)
+        public async Task UpdateItemAsync(UpdateItemCommand updateItemCommand, CancellationToken cancellationToken)
         {
-            // ToDo: Add endpoint that allows for modifying name and description and quality.
-            throw new NotImplementedException();
+            var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
+            var isUpdated = item.UpdateName(updateItemCommand.Name);
+            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
+            isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
+
+            if (isUpdated)
+            {
+                _itemRepository.Update(item);
+                await _itemRepository.SaveAsync(cancellationToken);
+            }
         }
 
         public async Task DeleteItemAsync(Guid id, CancellationToken cancellationToken)
