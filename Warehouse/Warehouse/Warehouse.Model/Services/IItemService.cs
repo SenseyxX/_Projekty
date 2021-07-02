@@ -4,14 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 
 namespace Warehouse.Model.Services
 {
     public interface IItemService
     {
         Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken);
-        Task<ItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken);
+        Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken);
         Task CreateItemAsync(CreateItemCommand createItemCommand, CancellationToken cancellationToken);
         Task UpdateItemAsync(UpdateItemCommand updateItemCommand, CancellationToken cancellationToken);
         Task DeleteItemAsync(Guid id, CancellationToken cancellationToken);

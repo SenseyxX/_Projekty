@@ -12,7 +12,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             string description,
             Guid categoryId,
             QualityLevel qualityLevel,
-            State State,
+            State state,
             Guid? ownerId,
             Guid actualOwnerId)
             : base(id)
@@ -21,7 +21,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             Description = description;
             CategoryId = categoryId;
             QualityLevel = qualityLevel;
-            State = State;
+            State = state;
             OwnerId = ownerId;
             ActualOwnerId = actualOwnerId;
             LoanHistories = new List<LoanHistory>();

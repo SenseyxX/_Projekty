@@ -28,15 +28,6 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<UserDto>> GetUserAsync(
-            [FromRoute]Guid userId,
-            CancellationToken cancellationToken)
-        {
-            var result = await _userService.GetUserAsync(userId,cancellationToken);
-            return Ok(result);
-        }
-
         [HttpPost]
         public async Task<ActionResult> AddUserAsync(
             AddUserCommand addUserCommand,
@@ -46,7 +37,16 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("{userId}")]
+        [HttpGet("{userId:guid}")]
+        public async Task<ActionResult<UserDto>> GetUserAsync(
+            [FromRoute]Guid userId,
+            CancellationToken cancellationToken)
+        {
+            var result = await _userService.GetUserAsync(userId,cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpPut("{userId:guid}")]
         public async Task<IActionResult> UpdateUserAsync(
             [FromRoute] Guid userId,
             [FromBody] UpdateUserCommand updateUserCommand,
@@ -57,8 +57,8 @@ namespace Warehouse.Api.Controllers
             await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
             return Ok();
         }
-
-        [HttpDelete("{userId}")]
+        
+        [HttpDelete("{userId:guid}")]
         public async Task<IActionResult> DeleteUserAsync(
             [FromRoute] Guid userId,
             CancellationToken cancellationToken)

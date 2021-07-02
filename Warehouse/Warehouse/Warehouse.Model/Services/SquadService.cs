@@ -18,6 +18,7 @@ namespace Warehouse.Model.Services
         {
             _squadRepository = squadRepository;
         }
+
         public async Task AddSquadAsync(
             AddSquadCommand addSquadCommand,
             CancellationToken cancellationToken)
@@ -39,8 +40,8 @@ namespace Warehouse.Model.Services
             }
         }
 
-        public async Task<SquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
-            => (SquadDto) await _squadRepository.GetAsync(id, cancellationToken);
+        public async Task<FullSquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
+            => (FullSquadDto) await _squadRepository.GetAsync(id, cancellationToken);
 
         public async Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken)
         {

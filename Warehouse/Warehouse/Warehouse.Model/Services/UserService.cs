@@ -53,8 +53,8 @@ namespace Warehouse.Model.Services
             }
         }
 
-        public async Task<UserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
-           => (UserDto)await _userRepository.GetAsync(id, cancellationToken);
+        public async Task<FullUserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
+           => (FullUserDto)await _userRepository.GetAsync(id, cancellationToken);
 
         public async Task<IEnumerable<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
         {

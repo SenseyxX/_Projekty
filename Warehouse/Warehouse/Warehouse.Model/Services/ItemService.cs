@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Warehouse.Model.Contracts.Commands;
 using Warehouse.Model.DomainServices;
 using Warehouse.Model.Dtos;
-using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Factories;
 using Warehouse.Persistence.Repositories;
 
@@ -23,9 +22,10 @@ namespace Warehouse.Model.Services
             _itemDomainService = itemDomainService;
         }
 
-        public Task<ItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var item = await _itemRepository.GetAsync(id, cancellationToken);
+            return (FullItemDto) item;
         }
 
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken)
@@ -56,7 +56,7 @@ namespace Warehouse.Model.Services
             var isUpdated = item.UpdateName(updateItemCommand.Name);
             isUpdated = item.UpdateOwner(updateItemCommand.OwnerId)||isUpdated;
             isUpdated = item.UpdateDescription(updateItemCommand.Description)||isUpdated;
-            
+
             if (isUpdated)
             {
                 _itemRepository.Update(item);

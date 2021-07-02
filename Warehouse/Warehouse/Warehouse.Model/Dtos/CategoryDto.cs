@@ -17,8 +17,8 @@ namespace Warehouse.Model.Dtos
         public string Description { get; }
 
         public static explicit operator CategoryDto(Category category)
-            => new(category.Id, 
-                category.Name, 
-                category.Description);
+            => new(category.Id,
+                   category.Name, 
+                   category.Description);
     }
 }

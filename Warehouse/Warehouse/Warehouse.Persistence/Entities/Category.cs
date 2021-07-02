@@ -1,21 +1,20 @@
 ﻿    using System;
 using System.Collections.Generic;
     using Warehouse.Persistence.Entities.Abstractions;
-using Warehouse.Persistence.Entities.Item;
 
-namespace Warehouse.Persistence.Entities
+    namespace Warehouse.Persistence.Entities
 {
     public sealed class Category : Aggregate
-    {      
+    {
         public Category(Guid id,
             string name,
             string description,
-             State state) 
+             State state)
             : base(id)
         {
             Name = name;
             Description = description;
-            State = State;
+            State = state;
             Items = new List<Item.Entities.Item>();
         }
 
@@ -43,8 +42,9 @@ namespace Warehouse.Persistence.Entities
             }
 
             Description = description;
-            return true;            
+            return true;
         }
+
         public bool Activate()
         {
             if (State == State.Active)

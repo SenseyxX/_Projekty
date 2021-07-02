@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Warehouse.Persistence.Entities.Abstractions;
-using Warehouse.Persistence.Entities.Item;
 
 namespace Warehouse.Persistence.Entities
 {
@@ -9,12 +8,14 @@ namespace Warehouse.Persistence.Entities
     {
         public Squad(Guid id,
             string name,
-            State State)
+            State state)
             : base(id)
         {
             Name = name;
+            State = state;
             Users = new List<User.Entities.User>();
         }
+
         public string Name { get; private set; }
         public State State { get;private set; }
         public ICollection<User.Entities.User> Users { get; }

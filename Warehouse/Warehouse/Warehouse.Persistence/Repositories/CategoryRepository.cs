@@ -10,7 +10,7 @@ namespace Warehouse.Persistence.Repositories
     public sealed class CategoryRepository : Repository<Category>, ICategoryRepository
     {
         public CategoryRepository(WarehouseContext warehouseContext)
-         : base(warehouseContext)
+            : base(warehouseContext)
         {
         }
 

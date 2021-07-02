@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using Warehouse.Persistence.Entities;
 using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
@@ -31,7 +30,6 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
             entityTypeBuilder
                 .Property<Guid>(nameof(LoanHistory.ReceiverId))
                 .HasColumnName(nameof(LoanHistory.ReceiverId));
-
         }
     }
 }
