@@ -21,7 +21,8 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SquadDto>>> GetUsersAsync(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<SquadDto>>> GetUsersAsync(
+            CancellationToken cancellationToken)
         {
             var result = await _squadService.GetSquadsAsync(cancellationToken);
             return Ok(result);
@@ -46,7 +47,9 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpDelete("{squadId:guid}")]
-        public async Task<ActionResult> DeleteSquadAsync([FromRoute] Guid squadId, CancellationToken cancellationToken)
+        public async Task<ActionResult> DeleteSquadAsync(
+            [FromRoute] Guid squadId,
+            CancellationToken cancellationToken)
         {
             await _squadService.DeleteSquadAsync(squadId, cancellationToken);
             return Ok();

@@ -42,11 +42,10 @@ namespace Warehouse.Model.Services
             CancellationToken cancellationToken)
         {
             var category = await _categoryRepository.GetAsync(updateCategoryCommand.CategoryId, cancellationToken);
+            var isUpdated = category.UpdateName(updateCategoryCommand.Name);
+            isUpdated = category.UpdateDescription(updateCategoryCommand.Description) || isUpdated;
 
-            var isNameUpdated = category.UpdateName(updateCategoryCommand.Name);
-            var isDescriptionUpdated = category.UpdateDescription(updateCategoryCommand.Description);
-
-            if (isNameUpdated || isDescriptionUpdated)
+            if (isUpdated)
             {
                 _categoryRepository.Update(category);
                 await _categoryRepository.SaveAsync(cancellationToken);

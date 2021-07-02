@@ -48,12 +48,14 @@ namespace Warehouse.Model.Services
             await _itemRepository.SaveAsync(cancellationToken);
         }
 
-        public async Task UpdateItemAsync(UpdateItemCommand updateItemCommand, CancellationToken cancellationToken)
+        public async Task UpdateItemAsync(
+            UpdateItemCommand updateItemCommand,
+            CancellationToken cancellationToken)
         {
-            var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
+            var item = await _itemRepository.GetAsync(updateItemCommand.Id, cancellationToken);
             var isUpdated = item.UpdateName(updateItemCommand.Name);
-            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
-            isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
+            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId)||isUpdated;
+            isUpdated = item.UpdateDescription(updateItemCommand.Description)||isUpdated;
 
             if (isUpdated)
             {
