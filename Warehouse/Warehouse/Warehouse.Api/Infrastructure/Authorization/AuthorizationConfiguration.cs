@@ -11,7 +11,9 @@ namespace Warehouse.Api.Infrastructure.Authorization
             return serviceCollection.AddAuthorization(options => options.AddPolicy(
                     AuthorizationConstants.AdminRequirementPolicy,
                     policy => policy.Requirements.Add(new AdminRequirement(serviceProvider))))
-                .AddAuthorization(); // ToDo: Add squad owner policy.
+                .AddAuthorization(options => options.AddPolicy(
+                    AuthorizationConstants.SquadOwnerRequirementPolicy,
+                    policy => policy.Requirements.Add(new SquadOwnerRequirement(serviceProvider))));
         }
     }
 }

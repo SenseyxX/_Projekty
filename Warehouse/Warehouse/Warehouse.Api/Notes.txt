@@ -1,4 +1,3 @@
 ﻿ToDo:
-    Dodać politykę squadOwner
-    Dodać/ zmienić sety na inity w kontraktach
+    Dodać politykę squadOwner    
 
