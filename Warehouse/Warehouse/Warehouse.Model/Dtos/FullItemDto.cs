@@ -15,25 +15,18 @@ namespace Warehouse.Model.Dtos
             string description,
             Guid categoryId,
             QualityLevel qualityLevel,
+            int quantity,
             State state,
             Guid? ownerId,
             Guid actualOwnerId,
             IEnumerable<LoanHistoryDto>loanHistoryDtos)
-                : base(id, name, description)
+                : base(id, name, description, qualityLevel, quantity, state, ownerId, actualOwnerId)
             {
-                  CategoryId = categoryId;
-                  QualityLevel = qualityLevel;
-                  State = state;
-                  OwnerId = ownerId;
-                  ActualOwnerId = actualOwnerId;
+                  CategoryId = categoryId; 
                   LoanHistoryDtos = loanHistoryDtos;
             }
 
-            public Guid CategoryId { get; }
-            public QualityLevel QualityLevel { get; }
-            public State State { get; }
-            public Guid? OwnerId { get; }
-            public Guid ActualOwnerId { get; }
+            public Guid CategoryId { get; }                        
             public IEnumerable<LoanHistoryDto> LoanHistoryDtos { get; }
 
             public static explicit operator FullItemDto(Item item)
@@ -42,6 +35,7 @@ namespace Warehouse.Model.Dtos
                    item.Description,
                    item.CategoryId,
                    item.QualityLevel,
+                   item.Quantity,
                    item.State,
                    item.OwnerId,
                    item.ActualOwnerId,

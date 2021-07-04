@@ -12,6 +12,7 @@ namespace Warehouse.Persistence.Factories
             string description,
             Guid categoryId,
             QualityLevel qualityLevel,
+            int quantity,
             Guid? ownerId,
             Guid actualOwnerId)
             => new (
@@ -20,6 +21,7 @@ namespace Warehouse.Persistence.Factories
                 description,
                 categoryId,
                 qualityLevel,
+                quantity,
                 State.Active,
                 ownerId,
                 actualOwnerId);

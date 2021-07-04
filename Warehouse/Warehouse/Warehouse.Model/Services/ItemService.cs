@@ -41,6 +41,7 @@ namespace Warehouse.Model.Services
                 createItemCommand.Description,
                 createItemCommand.CategoryId,
                 createItemCommand.QualityLevel,
+                createItemCommand.Quantity,
                 createItemCommand.OwnerId,
                 createItemCommand.ActualOwnerId);
 
@@ -52,10 +53,11 @@ namespace Warehouse.Model.Services
             UpdateItemCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
-            var item = await _itemRepository.GetAsync(updateItemCommand.Id, cancellationToken);
+            var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
             var isUpdated = item.UpdateName(updateItemCommand.Name);
-            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId)||isUpdated;
-            isUpdated = item.UpdateDescription(updateItemCommand.Description)||isUpdated;
+            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
+            isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
+            isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
 
             if (isUpdated)
             {
