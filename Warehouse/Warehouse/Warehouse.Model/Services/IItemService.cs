@@ -7,7 +7,7 @@ using Warehouse.Model.Dtos;
 
 namespace Warehouse.Model.Services
 {
-    public interface IItemService
+    public interface IItemService // ToDo Dodać opis
     {
         Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken);
         Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken);

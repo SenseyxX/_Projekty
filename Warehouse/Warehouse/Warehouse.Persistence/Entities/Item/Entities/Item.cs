@@ -5,38 +5,42 @@ using Warehouse.Persistence.Factories;
 
 namespace Warehouse.Persistence.Entities.Item.Entities
 {
-    public sealed class Item : Aggregate
+    public sealed class Item : Aggregate // Encja "Item" jest agregatem dla innych encji jak "LoanHistory"
     {
         public Item(Guid id,
             string name,
             string description,
             Guid categoryId,
-            QualityLevel qualityLevel,
+            QualityLevel qualityLevel, // Zdefiniowanie enumaratora
+            int quantity,
             State state,
             Guid? ownerId,
-            Guid actualOwnerId)
-            : base(id)
+            Guid actualOwnerId) 
+            : base(id)  // Zdefiniowany constructor z kalsy dziedziczącej 
         {
-            Name = name;
+            Name = name; // Przypisanie wartości constructora do danego propa
             Description = description;
             CategoryId = categoryId;
             QualityLevel = qualityLevel;
+            Quantity = quantity;
             State = state;
             OwnerId = ownerId;
             ActualOwnerId = actualOwnerId;
-            LoanHistories = new List<LoanHistory>();
+            LoanHistories = new List<LoanHistory>(); // Stworzenie listy i przypisanie do propa  
         }
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public Guid CategoryId { get; }
-        public QualityLevel QualityLevel { get; }
-        public State State { get; private set; }
-        public Guid? OwnerId { get; private set; }
+        public Guid CategoryId { get; } // Zdefiniowanie wartości która występuje w encji "Category"
+        public QualityLevel QualityLevel { get; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel"
+        public int Quantity { get; set; }
+        public State State { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
+        public Guid? OwnerId { get; private set; } 
         public Guid ActualOwnerId { get; }
-        public ICollection<LoanHistory> LoanHistories { get; }
+        public ICollection<LoanHistory> LoanHistories { get; } // Stworzenie relacji jeden do wielu (jeden Item może mieć wiele LoanHistory)
 
-        public bool UpdateName(string name)
+        // Metody wywoływane przy aktualizacji wartości w serwisie
+        public bool UpdateName(string name) // Metoda wywoływana przy aktualizacji wartości w serwisie
         {
             if (Name == name)
             {
@@ -55,6 +59,17 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             }
 
             Description = description;
+            return true;
+        }
+
+        public bool UpdateQuantity(int quantity)
+        {
+            if (Quantity == quantity)
+            {
+                return false;
+            }
+
+            Quantity = quantity;
             return true;
         }
 
@@ -77,7 +92,8 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             return true;
         }
 
-        public bool Activate()
+        // Metody zmieniające stan Itemu funkcja która zastępuje usuwanie wartości przez zmiane statusu.
+        public bool Activate() 
         {
             if (State == State.Active)
             {

@@ -5,7 +5,7 @@ using Warehouse.Persistence.Repositories;
 
 namespace Warehouse.Model.DomainServices
 {
-    public sealed class ItemDomainService
+    public sealed class ItemDomainService // ToDo OPIS
     {
         private readonly IUserRepository _userRepository;
         private readonly IItemRepository _itemRepository;

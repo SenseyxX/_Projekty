@@ -9,9 +9,9 @@ using Warehouse.Persistence.Repositories;
 
 namespace Warehouse.Persistence
 {
-    public static class PersistenceConfiguration
+    public static class PersistenceConfiguration // Klasa w któej definiujemy ustawienia solucji persistance
     {
-        private const string WarehouseContextSectionKey = "WarehouseContext";
+        private const string WarehouseContextSectionKey = "WarehouseContext"; // Zdefiniowanie nazwy contextu
 
         public static IServiceCollection RegisterPersistenceDependencies(
             this IServiceCollection serviceCollection,
@@ -53,6 +53,7 @@ namespace Warehouse.Persistence
             return applicationBuilder;
         }
 
+        // Zdefiniowanie wcześniej stworzonych repozytorium 
         private static IServiceCollection RegisterRepositories(this IServiceCollection serviceCollection)
             => serviceCollection
                 .AddTransient<IUserRepository, UserRepository>()

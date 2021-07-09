@@ -2,7 +2,7 @@
 
 namespace Warehouse.Persistence.Repositories
 {
-    public interface IItemRepository : IRepository<Item>
+    public interface IItemRepository : IRepository<Item> 
     {        
     }
 }

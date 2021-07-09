@@ -8,19 +8,21 @@ namespace Warehouse.Persistence.Context
 {
     public sealed class WarehouseContext : DbContext
     {
-        public const string DefaultSchemaName = "Warehouse";
+        public const string DefaultSchemaName = "Warehouse";  
 
         public WarehouseContext(DbContextOptions<WarehouseContext> options)
             : base(options)
         {
         }
-
+        
+        // Inicjowanie encji w contexcie
         public DbSet<Category> Categories { get; init; }
         public DbSet<Item> Items { get; init; }
         public DbSet<LoanHistory> LoanHistories { get; init; }
         public DbSet<Squad>Squads  { get; init; }
         public DbSet<User> Users { get; init; }
 
+        // Inicjowanie plików konfiguracyjnych encje
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder
                 .ApplyConfiguration(new CategoryTypeConfiguration())
