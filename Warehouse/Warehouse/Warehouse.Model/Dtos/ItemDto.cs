@@ -30,8 +30,8 @@ namespace Warehouse.Model.Dtos
             }
 
             public Guid Id { get; }
-            public string Name { get; }
-            public string Description { get; }
+            public string Name { get; set; }
+            public string Description { get; set; }
             public Guid CategoryId { get; set; }
             public QualityLevel QualityLevel { get; set; }
             public int Quantity { get; set; }

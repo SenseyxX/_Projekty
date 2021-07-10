@@ -16,7 +16,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             State state,
             Guid? ownerId,
             Guid actualOwnerId) 
-            : base(id)  // Zdefiniowany constructor z kalsy dziedziczącej 
+            : base(id)  // Zdefiniowany constructor z klasy Agregatu 
         {
             Name = name; // Przypisanie wartości constructora do danego propa
             Description = description;
@@ -32,13 +32,16 @@ namespace Warehouse.Persistence.Entities.Item.Entities
         public string Name { get; private set; }
         public string Description { get; private set; }
         public Guid CategoryId { get; } // Zdefiniowanie wartości która występuje w encji "Category"
-        public QualityLevel QualityLevel { get; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel"
-        public int Quantity { get; set; }
+        public QualityLevel QualityLevel { get; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel". ToDo Dodać możliwość edycji QualityLevel 
+        public int Quantity { get; private set; }
         public State State { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
         public Guid? OwnerId { get; private set; } 
         public Guid ActualOwnerId { get; }
         public ICollection<LoanHistory> LoanHistories { get; } // Stworzenie relacji jeden do wielu (jeden Item może mieć wiele LoanHistory)
+        
+        // ToDo Dodanie Zdjęcia
 
+            
         // Metody wywoływane przy aktualizacji wartości w serwisie
         public bool UpdateName(string name) // Metoda wywoływana przy aktualizacji wartości w serwisie
         {
@@ -73,7 +76,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             return true;
         }
 
-        public bool UpdateOwner(Guid ownerId)
+        public bool UpdateOwner(Guid ownerId) // ToDo CZy tu nie powinniśmy aktualizaować aCtualOwner ?
         {
             if (OwnerId == ownerId)
             {

@@ -14,7 +14,8 @@ namespace Warehouse.Persistence.Factories
             string email,
             string phoneNumber,
             PermissionLevel permissionLevel,
-            Guid squadId)
+            Guid squadId,
+            Guid teamId)
             => new (
                 Guid.NewGuid(),
                 name,
@@ -24,6 +25,7 @@ namespace Warehouse.Persistence.Factories
                 phoneNumber,
                 permissionLevel,
                 State.Active,
-                squadId);
+                squadId,
+                teamId);
     }
 }

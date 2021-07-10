@@ -15,7 +15,7 @@ namespace Warehouse.Persistence.Context
         {
         }
         
-        // Inicjowanie encji w contexcie
+        // Inicjowanie encji w context
         public DbSet<Category> Categories { get; init; }
         public DbSet<Item> Items { get; init; }
         public DbSet<LoanHistory> LoanHistories { get; init; }
@@ -29,6 +29,8 @@ namespace Warehouse.Persistence.Context
                 .ApplyConfiguration(new ItemTypeConfiguration())
                 .ApplyConfiguration(new LoanHistoryTypeConfiguration())
                 .ApplyConfiguration(new SquadTypeConfiguration())
-                .ApplyConfiguration(new UserTypeConfiguration());
+                .ApplyConfiguration(new UserTypeConfiguration())
+                .ApplyConfiguration(new TeamTypeConfiguration())
+                .ApplyConfiguration(new DuesTypeConfiguration());
     }
 }
