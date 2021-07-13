@@ -6,7 +6,8 @@ namespace Warehouse.Persistence.Entities
 {
     public sealed class Squad : Aggregate
     {
-        public Squad(Guid id,
+        public Squad(
+            Guid id,
             string name,
             State state)
             : base(id)
@@ -22,7 +23,7 @@ namespace Warehouse.Persistence.Entities
 
         public bool UpdateName(string name)
         {
-            if (Name == name || string.IsNullOrEmpty(name))
+            if (Name == name || string.IsNullOrEmpty(name)) // ToDo Dlaczego IsNullOrEmty ???
             {
                 return false;
             }

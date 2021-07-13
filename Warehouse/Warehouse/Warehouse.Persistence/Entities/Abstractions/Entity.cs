@@ -9,6 +9,6 @@ namespace Warehouse.Persistence.Entities.Abstractions
             Id = id;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } // ToDo : Czy powinnismy zmieniać id
     }
 }

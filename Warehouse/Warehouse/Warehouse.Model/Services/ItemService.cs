@@ -11,7 +11,7 @@ using Warehouse.Persistence.Repositories;
 
 namespace Warehouse.Model.Services
 {
-    public sealed class ItemService : IItemService
+    public sealed class ItemService : IItemService // Główne metody do edycji danych na bazie
     {
         private readonly IItemRepository _itemRepository;
         private readonly ItemDomainService _itemDomainService;
@@ -22,19 +22,19 @@ namespace Warehouse.Model.Services
             _itemDomainService = itemDomainService;
         }
 
-        public async Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken) // Pobieranie Itemu o podanym Id
         {
             var item = await _itemRepository.GetAsync(id, cancellationToken);
             return (FullItemDto) item;
         }
 
-        public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken) // Pobranie wszystkich Itemów
         {
             var items = await _itemRepository.GetRangeAsync(cancellationToken);
             return items.Select(item => (ItemDto) item);
         }
 
-        public async Task CreateItemAsync(CreateItemCommand createItemCommand, CancellationToken cancellationToken)
+        public async Task CreateItemAsync(CreateItemCommand createItemCommand, CancellationToken cancellationToken) // Stworznie nowego Itemu
         {
             var item = ItemFactory.Create(
                 createItemCommand.Name,
@@ -53,11 +53,19 @@ namespace Warehouse.Model.Services
             UpdateItemCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
             var isUpdated = item.UpdateName(updateItemCommand.Name);
             isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
             isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
             isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
+=======
+            var item = await _itemRepository.GetAsync(updateItemCommand.OwnerId, cancellationToken);
+            var isUpdated = item.UpdateName(updateItemCommand.Name);
+            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId)||isUpdated;
+            isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
+            isUpdated = item.UpdateDescription(updateItemCommand.Description)||isUpdated;
+>>>>>>> main
 
             if (isUpdated)
             {

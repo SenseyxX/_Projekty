@@ -5,7 +5,7 @@ using Warehouse.Persistence.Entities.Item.Entities;
 
 namespace Warehouse.Persistence.Factories
 {
-    public static class ItemFactory
+    public static class ItemFactory // Factory tworzące nowe itemy
     {
         public static Item Create(
             string name,

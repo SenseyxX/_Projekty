@@ -10,18 +10,19 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
     internal sealed class ItemTypeConfiguration : IEntityTypeConfiguration<Item>
     {
         private const string TableName = "Items";
-
+      
+        // Konfiguracja każdego propa w danej encji
         public void Configure(EntityTypeBuilder<Item> entityTypeBuilder)
         {
             entityTypeBuilder
-                .ToTable(TableName, WarehouseContext.DefaultSchemaName)
-                .HasKey(item => item.Id);
+                .ToTable(TableName, WarehouseContext.DefaultSchemaName) // Stworzenie Tabeli
+                .HasKey(item => item.Id); // Dodanie klucza tabeli
 
             entityTypeBuilder
-                .Property<string>(nameof(Item.Name))
-                .HasMaxLength(50)
-                .HasColumnName(nameof(Item.Name))
-                .IsRequired();
+                .Property<string>(nameof(Item.Name)) // Zdefiniownie że dany prop jest stringiem
+                .HasMaxLength(50)   // Określenie maksymalnej ilości znaków w komórce
+                .HasColumnName(nameof(Item.Name)) // Określenie Nazwy kolumny
+                .IsRequired();      // Czy wartość w danej komórce jest wymagana 
 
             entityTypeBuilder
                 .Property<string>(nameof(Item.Description))
@@ -31,7 +32,7 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property<QualityLevel>(nameof(Item.QualityLevel))
-                .HasColumnType("tinyint")
+                .HasColumnType("tinyint") // Zdefiniowanie typu komórki tinyint wartości od 0-255
                 .HasColumnName(nameof(Item.QualityLevel))
                 .IsRequired();
 
@@ -57,11 +58,11 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .HasMany(item => item.LoanHistories)
-                .WithOne()
-                .HasForeignKey(loadHistory => loadHistory.ItemId);
+                .HasMany(item => item.LoanHistories) // Zdefiniowanie  zalezności pomiędzy encją Item a Loan history , Item posiada wiele LoanHistory
+                .WithOne()    // Określenie że encja LoanHistory posiada tylko jeden item
+                .HasForeignKey(loadHistory => loadHistory.ItemId); // Ustawienie ForeignKey
 
-            entityTypeBuilder.HasQueryFilter(item => item.State != State.Deleted);
+            entityTypeBuilder.HasQueryFilter(item => item.State != State.Deleted); // ToDo OPIS
         }
     }
 }

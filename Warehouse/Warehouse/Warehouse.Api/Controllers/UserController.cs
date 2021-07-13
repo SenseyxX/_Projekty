@@ -30,10 +30,10 @@ namespace Warehouse.Api.Controllers
 
         [HttpPost]
         public async Task<ActionResult> AddUserAsync(
-            AddUserCommand addUserCommand,
+            CreateUserCommand addUserCommand,
             CancellationToken cancellationToken)
         {
-            await _userService.AddUserAsync(addUserCommand,cancellationToken);
+            await _userService.CreateUserAsync(addUserCommand,cancellationToken);
             return Ok();
         }
 

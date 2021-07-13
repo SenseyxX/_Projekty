@@ -17,19 +17,24 @@ namespace Warehouse.Model.Dtos
             PermissionLevel permissionLevel,
             State state,
             Guid squadId,
+            Guid teamId,
             IEnumerable<ItemDto> ownedItems,
             IEnumerable<ItemDto> storedItems)
-            : base(id,name, lastName, email, phoneNumber)
+            :base (id,
+                   name,
+                   lastName,
+                   email,
+                   phoneNumber,
+                   squadId,
+                   teamId)
             {
                 PermissionLevel = permissionLevel;
                 State = state;
-                SquadId = squadId;
                 State = state;
                 OwnedItems = ownedItems;
                 StoredItems = storedItems;
             }
 
-            public Guid SquadId { get; }
             public State State { get; private set; }
             public PermissionLevel PermissionLevel { get; }
             public IEnumerable<ItemDto> OwnedItems { get; }
@@ -44,6 +49,7 @@ namespace Warehouse.Model.Dtos
                          user.PermissionLevel,
                          user.State,
                          user.SquadId,
+                         user.TeamId,
                          user.OwnedItems.Select(ownedItems => (ItemDto) ownedItems),
                          user.StoredItems.Select(storesItems => (ItemDto) storesItems));
     }

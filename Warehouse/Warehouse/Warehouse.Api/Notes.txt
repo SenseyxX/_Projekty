@@ -1,3 +1,9 @@
 ﻿ToDo:
+<<<<<<< HEAD
     Dodać politykę squadOwner    
 
+=======
+      Stworzyć opisy
+      Stworzyć mockapy (https://xd.adobe.com/view/ebd888d5-5c64-405c-98d6-53a883fe3ab8-be8b/ )
+      
+>>>>>>> main
