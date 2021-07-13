@@ -3,7 +3,7 @@ using Warehouse.Persistence.Entities.User;
 
 namespace Warehouse.Model.Contracts.Commands
 {
-    public sealed class AddUserCommand
+    public sealed class CreateUserCommand
     {
         public string Name { get; set; }
         public string LastName { get; set; }

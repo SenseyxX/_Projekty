@@ -22,8 +22,8 @@ namespace Warehouse.Model.Services
             _encryptionService = encryptionService;
         }
 
-        public async Task AddUserAsync(
-            AddUserCommand addUserCommand,
+        public async Task CreateUserAsync(
+            CreateUserCommand addUserCommand,
             CancellationToken cancellationToken)
         {
             var passwordHash = _encryptionService.EncodePassword(addUserCommand.Password);
@@ -42,7 +42,12 @@ namespace Warehouse.Model.Services
             await _userRepository.SaveAsync(cancellationToken);
         }
 
-        public async Task DeleteUserAsync(Guid id, CancellationToken cancellationToken)
+		  public Task CreateUserDuesAsync(CreateDuesCommand createDuesCommand, CancellationToken cancellationToken)
+		  {
+			   throw new NotImplementedException();
+		  }
+
+		  public async Task DeleteUserAsync(Guid id, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetAsync(id, cancellationToken);
             var updated = user.Delete();
@@ -54,16 +59,31 @@ namespace Warehouse.Model.Services
             }
         }
 
-        public async Task<FullUserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
+		  public Task DeleteUserDuesAsync(Guid id, CancellationToken cancellationToken)
+		  {
+			   throw new NotImplementedException();
+		  }
+
+		  public async Task<FullUserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
            => (FullUserDto)await _userRepository.GetAsync(id, cancellationToken);
 
-        public async Task<IEnumerable<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
+		  public Task<DuesDto> GetUserDuesAsync(Guid id, CancellationToken cancellationToken)
+		  {
+			   throw new NotImplementedException();
+		  }
+
+		  public async Task<IEnumerable<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
         {
             var users = await _userRepository.GetRangeAsync(cancellationToken);
             return users.Select(user => (UserDto)user);
         }
 
-        public async Task UpdateUserAsync(
+		  public Task<IEnumerable<DuesDto>> GetUsersDuesAsync(CancellationToken cancellationToken)
+		  {
+			   throw new NotImplementedException();
+		  }
+
+		  public async Task UpdateUserAsync(
             UpdateUserCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
@@ -79,5 +99,10 @@ namespace Warehouse.Model.Services
                 await _userRepository.SaveAsync(cancellationToken);
             }
         }
-    }
+
+		  public Task UpdateUserDuesAsync(UpdateDuesCommand updateDuesCommand, CancellationToken cancellationToken)
+		  {
+			   throw new NotImplementedException();
+		  }
+	 }
 }

@@ -7,7 +7,8 @@ namespace Warehouse.Persistence.Entities.Item.Entities
 {
     public sealed class Item : Aggregate // Encja "Item" jest agregatem dla innych encji jak "LoanHistory"
     {
-        public Item(Guid id,
+        public Item(
+            Guid id,
             string name,
             string description,
             Guid categoryId,
