@@ -53,11 +53,19 @@ namespace Warehouse.Model.Services
             UpdateItemCommand updateItemCommand,
             CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
+            var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
+            var isUpdated = item.UpdateName(updateItemCommand.Name);
+            isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
+            isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
+            isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
+=======
             var item = await _itemRepository.GetAsync(updateItemCommand.OwnerId, cancellationToken);
             var isUpdated = item.UpdateName(updateItemCommand.Name);
             isUpdated = item.UpdateOwner(updateItemCommand.OwnerId)||isUpdated;
             isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
             isUpdated = item.UpdateDescription(updateItemCommand.Description)||isUpdated;
+>>>>>>> main
 
             if (isUpdated)
             {

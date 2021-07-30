@@ -21,6 +21,11 @@ namespace Warehouse.Model.Dtos
             Guid? ownerId,
             Guid actualOwnerId,
             IEnumerable<LoanHistoryDto>loanHistoryDtos)
+<<<<<<< HEAD
+                : base(id, name, description, qualityLevel, quantity, state, ownerId, actualOwnerId)
+            {
+                  CategoryId = categoryId; 
+=======
                 : base (id,
                         name,
                         description,
@@ -37,9 +42,14 @@ namespace Warehouse.Model.Dtos
                   State = state;
                   OwnerId = ownerId;
                   ActualOwnerId = actualOwnerId;
+>>>>>>> main
                   LoanHistoryDtos = loanHistoryDtos;
              }
 
+<<<<<<< HEAD
+            public Guid CategoryId { get; }                        
+=======
+>>>>>>> main
             public IEnumerable<LoanHistoryDto> LoanHistoryDtos { get; }
 
             public static explicit operator FullItemDto(Item item)

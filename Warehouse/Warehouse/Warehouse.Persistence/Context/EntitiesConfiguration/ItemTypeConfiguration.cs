@@ -37,6 +37,11 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
+               .Property<int>(nameof(Item.Quantity))
+               .HasColumnName(nameof(Item.Quantity))
+               .IsRequired();
+
+            entityTypeBuilder
                 .Property<State>(nameof(Item.State))
                 .HasColumnType("tinyint")
                 .HasColumnName(nameof(Item.State))
