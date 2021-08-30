@@ -31,6 +31,6 @@ namespace Warehouse.Persistence.Context
                 .ApplyConfiguration(new SquadTypeConfiguration())
                 .ApplyConfiguration(new UserTypeConfiguration())
                 .ApplyConfiguration(new TeamTypeConfiguration())
-                .ApplyConfiguration(new DuesTypeConfiguration());
+                .ApplyConfiguration(new DueTypeConfiguration());
     }
 }

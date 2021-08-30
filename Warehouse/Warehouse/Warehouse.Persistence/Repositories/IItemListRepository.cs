@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Warehouse.Persistence.Entities;
+using Warehouse.Persistence.Entities.ItemList.Entities;
 
 namespace Warehouse.Persistence.Repositories
 {
-	 public interface IDuesRepository : IRepository<Dues>
+	 interface IItemListRepository : IRepository<ItemList>
 	 {
 	 }
 }

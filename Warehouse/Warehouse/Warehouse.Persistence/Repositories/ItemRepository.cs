@@ -20,5 +20,6 @@ namespace Warehouse.Persistence.Repositories
                 .Set<Item>()
                 .Include(item => item.LoanHistories)
                 .FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
+        
     }
 }

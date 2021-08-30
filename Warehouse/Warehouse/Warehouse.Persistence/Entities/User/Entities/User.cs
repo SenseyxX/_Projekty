@@ -29,6 +29,7 @@ namespace Warehouse.Persistence.Entities.User.Entities
             TeamId = teamId;
             OwnedItems = new List<Item.Entities.Item>();
             StoredItems = new List<Item.Entities.Item>();
+            Dues = new List<Due>();
         }
 
         public string Name { get; private set; }
@@ -42,6 +43,7 @@ namespace Warehouse.Persistence.Entities.User.Entities
         public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }
         public ICollection<Item.Entities.Item> StoredItems { get; }
+        public ICollection<Due> Dues { get; }
 
         public bool UpdateName(string name)
         {

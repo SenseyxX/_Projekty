@@ -31,7 +31,7 @@ namespace Warehouse.Model.Dtos
 		  public Status Status { get; set; }
 		  public Persistence.Entities.User.Enums.Half Half { get; set; }
 
-		  public static explicit operator DuesDto(Dues dues)
+		  public static explicit operator DuesDto(Due dues)
 			 =>new DuesDto(
 				  dues.Id,
 				  dues.UserId,

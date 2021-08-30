@@ -12,7 +12,7 @@ namespace Warehouse.Model.Contracts.Commands
         public string PhoneNumber { get; init; }
         public Guid SquadId { get; init; }
         public PermissionLevel PermissionLevel { get; init; }
-        public Guid TeamId { get; set; }
+        public Guid TeamId { get; init; }
         
     }
 }

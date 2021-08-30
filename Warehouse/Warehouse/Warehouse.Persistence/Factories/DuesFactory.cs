@@ -11,7 +11,7 @@ namespace Warehouse.Persistence.Factories
 {
 	 public static class DuesFactory
 	 {
-		  public static Dues Create(
+		  public static Due Create(
 			   Guid userId,
 			   Half half,
 			   int amount,

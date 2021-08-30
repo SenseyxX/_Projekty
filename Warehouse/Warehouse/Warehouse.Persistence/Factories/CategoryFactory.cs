@@ -5,7 +5,9 @@ namespace Warehouse.Persistence.Factories
 {
     public static class CategoryFactory
     {
-        public static Category Create(string name, string description )
+        public static Category Create(
+                  string name,
+                  string description )
             => new (
                 Guid.NewGuid(),
                 name,

@@ -7,9 +7,9 @@ using Half = Warehouse.Persistence.Entities.User.Enums.Half;
 
 namespace Warehouse.Persistence.Entities
 {
-	 public sealed class Dues : Entity
+	 public sealed class Due : Entity
 	 {
-		  public Dues(
+		  public Due(
 			   Guid id,
 			   Guid userId,
 			   Half half,

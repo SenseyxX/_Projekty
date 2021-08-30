@@ -12,11 +12,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             string name,
             string description,
             Guid categoryId,
-<<<<<<< HEAD
             QualityLevel qualityLevel,
-=======
-            QualityLevel qualityLevel, // Zdefiniowanie enumaratora
->>>>>>> main
             int quantity,
             State state,
             Guid? ownerId,
@@ -36,15 +32,6 @@ namespace Warehouse.Persistence.Entities.Item.Entities
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-<<<<<<< HEAD
-        public Guid CategoryId { get; }
-        public QualityLevel QualityLevel { get; private set; } 
-        public int Quantity { get;private set; }
-        public State State { get; private set; }
-        public Guid? OwnerId { get; private set; }
-        public Guid ActualOwnerId { get; private set; }
-        public ICollection<LoanHistory> LoanHistories { get; }
-=======
         public Guid CategoryId { get; } // Zdefiniowanie wartości która występuje w encji "Category"
         public QualityLevel QualityLevel { get; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel". ToDo Dodać możliwość edycji QualityLevel 
         public int Quantity { get; private set; }
@@ -53,10 +40,8 @@ namespace Warehouse.Persistence.Entities.Item.Entities
         public Guid ActualOwnerId { get; }
         public ICollection<LoanHistory> LoanHistories { get; } // Stworzenie relacji jeden do wielu (jeden Item może mieć wiele LoanHistory)
         
-        // ToDo Dodanie Zdjęcia
->>>>>>> main
+        // ToDo Dodanie Zdjęcia   
 
-            
         // Metody wywoływane przy aktualizacji wartości w serwisie
         public bool UpdateName(string name) // Metoda wywoływana przy aktualizacji wartości w serwisie
         {
@@ -90,12 +75,7 @@ namespace Warehouse.Persistence.Entities.Item.Entities
             Quantity = quantity;
             return true;
         }
-
-<<<<<<< HEAD
-        public bool UpdateOwner(Guid ownerId)
-=======
         public bool UpdateOwner(Guid ownerId) // ToDo CZy tu nie powinniśmy aktualizaować aCtualOwner ?
->>>>>>> main
         {
             if (OwnerId == ownerId)
             {

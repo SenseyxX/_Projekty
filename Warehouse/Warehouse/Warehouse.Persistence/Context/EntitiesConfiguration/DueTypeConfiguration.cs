@@ -7,36 +7,36 @@ using Half = Warehouse.Persistence.Entities.User.Enums.Half;
 
 namespace Warehouse.Persistence.Context.EntitiesConfiguration
 {
-	 internal sealed class DuesTypeConfiguration : IEntityTypeConfiguration<Dues>
+	 internal sealed class DueTypeConfiguration : IEntityTypeConfiguration<Due>
 	 {
 		  private const string TableName = "Dues";
-		  public void Configure(EntityTypeBuilder<Dues>entityTypeBuilder)
+		  public void Configure(EntityTypeBuilder<Due>entityTypeBuilder)
 		  {
 			   entityTypeBuilder
 				  .ToTable(TableName, WarehouseContext.DefaultSchemaName)
 				  .HasKey(dues => dues.Id);
 
 			   entityTypeBuilder
-				    .Property<Guid>(nameof(Dues.UserId))
-				    .HasColumnName(nameof(Dues.UserId))
+				    .Property<Guid>(nameof(Due.UserId))
+				    .HasColumnName(nameof(Due.UserId))
 				    .IsRequired();
 
 			   entityTypeBuilder
-				  .Property<Half>(nameof(Dues.Half))
+				  .Property<Half>(nameof(Due.Half))
 				  .HasColumnType("tinyint")
-				  .HasColumnName(nameof(Dues.Half))
+				  .HasColumnName(nameof(Due.Half))
 				  .IsRequired();
 
 			   entityTypeBuilder
-        			  .Property<int>(nameof(Dues.Amount))
+        			  .Property<int>(nameof(Due.Amount))
 				  .HasColumnType("int")
-				  .HasColumnName(nameof(Dues.Amount))
+				  .HasColumnName(nameof(Due.Amount))
 				  .IsRequired();
 
 			   entityTypeBuilder
-				  .Property<Status>(nameof(Dues.Status))
+				  .Property<Status>(nameof(Due.Status))
 				  .HasColumnType("tinyint")
-				  .HasColumnName(nameof(Dues.Status))
+				  .HasColumnName(nameof(Due.Status))
 				  .IsRequired();	 
 		  }
 	 }

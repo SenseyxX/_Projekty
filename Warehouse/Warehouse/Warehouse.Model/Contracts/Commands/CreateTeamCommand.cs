@@ -8,9 +8,9 @@ namespace Warehouse.Model.Contracts.Commands
 {
 	 public sealed class CreateTeamCommand
 	 {
-		  public string Name { get; set; }
-		  public Guid TeamOwnerId { get; set; }
-		  public string Description { get; set; }
-		  public int Points { get; set; }
+		  public string Name { get; init; }
+		  public Guid TeamOwnerId { get; init; }
+		  public string Description { get; init; }
+		  public int Points { get; init; }
 	 }
 }

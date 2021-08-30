@@ -10,9 +10,9 @@ namespace Warehouse.Model.Contracts.Commands
 {
 	 public sealed class CreateDuesCommand
 	 {
-		  public Guid UserId { get; set; }
-		  public Half Half { get; set; }
-		  public int Amount { get; set; }
-		  public Status Status { get; set; }
+		  public Guid UserId { get; init; }
+		  public Half Half { get; init; }
+		  public int Amount { get; init; }
+		  public Status Status { get; init; }
 	 }
 }

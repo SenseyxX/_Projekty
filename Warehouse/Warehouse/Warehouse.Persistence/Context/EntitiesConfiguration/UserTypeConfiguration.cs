@@ -68,6 +68,11 @@ namespace Warehouse.Persistence.Context.EntitiesConfiguration
                 .WithOne()
                 .HasForeignKey(item => item.OwnerId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            entityTypeBuilder
+                .HasMany(user => user.Dues)
+                .WithOne()
+                .HasForeignKey(due => due.UserId); 
         }
     }
 }
