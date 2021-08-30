@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using Warehouse.Domain.Abstractions;
+using Warehouse.Domain.Category.Enumeration;
+using Warehouse.Domain.User.Enumeration;
+
+namespace Warehouse.Domain.User.Entities
+{
+    public sealed class User : Aggregate
+    {
+        public User(Guid id,
+            string name,
+            string lastName,
+            byte[] passwordHash,
+            string email,
+            string phoneNumber,
+            PermissionLevel permissionLevel,
+            CategoryState categoryState,
+            Guid squadId,
+            Guid teamId)
+            : base(id)
+        {
+            Name = name;
+            LastName = lastName;
+            PasswordHash = passwordHash;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            PermissionLevel = permissionLevel;
+            CategoryState = categoryState;
+            SquadId = squadId;
+            TeamId = teamId;
+            OwnedItems = new List<Item.Entities.Item>();
+            StoredItems = new List<Item.Entities.Item>();
+            Dues = new List<Due>();
+        }
+
+        public string Name { get; private set; }
+        public string LastName { get; private set; }
+        public byte[] PasswordHash { get; private set; }
+        public string Email { get; private set; }
+        public string PhoneNumber { get; private set; }
+        public Guid SquadId { get; }
+        public Guid TeamId { get;  } // ToDo Czy modyfikacja jest implementowana jak przy innych propach?
+        public CategoryState CategoryState { get; private set; }
+        public PermissionLevel PermissionLevel { get; }
+        public ICollection<Item.Entities.Item> OwnedItems { get; }
+        public ICollection<Item.Entities.Item> StoredItems { get; }
+        public ICollection<Due> Dues { get; }
+
+        public bool UpdateName(string name)
+        {
+            if (Name == name || string.IsNullOrEmpty(name))
+            {
+                return false;
+            }
+
+            Name = name;
+            return true;
+        }
+
+        public bool UpdateLastName(string lastname)
+        {
+            if (LastName == lastname || string.IsNullOrEmpty(lastname))
+            {
+                return false;
+            }
+
+            LastName = lastname;
+            return true;
+        }
+
+        public bool UpdatePasswordHash(byte[] passwordHash)
+        {
+            if (PasswordHash == passwordHash || passwordHash.Length <= 0)
+            {
+                return false;
+            }
+
+            PasswordHash = passwordHash;
+            return true;
+        }
+
+        public bool UpdateEmail(string email)
+        {
+            if (Email == email || string.IsNullOrEmpty(email))
+            {
+                return false;
+            }
+
+            Email = email;
+            return true;
+        }
+
+        public bool UpdatePhoneNumber(string phoneNumber)
+        {
+            if (PhoneNumber == phoneNumber || string.IsNullOrEmpty(phoneNumber))
+            {
+                return false;
+            }
+
+            PhoneNumber = phoneNumber;
+            return true;
+        }
+
+        public bool Activate()
+        {
+            if (CategoryState == CategoryState.Active)
+            {
+                return false;
+            }
+
+            CategoryState = CategoryState.Active;
+            return true;
+        }
+
+        public bool Delete()
+        {
+            if (CategoryState == CategoryState.Deleted)
+            {
+                return false;
+            }
+
+            CategoryState = CategoryState.Deleted;
+            return true;
+        }
+    }
+}

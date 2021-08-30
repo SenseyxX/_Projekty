@@ -2,9 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Api", "Warehouse.Api\Warehouse.Api.csproj", "{055074DC-25B4-4C89-930C-8C63BE588BFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Model", "Warehouse.Model\Warehouse.Model.csproj", "{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Application", "Warehouse.Application\Warehouse.Application.csproj", "{2D72BD8F-73DB-4E43-9187-169F8D5E56D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Persistence", "Warehouse.Persistence\Warehouse.Persistence.csproj", "{1AD7F3CA-EF58-4836-9F09-160E08F5B489}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Infrastructure", "Warehouse.Infrastructure\Warehouse.Infrastructure.csproj", "{1AD7F3CA-EF58-4836-9F09-160E08F5B489}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Domain", "Warehouse.Domain\Warehouse.Domain.csproj", "{DD08FADB-4FFA-4529-B126-03663FDF6907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AD7F3CA-EF58-4836-9F09-160E08F5B489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD08FADB-4FFA-4529-B126-03663FDF6907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD08FADB-4FFA-4529-B126-03663FDF6907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD08FADB-4FFA-4529-B126-03663FDF6907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD08FADB-4FFA-4529-B126-03663FDF6907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

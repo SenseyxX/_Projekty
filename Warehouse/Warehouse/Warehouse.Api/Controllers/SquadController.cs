@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Model.Contracts.Commands;
-using Warehouse.Model.Dtos;
-using Warehouse.Model.Services;
+using Warehouse.Application.Contracts.Commands;
+using Warehouse.Application.Dtos;
+using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers
 {
@@ -13,18 +13,18 @@ namespace Warehouse.Api.Controllers
     [Route(RoutePattern)]
     public sealed class SquadController : Controller
     {
-        private readonly ISquadService _squadService;
+        private readonly SquadHandler _squadHandler;
 
-        public SquadController(ISquadService squadService)
+        public SquadController(SquadHandler squadHandler)
         {
-            _squadService = squadService;
+            _squadHandler = squadHandler;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SquadDto>>> GetUsersAsync(
             CancellationToken cancellationToken)
         {
-            var result = await _squadService.GetSquadsAsync(cancellationToken);
+            var result = await _squadHandler.GetSquadsAsync(cancellationToken);
             return Ok(result);
         }
 
@@ -33,7 +33,7 @@ namespace Warehouse.Api.Controllers
             [FromRoute]Guid squadId,
             CancellationToken cancellationToken)
         {
-            var result = await _squadService.GetSquadAsync(squadId,cancellationToken);
+            var result = await _squadHandler.GetSquadAsync(squadId,cancellationToken);
             return Ok(result);
         }
 
@@ -42,7 +42,7 @@ namespace Warehouse.Api.Controllers
             AddSquadCommand addSquadCommand,
             CancellationToken cancellationToken)
         {
-            await _squadService.AddSquadAsync(addSquadCommand,cancellationToken);
+            await _squadHandler.AddSquadAsync(addSquadCommand,cancellationToken);
             return Ok();
         }
 
@@ -51,7 +51,7 @@ namespace Warehouse.Api.Controllers
             [FromRoute] Guid squadId,
             CancellationToken cancellationToken)
         {
-            await _squadService.DeleteSquadAsync(squadId, cancellationToken);
+            await _squadHandler.DeleteSquadAsync(squadId, cancellationToken);
             return Ok();
         }
     }

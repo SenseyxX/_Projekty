@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Model.Contracts.Commands;
-using Warehouse.Model.Dtos;
-using Warehouse.Model.Services;
+using Warehouse.Application.Contracts.Commands;
+using Warehouse.Application.Dtos;
+using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers
 {
@@ -13,18 +13,18 @@ namespace Warehouse.Api.Controllers
     [Route(RoutePattern)]
     public class ItemController : Controller
     {
-        private readonly IItemService _itemService;
+        private readonly ItemHandler _itemHandler;
 
-        public ItemController(IItemService itemService)
+        public ItemController(ItemHandler itemHandler)
         {
-            _itemService = itemService;
+            _itemHandler = itemHandler;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ItemDto>>> GetItemsAsync(
             CancellationToken cancellationToken)
         {
-            var result = await _itemService.GetItemsAsync(cancellationToken);
+            var result = await _itemHandler.GetItemsAsync(cancellationToken);
             return Ok(result);
         }
 
@@ -33,7 +33,7 @@ namespace Warehouse.Api.Controllers
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
         {
-            var result = await _itemService.GetItemAsync(id,cancellationToken);
+            var result = await _itemHandler.GetItemAsync(id,cancellationToken);
             return Ok(result);
         }
 
@@ -42,7 +42,7 @@ namespace Warehouse.Api.Controllers
         [FromBody] CreateItemCommand createItemCommand,
         CancellationToken cancellationToken)
         {
-            await _itemService.CreateItemAsync(createItemCommand, cancellationToken);
+            await _itemHandler.CreateItemAsync(createItemCommand, cancellationToken);
             return Ok();
         }
 
@@ -52,7 +52,7 @@ namespace Warehouse.Api.Controllers
             CancellationToken cancellationToken)
 
         {
-            await _itemService.DeleteItemAsync(itemId, cancellationToken);
+            await _itemHandler.DeleteItemAsync(itemId, cancellationToken);
             return Ok();
         }
 
@@ -64,7 +64,7 @@ namespace Warehouse.Api.Controllers
         {
             updateItemCommand.ItemId = itemId;
 
-            await _itemService.UpdateItemAsync(updateItemCommand, cancellationToken);
+            await _itemHandler.UpdateItemAsync(updateItemCommand, cancellationToken);
             return Ok();
         }
 
@@ -73,7 +73,7 @@ namespace Warehouse.Api.Controllers
             [FromRoute] Guid itemId,
             CancellationToken cancellationToken)
         {
-            var result = await _itemService.GetItemLoanHistoriesAsync(itemId, cancellationToken);
+            var result = await _itemHandler.GetItemLoanHistoriesAsync(itemId, cancellationToken);
             return Ok(result);
         }
 
@@ -85,7 +85,7 @@ namespace Warehouse.Api.Controllers
         {
             loanItemCommand.ItemId = itemId;
 
-            await _itemService.LoanItemAsync(loanItemCommand, cancellationToken);
+            await _itemHandler.LoanItemAsync(loanItemCommand, cancellationToken);
             return Ok();
         }
     }
