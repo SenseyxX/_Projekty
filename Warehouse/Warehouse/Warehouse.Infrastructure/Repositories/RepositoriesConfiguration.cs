@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Domain.Category;
 using Warehouse.Domain.Item;
+using Warehouse.Domain.Rental;
 using Warehouse.Domain.Squad;
 using Warehouse.Domain.User;
 
@@ -13,6 +14,7 @@ namespace Warehouse.Infrastructure.Repositories
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<IItemRepository, ItemRepository>()
-                .AddTransient<ISquadRepository, SquadRepository>();
+                .AddTransient<ISquadRepository, SquadRepository>()
+                .AddTransient<IRentalRepository, RentalRepository>();
     }
 }
