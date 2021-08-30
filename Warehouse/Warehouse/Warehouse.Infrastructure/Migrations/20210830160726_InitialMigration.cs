@@ -18,7 +18,7 @@ namespace Warehouse.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    State = table.Column<byte>(type: "tinyint", nullable: false)
+                    CategoryState = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +32,7 @@ namespace Warehouse.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    State = table.Column<byte>(type: "tinyint", nullable: false)
+                    CategoryState = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,7 +49,7 @@ namespace Warehouse.Infrastructure.Migrations
                     TeamOwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     Points = table.Column<byte>(type: "tinyint", nullable: false),
-                    State = table.Column<int>(type: "int", nullable: false)
+                    CategoryState = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,7 +69,7 @@ namespace Warehouse.Infrastructure.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     SquadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    State = table.Column<byte>(type: "tinyint", nullable: false),
+                    CategoryState = table.Column<byte>(type: "tinyint", nullable: false),
                     PermissionLevel = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
@@ -100,7 +100,7 @@ namespace Warehouse.Infrastructure.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Half = table.Column<byte>(type: "tinyint", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<byte>(type: "tinyint", nullable: false)
+                    DueStatus = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,7 +125,7 @@ namespace Warehouse.Infrastructure.Migrations
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     QualityLevel = table.Column<byte>(type: "tinyint", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    State = table.Column<byte>(type: "tinyint", nullable: false),
+                    CategoryState = table.Column<byte>(type: "tinyint", nullable: false),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ActualOwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

@@ -19,7 +19,7 @@ namespace Warehouse.Domain.Item
         public async Task LoanItemAsync(Guid itemId, Guid receiverId, CancellationToken cancellationToken)
         {
             _ = await _userRepository.GetAsync(receiverId, cancellationToken)
-                       ?? throw new NullReferenceException();
+                ?? throw new NullReferenceException();
 
             var item = await _itemRepository.GetAsync(itemId, cancellationToken);
             var updated = item.UpdateOwner(receiverId);

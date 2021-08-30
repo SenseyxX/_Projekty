@@ -19,11 +19,15 @@ namespace Warehouse.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Warehouse.Domain.Category.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("CategoryState")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("CategoryState");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -37,16 +41,12 @@ namespace Warehouse.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("Name");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint")
-                        .HasColumnName("State");
-
                     b.HasKey("Id");
 
                     b.ToTable("Category", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Item.Entities.Item", b =>
+            modelBuilder.Entity("Warehouse.Domain.Item.Entities.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,6 +58,10 @@ namespace Warehouse.Infrastructure.Migrations
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("CategoryState")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("CategoryState");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -83,10 +87,6 @@ namespace Warehouse.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Quantity");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint")
-                        .HasColumnName("State");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ActualOwnerId");
@@ -98,7 +98,7 @@ namespace Warehouse.Infrastructure.Migrations
                     b.ToTable("Items", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Item.Entities.LoanHistory", b =>
+            modelBuilder.Entity("Warehouse.Domain.Item.Entities.LoanHistory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,11 +127,15 @@ namespace Warehouse.Infrastructure.Migrations
                     b.ToTable("LoanHistories", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Squad.Entities.Squad", b =>
+            modelBuilder.Entity("Warehouse.Domain.Squad.Entities.Squad", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("CategoryState")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("CategoryState");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -139,20 +143,19 @@ namespace Warehouse.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("Name");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint")
-                        .HasColumnName("State");
-
                     b.HasKey("Id");
 
                     b.ToTable("Squads", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Squad.Entities.Team", b =>
+            modelBuilder.Entity("Warehouse.Domain.Squad.Entities.Team", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CategoryState")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
@@ -169,9 +172,6 @@ namespace Warehouse.Infrastructure.Migrations
                         .HasColumnType("tinyint")
                         .HasColumnName("Points");
 
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("TeamOwnerId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("TeamOwnerId");
@@ -181,7 +181,7 @@ namespace Warehouse.Infrastructure.Migrations
                     b.ToTable("Teams", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.User.Entities.Due", b =>
+            modelBuilder.Entity("Warehouse.Domain.User.Entities.Due", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -191,13 +191,13 @@ namespace Warehouse.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Amount");
 
+                    b.Property<byte>("DueStatus")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("DueStatus");
+
                     b.Property<byte>("Half")
                         .HasColumnType("tinyint")
                         .HasColumnName("Half");
-
-                    b.Property<byte>("Status")
-                        .HasColumnType("tinyint")
-                        .HasColumnName("Status");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier")
@@ -210,11 +210,15 @@ namespace Warehouse.Infrastructure.Migrations
                     b.ToTable("Dues", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.User.Entities.User", b =>
+            modelBuilder.Entity("Warehouse.Domain.User.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte>("CategoryState")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("CategoryState");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -253,10 +257,6 @@ namespace Warehouse.Infrastructure.Migrations
                     b.Property<Guid>("SquadId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint")
-                        .HasColumnName("State");
-
                     b.Property<Guid>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
@@ -269,80 +269,80 @@ namespace Warehouse.Infrastructure.Migrations
                     b.ToTable("Users", "Warehouse");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Item.Entities.Item", b =>
+            modelBuilder.Entity("Warehouse.Domain.Item.Entities.Item", b =>
                 {
-                    b.HasOne("Warehouse.Domain.Entities.User.Entities.User", null)
+                    b.HasOne("Warehouse.Domain.User.Entities.User", null)
                         .WithMany("OwnedItems")
                         .HasForeignKey("ActualOwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Warehouse.Domain.Entities.Category", null)
+                    b.HasOne("Warehouse.Domain.Category.Entities.Category", null)
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Warehouse.Domain.Entities.User.Entities.User", null)
+                    b.HasOne("Warehouse.Domain.User.Entities.User", null)
                         .WithMany("StoredItems")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.NoAction);
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Item.Entities.LoanHistory", b =>
+            modelBuilder.Entity("Warehouse.Domain.Item.Entities.LoanHistory", b =>
                 {
-                    b.HasOne("Warehouse.Domain.Entities.Item.Entities.Item", null)
+                    b.HasOne("Warehouse.Domain.Item.Entities.Item", null)
                         .WithMany("LoanHistories")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.User.Entities.Due", b =>
+            modelBuilder.Entity("Warehouse.Domain.User.Entities.Due", b =>
                 {
-                    b.HasOne("Warehouse.Domain.Entities.User.Entities.User", null)
+                    b.HasOne("Warehouse.Domain.User.Entities.User", null)
                         .WithMany("Dues")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.User.Entities.User", b =>
+            modelBuilder.Entity("Warehouse.Domain.User.Entities.User", b =>
                 {
-                    b.HasOne("Warehouse.Domain.Entities.Squad.Entities.Squad", null)
+                    b.HasOne("Warehouse.Domain.Squad.Entities.Squad", null)
                         .WithMany("Users")
                         .HasForeignKey("SquadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Warehouse.Domain.Entities.Squad.Entities.Team", null)
+                    b.HasOne("Warehouse.Domain.Squad.Entities.Team", null)
                         .WithMany("Users")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Category", b =>
+            modelBuilder.Entity("Warehouse.Domain.Category.Entities.Category", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Item.Entities.Item", b =>
+            modelBuilder.Entity("Warehouse.Domain.Item.Entities.Item", b =>
                 {
                     b.Navigation("LoanHistories");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Squad.Entities.Squad", b =>
+            modelBuilder.Entity("Warehouse.Domain.Squad.Entities.Squad", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.Squad.Entities.Team", b =>
+            modelBuilder.Entity("Warehouse.Domain.Squad.Entities.Team", b =>
                 {
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("Warehouse.Domain.Entities.User.Entities.User", b =>
+            modelBuilder.Entity("Warehouse.Domain.User.Entities.User", b =>
                 {
                     b.Navigation("Dues");
 

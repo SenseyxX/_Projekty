@@ -10,6 +10,7 @@ namespace Warehouse.Application.Handlers
             .AddTransient<ItemHandler>()
             .AddTransient<UserHandler>()
             .AddTransient<SquadHandler>()
-            .AddTransient<AuthenticationHandler>();
+            .AddTransient<AuthenticationHandler>()
+            .AddTransient<RentalHandler>();
     }
 }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Application.Contracts.Commands;
+using Warehouse.Application.Contracts.Commands.Rental;
 using Warehouse.Application.Dtos;
 using Warehouse.Application.Handlers;
 
@@ -14,10 +15,12 @@ namespace Warehouse.Api.Controllers
     public sealed class UserController : Controller
     {
         private readonly UserHandler _userHandler;
+        private readonly RentalHandler _rentalHandler;
 
-        public UserController(UserHandler userHandler)
+        public UserController(UserHandler userHandler, RentalHandler rentalHandler)
         {
             _userHandler = userHandler;
+            _rentalHandler = rentalHandler;
         }
 
         [HttpGet]
@@ -64,6 +67,15 @@ namespace Warehouse.Api.Controllers
             CancellationToken cancellationToken)
         {
             await _userHandler.DeleteUserAsync(userId, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("{userId:guid}/rental")]
+        public async Task<IActionResult> CreateRentalAsync([FromRoute] Guid userId, CancellationToken cancellationToken)
+
+        {
+            var command = new CreateRentalCommand(userId);
+            await _rentalHandler.CreateRentalAsync(command, cancellationToken);
             return Ok();
         }
     }
