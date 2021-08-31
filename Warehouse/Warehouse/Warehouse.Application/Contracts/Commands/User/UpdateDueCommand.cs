@@ -2,7 +2,7 @@
 
 namespace Warehouse.Application.Contracts.Commands
 {
-	 public sealed class UpdateDuesCommand
+	 public sealed class UpdateDueCommand
 	 {
 		  public int Amount { get; set; }		  
 		  DueStatus DueStatus { get; set; }

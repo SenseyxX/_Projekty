@@ -39,7 +39,7 @@ namespace Warehouse.Api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddCategoryAsync(
-            [FromBody] AddCategoryCommand addCategoryCommand,
+            [FromBody] CreateCategoryCommand addCategoryCommand,
             CancellationToken cancellationToken)
         {
             await _categoryHandler.AddCategoryAsync(addCategoryCommand, cancellationToken);

@@ -42,7 +42,7 @@ namespace Warehouse.Application.Handlers
             await _userRepository.SaveAsync(cancellationToken);
         }
 
-		  public Task CreateUserDuesAsync(CreateDuesCommand createDuesCommand, CancellationToken cancellationToken)
+		  public Task CreateUserDuesAsync(CreateDueCommand createDuesCommand, CancellationToken cancellationToken)
 		  {
 			   throw new NotImplementedException();
 		  }
@@ -100,7 +100,7 @@ namespace Warehouse.Application.Handlers
             }
         }
 
-		  public Task UpdateUserDuesAsync(UpdateDuesCommand updateDuesCommand, CancellationToken cancellationToken)
+		  public Task UpdateUserDuesAsync(UpdateDueCommand updateDuesCommand, CancellationToken cancellationToken)
 		  {
 			   throw new NotImplementedException();
 		  }

@@ -4,7 +4,7 @@ using Half = Warehouse.Domain.User.Enumeration.Half;
 
 namespace Warehouse.Application.Contracts.Commands
 {
-	 public sealed class CreateDuesCommand
+	 public sealed class CreateDueCommand
 	 {
 		  public Guid UserId { get; init; }
 		  public Half Half { get; init; }

@@ -39,7 +39,7 @@ namespace Warehouse.Api.Controllers
 
         [HttpPost]
         public async Task<ActionResult> AddSquadAsync(
-            AddSquadCommand addSquadCommand,
+            CreateSquadCommand addSquadCommand,
             CancellationToken cancellationToken)
         {
             await _squadHandler.AddSquadAsync(addSquadCommand,cancellationToken);

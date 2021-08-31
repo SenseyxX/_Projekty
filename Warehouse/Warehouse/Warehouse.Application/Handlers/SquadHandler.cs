@@ -20,7 +20,7 @@ namespace Warehouse.Application.Handlers
         }
 
         public async Task AddSquadAsync(
-            AddSquadCommand addSquadCommand,
+            CreateSquadCommand addSquadCommand,
             CancellationToken cancellationToken)
         {
             var squad = SquadFactory.Create(addSquadCommand.Name);

@@ -29,7 +29,7 @@ namespace Warehouse.Application.Handlers
             => (FullCategoryDto) await _categoryRepository.GetAsync(id, cancellationToken);
 
         public async Task AddCategoryAsync(
-            AddCategoryCommand addCategoryCommand,
+            CreateCategoryCommand addCategoryCommand,
             CancellationToken cancellationToken)
         {
             var category = CategoryFactory.Create(addCategoryCommand.Name, addCategoryCommand.Description);
