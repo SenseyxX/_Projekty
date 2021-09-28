@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Application.Contracts.Commands;
-using Warehouse.Application.Dtos;
+using Warehouse.Application.Contracts.Commands.Category;
+using Warehouse.Application.Dtos.Category;
 using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers

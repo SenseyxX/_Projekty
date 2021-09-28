@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Application.Contracts.Commands;
-using Warehouse.Application.Dtos;
+using Warehouse.Application.Contracts.Commands.Item;
+using Warehouse.Application.Dtos.Item;
 using Warehouse.Domain.Item;
 using Warehouse.Domain.Item.Factories;
 

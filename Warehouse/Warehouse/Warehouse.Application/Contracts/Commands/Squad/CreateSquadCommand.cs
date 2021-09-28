@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Application.Contracts.Commands
+﻿namespace Warehouse.Application.Contracts.Commands.Squad
 {
     public sealed class CreateSquadCommand
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Warehouse.Application.Dtos.User;
 using Warehouse.Domain.Category.Enumeration;
-using Warehouse.Domain.Squad.Entities;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Squad
 {
 	 public sealed class FullSquadDto : SquadDto
 	 {
@@ -20,7 +20,7 @@ namespace Warehouse.Application.Dtos
 
 		  public IEnumerable<UserDto> UserDtos { get; }
 
-		  public static explicit operator FullSquadDto(Squad squad)
+		  public static explicit operator FullSquadDto(Domain.Squad.Entities.Squad squad)
 			   => new(squad.Id,
 				      squad.Name,
                       squad.CategoryState,

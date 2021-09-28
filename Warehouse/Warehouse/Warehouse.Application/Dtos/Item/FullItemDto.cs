@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Warehouse.Domain.Category.Enumeration;
-using Warehouse.Domain.Item.Entities;
 using Warehouse.Domain.Item.Enumeration;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Item
 {
     public sealed class FullItemDto : ItemDto // Klasa która ma za zadanie odizolować wybrane propy od głownej encji od edycji/wyświetlania w serwisach/controllerach/repozytoriach
                                               // Klasy FullDto głównie są wykorzystowwane przy wyświetlaniu bardziej szczegółowych informacji                                     
@@ -36,7 +35,7 @@ namespace Warehouse.Application.Dtos
 
             public IEnumerable<LoanHistoryDto> LoanHistoryDtos { get; }
 
-            public static explicit operator FullItemDto(Item item)
+            public static explicit operator FullItemDto(Domain.Item.Entities.Item item)
             => new(item.Id,
                    item.Name,
                    item.Description,

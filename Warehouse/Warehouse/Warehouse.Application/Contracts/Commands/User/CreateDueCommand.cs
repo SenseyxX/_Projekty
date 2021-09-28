@@ -2,7 +2,7 @@
 using Warehouse.Domain.User.Enumeration;
 using Half = Warehouse.Domain.User.Enumeration.Half;
 
-namespace Warehouse.Application.Contracts.Commands
+namespace Warehouse.Application.Contracts.Commands.User
 {
 	 public sealed class CreateDueCommand
 	 {

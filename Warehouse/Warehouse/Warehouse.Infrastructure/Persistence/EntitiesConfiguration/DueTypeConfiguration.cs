@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Domain.User.Entities;
 using Warehouse.Infrastructure.Persistence.Context;
-using Half = Warehouse.Domain.User.Enumeration.Half;
 
 namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 {

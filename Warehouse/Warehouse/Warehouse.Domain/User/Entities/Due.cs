@@ -26,37 +26,24 @@ namespace Warehouse.Domain.User.Entities
 		  public int Amount { get; private set; }
 		  public DueStatus DueStatus { get; private set; }
 
-		  public bool UpdateAmount(int amount)
+		  internal void UpdateAmount(int amount)
 		  {
-			   if (Amount == amount)
-			   {
-				    return false;
-			   }
+              if (DueStatus == DueStatus.Paid || Amount == amount)
+              {
+                  throw new Exception();
+              }
 
-			   Amount = amount;
-			   return true;
+              Amount = amount;
 		  }
 
-		  public bool Paid()
+		  internal void Pay()
 		  {
 			   if (DueStatus == DueStatus.Paid)
-			   {
-				    return false;
-			   }
+               {
+                   throw new Exception();
+               }
 
 			   DueStatus = DueStatus.Paid;
-			   return true;
-		  }
-
-          public bool Waiting()
-		  {
-			   if (DueStatus == DueStatus.Waiting)
-			   {
-				    return false;
-			   }
-
-			   DueStatus = DueStatus.Waiting;
-			   return true;
 		  }
 	 }
 }

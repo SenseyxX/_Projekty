@@ -1,8 +1,7 @@
 ﻿using System;
 using Warehouse.Domain.Category.Enumeration;
-using Warehouse.Domain.Squad.Entities;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Squad
 {
     public class SquadDto
     {
@@ -20,7 +19,7 @@ namespace Warehouse.Application.Dtos
         public string Name { get;  }
         public CategoryState CategoryState { get;  }
 
-        public static explicit operator SquadDto(Squad squad)
+        public static explicit operator SquadDto(Domain.Squad.Entities.Squad squad)
             => new (
                 squad.Id,
                 squad.Name,

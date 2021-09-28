@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Warehouse.Application.Dtos.Item;
 using Warehouse.Domain.Category.Enumeration;
-using Warehouse.Domain.User.Entities;
 using Warehouse.Domain.User.Enumeration;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.User
 {
     public sealed class FullUserDto : UserDto
     {
@@ -40,7 +40,7 @@ namespace Warehouse.Application.Dtos
             public IEnumerable<ItemDto> OwnedItems { get; }
             public IEnumerable<ItemDto> StoredItems { get; }
 
-            public static explicit operator FullUserDto(User user)
+            public static explicit operator FullUserDto(Domain.User.Entities.User user)
                   => new(user.Id,
                          user.Name,
                          user.LastName,

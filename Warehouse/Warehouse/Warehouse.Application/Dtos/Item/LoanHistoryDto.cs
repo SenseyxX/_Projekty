@@ -1,7 +1,7 @@
 ﻿using System;
 using Warehouse.Domain.Item.Entities;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Item
 {
     public sealed class LoanHistoryDto
     {

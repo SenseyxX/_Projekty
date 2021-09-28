@@ -1,9 +1,8 @@
 ﻿using System;
 using Warehouse.Domain.Category.Enumeration;
-using Warehouse.Domain.Item.Entities;
 using Warehouse.Domain.Item.Enumeration;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Item
 {
     public class ItemDto
     {
@@ -38,7 +37,7 @@ namespace Warehouse.Application.Dtos
         public Guid? OwnerId { get; }
         public Guid ActualOwnerId { get;}
 
-        public static explicit operator ItemDto(Item item)
+        public static explicit operator ItemDto(Domain.Item.Entities.Item item)
                 => new (
                     item.Id,
                     item.Name,

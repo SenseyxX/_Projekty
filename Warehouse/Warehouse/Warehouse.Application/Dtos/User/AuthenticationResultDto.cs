@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Application.Dtos
+﻿namespace Warehouse.Application.Dtos.User
 {
     public sealed class AuthenticationResultDto
     {

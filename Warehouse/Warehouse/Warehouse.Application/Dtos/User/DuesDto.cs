@@ -3,7 +3,7 @@ using Warehouse.Domain.User.Entities;
 using Warehouse.Domain.User.Enumeration;
 using Half = Warehouse.Domain.User.Enumeration.Half;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.User
 {
 	 public class DuesDto
 	 {

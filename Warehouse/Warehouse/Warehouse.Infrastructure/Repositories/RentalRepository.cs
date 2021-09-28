@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Warehouse.Domain.Rental;
+﻿using Warehouse.Domain.Rental;
 using Warehouse.Domain.Rental.Entities;
 using Warehouse.Infrastructure.Persistence.Context;
 

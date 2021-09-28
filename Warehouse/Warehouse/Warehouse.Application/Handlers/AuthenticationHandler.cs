@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Application.Dtos;
+using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Services;
 using Warehouse.Domain.User;
 

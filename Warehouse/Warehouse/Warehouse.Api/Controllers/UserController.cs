@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Warehouse.Application.Contracts.Commands;
 using Warehouse.Application.Contracts.Commands.Rental;
-using Warehouse.Application.Dtos;
+using Warehouse.Application.Contracts.Commands.User;
+using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers

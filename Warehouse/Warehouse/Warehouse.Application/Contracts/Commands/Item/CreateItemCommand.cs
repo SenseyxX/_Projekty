@@ -1,7 +1,7 @@
 ﻿using System;
 using Warehouse.Domain.Item.Enumeration;
 
-namespace Warehouse.Application.Contracts.Commands
+namespace Warehouse.Application.Contracts.Commands.Item
 {
     public sealed class CreateItemCommand
     {

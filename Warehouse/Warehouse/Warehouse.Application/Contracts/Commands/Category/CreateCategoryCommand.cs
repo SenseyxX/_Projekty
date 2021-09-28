@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Application.Contracts.Commands
+﻿namespace Warehouse.Application.Contracts.Commands.Category
 {
     public sealed class CreateCategoryCommand
     {

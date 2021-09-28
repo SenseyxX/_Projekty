@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Warehouse.Domain.Abstractions;
 using Warehouse.Domain.Category.Enumeration;
 using Warehouse.Domain.User.Enumeration;
+using Warehouse.Domain.User.Factories;
+using Half = Warehouse.Domain.User.Enumeration.Half;
 
 namespace Warehouse.Domain.User.Entities
 {
@@ -122,6 +125,28 @@ namespace Warehouse.Domain.User.Entities
 
             CategoryState = CategoryState.Deleted;
             return true;
+        }
+
+        public void AddDue(Half half, int amount)
+        {
+            var due = DueFactory.Create(Id, half, amount, DueStatus.Waiting);
+            Dues.Add(due);
+        }
+
+        public void PayDue(Guid dueId)
+        {
+            var due = Dues.FirstOrDefault(due => due.Id == dueId)
+                ?? throw new NullReferenceException();
+
+            due.Pay();
+        }
+
+        public void UpdateDueAmount(Guid dueId, int amount)
+        {
+            var due = Dues.FirstOrDefault(due => due.Id == dueId)
+                ?? throw new NullReferenceException();
+
+            due.UpdateAmount(amount);
         }
     }
 }

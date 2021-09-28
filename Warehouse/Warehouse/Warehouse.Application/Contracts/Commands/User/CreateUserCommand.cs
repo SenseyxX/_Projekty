@@ -1,7 +1,7 @@
 ﻿using System;
 using Warehouse.Domain.User.Enumeration;
 
-namespace Warehouse.Application.Contracts.Commands
+namespace Warehouse.Application.Contracts.Commands.User
 {
     public sealed class CreateUserCommand
     {

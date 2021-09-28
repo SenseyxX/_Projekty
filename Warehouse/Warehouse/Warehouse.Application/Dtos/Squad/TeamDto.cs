@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Warehouse.Application.Dtos.User;
 using Warehouse.Domain.Squad.Entities;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Squad
 {
 	 public class TeamDto
 	 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Warehouse.Domain.Category.Entities;
+using Warehouse.Application.Dtos.Item;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Category
 {
     public sealed class FullCategoryDto : CategoryDto
     {
@@ -19,7 +19,7 @@ namespace Warehouse.Application.Dtos
 
         public IEnumerable<ItemDto> ItemDtos { get; }
 
-        public static explicit operator FullCategoryDto(Category category)
+        public static explicit operator FullCategoryDto(Domain.Category.Entities.Category category)
             => new(category.Id,
                 category.Name,
                 category.Description,

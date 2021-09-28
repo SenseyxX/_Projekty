@@ -1,7 +1,6 @@
 ﻿using System;
-using Warehouse.Domain.User.Entities;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.User
 {
     public class UserDto
     {
@@ -31,7 +30,7 @@ namespace Warehouse.Application.Dtos
         public Guid SquadId { get; }
         public Guid TeamId { get; }
 
-        public static explicit operator UserDto(User user)
+        public static explicit operator UserDto(Domain.User.Entities.User user)
             => new (
                 user.Id,
                 user.Name,

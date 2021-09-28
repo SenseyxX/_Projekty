@@ -1,7 +1,6 @@
 ﻿using System;
-using Warehouse.Domain.Category.Entities;
 
-namespace Warehouse.Application.Dtos
+namespace Warehouse.Application.Dtos.Category
 {
     public class CategoryDto
     {
@@ -16,7 +15,7 @@ namespace Warehouse.Application.Dtos
         public string Name { get; }
         public string Description { get; }
 
-        public static explicit operator CategoryDto(Category category)
+        public static explicit operator CategoryDto(Domain.Category.Entities.Category category)
             => new(category.Id,
                    category.Name, 
                    category.Description);
