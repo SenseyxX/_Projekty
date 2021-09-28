@@ -72,10 +72,49 @@ namespace Warehouse.Api.Controllers
 
         [HttpPost("{userId:guid}/rental")]
         public async Task<IActionResult> CreateRentalAsync([FromRoute] Guid userId, CancellationToken cancellationToken)
-
         {
             var command = new CreateRentalCommand(userId);
             await _rentalHandler.CreateRentalAsync(command, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("{userId:guid}/dues")]
+        public async Task<IActionResult> CreateUserDueAsync(
+            [FromRoute] Guid userId,
+            [FromBody] CreateDueCommand createDueCommand,
+            CancellationToken cancellationToken)
+        {
+            createDueCommand.UserId = userId;
+
+            await _userHandler.CreateUserDueAsync(createDueCommand, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{userId:guid}/{dueId:guid}")]
+        public async Task<IActionResult> UpdateUserDueAsync(
+            [FromRoute] Guid userId,
+            [FromRoute] Guid dueId,
+            [FromBody] UpdateDueAmountCommand updateDueAmountCommand,
+            CancellationToken cancellationToken)
+        {
+            updateDueAmountCommand.UserId = userId;
+            updateDueAmountCommand.DueId = dueId;
+
+            await _userHandler.UpdateUserDueAsync(updateDueAmountCommand, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{userId:guid}/{dueId:guid}/pay")]
+        public async Task<IActionResult> PayUserDueAsync(
+            [FromRoute] Guid userId,
+            [FromRoute] Guid dueId,
+            [FromBody] PayDueCommand payDueCommand,
+            CancellationToken cancellationToken)
+        {
+            payDueCommand.UserId = userId;
+            payDueCommand.DueId = dueId;
+
+            await _userHandler.PayUserDueAsync(payDueCommand, cancellationToken);
             return Ok();
         }
     }
