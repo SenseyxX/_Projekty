@@ -22,6 +22,7 @@ namespace Warehouse.Infrastructure.Persistence.Context
         public DbSet<LoanHistory> LoanHistories { get; init; }
         public DbSet<Squad>Squads  { get; init; }
         public DbSet<User> Users { get; init; }
+        public DbSet<Due> Dues { get; init; }
 
         // Inicjowanie plików konfiguracyjnych encje
         protected override void OnModelCreating(ModelBuilder modelBuilder)
