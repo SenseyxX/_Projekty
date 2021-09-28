@@ -7,7 +7,7 @@ namespace Warehouse.Domain.User.Factories
 {
 	 public static class DueFactory
      {
-         public static Due Create(Guid userId, Half half, int amount, DueStatus dueStatus)
+         public static Due Create(Guid userId, Half half, int amount)
              => new(
                  Guid.NewGuid(),
                  userId,

@@ -129,7 +129,7 @@ namespace Warehouse.Domain.User.Entities
 
         public void AddDue(Half half, int amount)
         {
-            var due = DueFactory.Create(Id, half, amount, DueStatus.Waiting);
+            var due = DueFactory.Create(Id, half, amount);
             Dues.Add(due);
         }
 

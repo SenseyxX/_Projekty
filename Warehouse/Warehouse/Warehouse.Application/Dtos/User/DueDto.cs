@@ -5,14 +5,14 @@ using Half = Warehouse.Domain.User.Enumeration.Half;
 
 namespace Warehouse.Application.Dtos.User
 {
-	 public class DuesDto
+	 public class DueDto
 	 {
-		  protected DuesDto(
-				    Guid id,
-				    Guid userId,				    			    
-				    int amount,
-				    DueStatus dueStatus,
-				    Half half)
+		  protected DueDto(
+              Guid id,
+              Guid userId,
+              int amount,
+              DueStatus dueStatus,
+              Half half)
 		  {
 			   Id = id;
 			   UserId = userId;
@@ -23,16 +23,16 @@ namespace Warehouse.Application.Dtos.User
 
 		  public Guid Id { get; }
 		  public Guid UserId { get; }
-		  public int Amount { get; set; }
-		  public DueStatus DueStatus { get; set; }
-		  public Half Half { get; set; }
+		  public int Amount { get; }
+          public DueStatus DueStatus { get; }
+          public Half Half { get; }
 
-		  public static explicit operator DuesDto(Due dues)
-			 =>new DuesDto(
+		  public static explicit operator DueDto(Due dues)
+			 => new DueDto(
 				  dues.Id,
 				  dues.UserId,
 				  dues.Amount,
-			       dues.DueStatus,
+			      dues.DueStatus,
 				  dues.Half);
 	 }
 }

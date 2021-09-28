@@ -42,12 +42,7 @@ namespace Warehouse.Application.Handlers
             await _userRepository.SaveAsync(cancellationToken);
         }
 
-		  public Task CreateUserDuesAsync(CreateDueCommand createDuesCommand, CancellationToken cancellationToken)
-		  {
-			   throw new NotImplementedException();
-		  }
-
-		  public async Task DeleteUserAsync(Guid id, CancellationToken cancellationToken)
+        public async Task DeleteUserAsync(Guid id, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetAsync(id, cancellationToken);
             var updated = user.Delete();
@@ -59,29 +54,14 @@ namespace Warehouse.Application.Handlers
             }
         }
 
-		  public Task DeleteUserDuesAsync(Guid id, CancellationToken cancellationToken)
-		  {
-			   throw new NotImplementedException();
-		  }
-
 		  public async Task<FullUserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
            => (FullUserDto)await _userRepository.GetAsync(id, cancellationToken);
 
-		  public Task<DuesDto> GetUserDuesAsync(Guid id, CancellationToken cancellationToken)
-		  {
-			   throw new NotImplementedException();
-		  }
-
-		  public async Task<IEnumerable<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
+          public async Task<IEnumerable<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
         {
             var users = await _userRepository.GetRangeAsync(cancellationToken);
             return users.Select(user => (UserDto)user);
         }
-
-		  public Task<IEnumerable<DuesDto>> GetUsersDuesAsync(CancellationToken cancellationToken)
-		  {
-			   throw new NotImplementedException();
-		  }
 
 		  public async Task UpdateUserAsync(
             UpdateUserCommand updateItemCommand,
@@ -100,9 +80,41 @@ namespace Warehouse.Application.Handlers
             }
         }
 
-		  public Task UpdateUserDuesAsync(UpdateDueCommand updateDuesCommand, CancellationToken cancellationToken)
-		  {
-			   throw new NotImplementedException();
-		  }
-	 }
+          public async Task CreateUserDueAsync(CreateDueCommand createDueCommand, CancellationToken cancellationToken)
+          {
+              var user = await _userRepository.GetAsync(createDueCommand.UserId, cancellationToken);
+
+              user.AddDue(createDueCommand.Half, createDueCommand.Amount);
+
+              _userRepository.Update(user);
+              await _userRepository.SaveAsync(cancellationToken);
+          }
+
+		  public async Task UpdateUserDueAsync(UpdateDueAmountCommand updateDueAmountCommand, CancellationToken cancellationToken)
+          {
+              var user = await _userRepository.GetAsync(updateDueAmountCommand.UserId, cancellationToken);
+
+              user.UpdateDueAmount(updateDueAmountCommand.DueId, updateDueAmountCommand.Amount);
+
+              _userRepository.Update(user);
+              await _userRepository.SaveAsync(cancellationToken);
+          }
+
+          public async Task PayUserDueAsync(PayDueCommand payDueCommand, CancellationToken cancellationToken)
+          {
+              var user = await _userRepository.GetAsync(payDueCommand.UserId, cancellationToken);
+
+              user.PayDue(payDueCommand.DueId);
+
+              _userRepository.Update(user);
+              await _userRepository.SaveAsync(cancellationToken);
+          }
+
+          public async Task<IEnumerable<DueDto>> GetUserDuesAsync(Guid id, CancellationToken cancellationToken)
+          {
+              var user = await _userRepository.GetAsync(id, cancellationToken);
+
+              return user.Dues.Select(due => (DueDto) due);
+          }
+    }
 }
