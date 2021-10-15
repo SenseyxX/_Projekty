@@ -43,7 +43,7 @@ namespace Warehouse.Domain.User.Entities
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public Guid SquadId { get; }
-        public Guid TeamId { get;  } // ToDo Czy modyfikacja jest implementowana jak przy innych propach?
+        public Guid TeamId { get; }
         public CategoryState CategoryState { get; private set; }
         public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }

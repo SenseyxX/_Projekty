@@ -89,5 +89,19 @@ namespace Warehouse.Application.Handlers
         {
             await _itemDomainService.LoanItemAsync(loanItemCommand.ItemId, loanItemCommand.ReceiverId, cancellationToken);
         }
+
+        public async Task UpdateItemQualityAsync(
+            UpdateItemQualityCommand updateItemQualityCommand,
+            CancellationToken cancellationToken)
+        {
+            var item = await _itemRepository.GetAsync(updateItemQualityCommand.ItemId, cancellationToken);
+            var isUpdated = item.UpdateQuality(updateItemQualityCommand.QualityLevel);
+
+            if (isUpdated)
+            {
+                _itemRepository.Update(item);
+                await _itemRepository.SaveAsync(cancellationToken);
+            }
+        }
     }
 }

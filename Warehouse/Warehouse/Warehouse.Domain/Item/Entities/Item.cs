@@ -35,7 +35,7 @@ namespace Warehouse.Domain.Item.Entities
         public string Name { get; private set; }
         public string Description { get; private set; }
         public Guid CategoryId { get; } // Zdefiniowanie wartości która występuje w encji "Category"
-        public QualityLevel QualityLevel { get; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel". ToDo Dodać możliwość edycji QualityLevel
+        public QualityLevel QualityLevel { get; private set; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel".
         public int Quantity { get; private set; }
         public CategoryState CategoryState { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
         public Guid? OwnerId { get; private set; }
@@ -78,7 +78,7 @@ namespace Warehouse.Domain.Item.Entities
             return true;
         }
 
-        public bool UpdateOwner(Guid ownerId) // ToDo CZy tu nie powinniśmy aktualizaować aCtualOwner ?
+        public bool UpdateOwner(Guid ownerId)
         {
             if (OwnerId == ownerId)
             {
@@ -95,6 +95,17 @@ namespace Warehouse.Domain.Item.Entities
 
             LoanHistories.Add(loanHistory);
 
+            return true;
+        }
+
+        public bool UpdateQuality(QualityLevel qualityLevel)
+        {
+            if (QualityLevel == qualityLevel)
+            {
+                return false;
+            }
+
+            QualityLevel = qualityLevel;
             return true;
         }
 

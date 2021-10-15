@@ -9,6 +9,6 @@ namespace Warehouse.Domain.Abstractions
             Id = id;
         }
 
-        public Guid Id { get; private set; } // ToDo : Czy powinnismy zmieniać id
+        public Guid Id { get; }
     }
 }

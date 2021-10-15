@@ -88,5 +88,17 @@ namespace Warehouse.Api.Controllers
             await _itemHandler.LoanItemAsync(loanItemCommand, cancellationToken);
             return Ok();
         }
+
+        [HttpPut("{itemId:guid}/quality")]
+        public async Task<IActionResult> UpdateItemQualityAsync(
+            [FromRoute] Guid itemId,
+            [FromBody] UpdateItemQualityCommand updateItemQualityCommand,
+            CancellationToken cancellationToken)
+        {
+            updateItemQualityCommand.ItemId = itemId;
+
+            await _itemHandler.UpdateItemQualityAsync(updateItemQualityCommand, cancellationToken);
+            return Ok();
+        }
     }
 }
