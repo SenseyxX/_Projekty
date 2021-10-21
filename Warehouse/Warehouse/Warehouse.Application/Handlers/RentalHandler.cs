@@ -27,5 +27,16 @@ namespace Warehouse.Application.Handlers
             await _rentalRepository.CreateAsync(rental, cancellationToken);
             await _rentalRepository.SaveAsync(cancellationToken);
         }
+
+        public async Task PickItemAsync(PickItemCommand pickItemCommand, CancellationToken cancellationToken)
+        {
+            var rental = await _rentalRepository.GetAsync(pickItemCommand.RentalId, cancellationToken);
+
+            // ToDo: Add item status validation.
+            rental.PickItem(pickItemCommand.ItemCode);
+
+            _rentalRepository.Update(rental);
+            await _rentalRepository.SaveAsync(cancellationToken);
+        }
     }
 }

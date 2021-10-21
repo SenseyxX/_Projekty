@@ -10,5 +10,7 @@ namespace Warehouse.Infrastructure.Repositories
             : base(dbContext)
         {
         }
+
+        // ToDo: Override gets to include rental items (join), analogically to ItemRepository
     }
 }
