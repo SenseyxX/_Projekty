@@ -17,6 +17,16 @@ namespace Warehouse.Domain.Rental.Entities
 		  }
 
 		  public string RentalItemCode { get; }
-		  public RentalItemStatus RentalItemStatus { get; }
-	 }
+		  public RentalItemStatus RentalItemStatus { get; private set; }
+
+          internal void Return()
+          {
+              if (RentalItemStatus != RentalItemStatus.Picked)
+              {
+                  throw new Exception();
+              }
+
+              RentalItemStatus = RentalItemStatus.Returned;
+          }
+     }
 }
