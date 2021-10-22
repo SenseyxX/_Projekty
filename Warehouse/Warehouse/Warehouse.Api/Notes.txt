@@ -1,10 +1,10 @@
 ﻿ToDo:
-Stworzyć DB + migracja
-      Stworzyć mockapy (https://xd.adobe.com/view/ebd888d5-5c64-405c-98d6-53a883fe3ab8-be8b/ )
-      Pogrupowanie commnadów
+- Stworzyć DB + migracja
+- Lista itemów
+- Dodanie zdjęcia jako prop do encji itemu
+     
 
-Po dodaniu warstwy aplikacji dla rentala musisz dodać nowe tabele : rentals i rentalItems do kontekstu bazodanowego, i dodać ich konfiguracje (folder EntitiesConfiguration)
-Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy
+Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:
 dotnet ef migrations add NazwaMigracji -s ../Warehouse.Api -c WarehouseContext, po wcześniejszym wejściu do folderu Warehouse.Infrastructure (cd Warehouse.Infrastructure)
 
 

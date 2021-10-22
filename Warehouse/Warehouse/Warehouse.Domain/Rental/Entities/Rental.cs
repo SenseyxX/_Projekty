@@ -22,7 +22,7 @@ namespace Warehouse.Domain.Rental.Entities
 
 		  public Guid UserId { get; }
 		  public RentalStatus RentalStatus { get; private set; }
-		  ICollection<RentalItem> RentalItems { get; }
+		  public ICollection<RentalItem> RentalItems { get; }
 
           public void PickItem(string rentalItemCode)
           {
