@@ -1,31 +1,30 @@
 ﻿ToDo:
-- Stworzyć DB + migracja
-- Lista itemów
-- Dodanie zdjęcia jako prop do encji itemu
-     
+* Stworzyć DB + migracja
+* Lista itemów
+* Dodanie zdjęcia jako prop do encji itemu
+* Dodać "Name" do encji Rental
 
-Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:
-dotnet ef migrations add NazwaMigracji -s ../Warehouse.Api -c WarehouseContext, po wcześniejszym wejściu do folderu Warehouse.Infrastructure (cd Warehouse.Infrastructure)
+* Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:
+  dotnet ef migrations add NazwaMigracji -s ../Warehouse.Api -c WarehouseContext, po wcześniejszym wejściu do folderu Warehouse.Infrastructure (cd Warehouse.Infrastructure)
 
 
-Dodatkowo jeśli będziesz miał czas to możesz dodać sobie pobieranie rentali i wysyłanie info na front (dtosy itd.) analogicznie jak Item/FullItem Dto.
- 
- 
- 
- 
-Domain => 
-    *Entities
 
-Infrastructure =>
-    *Repositories
-    *Migrations
-    *Db Context
-    *Entities Configurations
-       
-Application =>
-    *Handlers
-    *Dtos 
-  
-API
-    *Controllers
- 
+
+
+ ------------------------------------|
+ |   Domain =>                       | 
+ |       *Entities                   |
+ |                                   |    
+ |   Infrastructure =>               |
+ |           *Repositories           |
+ |       *Migrations                 |
+ |       *Db Context                 |
+ |       *Entities Configurations    |
+ |                                   |
+ |   Application =>                  |
+ |       *Handlers                   |
+ |       *Dtos                       |
+ |                                   |
+ |  API                              |        
+ |       *Controllers                |
+ |------------------------------------

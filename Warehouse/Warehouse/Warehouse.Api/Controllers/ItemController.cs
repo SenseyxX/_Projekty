@@ -28,12 +28,12 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{itemId}")]
+        [HttpGet("{itemId:guid}")]
         public async Task<ActionResult<FullItemDto>> GetItemAsync(
-        [FromRoute] Guid id,
+        [FromRoute] Guid itemId,
         CancellationToken cancellationToken)
         {
-            var result = await _itemHandler.GetItemAsync(id,cancellationToken);
+            var result = await _itemHandler.GetItemAsync(itemId,cancellationToken);
             return Ok(result);
         }
 

@@ -9,7 +9,8 @@ namespace Warehouse.Application.Dtos.User
 {
     public sealed class FullUserDto : UserDto
     {
-        private FullUserDto(Guid id,
+        private FullUserDto(
+            Guid id,
             string name,
             string lastName,
             string email,

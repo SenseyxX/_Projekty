@@ -19,7 +19,7 @@ namespace Warehouse.Application.Dtos.Item
             CategoryState categoryState,
             Guid? ownerId,
             Guid actualOwnerId,
-            IEnumerable<LoanHistoryDto>loanHistoryDtos)
+            IEnumerable<LoanHistoryDto>loanHistoryDto)
                 : base (id,
                         name,
                         description,
@@ -30,21 +30,22 @@ namespace Warehouse.Application.Dtos.Item
                         ownerId,
                         actualOwnerId)
             {
-                  LoanHistoryDtos = loanHistoryDtos;
-             }
+                  LoanHistoryDto = loanHistoryDto;
+            }
 
-            public IEnumerable<LoanHistoryDto> LoanHistoryDtos { get; }
+            public IEnumerable<LoanHistoryDto> LoanHistoryDto { get; }
 
             public static explicit operator FullItemDto(Domain.Item.Entities.Item item)
-            => new(item.Id,
-                   item.Name,
-                   item.Description,
-                   item.CategoryId,
-                   item.QualityLevel,
-                   item.Quantity,
-                   item.CategoryState,
-                   item.OwnerId,
-                   item.ActualOwnerId,
-                   item.LoanHistories.Select(loanHistory => (LoanHistoryDto)loanHistory));
+                => new(
+                       item.Id,
+                       item.Name,
+                       item.Description,
+                       item.CategoryId,
+                       item.QualityLevel,
+                       item.Quantity,
+                       item.CategoryState,
+                       item.OwnerId,
+                       item.ActualOwnerId,
+                       item.LoanHistories.Select(loanHistory => (LoanHistoryDto)loanHistory));
     }
 }

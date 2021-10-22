@@ -6,7 +6,8 @@ namespace Warehouse.Application.Dtos.Item
 {
     public class ItemDto
     {
-        protected ItemDto(Guid id,
+        protected ItemDto(
+            Guid id,
             string name,
             string description,
             Guid categoryId,
@@ -30,8 +31,8 @@ namespace Warehouse.Application.Dtos.Item
         public Guid Id { get; }
         public string Name { get; }
         public string Description { get; }
-	   public Guid CategoryId { get;}
-	   public QualityLevel QualityLevel { get; }
+	    public Guid CategoryId { get;}
+	    public QualityLevel QualityLevel { get; }
         public int Quantity { get; }
         public CategoryState CategoryState { get; }
         public Guid? OwnerId { get; }

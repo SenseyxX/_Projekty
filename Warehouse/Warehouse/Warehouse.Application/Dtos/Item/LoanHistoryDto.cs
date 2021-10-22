@@ -5,7 +5,11 @@ namespace Warehouse.Application.Dtos.Item
 {
     public sealed class LoanHistoryDto
     {
-        private LoanHistoryDto(DateTime timestamp, Guid itemId, Guid borrowerId, Guid receiverId)
+        private LoanHistoryDto(
+            DateTime timestamp,
+            Guid itemId,
+            Guid borrowerId,
+            Guid receiverId)
         {
             Timestamp = timestamp;
             ItemId = itemId;

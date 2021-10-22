@@ -4,7 +4,10 @@ namespace Warehouse.Application.Dtos.Category
 {
     public class CategoryDto
     {
-        protected CategoryDto(Guid id, string name, string description)
+        protected CategoryDto(
+            Guid id,
+            string name,
+            string description)
         {
             Id = id;
             Name = name;
