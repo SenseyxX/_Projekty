@@ -1,4 +1,8 @@
-﻿using Warehouse.Domain.Rental;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Warehouse.Domain.Rental;
 using Warehouse.Domain.Rental.Entities;
 using Warehouse.Infrastructure.Persistence.Context;
 
@@ -11,6 +15,10 @@ namespace Warehouse.Infrastructure.Repositories
         {
         }
 
-        // ToDo: Override gets to include rental items (join), analogically to ItemRepository
+        public override async Task<Rental> GetAsync(Guid id, CancellationToken cancellationToken)
+            => await DbContext
+                .Set<Rental>()
+                .Include(rentalItem => rentalItem.RentalItems)
+                .FirstOrDefaultAsync(rentalItem => rentalItem.Id == id, cancellationToken);
     }
 }

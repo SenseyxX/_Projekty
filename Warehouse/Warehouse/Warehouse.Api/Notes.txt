@@ -9,3 +9,23 @@ dotnet ef migrations add NazwaMigracji -s ../Warehouse.Api -c WarehouseContext, 
 
 
 Dodatkowo jeśli będziesz miał czas to możesz dodać sobie pobieranie rentali i wysyłanie info na front (dtosy itd.) analogicznie jak Item/FullItem Dto.
+ 
+ 
+ 
+ 
+Domain => 
+    *Entities
+
+Infrastructure =>
+    *Repositories
+    *Migrations
+    *Db Context
+    *Entities Configurations
+       
+Application =>
+    *Handlers
+    *Dtos 
+  
+API
+    *Controllers
+ 
