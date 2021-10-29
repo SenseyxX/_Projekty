@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Warehouse.Model.Contracts.Commands;
-using Warehouse.Model.Dtos;
-using Warehouse.Model.Services;
+using Warehouse.Application.Contracts.Commands.Rental;
+using Warehouse.Application.Contracts.Commands.User;
+using Warehouse.Application.Dtos.User;
+using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers
 {
@@ -13,18 +14,20 @@ namespace Warehouse.Api.Controllers
     [Route(RoutePattern)]
     public sealed class UserController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly UserHandler _userHandler;
+        private readonly RentalHandler _rentalHandler;
 
-        public UserController(IUserService userService)
+        public UserController(UserHandler userHandler, RentalHandler rentalHandler)
         {
-            _userService = userService;
+            _userHandler = userHandler;
+            _rentalHandler = rentalHandler;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersAsync(
             CancellationToken cancellationToken)
         {
-            var result = await _userService.GetUsersAsync(cancellationToken);
+            var result = await _userHandler.GetUsersAsync(cancellationToken);
             return Ok(result);
         }
 
@@ -33,7 +36,7 @@ namespace Warehouse.Api.Controllers
             CreateUserCommand addUserCommand,
             CancellationToken cancellationToken)
         {
-            await _userService.CreateUserAsync(addUserCommand,cancellationToken);
+            await _userHandler.CreateUserAsync(addUserCommand,cancellationToken);
             return Ok();
         }
 
@@ -42,7 +45,7 @@ namespace Warehouse.Api.Controllers
             [FromRoute]Guid userId,
             CancellationToken cancellationToken)
         {
-            var result = await _userService.GetUserAsync(userId,cancellationToken);
+            var result = await _userHandler.GetUserAsync(userId,cancellationToken);
             return Ok(result);
         }
 
@@ -54,16 +57,64 @@ namespace Warehouse.Api.Controllers
         {
             updateUserCommand.UserId = userId;
 
-            await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
+            await _userHandler.UpdateUserAsync(updateUserCommand, cancellationToken);
             return Ok();
         }
-        
+
         [HttpDelete("{userId:guid}")]
         public async Task<IActionResult> DeleteUserAsync(
             [FromRoute] Guid userId,
             CancellationToken cancellationToken)
         {
-            await _userService.DeleteUserAsync(userId, cancellationToken);
+            await _userHandler.DeleteUserAsync(userId, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("{userId:guid}/rental")]
+        public async Task<IActionResult> CreateRentalAsync([FromRoute] Guid userId, CancellationToken cancellationToken)
+        {
+            var command = new CreateRentalCommand(userId);
+            await _rentalHandler.CreateRentalAsync(command, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("{userId:guid}/dues")]
+        public async Task<IActionResult> CreateUserDueAsync(
+            [FromRoute] Guid userId,
+            [FromBody] CreateDueCommand createDueCommand,
+            CancellationToken cancellationToken)
+        {
+            createDueCommand.UserId = userId;
+
+            await _userHandler.CreateUserDueAsync(createDueCommand, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{userId:guid}/{dueId:guid}")]
+        public async Task<IActionResult> UpdateUserDueAsync(
+            [FromRoute] Guid userId,
+            [FromRoute] Guid dueId,
+            [FromBody] UpdateDueAmountCommand updateDueAmountCommand,
+            CancellationToken cancellationToken)
+        {
+            updateDueAmountCommand.UserId = userId;
+            updateDueAmountCommand.DueId = dueId;
+
+            await _userHandler.UpdateUserDueAsync(updateDueAmountCommand, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{userId:guid}/{dueId:guid}/pay")]
+        public async Task<IActionResult> PayUserDueAsync(
+            [FromRoute] Guid userId,
+            [FromRoute] Guid dueId,
+            [FromBody] PayDueCommand payDueCommand,
+            CancellationToken cancellationToken)
+        {
+            payDueCommand.UserId = userId;
+            payDueCommand.DueId = dueId;
+
+            await _userHandler.PayUserDueAsync(payDueCommand, cancellationToken);
             return Ok();
         }
     }

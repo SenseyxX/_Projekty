@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Warehouse.Model.Contracts.Commands;
-using Warehouse.Model.Dtos;
-using Warehouse.Model.Services;
+using Warehouse.Application.Contracts.Commands.User;
+using Warehouse.Application.Dtos.User;
+using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers
 {
@@ -11,11 +11,11 @@ namespace Warehouse.Api.Controllers
     [Route(RoutePattern)]
     public sealed class AuthenticationController : Controller
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly AuthenticationHandler _authenticationHandler;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(AuthenticationHandler authenticationHandler)
         {
-            _authenticationService = authenticationService;
+            _authenticationHandler = authenticationHandler;
         }
 
         [HttpPost]
@@ -23,7 +23,7 @@ namespace Warehouse.Api.Controllers
             [FromBody] AuthenticateUserCommand command,
             CancellationToken cancellationToken)
         {
-            var result = await _authenticationService.AuthenticateAsync(
+            var result = await _authenticationHandler.AuthenticateAsync(
                 command.Email,
                 command.Password,
                 cancellationToken);

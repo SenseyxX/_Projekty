@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Warehouse.Api.Infrastructure;
-using Warehouse.Api.Infrastructure.Authorization;
-using Warehouse.Model;
-using Warehouse.Persistence;
+using Warehouse.Application;
+using Warehouse.Domain;
+using Warehouse.Infrastructure;
+using Warehouse.Infrastructure.Messaging;
+using Warehouse.Infrastructure.Persistence;
 
 namespace Warehouse.Api
 {
@@ -21,18 +21,9 @@ namespace Warehouse.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers(options => options
-                    .Filters
-                    .Add<ExceptionFilter>())
-                .AddNewtonsoftJson(options =>
-                    options
-                        .SerializerSettings
-                        .ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
-                .Services
-                .RegisterModelDependencies(_configuration)
-                .RegisterPersistenceDependencies(_configuration)
-                .ConfigureSwagger(_configuration)
-                .RegisterAuthorizationDependencies();
+                .RegisterDomainDependencies()
+                .RegisterApplicationDependencies(_configuration)
+                .RegisterInfrastructureDependencies(_configuration);
         }
 
         public void Configure(IApplicationBuilder app)

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Model.Contracts.Commands;
-using Warehouse.Model.Dtos;
-using Warehouse.Model.Services;
+using Warehouse.Application.Contracts.Commands.Category;
+using Warehouse.Application.Dtos.Category;
+using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers
 {
@@ -13,18 +13,18 @@ namespace Warehouse.Api.Controllers
     [Route(RoutePattern)]
     public class CategoryController : Controller
     {
-        private readonly ICategoryService _categoryService;
+        private readonly CategoryHandler _categoryHandler;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(CategoryHandler categoryHandler)
         {
-            _categoryService = categoryService;
+            _categoryHandler = categoryHandler;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
             CancellationToken cancellationToken)
         {
-            var result = await _categoryService.GetCategoriesAsync(cancellationToken);
+            var result = await _categoryHandler.GetCategoriesAsync(cancellationToken);
             return Ok(result);
         }
 
@@ -33,16 +33,16 @@ namespace Warehouse.Api.Controllers
             [FromRoute] Guid categoryId,
             CancellationToken cancellationToken)
         {
-            var result = await _categoryService.GetCategoryAsync(categoryId, cancellationToken);
+            var result = await _categoryHandler.GetCategoryAsync(categoryId, cancellationToken);
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddCategoryAsync(
-            [FromBody] AddCategoryCommand addCategoryCommand,
+            [FromBody] CreateCategoryCommand addCategoryCommand,
             CancellationToken cancellationToken)
         {
-            await _categoryService.AddCategoryAsync(addCategoryCommand, cancellationToken);
+            await _categoryHandler.AddCategoryAsync(addCategoryCommand, cancellationToken);
             return Ok();
         }
 
@@ -54,7 +54,7 @@ namespace Warehouse.Api.Controllers
         {
             updateCategoryCommand.CategoryId = categoryId;
 
-            await _categoryService.UpdateCategoryAsync(updateCategoryCommand, cancellationToken);
+            await _categoryHandler.UpdateCategoryAsync(updateCategoryCommand, cancellationToken);
             return Ok();
         }
 
@@ -64,7 +64,7 @@ namespace Warehouse.Api.Controllers
             CancellationToken cancellationToken)
 
         {
-            await _categoryService.DeleteCategoryAsync(categoryId, cancellationToken);
+            await _categoryHandler.DeleteCategoryAsync(categoryId, cancellationToken);
             return Ok();
         }
     }
