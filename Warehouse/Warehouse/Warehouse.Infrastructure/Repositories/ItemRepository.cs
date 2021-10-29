@@ -16,10 +16,18 @@ namespace Warehouse.Infrastructure.Repositories
         }
 
         // Dodanie nowej metody która nie jest dziedzioczona z clasy Repository
+
+        // Add to GetWithDependencies
         public override async Task<Item> GetAsync(Guid id, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Item>()
                 .Include(item => item.LoanHistories)
                 .FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
+
+        public async Task<Item> GetByCodeAsync(string itemCode, CancellationToken cancellationToken)
+            => await DbContext
+                .Set<Item>()
+                .Include(item => item.LoanHistories)
+                .FirstOrDefaultAsync(item => item.Name == itemCode, cancellationToken);
     }
 }
