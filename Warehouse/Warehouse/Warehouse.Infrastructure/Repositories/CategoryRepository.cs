@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Domain.Category;
 using Warehouse.Domain.Category.Entities;
+using Warehouse.Domain.Category.Enumeration;
 using Warehouse.Infrastructure.Persistence.Context;
 
 namespace Warehouse.Infrastructure.Repositories

@@ -20,6 +20,7 @@ namespace Warehouse.Api.Controllers
             _categoryHandler = categoryHandler;
         }
 
+        // ToDo: Po usunięciu nie powinniśmy wyświetlać nie aktywnych kategorii
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
             CancellationToken cancellationToken)
@@ -28,6 +29,7 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
+        // ToDo: Po usunięciu nie powinniśmy wyświetlać nie aktywnych kategorii
         [HttpGet("{categoryId:guid}")]
         public async Task<ActionResult<FullCategoryDto>> GetCategoryAsync(
             [FromRoute] Guid categoryId,
@@ -57,12 +59,11 @@ namespace Warehouse.Api.Controllers
             await _categoryHandler.UpdateCategoryAsync(updateCategoryCommand, cancellationToken);
             return Ok();
         }
-
+        
         [HttpDelete("{categoryId:guid}")]
         public async Task<IActionResult> DeleteCategoryAsync(
             [FromRoute] Guid categoryId,
             CancellationToken cancellationToken)
-
         {
             await _categoryHandler.DeleteCategoryAsync(categoryId, cancellationToken);
             return Ok();

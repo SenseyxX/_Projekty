@@ -10,6 +10,7 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
+    [Route(RoutePattern)]
     public class RentalController : Controller
     {
         private readonly RentalHandler _rentalHandler;
