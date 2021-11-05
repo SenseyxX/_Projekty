@@ -1,0 +1,28 @@
+$white: rgb(255, 255, 255);
+$darkBlue: rgb(13, 71, 161);
+$lightBlue: #1976D2;
+$lightGray: rgb(200, 200, 200);
+$blue: rgb(30, 98, 232);
+$darkMarineBlue: rgb(4, 30, 65);
+$oceanDepth: rgb(56, 77, 105);
+$dirtySea: rgb(29, 52, 83);
+$leafy: rgb(55, 179, 74);
+$crimson: rgb(222, 0, 0);
+$smurf: #11b8b8;
+$softRed: rgba(226, 79, 79, 0.73);
+
+
+:export {
+  white: $white;
+  darkBlue: $darkBlue;
+  lightGray: $lightGray;
+  blue: $blue;
+  darkMarineBlue: $darkMarineBlue;
+  dirtySea: $dirtySea;
+  oceanDepth: $oceanDepth;
+  leafy: $leafy;
+  crimson: $crimson;
+  smurf: $smurf;
+  lightBlue: $lightBlue;
+  softRed: $softRed;
+}
