@@ -10,16 +10,18 @@ namespace Warehouse.Domain.Squad.Entities
         public Squad(
             Guid id,
             string name,
-            CategoryState categoryState)
+            State state)
             : base(id)
         {
             Name = name;
-            CategoryState = categoryState;
+            State = state;
+            Teams = new List<Team>();
             Users = new List<User.Entities.User>();
         }
 
         public string Name { get; private set; }
-        public CategoryState CategoryState { get;private set; }
+        public State State { get;private set; }
+        public ICollection<Team> Teams { get; }
         public ICollection<User.Entities.User> Users { get; }
 
         public bool UpdateName(string name)
@@ -35,23 +37,23 @@ namespace Warehouse.Domain.Squad.Entities
 
         public bool Activate()
         {
-            if (CategoryState == CategoryState.Active)
+            if (State == State.Active)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Active;
+            State = State.Active;
             return true;
         }
 
         public bool Delete()
         {
-            if (CategoryState == CategoryState.Deleted)
+            if (State == State.Deleted)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Deleted;
+            State = State.Deleted;
             return true;
         }
     }

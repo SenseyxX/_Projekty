@@ -19,14 +19,29 @@ namespace Warehouse.Application.Handlers
             _squadRepository = squadRepository;
         }
 
-        public async Task AddSquadAsync(
-            CreateSquadCommand addSquadCommand,
+        public async Task CreateSquadAsync(
+            CreateSquadCommand createSquadCommand,
             CancellationToken cancellationToken)
         {
-            var squad = SquadFactory.Create(addSquadCommand.Name);
+            var squad = SquadFactory.Create(createSquadCommand.Name);
             await _squadRepository.CreateAsync(squad, cancellationToken);
             await _squadRepository.SaveAsync(cancellationToken);
         }
+
+        // public async Task CreateTeamAsync(
+        //     CreateTeamCommand createTeamCommand,
+        //     CancellationToken cancellationToken)
+        // {
+        //     var team =  TeamFactory.Create(
+        //         createTeamCommand.Name,
+        //         createTeamCommand.TeamOwnerId,
+        //         createTeamCommand.SquadId,
+        //         createTeamCommand.Description,
+        //         createTeamCommand.Points);
+        //     
+        //     await _squadRepository.CreateAsync(team, cancellationToken);
+        //     await _squadRepository.SaveAsync(cancellationToken);
+        // }
 
         public async Task DeleteSquadAsync(Guid id, CancellationToken cancellationToken)
         {
@@ -42,13 +57,13 @@ namespace Warehouse.Application.Handlers
 
         public async Task<FullSquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
             => (FullSquadDto) await _squadRepository.GetAsync(id, cancellationToken);
-
+        
         public async Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken)
         {
             var result = await _squadRepository.GetRangeAsync(cancellationToken);
             return result.Select(squad => (SquadDto)squad);
         }
-
+        
         public async Task UpdateSquadAsync(
             UpdateSquadCommand updateSquadCommand,
             CancellationToken cancellationToken)
@@ -62,5 +77,6 @@ namespace Warehouse.Application.Handlers
                 await _squadRepository.SaveAsync(cancellationToken);
             }
         }
+
     }
 }

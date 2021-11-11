@@ -16,7 +16,7 @@ namespace Warehouse.Application.Dtos.User
             string email,
             string phoneNumber,
             PermissionLevel permissionLevel,
-            CategoryState categoryState,
+            State state,
             Guid squadId,
             Guid teamId,
             IEnumerable<ItemDto> ownedItems,
@@ -30,13 +30,13 @@ namespace Warehouse.Application.Dtos.User
                    teamId)
             {
                 PermissionLevel = permissionLevel;
-                CategoryState = categoryState;
-                CategoryState = categoryState;
+                State = state;
+                State = state;
                 OwnedItems = ownedItems;
                 StoredItems = storedItems;
             }
 
-            public CategoryState CategoryState { get; private set; }
+            public State State { get; private set; }
             public PermissionLevel PermissionLevel { get; }
             public IEnumerable<ItemDto> OwnedItems { get; }
             public IEnumerable<ItemDto> StoredItems { get; }
@@ -48,7 +48,7 @@ namespace Warehouse.Application.Dtos.User
                          user.Email,
                          user.PhoneNumber,
                          user.PermissionLevel,
-                         user.CategoryState,
+                         user.State,
                          user.SquadId,
                          user.TeamId,
                          user.OwnedItems.Select(ownedItems => (ItemDto) ownedItems),

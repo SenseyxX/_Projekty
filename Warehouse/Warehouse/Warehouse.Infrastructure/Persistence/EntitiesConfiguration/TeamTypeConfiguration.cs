@@ -21,12 +21,16 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 				    .HasMaxLength(30)
 				    .HasColumnName(nameof(Team.Name))
 				    .IsRequired();
+			   
+			   entityTypeBuilder
+				   .Property(nameof(Team.SquadId))
+				   .HasColumnName(nameof(Team.SquadId))
+				   .IsRequired();
 
 			   entityTypeBuilder
-				    .Property(nameof(Team.TeamOwnerId))
-				    .HasColumnName(nameof(Team.TeamOwnerId))
-				    .IsRequired();
-
+				   .Property(nameof(Team.TeamOwnerId))
+				   .HasColumnName(nameof(Team.TeamOwnerId));
+				   
 			   entityTypeBuilder
 					.Property(nameof(Team.Description))
 					.HasMaxLength(1000)
@@ -42,7 +46,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 				    .WithOne()
 				    .HasForeignKey(user => user.TeamId);
 
-			   entityTypeBuilder.HasQueryFilter(team => team.CategoryState != CategoryState.Deleted);
+			   entityTypeBuilder.HasQueryFilter(team => team.State != State.Deleted);
 		  }
 	 }
 }

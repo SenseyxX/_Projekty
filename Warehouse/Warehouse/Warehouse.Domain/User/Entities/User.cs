@@ -18,7 +18,7 @@ namespace Warehouse.Domain.User.Entities
             string email,
             string phoneNumber,
             PermissionLevel permissionLevel,
-            CategoryState categoryState,
+            State state,
             Guid squadId,
             Guid teamId)
             : base(id)
@@ -29,7 +29,7 @@ namespace Warehouse.Domain.User.Entities
             Email = email;
             PhoneNumber = phoneNumber;
             PermissionLevel = permissionLevel;
-            CategoryState = categoryState;
+            State = state;
             SquadId = squadId;
             TeamId = teamId;
             OwnedItems = new List<Item.Entities.Item>();
@@ -44,7 +44,7 @@ namespace Warehouse.Domain.User.Entities
         public string PhoneNumber { get; private set; }
         public Guid SquadId { get; }
         public Guid TeamId { get; }
-        public CategoryState CategoryState { get; private set; }
+        public State State { get; private set; }
         public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }
         public ICollection<Item.Entities.Item> StoredItems { get; }
@@ -107,23 +107,23 @@ namespace Warehouse.Domain.User.Entities
 
         public bool Activate()
         {
-            if (CategoryState == CategoryState.Active)
+            if (State == State.Active)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Active;
+            State = State.Active;
             return true;
         }
 
         public bool Delete()
         {
-            if (CategoryState == CategoryState.Deleted)
+            if (State == State.Deleted)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Deleted;
+            State = State.Deleted;
             return true;
         }
 

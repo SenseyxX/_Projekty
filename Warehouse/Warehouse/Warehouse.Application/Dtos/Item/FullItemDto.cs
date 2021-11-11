@@ -16,7 +16,7 @@ namespace Warehouse.Application.Dtos.Item
             Guid categoryId,
             QualityLevel qualityLevel,
             int quantity,
-            CategoryState categoryState,
+            State state,
             Guid? ownerId,
             Guid actualOwnerId,
             IEnumerable<LoanHistoryDto>loanHistoryDto)
@@ -26,7 +26,7 @@ namespace Warehouse.Application.Dtos.Item
                         categoryId,
                         qualityLevel,
                         quantity,
-                        categoryState,
+                        state,
                         ownerId,
                         actualOwnerId)
             {
@@ -43,7 +43,7 @@ namespace Warehouse.Application.Dtos.Item
                        item.CategoryId,
                        item.QualityLevel,
                        item.Quantity,
-                       item.CategoryState,
+                       item.State,
                        item.OwnerId,
                        item.ActualOwnerId,
                        item.LoanHistories.Select(loanHistory => (LoanHistoryDto)loanHistory));

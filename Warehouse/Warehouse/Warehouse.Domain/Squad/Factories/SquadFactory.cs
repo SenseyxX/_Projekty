@@ -9,6 +9,6 @@ namespace Warehouse.Domain.Squad.Factories
             => new(
             Guid.NewGuid(),
             name,
-            CategoryState.Active);
+            State.Active);
     }
 }

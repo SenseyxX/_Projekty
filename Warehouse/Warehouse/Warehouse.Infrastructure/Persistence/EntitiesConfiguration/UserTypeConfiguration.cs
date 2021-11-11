@@ -46,9 +46,9 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .Property(nameof(User.CategoryState))
+                .Property(nameof(User.State))
                 .HasColumnType("tinyint")
-                .HasColumnName(nameof(User.CategoryState))
+                .HasColumnName(nameof(User.State))
                 .IsRequired();
 
             entityTypeBuilder

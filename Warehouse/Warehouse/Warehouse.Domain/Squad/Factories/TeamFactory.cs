@@ -9,14 +9,16 @@ namespace Warehouse.Domain.Squad.Factories
 		  public static Team Create(
 			   string name,
 			   Guid teamOwnerId,
+			   Guid squadId,
 			   string description,
 			   int points)
 			   => new(
 				    Guid.NewGuid(),
 				    name,
 				    teamOwnerId,
+				    squadId,
 				    description,
-				    points,
-				    CategoryState.Active);
+				    points = 0,
+				    State.Active);
 	 }
 }

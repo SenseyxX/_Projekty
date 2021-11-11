@@ -10,18 +10,18 @@ namespace Warehouse.Domain.Category.Entities
         public Category(Guid id,
             string name,
             string description,
-            CategoryState categoryState)
+            State state)
             : base(id)
         {
             Name = name;
             Description = description;
-            CategoryState = categoryState;
+            State = state;
             Items = new List<Item.Entities.Item>();
         }
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public CategoryState CategoryState { get;private set; }
+        public State State { get;private set; }
         public ICollection<Item.Entities.Item> Items { get; }
 
         public bool UpdateName(string name)
@@ -48,23 +48,23 @@ namespace Warehouse.Domain.Category.Entities
 
         public bool Activate()
         {
-            if (CategoryState == CategoryState.Active)
+            if (State == State.Active)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Active;
+            State = State.Active;
             return true;
         }
 
         public bool Delete()
         {
-            if (CategoryState == CategoryState.Deleted)
+            if (State == State.Deleted)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Deleted;
+            State = State.Deleted;
             return true;
         }
     }

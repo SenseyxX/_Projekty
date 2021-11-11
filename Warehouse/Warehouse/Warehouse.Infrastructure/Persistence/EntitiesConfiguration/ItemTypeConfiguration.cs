@@ -41,9 +41,9 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                .IsRequired();
 
             entityTypeBuilder
-                .Property(nameof(Item.CategoryState))
+                .Property(nameof(Item.State))
                 .HasColumnType("tinyint")
-                .HasColumnName(nameof(Item.CategoryState))
+                .HasColumnName(nameof(Item.State))
                 .IsRequired();
 
             entityTypeBuilder
@@ -61,7 +61,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .WithOne()    // Określenie że encja LoanHistory posiada tylko jeden item
                 .HasForeignKey(loadHistory => loadHistory.ItemId); // Ustawienie ForeignKey
 
-            entityTypeBuilder.HasQueryFilter(item => item.CategoryState != CategoryState.Deleted); // ToDo OPIS
+            entityTypeBuilder.HasQueryFilter(item => item.State != State.Deleted); // ToDo OPIS
         }
     }
 }

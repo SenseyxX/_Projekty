@@ -29,7 +29,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet("{squadId:guid}")]
-        public async Task<ActionResult<SquadDto>> GetSquadAsync(
+        public async Task<ActionResult<FullSquadDto>> GetSquadAsync(
             [FromRoute]Guid squadId,
             CancellationToken cancellationToken)
         {
@@ -42,7 +42,7 @@ namespace Warehouse.Api.Controllers
             CreateSquadCommand addSquadCommand,
             CancellationToken cancellationToken)
         {
-            await _squadHandler.AddSquadAsync(addSquadCommand,cancellationToken);
+            await _squadHandler.CreateSquadAsync(addSquadCommand,cancellationToken);
             return Ok();
         }
 
