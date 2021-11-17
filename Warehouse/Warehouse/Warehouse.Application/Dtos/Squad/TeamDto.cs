@@ -1,5 +1,4 @@
 ﻿using System;
-using Warehouse.Domain.Category.Enumeration;
 using Warehouse.Domain.Squad.Entities;
 
 namespace Warehouse.Application.Dtos.Squad

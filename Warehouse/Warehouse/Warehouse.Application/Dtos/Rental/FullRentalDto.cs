@@ -19,7 +19,7 @@ namespace Warehouse.Application.Dtos.Rental
             RentalItemDto = rentalItemDto;
         }
 
-        public IEnumerable<RentalItemDto> RentalItemDto { get; }
+        public IEnumerable<RentalItemDto> RentalItemDto { get;  }
 
         public static explicit operator FullRentalDto(Domain.Rental.Entities.Rental rental)
             => new(

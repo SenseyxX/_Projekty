@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Warehouse.Application.Contracts.Commands.Squad;
 using Warehouse.Application.Dtos.Squad;
 using Warehouse.Application.Handlers;

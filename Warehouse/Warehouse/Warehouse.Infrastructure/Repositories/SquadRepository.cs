@@ -15,12 +15,12 @@ namespace Warehouse.Infrastructure.Repositories
         {            
         }
 
-        public override async Task<Squad> GetAsync(Guid SquadId, CancellationToken cancellationToken)
+        public override async Task<Squad> GetAsync(Guid squadId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Squad>()
                 .Include(squad => squad.Teams)
-                .FirstOrDefaultAsync(squad => squad.Id == SquadId, cancellationToken);
-
+                .FirstOrDefaultAsync(squad => squad.Id == squadId, cancellationToken);
+      
         public async Task<Team> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Team>()

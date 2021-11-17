@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Warehouse.Domain.Abstractions;
 using Warehouse.Domain.Category.Enumeration;
+using Warehouse.Domain.Squad.Factories;
 
 namespace Warehouse.Domain.Squad.Entities
 {
@@ -54,6 +56,73 @@ namespace Warehouse.Domain.Squad.Entities
             }
 
             State = State.Deleted;
+            return true;
+        }
+
+        public void AddTeam(string teamName,
+                            Guid teamOwnerId,
+                            string description)
+        {
+            if (Teams.Any(team => team.Name == teamName))
+            {
+                throw new Exception();
+            }
+
+            var team = TeamFactory.Create(teamName, teamOwnerId,Id, description);
+            Teams.Add(team);
+        }
+
+        public void DeleteTeam(Guid teamId)
+        {
+            if (Teams.Any(team => team.Id != teamId && team.State != State.Active))
+            {
+                throw new Exception();
+            }
+
+            Teams
+                .First(team => team.Id == teamId)
+                .Delete();
+        }
+        
+        public bool UpdateTeamPoints(Guid teamId, int points)
+        {
+            if (Teams.Any(team => team.Id != teamId ))
+            {
+                throw new Exception();
+            }
+
+            Teams
+                .First(team => team.Id == teamId)
+                .UpdatePoints(points);
+
+            return true;
+        }
+        
+        public bool UpdateTeamDescription(Guid teamId, string description)
+        {
+            if (Teams.Any(team => team.Id != teamId))
+            {
+                throw new Exception();
+            }
+
+            Teams
+                .First(team => team.Id == teamId)
+                .UpdateDescription(description);
+
+            return true;
+        }
+        
+        public bool UpdateTeamName(Guid teamId, string name)
+        {
+            if (Teams.Any(team => team.Id != teamId))
+            {
+                throw new Exception();
+            }
+
+            Teams
+                .First(team => team.Id == teamId)
+                .UpdateName(name);
+            
             return true;
         }
     }

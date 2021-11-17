@@ -19,8 +19,7 @@ namespace Warehouse.Domain.User.Entities
             string phoneNumber,
             PermissionLevel permissionLevel,
             State state,
-            Guid squadId,
-            Guid teamId)
+            Guid squadId)
             : base(id)
         {
             Name = name;
@@ -31,7 +30,6 @@ namespace Warehouse.Domain.User.Entities
             PermissionLevel = permissionLevel;
             State = state;
             SquadId = squadId;
-            TeamId = teamId;
             OwnedItems = new List<Item.Entities.Item>();
             StoredItems = new List<Item.Entities.Item>();
             Dues = new List<Due>();
@@ -43,7 +41,6 @@ namespace Warehouse.Domain.User.Entities
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public Guid SquadId { get; }
-        public Guid TeamId { get; }
         public State State { get; private set; }
         public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }

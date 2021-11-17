@@ -40,12 +40,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 				    .Property(nameof(Team.Points))
 				    .HasColumnType("tinyint")
 				    .HasColumnName(nameof(Team.Points));
-
-			   entityTypeBuilder
-				    .HasMany(team => team.Users)
-				    .WithOne()
-				    .HasForeignKey(user => user.TeamId);
-
+			   
 			   entityTypeBuilder.HasQueryFilter(team => team.State != State.Deleted);
 		  }
 	 }

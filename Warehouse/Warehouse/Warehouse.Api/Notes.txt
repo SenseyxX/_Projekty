@@ -2,8 +2,7 @@
 * Dodanie zdjęcia jako prop do encji itemu
 * Dodać "Name" do encji Rental
 * Dodać endpointy dla "Teams"
-* Ujednolicenie nazw commandów
-* Powiązanie Squad <-> Teams
+* Dodać autoryzacje do kontrolerów
 
 
 * Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:

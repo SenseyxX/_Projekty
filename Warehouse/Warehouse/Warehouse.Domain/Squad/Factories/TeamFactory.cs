@@ -10,15 +10,14 @@ namespace Warehouse.Domain.Squad.Factories
 			   string name,
 			   Guid teamOwnerId,
 			   Guid squadId,
-			   string description,
-			   int points)
+			   string description)
 			   => new(
 				    Guid.NewGuid(),
 				    name,
 				    teamOwnerId,
 				    squadId,
 				    description,
-				    points = 0,
+				    0,
 				    State.Active);
 	 }
 }
