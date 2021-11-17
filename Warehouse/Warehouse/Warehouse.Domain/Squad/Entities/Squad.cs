@@ -125,5 +125,19 @@ namespace Warehouse.Domain.Squad.Entities
             
             return true;
         }
+        
+        public bool UpdateTeamOwner(Guid teamId, Guid teamOwnerId)
+        {
+            if (Teams.Any(team => team.Id != teamId))
+            {
+                throw new Exception();
+            }
+
+            Teams
+                .First(team => team.Id == teamId)
+                .UpdateTeamOwner(teamOwnerId);
+            
+            return true;
+        }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Warehouse.Domain.Squad.Entities;
-using Warehouse.Domain.Squad.Factories;
 
 namespace Warehouse.Domain.Squad
 {
@@ -15,11 +13,12 @@ namespace Warehouse.Domain.Squad
             _squadRepository = squadRepository;
         }
 
-        public async Task<Entities.Squad> CreateTeamAsync(string name,
-                                                Guid teamOwnerId,
-                                                Guid squadId,
-                                                string description,
-                                                CancellationToken cancellationToken)
+        public async Task<Entities.Squad> CreateTeamAsync(
+            string name,
+            Guid teamOwnerId,
+            Guid squadId,
+            string description,
+            CancellationToken cancellationToken)
         {
             var squad = await _squadRepository.GetAsync(squadId, cancellationToken)
                     ?? throw new Exception();

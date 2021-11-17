@@ -93,8 +93,9 @@ namespace Warehouse.Application.Handlers
             UpdateTeamCommand updateTeamCommand,
             CancellationToken cancellationToken)
         {
-            var team = await _squadRepository.GetAsync(updateTeamCommand.squadId, cancellationToken);
+            var team = await _squadRepository.GetAsync(updateTeamCommand.SquadId, cancellationToken);
             var isUpdated = team.UpdateTeamName(updateTeamCommand.TeamId, updateTeamCommand.Name);
+            isUpdated = team.UpdateTeamOwner(updateTeamCommand.TeamId, updateTeamCommand.TeamOwnerId);
             isUpdated = team.UpdateTeamPoints(updateTeamCommand.TeamId, updateTeamCommand.Points);
             isUpdated = team.UpdateTeamDescription(updateTeamCommand.TeamId, updateTeamCommand.Description);
             

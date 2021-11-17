@@ -27,10 +27,10 @@ namespace Warehouse.Domain.Squad.Entities
 		  }
 
 		  public string Name { get; private set; }
-		  public Guid SquadId { get; } // ToDo: Make this prop nullable
-		  public Guid TeamOwnerId { get; } // ToDo: Make this prop nullable
+		  public Guid SquadId { get; } 
+		  public Guid TeamOwnerId { get; private set; } 
 		  public string Description { get; private set; }
-		  public  int Points { get; private set; } // ToDo: Make this prop nullable
+		  public  int Points { get; private set; } 
 		  public State State { get; private set; }
 		public ICollection<User.Entities.User> Users { get; }
 
@@ -42,6 +42,17 @@ namespace Warehouse.Domain.Squad.Entities
 			  }
 
 			  Name = name;
+			  return true;
+		  }
+
+		  public bool UpdateTeamOwner(Guid teamOwnerId)
+		  {
+			  if (TeamOwnerId == teamOwnerId)
+			  {
+				  return false;
+			  }
+
+			  TeamOwnerId = teamOwnerId;
 			  return true;
 		  }
 
