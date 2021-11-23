@@ -31,6 +31,11 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .HasMany(squad => squad.Users)
                 .WithOne()
                 .HasForeignKey(user => user.SquadId);
+
+            entityTypeBuilder
+                .HasMany(squad => squad.Teams)
+                .WithOne()
+                .HasForeignKey(team => team.SquadId);
         }
     }
 }

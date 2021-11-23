@@ -56,18 +56,20 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
         
-        [HttpPost("{teamId:guid}/team")]
+        [HttpPost("{squadId}/team")]
         public async Task<ActionResult> AddTeamAsync(
-            [FromRoute] Guid teamId,
+            [FromRoute] Guid squadId, 
             [FromBody] CreateTeamCommand createTeamCommand,
             CancellationToken cancellationToken)
         {
+            createTeamCommand.SquadId = squadId;
+            
             await _squadHandler.CreateTeamAsync(createTeamCommand, cancellationToken);
             return Ok();
         }
 
         [HttpPut("{squadId:guid}")]
-        public async Task<IActionResult> UpdateTeamAsync(
+        public async Task<IActionResult> UpdateSquadAsync(
             [FromRoute] Guid squadId,
             [FromBody] UpdateSquadCommand updateSquadCommand,
             CancellationToken cancellationToken)

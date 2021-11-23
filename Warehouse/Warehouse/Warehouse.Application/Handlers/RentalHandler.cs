@@ -31,7 +31,7 @@ namespace Warehouse.Application.Handlers
             CreateRentalCommand createRentalCommand,
             CancellationToken cancellationToken)
         {
-            var rental = await _rentalDomainService.CreateRentalAsync(createRentalCommand.UserId, cancellationToken);
+            var rental = await _rentalDomainService.CreateRentalAsync(createRentalCommand.UserId,createRentalCommand.Name, cancellationToken);
 
             await _rentalRepository.CreateAsync(rental, cancellationToken);
             await _rentalRepository.SaveAsync(cancellationToken);

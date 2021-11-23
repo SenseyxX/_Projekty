@@ -34,12 +34,12 @@ namespace Warehouse.Application.Handlers
             CreateTeamCommand createTeamCommand,
             CancellationToken cancellationToken)
         {
-            var team = await _teamDomainService.CreateTeamAsync(createTeamCommand.Name,
+            var squad = await _teamDomainService.CreateTeamAsync(createTeamCommand.Name,
                                                                 createTeamCommand.TeamOwnerId,
                                                                 createTeamCommand.SquadId,
                                                                 createTeamCommand.Description,
                                                                 cancellationToken);
-            await _squadRepository.CreateAsync(team, cancellationToken);
+             _squadRepository.Update(squad);
             await _squadRepository.SaveAsync(cancellationToken);
         }
 
@@ -81,7 +81,7 @@ namespace Warehouse.Application.Handlers
         {
             var squad = await _squadRepository.GetAsync(updateSquadCommand.SquadId, cancellationToken);
             var isUpdated = squad.UpdateName(updateSquadCommand.Name);
-
+            
             if (isUpdated)
             {
                 _squadRepository.Update(squad);

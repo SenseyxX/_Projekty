@@ -11,17 +11,20 @@ namespace Warehouse.Domain.Rental.Entities
 	 {
          internal Rental(
               Guid id,
+              string name,
               Guid userId,
               RentalStatus rentalStatus)
               : base(id)
 		  {
 			   UserId = userId;
+               Name = name;
 			   RentalStatus = rentalStatus;
 			   RentalItems = new List<RentalItem>();
 		  }
 
 		  public Guid UserId { get; }
-		  public RentalStatus RentalStatus { get; private set; }
+          public string Name { get; }
+          public RentalStatus RentalStatus { get; private set; }
 		  public ICollection<RentalItem> RentalItems { get; }
 
           public void PickItem(string rentalItemCode)

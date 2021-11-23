@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Domain.Item;
 using Warehouse.Domain.Rental;
+using Warehouse.Domain.Squad;
 
 namespace Warehouse.Domain
 {
@@ -9,6 +10,7 @@ namespace Warehouse.Domain
         public static IServiceCollection RegisterDomainDependencies(this IServiceCollection serviceCollection)
             => serviceCollection
                 .AddTransient<ItemDomainService>()
-                .AddTransient<RentalDomainService>();
+                .AddTransient<RentalDomainService>()
+                .AddTransient<TeamDomainService>();
     }
 }

@@ -23,11 +23,6 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 				    .IsRequired();
 			   
 			   entityTypeBuilder
-				   .Property(nameof(Team.SquadId))
-				   .HasColumnName(nameof(Team.SquadId))
-				   .IsRequired();
-
-			   entityTypeBuilder
 				   .Property(nameof(Team.TeamOwnerId))
 				   .HasColumnName(nameof(Team.TeamOwnerId));
 				   

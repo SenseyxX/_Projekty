@@ -38,8 +38,8 @@ namespace Warehouse.Domain.Item.Entities
         public QualityLevel QualityLevel { get; private set; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel".
         public int Quantity { get; private set; }
         public State State { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
-        public Guid? OwnerId { get; private set; }
-        public Guid ActualOwnerId { get; }
+        public Guid? OwnerId { get;  }
+        public Guid ActualOwnerId { get; private set; }
         public ICollection<LoanHistory> LoanHistories { get; } // Stworzenie relacji jeden do wielu (jeden Item może mieć wiele LoanHistory)
 
         // ToDo Dodanie Zdjęcia
@@ -78,20 +78,20 @@ namespace Warehouse.Domain.Item.Entities
             return true;
         }
 
-        public bool UpdateOwner(Guid ownerId)
+        public bool UpdateOwner(Guid actualOwnerId)
         {
-            if (OwnerId == ownerId)
+            if (ActualOwnerId == actualOwnerId)
             {
                 return false;
             }
 
-            OwnerId = ownerId;
+            ActualOwnerId = actualOwnerId;
 
             var loanHistory = LoanHistoryFactory.Create(
                 DateTime.Now,
                 Id,
-                ActualOwnerId,
-                OwnerId.Value);
+                OwnerId.Value,
+                ActualOwnerId);
 
             LoanHistories.Add(loanHistory);
 

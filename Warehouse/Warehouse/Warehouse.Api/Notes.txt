@@ -1,7 +1,5 @@
 ﻿ToDo:
 * Dodanie zdjęcia jako prop do encji itemu
-* Dodać "Name" do encji Rental
-* Dodać endpointy dla "Teams"
 * Dodać autoryzacje do kontrolerów
 
 

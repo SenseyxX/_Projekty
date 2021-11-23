@@ -15,12 +15,12 @@ namespace Warehouse.Domain.Rental
             _userRepository = userRepository;
         }
 
-        public async Task<Entities.Rental> CreateRentalAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<Entities.Rental> CreateRentalAsync(Guid userId, string name, CancellationToken cancellationToken)
         {
             var _ = await _userRepository.GetAsync(userId, cancellationToken)
                 ?? throw new NullReferenceException();
 
-            var rental = RentalFactory.Create(userId);
+            var rental = RentalFactory.Create(userId, name);
             return rental;
         }
     }
