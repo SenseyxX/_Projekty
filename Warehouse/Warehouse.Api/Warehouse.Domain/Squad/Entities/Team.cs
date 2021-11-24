@@ -11,25 +11,50 @@ namespace Warehouse.Domain.Squad.Entities
 			   Guid id,
 			   string name,
 			   Guid teamOwnerId,
+			   Guid squadId,
 			   string description,
 			   int points,
-			   CategoryState categoryState
+			   State state
 			   ):base (id)
 		  {
 			   Name = name;
 			   TeamOwnerId = teamOwnerId;
+			   SquadId = squadId;
 			   Description = description;
 			   Points = points;
-			   CategoryState = categoryState;
+			   State = state;
 			   Users = new List<User.Entities.User>();
 		  }
 
-		  public string Name { get; }
-		  public Guid TeamOwnerId { get; }
+		  public string Name { get; private set; }
+		  public Guid SquadId { get; } 
+		  public Guid TeamOwnerId { get; private set; } 
 		  public string Description { get; private set; }
-		  public int Points { get; private set; }
-		  public CategoryState CategoryState { get; private set; }
-		  public ICollection<User.Entities.User> Users { get; }
+		  public  int Points { get; private set; } 
+		  public State State { get; private set; }
+		public ICollection<User.Entities.User> Users { get; }
+
+		  public bool UpdateName(string name)
+		  {
+			  if (Name == name)
+			  {
+				  return false;
+			  }
+
+			  Name = name;
+			  return true;
+		  }
+
+		  public bool UpdateTeamOwner(Guid teamOwnerId)
+		  {
+			  if (TeamOwnerId == teamOwnerId)
+			  {
+				  return false;
+			  }
+
+			  TeamOwnerId = teamOwnerId;
+			  return true;
+		  }
 
 		  public bool UpdateDescription(string description)
 		  {
@@ -42,7 +67,7 @@ namespace Warehouse.Domain.Squad.Entities
 			   return true;
 		  }
 
-		  public bool UpdatePoints(int points)
+		  public bool UpdatePoints( int points)
 		  {
 			   if (Points == points)
 			   {
@@ -55,23 +80,23 @@ namespace Warehouse.Domain.Squad.Entities
 
 		  public bool Activate()
 		  {
-			   if (CategoryState == CategoryState.Active)
+			   if (State == State.Active)
 			   {
 				    return false;
 			   }
 
-			   CategoryState = CategoryState.Active;
+			   State = State.Active;
 			   return true;
 		  }
 
 		  public bool Delete()
 		  {
-			   if (CategoryState == CategoryState.Deleted)
+			   if (State == State.Deleted)
 			   {
 				    return false;
 			   }
 
-			   CategoryState = CategoryState.Deleted;
+			   State = State.Deleted;
 			   return true;
 		  }
 	 }

@@ -17,10 +17,10 @@ namespace Warehouse.Infrastructure.Repositories
             DbContext = dbContext;
         }
 
-        public virtual async Task<TAggregate> GetAsync(Guid id, CancellationToken cancellationToken)
+        public virtual async Task<TAggregate> GetAsync(Guid squadId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<TAggregate>()
-                .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
+                .FirstOrDefaultAsync(entity => entity.Id == squadId, cancellationToken);
 
         public virtual async Task<ICollection<TAggregate>> GetRangeAsync(CancellationToken cancellationToken)
             => await DbContext

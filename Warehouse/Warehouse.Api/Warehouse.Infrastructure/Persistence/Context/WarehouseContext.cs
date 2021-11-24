@@ -39,7 +39,7 @@ namespace Warehouse.Infrastructure.Persistence.Context
                 .ApplyConfiguration(new RentalTypeConfiguration())
                 .ApplyConfiguration(new RentalItemTypeConfiguration())
                 .ApplyConfiguration(new SquadTypeConfiguration())
-                .ApplyConfiguration(new UserTypeConfiguration())
-                .ApplyConfiguration(new TeamTypeConfiguration());
+                .ApplyConfiguration(new TeamTypeConfiguration())
+                .ApplyConfiguration(new UserTypeConfiguration());
     }
 }

@@ -13,7 +13,7 @@ namespace Warehouse.Application.Dtos.Item
             Guid categoryId,
             QualityLevel qualityLevel,
             int quantity,
-            CategoryState categoryState,
+            State state,
             Guid? ownerId,
             Guid actualOwnerId)
         {
@@ -23,7 +23,7 @@ namespace Warehouse.Application.Dtos.Item
             CategoryId = categoryId;
             QualityLevel = qualityLevel;
             Quantity = quantity;
-            CategoryState = categoryState;
+            State = state;
             OwnerId = ownerId;
             ActualOwnerId = actualOwnerId;
         }
@@ -34,7 +34,7 @@ namespace Warehouse.Application.Dtos.Item
 	    public Guid CategoryId { get;}
 	    public QualityLevel QualityLevel { get; }
         public int Quantity { get; }
-        public CategoryState CategoryState { get; }
+        public State State { get; }
         public Guid? OwnerId { get; }
         public Guid ActualOwnerId { get;}
 
@@ -46,7 +46,7 @@ namespace Warehouse.Application.Dtos.Item
                     item.CategoryId,
                     item.QualityLevel,
                     item.Quantity,
-                    item.CategoryState,
+                    item.State,
                     item.OwnerId,
                     item.ActualOwnerId);
     }

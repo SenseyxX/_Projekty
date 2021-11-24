@@ -1,13 +1,10 @@
 ﻿ToDo:
-* Stworzyć DB + migracja
-* Lista itemów
 * Dodanie zdjęcia jako prop do encji itemu
-* Dodać "Name" do encji Rental
+* Dodać autoryzacje do kontrolerów
+
 
 * Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:
   dotnet ef migrations add NazwaMigracji -s ../Warehouse.Api -c WarehouseContext, po wcześniejszym wejściu do folderu Warehouse.Infrastructure (cd Warehouse.Infrastructure)
-
-
 
 
 

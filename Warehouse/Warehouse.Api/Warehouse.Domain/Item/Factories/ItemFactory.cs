@@ -21,7 +21,7 @@ namespace Warehouse.Domain.Item.Factories
                 categoryId,
                 qualityLevel,
                 quantity,
-                CategoryState.Active,
+                State.Active,
                 ownerId,
                 actualOwnerId);
     }

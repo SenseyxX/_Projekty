@@ -16,6 +16,11 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .HasKey(rental => rental.Id);
 
             entityTypeBuilder
+                .Property(nameof(Rental.Name))
+                .HasColumnName(nameof(Rental.Name))
+                .IsRequired();
+                
+            entityTypeBuilder
                 .Property(nameof(Rental.UserId))
                 .HasColumnName(nameof(Rental.UserId))
                 .IsRequired();

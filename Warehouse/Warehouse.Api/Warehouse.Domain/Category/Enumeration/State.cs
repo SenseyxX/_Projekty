@@ -1,6 +1,6 @@
 ﻿namespace Warehouse.Domain.Category.Enumeration
 {
-    public enum CategoryState
+    public enum State
     {
         Active,
         Deleted,

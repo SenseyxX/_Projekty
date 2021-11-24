@@ -16,7 +16,7 @@ namespace Warehouse.Domain.Item.Entities
             Guid categoryId,
             QualityLevel qualityLevel,
             int quantity,
-            CategoryState categoryState,
+            State state,
             Guid? ownerId,
             Guid actualOwnerId)
             : base(id)  // Zdefiniowany constructor z klasy Agregatu
@@ -26,7 +26,7 @@ namespace Warehouse.Domain.Item.Entities
             CategoryId = categoryId;
             QualityLevel = qualityLevel;
             Quantity = quantity;
-            CategoryState = categoryState;
+            State = state;
             OwnerId = ownerId;
             ActualOwnerId = actualOwnerId;
             LoanHistories = new List<LoanHistory>(); // Stworzenie listy i przypisanie do propa
@@ -37,9 +37,9 @@ namespace Warehouse.Domain.Item.Entities
         public Guid CategoryId { get; } // Zdefiniowanie wartości która występuje w encji "Category"
         public QualityLevel QualityLevel { get; private set; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel".
         public int Quantity { get; private set; }
-        public CategoryState CategoryState { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
-        public Guid? OwnerId { get; private set; }
-        public Guid ActualOwnerId { get; }
+        public State State { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
+        public Guid? OwnerId { get;  }
+        public Guid ActualOwnerId { get; private set; }
         public ICollection<LoanHistory> LoanHistories { get; } // Stworzenie relacji jeden do wielu (jeden Item może mieć wiele LoanHistory)
 
         // ToDo Dodanie Zdjęcia
@@ -78,20 +78,20 @@ namespace Warehouse.Domain.Item.Entities
             return true;
         }
 
-        public bool UpdateOwner(Guid ownerId)
+        public bool UpdateOwner(Guid actualOwnerId)
         {
-            if (OwnerId == ownerId)
+            if (ActualOwnerId == actualOwnerId)
             {
                 return false;
             }
 
-            OwnerId = ownerId;
+            ActualOwnerId = actualOwnerId;
 
             var loanHistory = LoanHistoryFactory.Create(
                 DateTime.Now,
                 Id,
-                ActualOwnerId,
-                OwnerId.Value);
+                OwnerId.Value,
+                ActualOwnerId);
 
             LoanHistories.Add(loanHistory);
 
@@ -112,23 +112,23 @@ namespace Warehouse.Domain.Item.Entities
         // Metody zmieniające stan Itemu funkcja która zastępuje usuwanie wartości przez zmiane statusu.
         public bool Activate()
         {
-            if (CategoryState == CategoryState.Active)
+            if (State == State.Active)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Active;
+            State = State.Active;
             return true;
         }
 
         public bool Delete()
         {
-            if (CategoryState == CategoryState.Deleted)
+            if (State == State.Deleted)
             {
                 return false;
             }
 
-            CategoryState = CategoryState.Deleted;
+            State = State.Deleted;
             return true;
         }
     }

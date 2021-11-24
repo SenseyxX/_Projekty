@@ -8,21 +8,21 @@ namespace Warehouse.Application.Dtos.Squad
         protected SquadDto(
             Guid id,
             string name,
-            CategoryState categoryState)
+            State state)
         {
             Id = id;
             Name = name;
-            CategoryState = categoryState;
+            State = state;
         }
 
         public Guid Id { get; }
         public string Name { get;  }
-        public CategoryState CategoryState { get;  }
+        public State State { get;  }
 
         public static explicit operator SquadDto(Domain.Squad.Entities.Squad squad)
             => new (
                 squad.Id,
                 squad.Name,
-                squad.CategoryState);
+                squad.State);
     }
 }

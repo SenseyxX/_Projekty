@@ -17,13 +17,13 @@ namespace Warehouse.Infrastructure.Repositories
         {
         }
 
-        public override async Task<User> GetAsync(Guid id, CancellationToken cancellationToken)
+        public override async Task<User> GetAsync(Guid squadId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<User>()
                 .Include(user => user.Dues)
                 .Include(user => user.OwnedItems)
                 .Include(user => user.StoredItems)
-                .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+                .FirstOrDefaultAsync(user => user.Id == squadId, cancellationToken);
 
         public override async Task<ICollection<User>> GetRangeAsync(CancellationToken cancellationToken)
             => await GetWithDependencies()

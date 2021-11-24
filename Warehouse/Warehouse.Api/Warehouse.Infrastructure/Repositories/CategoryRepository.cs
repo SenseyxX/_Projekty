@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Domain.Category;
 using Warehouse.Domain.Category.Entities;
-using Warehouse.Domain.Category.Enumeration;
 using Warehouse.Infrastructure.Persistence.Context;
 
 namespace Warehouse.Infrastructure.Repositories
@@ -17,10 +16,10 @@ namespace Warehouse.Infrastructure.Repositories
         }
 
         // Jeśli była by potrzeba zmienić coś w zględem base repo
-        public override async Task<Category> GetAsync(Guid id, CancellationToken cancellationToken)
+        public override async Task<Category> GetAsync(Guid squadId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Category>()
                 .Include(category => category.Items)
-                .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
+                .FirstOrDefaultAsync(entity => entity.Id == squadId, cancellationToken);
     }
 }

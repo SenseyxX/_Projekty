@@ -12,6 +12,6 @@ namespace Warehouse.Domain.Category.Factories
                 Guid.NewGuid(),
                 name,
                 description,
-                CategoryState.Active);
+                State.Active);
     }
 }

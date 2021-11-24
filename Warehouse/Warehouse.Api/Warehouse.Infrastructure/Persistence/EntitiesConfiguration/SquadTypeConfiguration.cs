@@ -22,15 +22,20 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
-                .Property(nameof(Squad.CategoryState))
+                .Property(nameof(Squad.State))
                 .HasColumnType("tinyint")
-                .HasColumnName(nameof(Squad.CategoryState))
+                .HasColumnName(nameof(Squad.State))
                 .IsRequired();
 
             entityTypeBuilder
                 .HasMany(squad => squad.Users)
                 .WithOne()
                 .HasForeignKey(user => user.SquadId);
+
+            entityTypeBuilder
+                .HasMany(squad => squad.Teams)
+                .WithOne()
+                .HasForeignKey(team => team.SquadId);
         }
     }
 }

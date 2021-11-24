@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Warehouse.Application.Contracts.Commands.Rental;
 using Warehouse.Application.Contracts.Commands.User;
 using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Handlers;
@@ -67,14 +67,6 @@ namespace Warehouse.Api.Controllers
             CancellationToken cancellationToken)
         {
             await _userHandler.DeleteUserAsync(userId, cancellationToken);
-            return Ok();
-        }
-
-        [HttpPost("{userId:guid}/rental")]
-        public async Task<IActionResult> CreateRentalAsync([FromRoute] Guid userId, CancellationToken cancellationToken)
-        {
-            var command = new CreateRentalCommand(userId);
-            await _rentalHandler.CreateRentalAsync(command, cancellationToken);
             return Ok();
         }
 
