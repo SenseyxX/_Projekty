@@ -1,3 +1,0 @@
-﻿Czy robić folder na np: Seedera,Context,Profil Mappera ?
-Podzielić Dto na Query/Command/Dto
-Dodać servisy do obsługi controllerów
