@@ -1,0 +1,49 @@
+:export {
+  white: white;
+  darkBlue: #0d47a1;
+  lightGray: #c8c8c8;
+  blue: #1e62e8;
+}
+
+.logo {
+  font-family: "Titillium Web";
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #0d47a1;
+}
+
+.page-header {
+  font-family: "Titillium Web";
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.detail-label {
+  color: #c8c8c8;
+}
+
+.header-label {
+  font-family: "Titillium Web";
+  font-size: 1.4rem;
+  font-weight: bold;
+  float: left;
+}
+
+.stick-to-left {
+  float: left;
+}
+
+.button-label {
+  color: white;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.v-data-table
+  > .v-data-table__wrapper
+  tbody
+  tr.v-data-table__expanded__content {
+  box-shadow: none;
+}
