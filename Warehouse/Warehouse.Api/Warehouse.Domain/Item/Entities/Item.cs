@@ -17,7 +17,7 @@ namespace Warehouse.Domain.Item.Entities
             QualityLevel qualityLevel,
             int quantity,
             State state,
-            Guid? ownerId,
+            Guid ownerId,
             Guid actualOwnerId)
             : base(id)  // Zdefiniowany constructor z klasy Agregatu
         {
@@ -38,7 +38,7 @@ namespace Warehouse.Domain.Item.Entities
         public QualityLevel QualityLevel { get; private set; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel".
         public int Quantity { get; private set; }
         public State State { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
-        public Guid? OwnerId { get;  }
+        public Guid OwnerId { get;  }
         public Guid ActualOwnerId { get; private set; }
         public ICollection<LoanHistory> LoanHistories { get; } // Stworzenie relacji jeden do wielu (jeden Item może mieć wiele LoanHistory)
 
@@ -90,7 +90,7 @@ namespace Warehouse.Domain.Item.Entities
             var loanHistory = LoanHistoryFactory.Create(
                 DateTime.Now,
                 Id,
-                OwnerId.Value,
+                OwnerId,
                 ActualOwnerId);
 
             LoanHistories.Add(loanHistory);

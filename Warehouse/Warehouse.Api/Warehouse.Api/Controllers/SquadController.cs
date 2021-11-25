@@ -38,7 +38,7 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
         
-        [HttpGet("{teamId:guid}/team")]
+        [HttpGet("team/{teamId:guid}")]
         public async Task<ActionResult<IEnumerable<FullTeamDto>>> GetTeamsAsync(
             [FromRoute]Guid teamId,
             CancellationToken cancellationToken)
@@ -80,7 +80,7 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("{teamId}/team")]
+        [HttpPut("team/{teamId}")]
         public async Task<IActionResult> UpdateTeamAsync(
             [FromRoute] Guid teamId,
             [FromBody] UpdateTeamCommand updateTeamCommand,
@@ -101,7 +101,7 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("{squadId:guid}/{teamId}/team")] // ToDo: Make it better
+        [HttpDelete("{squadId:guid}/team/{teamId}")]
         public async Task<ActionResult> DeleteTeamAsync(
             [FromRoute] Guid teamId,
             [FromRoute] Guid squadId,

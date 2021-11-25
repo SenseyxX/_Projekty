@@ -41,8 +41,7 @@ namespace Warehouse.Application.Handlers
                 createItemCommand.CategoryId,
                 createItemCommand.QualityLevel,
                 createItemCommand.Quantity,
-                createItemCommand.OwnerId,
-                createItemCommand.ActualOwnerId);
+                createItemCommand.OwnerId);
 
             await _itemRepository.CreateAsync(item, cancellationToken);
             await _itemRepository.SaveAsync(cancellationToken);

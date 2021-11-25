@@ -48,8 +48,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property(nameof(Item.OwnerId))
-                .HasColumnName(nameof(Item.OwnerId))
-                .IsRequired(false);
+                .HasColumnName(nameof(Item.OwnerId));
 
             entityTypeBuilder
                 .Property(nameof(Item.ActualOwnerId))

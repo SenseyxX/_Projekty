@@ -12,8 +12,7 @@ namespace Warehouse.Domain.Item.Factories
             Guid categoryId,
             QualityLevel qualityLevel,
             int quantity,
-            Guid? ownerId,
-            Guid actualOwnerId)
+            Guid ownerId)
             => new (
                 Guid.NewGuid(),
                 name,
@@ -23,6 +22,6 @@ namespace Warehouse.Domain.Item.Factories
                 quantity,
                 State.Active,
                 ownerId,
-                actualOwnerId);
+                ownerId);
     }
 }

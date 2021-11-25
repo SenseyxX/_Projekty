@@ -10,7 +10,6 @@ namespace Warehouse.Application.Contracts.Commands.Item
         public Guid CategoryId { get; init; }
         public QualityLevel QualityLevel { get; init; }
         public int Quantity { get; init; }
-        public Guid? OwnerId { get; init; }
-        public Guid ActualOwnerId { get; init; }
+        public Guid OwnerId { get; init; }
     }
 }
