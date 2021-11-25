@@ -19,7 +19,7 @@ namespace Warehouse.Domain.User.Entities
             string phoneNumber,
             PermissionLevel permissionLevel,
             State state,
-            Guid squadId)
+            Guid? squadId)
             : base(id)
         {
             Name = name;
@@ -40,7 +40,7 @@ namespace Warehouse.Domain.User.Entities
         public byte[] PasswordHash { get; private set; }
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
-        public Guid SquadId { get; }
+        public Guid? SquadId { get; }
         public State State { get; private set; }
         public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }
@@ -144,6 +144,6 @@ namespace Warehouse.Domain.User.Entities
                 ?? throw new NullReferenceException();
 
             due.UpdateAmount(amount);
-        }
+        } 
     }
 }

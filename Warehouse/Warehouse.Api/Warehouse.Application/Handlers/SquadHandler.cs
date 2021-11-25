@@ -25,7 +25,7 @@ namespace Warehouse.Application.Handlers
             CreateSquadCommand createSquadCommand,
             CancellationToken cancellationToken)
         {
-            var squad = SquadFactory.Create(createSquadCommand.Name);
+            var squad = SquadFactory.Create(createSquadCommand.SquadOwnerId, createSquadCommand.Name);
             await _squadRepository.CreateAsync(squad, cancellationToken);
             await _squadRepository.SaveAsync(cancellationToken);
         }
@@ -81,6 +81,7 @@ namespace Warehouse.Application.Handlers
         {
             var squad = await _squadRepository.GetAsync(updateSquadCommand.SquadId, cancellationToken);
             var isUpdated = squad.UpdateName(updateSquadCommand.Name);
+            isUpdated = squad.UpdateSquadOwnerId(updateSquadCommand.SquadOwnerId);
             
             if (isUpdated)
             {

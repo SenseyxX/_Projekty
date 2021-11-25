@@ -28,6 +28,11 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
+                .Property(nameof(Squad.SquadOwnerId))
+                .HasColumnName(nameof(Squad.SquadOwnerId))
+                .IsRequired(false);
+
+            entityTypeBuilder
                 .HasMany(squad => squad.Users)
                 .WithOne()
                 .HasForeignKey(user => user.SquadId);

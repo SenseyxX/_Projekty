@@ -13,7 +13,7 @@ namespace Warehouse.Domain.User.Factories
             string email,
             string phoneNumber,
             PermissionLevel permissionLevel,
-            Guid squadId)
+            Guid? squadId)
             => new (
                 Guid.NewGuid(),
                 name,

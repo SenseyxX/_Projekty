@@ -12,19 +12,33 @@ namespace Warehouse.Domain.Squad.Entities
         public Squad(
             Guid id,
             string name,
+            Guid? squadOwnerId,
             State state)
             : base(id)
         {
+            SquadOwnerId = squadOwnerId;
             Name = name;
-            State = state;
+            State = state; 
             Teams = new List<Team>();
             Users = new List<User.Entities.User>();
         }
 
+        public Guid? SquadOwnerId { get; private set; }          
         public string Name { get; private set; }
         public State State { get;private set; }
         public ICollection<Team> Teams { get; }
         public ICollection<User.Entities.User> Users { get; }
+
+        public bool UpdateSquadOwnerId(Guid squadOwnerId)
+        {
+            if (SquadOwnerId == squadOwnerId)
+            {
+                return false;
+            }
+
+            SquadOwnerId = squadOwnerId;
+            return true;
+        }
 
         public bool UpdateName(string name)
         {

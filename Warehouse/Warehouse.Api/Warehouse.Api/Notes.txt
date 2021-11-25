@@ -1,6 +1,7 @@
 ﻿ToDo:
 * Dodanie zdjęcia jako prop do encji itemu
 * Dodać autoryzacje do kontrolerów
+* Dodać Update password
 
 
 * Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:

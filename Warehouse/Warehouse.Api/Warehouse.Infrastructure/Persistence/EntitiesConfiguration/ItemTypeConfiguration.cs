@@ -48,12 +48,12 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property(nameof(Item.OwnerId))
-                .HasColumnName(nameof(Item.OwnerId));
+                .HasColumnName(nameof(Item.OwnerId))
+                .IsRequired();
 
             entityTypeBuilder
                 .Property(nameof(Item.ActualOwnerId))
-                .HasColumnName(nameof(Item.ActualOwnerId))
-                .IsRequired();
+                .HasColumnName(nameof(Item.ActualOwnerId));
 
             entityTypeBuilder
                 .HasMany(item => item.LoanHistories) // Zdefiniowanie  zalezności pomiędzy encją Item a Loan history , Item posiada wiele LoanHistory

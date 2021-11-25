@@ -10,7 +10,7 @@ namespace Warehouse.Application.Dtos.User
             string lastName,
             string email,
             string phoneNumber,
-            Guid squadId)
+            Guid? squadId)
         {
             Id = id;
             Name = name;
@@ -25,7 +25,7 @@ namespace Warehouse.Application.Dtos.User
         public string LastName { get; }
         public string Email { get; }
         public string PhoneNumber { get;}
-        public Guid SquadId { get; }
+        public Guid? SquadId { get; }
 
         public static explicit operator UserDto(Domain.User.Entities.User user)
             => new (

@@ -17,7 +17,7 @@ namespace Warehouse.Application.Dtos.User
             string phoneNumber,
             PermissionLevel permissionLevel,
             State state,
-            Guid squadId,
+            Guid? squadId,
             IEnumerable<ItemDto> ownedItems,
             IEnumerable<ItemDto> storedItems)
             :base (id,

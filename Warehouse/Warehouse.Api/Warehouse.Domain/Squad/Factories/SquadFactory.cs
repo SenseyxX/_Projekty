@@ -5,10 +5,11 @@ namespace Warehouse.Domain.Squad.Factories
 {
     public static class SquadFactory
     {
-        public static Entities.Squad Create(string name)
+        public static Entities.Squad Create(Guid squadOwnerId, string name)
             => new(
             Guid.NewGuid(),
             name,
+            squadOwnerId,
             State.Active);
     }
 }

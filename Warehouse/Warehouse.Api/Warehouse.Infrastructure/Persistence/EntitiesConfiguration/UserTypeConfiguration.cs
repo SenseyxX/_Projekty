@@ -28,6 +28,11 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
+                .Property(nameof(User.SquadId))
+                .HasColumnName(nameof(User.SquadId))
+                .IsRequired(false);
+
+            entityTypeBuilder
                 .Property<byte[]>(nameof(User.PasswordHash))
                 .HasMaxLength(256)
                 .HasColumnName(nameof(User.PasswordHash))
@@ -76,4 +81,3 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
         }
     }
 }
-
