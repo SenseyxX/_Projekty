@@ -35,7 +35,8 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
             entityTypeBuilder
                 .HasMany(squad => squad.Users)
                 .WithOne()
-                .HasForeignKey(user => user.SquadId);
+                .HasForeignKey(user => user.SquadId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             entityTypeBuilder
                 .HasMany(squad => squad.Teams)
