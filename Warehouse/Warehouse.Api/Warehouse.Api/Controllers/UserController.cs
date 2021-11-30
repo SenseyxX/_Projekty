@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Warehouse.Application.Contracts.Commands.User;
 using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Handlers;
+using Warehouse.Infrastructure.Messaging.Authorization;
 
 namespace Warehouse.Api.Controllers
 {
@@ -15,15 +16,14 @@ namespace Warehouse.Api.Controllers
     public sealed class UserController : Controller
     {
         private readonly UserHandler _userHandler;
-        private readonly RentalHandler _rentalHandler;
 
         public UserController(UserHandler userHandler, RentalHandler rentalHandler)
         {
             _userHandler = userHandler;
-            _rentalHandler = rentalHandler;
         }
 
         [HttpGet]
+        [Authorize (Roles = "AdminRequirement")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersAsync(
             CancellationToken cancellationToken)
         {

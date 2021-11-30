@@ -11,23 +11,23 @@ using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Infrastructure.Messaging.Authorization
 {
-    public class SquadOwnerRequirement: AuthorizationHandler<SquadOwnerRequirement>, IAuthorizationRequirement
+    public sealed class UserRequirement : AuthorizationHandler<UserRequirement>, IAuthorizationRequirement
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public SquadOwnerRequirement(IServiceProvider serviceProvider)
+        public UserRequirement(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
-
+        
         protected override async Task HandleRequirementAsync(
             AuthorizationHandlerContext context,
-            SquadOwnerRequirement requirement)
+            UserRequirement requirement)
         {
             var isTokenProvided = CheckIsTokenProvided(context);
-            var isSquadOwner = isTokenProvided && await CheckIsSquadOwnerAsync(context.User);
+            var isUser = isTokenProvided && await CheckIsSquadOwnerAsync(context.User);
 
-            if (isSquadOwner)
+            if (isUser)
             {
                 context.Succeed(requirement);
             }
@@ -36,19 +36,19 @@ namespace Warehouse.Infrastructure.Messaging.Authorization
                 context.Fail();
             }
         }
-
+        
         private async Task<bool> CheckIsSquadOwnerAsync(ClaimsPrincipal claimsPrincipal)
         {
             var serviceProvider = (ServiceProvider)_serviceProvider;
 
             var scope = serviceProvider.CreateScope();
             var userRepository = scope.ServiceProvider.GetService<IUserRepository>()
-                ?? throw new NullReferenceException();
+                                 ?? throw new NullReferenceException();
 
             var userId = GetUserIdClaim(claimsPrincipal);
 
             var user = await userRepository.GetAsync(userId, CancellationToken.None);
-            return user.PermissionLevel == PermissionLevel.SquadOwner;
+            return user.PermissionLevel == PermissionLevel.User;
         }
 
         private static bool CheckIsTokenProvided(AuthorizationHandlerContext context) =>
@@ -68,6 +68,6 @@ namespace Warehouse.Infrastructure.Messaging.Authorization
             }
 
             return Guid.Parse(claim);
-        }                
+        }
     }
 }

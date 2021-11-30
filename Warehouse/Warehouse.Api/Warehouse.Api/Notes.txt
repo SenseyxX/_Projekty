@@ -2,6 +2,7 @@
 * Dodanie zdjęcia jako prop do encji itemu
 * Dodać autoryzacje do kontrolerów
 * Dodać Update password
+* Dodać walidacja unikalności adressu e-mail
 
 
 * Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:

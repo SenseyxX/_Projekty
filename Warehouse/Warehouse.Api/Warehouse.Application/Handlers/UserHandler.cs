@@ -23,19 +23,19 @@ namespace Warehouse.Application.Handlers
         }
 
         public async Task CreateUserAsync(
-            CreateUserCommand addUserCommand,
+            CreateUserCommand createUserCommand,
             CancellationToken cancellationToken)
         {
-            var passwordHash = _encryptionService.EncodePassword(addUserCommand.Password);
-
+            var passwordHash = _encryptionService.EncodePassword(createUserCommand.Password);
+            
             var user = UserFactory.Create(
-                addUserCommand.Name,
-                addUserCommand.LastName,
+                createUserCommand.Name,
+                createUserCommand.LastName,
                 passwordHash,
-                addUserCommand.Email,
-                addUserCommand.PhoneNumber,
-                addUserCommand.PermissionLevel,
-                addUserCommand.SquadId);
+                createUserCommand.Email,
+                createUserCommand.PhoneNumber,
+                createUserCommand.PermissionLevel,
+                createUserCommand.SquadId);
 
             await _userRepository.CreateAsync(user, cancellationToken);
             await _userRepository.SaveAsync(cancellationToken);
