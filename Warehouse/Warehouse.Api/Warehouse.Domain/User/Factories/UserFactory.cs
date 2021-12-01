@@ -21,7 +21,7 @@ namespace Warehouse.Domain.User.Factories
                 passwordHash,
                 email,
                 phoneNumber,
-                permissionLevel = PermissionLevel.User,
+                permissionLevel,
                 State.Active,
                 squadId);
     }
