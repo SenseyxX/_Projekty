@@ -1,6 +1,7 @@
 ﻿import axios from "axios";
 import vm from "@/main";
 import store from "@/store";
+import { AuthenticationResultStorageKey } from "@/shared/constants";
 
 const api = axios.create({
   baseURL: process.env.VUE_APP_API_URL,
@@ -13,25 +14,54 @@ function showErrorMessage(exception) {
 
 const client = {
   async get(resource, params) {
+    const config = this.createConfig(params);
+
     try {
-      return await api.get(resource, params);
+      return await api.get(resource, config);
     } catch (exception) {
       showErrorMessage(exception);
     }
   },
   async post(resource, data, params) {
+    const config = this.createConfig(params);
+
     try {
-      return await api.post(resource, data, params);
+      return await api.post(resource, data, config);
     } catch (exception) {
       showErrorMessage(exception);
     }
   },
   async put(resource, data, params) {
+    const config = this.createConfig(params);
+
     try {
-      return await api.put(resource, data, params);
+      return await api.put(resource, data, config);
     } catch (exception) {
       showErrorMessage(exception);
     }
+  },
+  async delete(resource, params) {
+    const config = this.createConfig(params);
+
+    try {
+      return await api.delete(resource, config);
+    } catch (exception) {
+      showErrorMessage(exception);
+    }
+  },
+  createConfig(params) {
+    const authenticationResult = JSON.parse(
+      localStorage.getItem(AuthenticationResultStorageKey)
+    );
+
+    const token = authenticationResult ? authenticationResult.jwt : null;
+
+    return {
+      params,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
   },
 };
 

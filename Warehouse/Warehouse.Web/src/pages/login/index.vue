@@ -65,6 +65,7 @@ export default {
       };
 
       await this.authenticate(command);
+      await this.$router.push("/item");
     },
   },
 };

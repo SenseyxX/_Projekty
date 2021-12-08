@@ -17,7 +17,8 @@ namespace Warehouse.Infrastructure
                 .RegisterPersistenceConfiguration(configuration)
                 .RegisterRepositoriesDependencies()
                 .RegisterMessagingDependencies(configuration)
-                .RegisterServicesDependencies();
+                .RegisterServicesDependencies()
+                .RegisterCorsDependencies(configuration);
         }
     }
 }

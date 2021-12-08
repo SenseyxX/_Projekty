@@ -14,3 +14,5 @@ export const Theme = {
 export const Names = {
   applicationName: "Warehouse",
 };
+
+export const AuthenticationResultStorageKey = "AuthenticationResult";

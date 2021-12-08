@@ -42,6 +42,7 @@
 import { Names, Theme } from "@/shared/constants";
 import { MenuKeys, MenuOptions } from "./constants";
 import { dateFilter, timeFilter } from "@/shared/filters";
+import { mapActions } from "vuex";
 
 export default {
   name: "HeaderBar",
@@ -66,10 +67,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions("authenticationModule", ["logout"]),
     onMenuOptionSelected(key) {
       switch (key) {
         case MenuKeys.AboutApplication:
-          this.openAboutDialog();
+          // ToDo: Open about dialog
+          break;
+        case MenuKeys.Logout:
+          this.logout();
+          this.$router.push("/login");
           break;
         default:
           break;

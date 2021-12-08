@@ -1,4 +1,5 @@
 ﻿import service from "@/shared/modules/authentication/service";
+import { AuthenticationResultStorageKey } from "@/shared/constants";
 
 const state = {
   authenticationResult: {},
@@ -9,9 +10,32 @@ const getters = {
 };
 
 const actions = {
-  async authenticate({ commit }, command) {
+  async authenticate({ commit, dispatch }, command) {
     const result = await service.authenticate(command);
     commit("setAuthenticationResult", result);
+    dispatch("pushAuthenticationResult");
+  },
+  logout({ commit, dispatch }) {
+    commit("setAuthenticationResult", {});
+    dispatch("removeAuthenticationResult");
+  },
+  pushAuthenticationResult({ state }) {
+    localStorage.setItem(
+      AuthenticationResultStorageKey,
+      JSON.stringify(state.authenticationResult)
+    );
+  },
+  recallAuthenticationResult({ commit }) {
+    const authenticationResult = JSON.parse(
+      localStorage.getItem(AuthenticationResultStorageKey)
+    );
+
+    if (authenticationResult) {
+      commit("setAuthenticationResult", authenticationResult);
+    }
+  },
+  removeAuthenticationResult() {
+    localStorage.removeItem(AuthenticationResultStorageKey);
   },
 };
 
