@@ -27,7 +27,7 @@ namespace Warehouse.Application.Handlers
             CancellationToken cancellationToken)
         {
             var passwordHash = _encryptionService.EncodePassword(createUserCommand.Password);
-            
+
             var user = UserFactory.Create(
                 createUserCommand.Name,
                 createUserCommand.LastName,
@@ -109,9 +109,9 @@ namespace Warehouse.Application.Handlers
               await _userRepository.SaveAsync(cancellationToken);
           }
 
-          public async Task<IEnumerable<DueDto>> GetUserDuesAsync(Guid id, CancellationToken cancellationToken)
+          public async Task<IEnumerable<DueDto>> GetUserDuesAsync(Guid userId, CancellationToken cancellationToken)
           {
-              var user = await _userRepository.GetAsync(id, cancellationToken);
+              var user = await _userRepository.GetAsync(userId, cancellationToken);
 
               return user.Dues.Select(due => (DueDto) due);
           }

@@ -48,7 +48,7 @@ namespace Warehouse.Api.Controllers
             var result = await _userHandler.GetUserAsync(userId,cancellationToken);
             return Ok(result);
         }
-
+        
         [HttpPut("{userId:guid}")]
         public async Task<IActionResult> UpdateUserAsync(
             [FromRoute] Guid userId,
@@ -69,7 +69,7 @@ namespace Warehouse.Api.Controllers
             await _userHandler.DeleteUserAsync(userId, cancellationToken);
             return Ok();
         }
-
+        
         [HttpPost("{userId:guid}/dues")]
         public async Task<IActionResult> CreateUserDueAsync(
             [FromRoute] Guid userId,

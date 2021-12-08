@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Warehouse.Domain.User;
 using Warehouse.Domain.User.Entities;
 using Warehouse.Infrastructure.Persistence.Context;
+using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Infrastructure.Repositories
 {

@@ -28,7 +28,7 @@ namespace Warehouse.Application.Dtos.User
           public Half Half { get; }
 
 		  public static explicit operator DueDto(Due dues)
-			 => new DueDto(
+			 => new (
 				  dues.Id,
 				  dues.UserId,
 				  dues.Amount,
