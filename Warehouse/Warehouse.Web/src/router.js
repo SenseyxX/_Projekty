@@ -2,11 +2,12 @@
 import Router from "vue-router";
 import loginRoutes from "./pages/login/router";
 import itemRoutes from "@/pages/item/router";
+import squadRoutes from "@/pages/squad/router";
 import { AuthenticationResultStorageKey } from "@/shared/constants";
 
 Vue.use(Router);
 
-const routes = [loginRoutes, itemRoutes];
+const routes = [loginRoutes, itemRoutes, squadRoutes];
 
 const router = new Router({
   routes: routes,
