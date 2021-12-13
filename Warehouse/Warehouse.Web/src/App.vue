@@ -22,6 +22,7 @@ import HeaderBar from "@/shared/components/HeaderBar";
 import FooterBar from "@/shared/components/FooterBar";
 import Loader from "@/shared/components/Loader";
 import { Theme } from "@/shared/constants";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -38,11 +39,18 @@ export default {
       },
     },
   },
-  methods: {},
-  computed: {},
+  methods: {
+    ...mapActions("authenticationModule", ["recallAuthenticationResult"]),
+  },
+  computed: {
+    ...mapGetters("authenticationModule", ["authenticationResult"]),
+  },
   data: () => ({
     Theme,
     routeName: null,
   }),
+  created() {
+    this.recallAuthenticationResult();
+  },
 };
 </script>

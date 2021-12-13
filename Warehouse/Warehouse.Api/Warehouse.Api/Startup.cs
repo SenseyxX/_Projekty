@@ -31,7 +31,7 @@ namespace Warehouse.Api
                 .UseMigrationsOfContext()
                 .UseSwaggerMiddleware(_configuration)
                 .UseRouting()
-                .UseCors()
+                .UseCorsMiddleware()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(builder => builder.MapControllers());

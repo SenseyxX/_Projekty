@@ -58,23 +58,23 @@ namespace Warehouse.Application.Handlers
         public async Task DeleteTeamAsync(Guid squadId, Guid teamId, CancellationToken cancellationToken)
         {
             var team = await _teamDomainService.DeleteTeamAsync(squadId, teamId, cancellationToken);
-            
+
             _squadRepository.Update(team);
             await _squadRepository.SaveAsync(cancellationToken);
         }
 
-        public async Task<FullSquadDto> GetSquadAsync(Guid id, CancellationToken cancellationToken)
-            => (FullSquadDto) await _squadRepository.GetAsync(id, cancellationToken);
-        
+        public async Task<FullSquadDto> GetSquadAsync(Guid squadOwnerId, CancellationToken cancellationToken)
+            => (FullSquadDto) await _squadRepository.GetByOwnerId(squadOwnerId, cancellationToken);
+
         public async Task<FullTeamDto> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
             => (FullTeamDto) await _squadRepository.GetTeamAsync(teamId, cancellationToken);
-        
+
         public async Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken)
         {
             var result = await _squadRepository.GetRangeAsync(cancellationToken);
             return result.Select(squad => (SquadDto)squad);
         }
-        
+
         public async Task UpdateSquadAsync(
             UpdateSquadCommand updateSquadCommand,
             CancellationToken cancellationToken)
@@ -82,7 +82,7 @@ namespace Warehouse.Application.Handlers
             var squad = await _squadRepository.GetAsync(updateSquadCommand.SquadId, cancellationToken);
             var isUpdated = squad.UpdateName(updateSquadCommand.Name);
             isUpdated = squad.UpdateSquadOwnerId(updateSquadCommand.SquadOwnerId);
-            
+
             if (isUpdated)
             {
                 _squadRepository.Update(squad);
@@ -99,7 +99,7 @@ namespace Warehouse.Application.Handlers
             isUpdated = team.UpdateTeamOwner(updateTeamCommand.TeamId, updateTeamCommand.TeamOwnerId);
             isUpdated = team.UpdateTeamPoints(updateTeamCommand.TeamId, updateTeamCommand.Points);
             isUpdated = team.UpdateTeamDescription(updateTeamCommand.TeamId, updateTeamCommand.Description);
-            
+
             if (isUpdated)
             {
                 _squadRepository.Update(team);

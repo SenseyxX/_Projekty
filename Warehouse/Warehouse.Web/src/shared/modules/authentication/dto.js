@@ -4,6 +4,8 @@ export class AuthenticationResultDto {
   constructor(data = {}) {
     this.isAuthenticated = data.isAuthenticated;
     this.jwt = data.jwt;
-    this.tokenOwner = new UserDto(data.tokenOwner ? data.tokenOwner : {});
+    this.tokenOwner = data.tokenOwner
+      ? new UserDto(data.tokenOwner)
+      : undefined;
   }
 }

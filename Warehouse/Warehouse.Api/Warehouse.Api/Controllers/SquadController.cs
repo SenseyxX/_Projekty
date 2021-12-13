@@ -29,15 +29,16 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{squadId:guid}")]
+        // ToDo: Get squad by squad owner id
+        [HttpGet("{squadOwnerId:guid}")]
         public async Task<ActionResult<FullSquadDto>> GetSquadAsync(
-            [FromRoute]Guid squadId,
+            [FromRoute]Guid squadOwnerId,
             CancellationToken cancellationToken)
         {
-            var result = await _squadHandler.GetSquadAsync(squadId,cancellationToken);
+            var result = await _squadHandler.GetSquadAsync(squadOwnerId, cancellationToken);
             return Ok(result);
         }
-        
+
         [HttpGet("team/{teamId:guid}")]
         public async Task<ActionResult<IEnumerable<FullTeamDto>>> GetTeamsAsync(
             [FromRoute]Guid teamId,
@@ -46,7 +47,7 @@ namespace Warehouse.Api.Controllers
             var result = await _squadHandler.GetTeamAsync(teamId, cancellationToken);
             return Ok(result);
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> AddSquadAsync(
             CreateSquadCommand createSquadCommand,
@@ -55,15 +56,15 @@ namespace Warehouse.Api.Controllers
             await _squadHandler.CreateSquadAsync(createSquadCommand,cancellationToken);
             return Ok();
         }
-        
+
         [HttpPost("{squadId}/team")]
         public async Task<ActionResult> AddTeamAsync(
-            [FromRoute] Guid squadId, 
+            [FromRoute] Guid squadId,
             [FromBody] CreateTeamCommand createTeamCommand,
             CancellationToken cancellationToken)
         {
             createTeamCommand.SquadId = squadId;
-            
+
             await _squadHandler.CreateTeamAsync(createTeamCommand, cancellationToken);
             return Ok();
         }
@@ -91,7 +92,7 @@ namespace Warehouse.Api.Controllers
             await _squadHandler.UpdateTeamAsync(updateTeamCommand, cancellationToken);
             return Ok();
         }
-        
+
         [HttpDelete("{squadId:guid}")]
         public async Task<ActionResult> DeleteSquadAsync(
             [FromRoute] Guid squadId,

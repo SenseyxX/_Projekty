@@ -5,8 +5,7 @@ const service = {
   async authenticate(command) {
     const resource = "authentication";
     const result = await client.post(resource, command);
-    console.log(result);
-    return new AuthenticationResultDto(result.data ? result.data : {});
+    return new AuthenticationResultDto(result ? result.data : {});
   },
 };
 

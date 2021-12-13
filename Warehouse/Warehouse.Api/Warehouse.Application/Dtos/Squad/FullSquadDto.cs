@@ -24,10 +24,11 @@ namespace Warehouse.Application.Dtos.Squad
 		  public IEnumerable<UserDto> UserDtos { get; }
 
 		  public static explicit operator FullSquadDto(Domain.Squad.Entities.Squad squad)
-			   => new(squad.Id,
-				      squad.Name,
-                      squad.State,
-				      squad.Teams.Select(team => (TeamDto)team),
-				      squad.Users.Select(user => (UserDto)user));
+			   => new(
+                   squad.Id,
+                   squad.Name,
+                   squad.State,
+                   squad.Teams.Select(team => (TeamDto)team),
+                   squad.Users.Select(user => (UserDto)user));
 	 }
 }

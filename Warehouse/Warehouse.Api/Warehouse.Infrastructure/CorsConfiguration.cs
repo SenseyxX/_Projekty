@@ -19,26 +19,21 @@ namespace Warehouse.Infrastructure
                 .GetSection(AllowedOriginsSectionName)
                 .Get<ICollection<string>>();
 
-            return services
-                .AddCors(o =>
-                {
-                    o.AddPolicy(
-                        PolicyName,
-                        b =>
+            return services.AddCors(o => o.AddPolicy(
+                    PolicyName,
+                    b =>
+                    {
+                        foreach (var origin in originsContainer)
                         {
-                            foreach (var origin in originsContainer)
-                            {
-                                b.WithOrigins(origin)
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod()
-                                    .AllowCredentials();
-                            }
-                        });
-                });
-         }   
-            public static IApplicationBuilder UseCorsMiddleware(this IApplicationBuilder applicationBuilder) =>
-                applicationBuilder
-                    .UseCors(PolicyName);
-        
+                            b.WithOrigins(origin)
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .AllowCredentials();
+                        }
+                    }));
+         }
+
+        public static IApplicationBuilder UseCorsMiddleware(this IApplicationBuilder applicationBuilder)
+            => applicationBuilder.UseCors(PolicyName);
     }
 }

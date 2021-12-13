@@ -9,5 +9,6 @@ namespace Warehouse.Domain.Squad
     public interface ISquadRepository : IRepository<Entities.Squad>
     {
         Task<Team> GetTeamAsync(Guid teamId, CancellationToken cancellationToken);
+        Task<Entities.Squad> GetByOwnerId(Guid squadOwnerId, CancellationToken cancellationToken);
     }
 }

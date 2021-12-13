@@ -12,7 +12,7 @@ namespace Warehouse.Infrastructure.Repositories
     {
         public SquadRepository(WarehouseContext warehouseContext)
             : base(warehouseContext)
-        {            
+        {
         }
 
         public override async Task<Squad> GetAsync(Guid squadId, CancellationToken cancellationToken)
@@ -20,10 +20,16 @@ namespace Warehouse.Infrastructure.Repositories
                 .Set<Squad>()
                 .Include(squad => squad.Teams)
                 .FirstOrDefaultAsync(squad => squad.Id == squadId, cancellationToken);
-      
+
         public async Task<Team> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Team>()
                 .FirstOrDefaultAsync(team => team.Id == teamId);
+
+        public async Task<Squad> GetByOwnerId(Guid squadOwnerId, CancellationToken cancellationToken)
+            => await DbContext
+                .Set<Squad>()
+                .Include(squad => squad.Teams)
+                .FirstOrDefaultAsync(squad => squad.SquadOwnerId == squadOwnerId, cancellationToken);
     }
 }
