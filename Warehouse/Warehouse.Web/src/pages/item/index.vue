@@ -1,28 +1,52 @@
 ﻿<template>
   <section class="text-center centerized">
-    <h6 class="title">Itemy</h6>
+    <v-row>
+      <v-col>
+        <v-btn>+</v-btn>
+      </v-col>
+      <v-col>
+        {{item.name}}
+      </v-col>
+    </v-row>
+    <add-item-dialog
+        :dialog-visibility="addItemDialogVisibility"
+        @canceled="closeAddItemDialog"
+        @confirmed="closeAddItemDialog"
+    ></add-item-dialog>
   </section>
 </template>
 
 <script>
-import { Theme } from "@/shared/constants";
+// import { Theme } from "@/shared/constants";
 import { mapGetters, mapActions } from "vuex";
+import AddItemDialog from "./addItemDialog";
 
 export default {
   name: "ItemPage",
+  components: {
+    AddItemDialog,
+  },
   data() {
     return {
-      loginValue: "",
-      passwordValue: "",
-      Theme,
-      isValid: false,
+      addItemDialogVisibility: false,
     };
   },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
+    ...mapGetters("itemModule", ["item"]),
   },
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
+    ...mapActions("itemModule", ["item"]),
+    onAddButtonClicked() {
+      this.addItemDialogVisibility = true;
+    },
+    closeAddItemDialog() {
+      this.addItemDialogVisibility = false;
+    },
+  },
+  async mounted() {
+    await this.getSquad(this.authenticationResult.tokenOwner.id);
   },
 };
 </script>

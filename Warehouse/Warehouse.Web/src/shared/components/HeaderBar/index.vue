@@ -70,6 +70,12 @@ export default {
     ...mapActions("authenticationModule", ["logout"]),
     onMenuOptionSelected(key) {
       switch (key) {
+        case  MenuKeys.Squad:
+          this.$router.push("/squad");
+          breake;
+        case  MenuKeys.Items:
+          this.$router.push("/item");
+          breake;
         case MenuKeys.AboutApplication:
           // ToDo: Open about dialog
           break;
