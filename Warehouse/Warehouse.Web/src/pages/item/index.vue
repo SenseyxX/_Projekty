@@ -5,13 +5,13 @@
         <v-btn>+</v-btn>
       </v-col>
       <v-col>
-        {{item.name}}
+        {{ item.name }}
       </v-col>
     </v-row>
     <add-item-dialog
-        :dialog-visibility="addItemDialogVisibility"
-        @canceled="closeAddItemDialog"
-        @confirmed="closeAddItemDialog"
+      :dialog-visibility="addItemDialogVisibility"
+      @canceled="closeAddItemDialog"
+      @confirmed="closeAddItemDialog"
     ></add-item-dialog>
   </section>
 </template>
@@ -45,8 +45,9 @@ export default {
       this.addItemDialogVisibility = false;
     },
   },
+
   async mounted() {
-    await this.getSquad(this.authenticationResult.tokenOwner.id);
+    await this.getItem(this.authenticationResult.tokenOwner.id);
   },
 };
 </script>

@@ -108,12 +108,5 @@ namespace Warehouse.Application.Handlers
               _userRepository.Update(user);
               await _userRepository.SaveAsync(cancellationToken);
           }
-
-          public async Task<IEnumerable<DueDto>> GetUserDuesAsync(Guid userId, CancellationToken cancellationToken)
-          {
-              var user = await _userRepository.GetAsync(userId, cancellationToken);
-
-              return user.Dues.Select(due => (DueDto) due);
-          }
     }
 }

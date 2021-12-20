@@ -34,7 +34,7 @@ namespace Warehouse.Application.Dtos.User
                 StoredItems = storedItems;
             }
 
-            public State State { get; private set; }
+            public State State { get; }
             public PermissionLevel PermissionLevel { get; }
             public IEnumerable<ItemDto> OwnedItems { get; }
             public IEnumerable<ItemDto> StoredItems { get; }

@@ -1,13 +1,13 @@
 ﻿<template>
   <v-dialog>
     <v-card class="frame">
-      <p class="ma-4 text-h6">Skład</p>
+      <p class="ma-4 text-h6">Przedmioty</p>
       <div class="select-group">
         <v-form ref="form" v-model="isValid">
           <v-text-field
-              v-model="name"
-              label="Nazwa przedmiotu"
-              :rules="[(v) => !!v || 'Nazwa jest wymagana']"
+            v-model="name"
+            label="Nazwa przedmiotu"
+            :rules="[(v) => !!v || 'Nazwa jest wymagana']"
           />
         </v-form>
       </div>
@@ -17,10 +17,10 @@
             Anuluj
           </v-btn>
           <v-btn
-              @click="saveChanges"
-              color="primary"
-              class="mr-8"
-              :disabled="!isValid"
+            @click="saveChanges"
+            color="primary"
+            class="mr-8"
+            :disabled="!isValid"
           >
             Zapisz
           </v-btn>
@@ -31,15 +31,15 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "addItemDialog",
   data: () => ({
-       name: "",
-       isValid: false, 
+    name: "",
+    isValid: false,
   }),
-  props:{
+  props: {
     dialogVisibility: {
       type: Boolean,
       defaultValue: false,
@@ -54,21 +54,21 @@ export default {
       const command = {
         name: this.name,
         description: this.description,
-        categoryId: this.categoryId, 
-        qualityLevel: this.qualityLevel, 
+        categoryId: this.categoryId,
+        qualityLevel: this.qualityLevel,
         quantity: this.quantity,
         ownerId: this.authenticationResult.tokenOwner.id,
       };
-      
-      await  this.addItem(command);
-      
+
+      await this.addItem(command);
+
       this.$emit("confirmed");
     },
     cancel() {
       this.$emit("canceled");
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped></style>

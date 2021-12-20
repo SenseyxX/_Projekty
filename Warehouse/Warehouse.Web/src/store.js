@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     requestModule,
     authenticationModule,
     squadModule,
+    itemModule,
   },
 });
 export default store;
