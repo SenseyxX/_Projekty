@@ -6,7 +6,7 @@
       </v-col>
       <v-col>
         {{ squad.name }}
-      </v-coL>
+      </v-col>
     </v-row>
     <add-squad-dialog
       :dialog-visibility="addSquadDialogVisibility"

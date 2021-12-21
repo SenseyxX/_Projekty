@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Warehouse.Application.Contracts.Commands.Category;
 using Warehouse.Application.Dtos.Category;
 using Warehouse.Application.Handlers;
@@ -10,6 +11,7 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
+    // [Authorize(Roles = "AdminRequirement")]
     [Route(RoutePattern)]
     public class CategoryController : Controller
     {
@@ -20,7 +22,6 @@ namespace Warehouse.Api.Controllers
             _categoryHandler = categoryHandler;
         }
 
-        // ToDo: Po usunięciu nie powinniśmy wyświetlać nie aktywnych kategorii
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategoriesAsync(
             CancellationToken cancellationToken)
@@ -29,7 +30,6 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        // ToDo: Po usunięciu nie powinniśmy wyświetlać nie aktywnych kategorii
         [HttpGet("{categoryId:guid}")]
         public async Task<ActionResult<FullCategoryDto>> GetCategoryAsync(
             [FromRoute] Guid categoryId,

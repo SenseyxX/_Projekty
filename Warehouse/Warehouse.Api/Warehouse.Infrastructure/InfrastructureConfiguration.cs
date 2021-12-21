@@ -7,7 +7,7 @@ using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Infrastructure
 {
-    public static class InfrastructureConfiguration // Klasa w któej definiujemy ustawienia solucji persistance
+    public static class InfrastructureConfiguration // Klasa w której definiujemy ustawienia solucji persistance
     {
         public static IServiceCollection RegisterInfrastructureDependencies(
             this IServiceCollection serviceCollection,

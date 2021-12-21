@@ -23,7 +23,6 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize (Roles = "AdminRequirement")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersAsync(
             CancellationToken cancellationToken)
         {

@@ -26,7 +26,7 @@ namespace Warehouse.Application.Handlers
             var item = await _itemRepository.GetAsync(id, cancellationToken);
             return (FullItemDto) item;
         }
-
+        
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken) // Pobranie wszystkich Itemów
         {
             var items = await _itemRepository.GetRangeAsync(cancellationToken);

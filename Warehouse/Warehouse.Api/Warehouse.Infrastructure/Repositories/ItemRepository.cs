@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +20,7 @@ namespace Warehouse.Infrastructure.Repositories
 
         // Dodanie nowej metody która nie jest dziedzioczona z clasy Repository
 
-        // Add to GetWithDependencies
+        // ToDo: Add to GetWithDependencies
         public override async Task<Item> GetAsync(Guid squadId, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Item>()
@@ -29,5 +32,13 @@ namespace Warehouse.Infrastructure.Repositories
                 .Set<Item>()
                 .Include(item => item.LoanHistories)
                 .FirstOrDefaultAsync(item => item.Name == itemCode, cancellationToken);
+
+        public async Task<ICollection<Item>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken)
+            => await DbContext
+                .Set<Item>()
+                .Include(item => item.LoanHistories)
+                .Where(item => item.OwnerId == userId)
+                .ToListAsync(cancellationToken);
+        
     }
 }
