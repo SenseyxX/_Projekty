@@ -4,6 +4,9 @@
     <p class="body-2 text-muted subtitle">
       Wpisz poniżej swój login i hasło a następnie nacisnij "Start".
     </p>
+    <v-btn text color="primary" @click="showRegistrationUserDialog"
+      >Zarejestruj</v-btn
+    >
     <v-form v-model="isValid">
       <v-row justify="center" dense class="ml-3 mr-3">
         <v-text-field
@@ -36,19 +39,28 @@
         Start
       </v-btn>
     </v-row>
+    <registration-user-dialog
+      :dialog-visibility="registrationUserDialogVisibility"
+      @canceled="hideRegistrationUserDialog"
+    />
   </section>
 </template>
 
 <script>
 import { Theme } from "@/shared/constants";
 import { mapGetters, mapActions } from "vuex";
+import registrationUserDialog from "./registrationUserDialog";
 
 export default {
   name: "LoginPage",
+  components: {
+    registrationUserDialog,
+  },
   data() {
     return {
       loginValue: "",
       passwordValue: "",
+      registrationUserDialogVisibility: false,
       Theme,
       isValid: false,
     };
@@ -66,6 +78,12 @@ export default {
 
       await this.authenticate(command);
       await this.$router.push("/item");
+    },
+    showRegistrationUserDialog() {
+      this.registrationUserDialogVisibility = true;
+    },
+    hideRegistrationUserDialog() {
+      this.registrationUserDialogVisibility = false;
     },
   },
 };
