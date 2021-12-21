@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-dialog>
+  <v-dialog persistent v-model="dialogVisibility">
     <v-card class="frame">
       <p class="ma-4 text-h6">Przedmioty</p>
       <div class="select-group">

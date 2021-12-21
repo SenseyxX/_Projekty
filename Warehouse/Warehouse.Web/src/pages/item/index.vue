@@ -2,7 +2,7 @@
   <section class="text-center centerized">
     <v-row>
       <v-col>
-        <v-btn>+</v-btn>
+        <v-btn @click="onAddButtonClicked">+</v-btn>
       </v-col>
       <v-col>
         {{ item.name }}
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// import { Theme } from "@/shared/constants";
 import { mapGetters, mapActions } from "vuex";
 import AddItemDialog from "./addItemDialog";
 
@@ -37,7 +36,7 @@ export default {
   },
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
-    ...mapActions("itemModule", ["item"]),
+    ...mapActions("itemModule", ["addItem", "getItem"]),
     onAddButtonClicked() {
       this.addItemDialogVisibility = true;
     },
