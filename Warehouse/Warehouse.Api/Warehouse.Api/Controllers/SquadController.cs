@@ -22,14 +22,13 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SquadDto>>> GetUsersAsync(
+        public async Task<ActionResult<IEnumerable<SquadDto>>> GetSquadAsync(
             CancellationToken cancellationToken)
         {
             var result = await _squadHandler.GetSquadsAsync(cancellationToken);
             return Ok(result);
         }
 
-        // ToDo: Get squad by squad owner id
         [HttpGet("{squadOwnerId:guid}")]
         public async Task<ActionResult<FullSquadDto>> GetSquadAsync(
             [FromRoute]Guid squadOwnerId,

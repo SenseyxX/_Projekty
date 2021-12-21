@@ -9,6 +9,22 @@
             label="Nazwa przedmiotu"
             :rules="[(v) => !!v || 'Nazwa jest wymagana']"
           />
+          <v-text-field v-model="description" label="Opis przedmiotu" />
+          <v-text-field
+            v-model="categoryId"
+            label="Kategoria przedmiotu"
+            :rules="[(v) => !!v || 'Kategoria jest wymagana']"
+          />
+          <v-text-field
+            v-model="qualityLevel"
+            label="Jakość przedmiotu"
+            :rules="[(v) => !!v || 'Jakość jest wymagana']"
+          />
+          <v-text-field
+            v-model="quantity"
+            label="Ilość"
+            :rules="[(v) => !!v || 'Ilość jest wymagana']"
+          />
         </v-form>
       </div>
       <v-container>
@@ -37,6 +53,10 @@ export default {
   name: "addItemDialog",
   data: () => ({
     name: "",
+    description: "",
+    categoryId: "",
+    qualityLevel: "",
+    quantity: "1",
     isValid: false,
   }),
   props: {

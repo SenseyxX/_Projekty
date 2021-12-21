@@ -2,7 +2,7 @@ export const MenuKeys = {
   Squad: "Squad",
   Teams: "teams",
   Items: "Items",
-  Dues: "dues",
+  Dues: "Dues",
   AboutApplication: "AboutApplication",
   Logout: "Logout",
 };
