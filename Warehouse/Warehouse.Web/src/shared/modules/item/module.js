@@ -20,7 +20,7 @@ const actions = {
 };
 
 const mutations = {
-  setSquad(state, result) {
+  setItem(state, result) {
     state.item = result;
   },
 };

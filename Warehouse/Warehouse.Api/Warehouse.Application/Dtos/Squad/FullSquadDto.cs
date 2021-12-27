@@ -12,16 +12,16 @@ namespace Warehouse.Application.Dtos.Squad
                 Guid id,
                 string name,
                 State state,
-                IEnumerable<TeamDto> teamDtos,
-			    IEnumerable<UserDto>userDtos)
+                IEnumerable<TeamDto> teams,
+			    IEnumerable<UserDto> users)
 			   :base(id,name,state)
 		  {
-			   UserDtos = userDtos;
-			   TeamDtos = teamDtos;
+			   Users = users;
+			   Teams = teams;
 		  }
 
-		  public IEnumerable<TeamDto> TeamDtos { get; }
-		  public IEnumerable<UserDto> UserDtos { get; }
+		  public IEnumerable<TeamDto> Teams { get; }
+		  public IEnumerable<UserDto> Users { get; }
 
 		  public static explicit operator FullSquadDto(Domain.Squad.Entities.Squad squad)
 			   => new(

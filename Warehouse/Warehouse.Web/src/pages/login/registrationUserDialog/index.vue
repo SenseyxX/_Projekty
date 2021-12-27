@@ -1,29 +1,37 @@
 ﻿<template>
-  <v-dialog persistent v-model="dialogVisibility">
+  <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card class="frame">
-      <p class="ma-4 text-h6">Przedmioty</p>
+      <p class="ma-4 text-h6">Skład</p>
       <div class="select-group">
         <v-form ref="form" v-model="isValid">
           <v-text-field
             v-model="name"
-            label="Nazwa przedmiotu"
-            :rules="[(v) => !!v || 'Nazwa jest wymagana']"
-          />
-          <v-text-field v-model="description" label="Opis przedmiotu" />
-          <v-text-field
-            v-model="categoryId"
-            label="Kategoria przedmiotu"
-            :rules="[(v) => !!v || 'Kategoria jest wymagana']"
+            label="Imię"
+            :rules="[(v) => !!v || 'Imię jest wymagane']"
           />
           <v-text-field
-            v-model="qualityLevel"
-            label="Jakość przedmiotu"
-            :rules="[(v) => !!v || 'Jakość jest wymagana']"
+            v-model="lastName"
+            label="Nazwisko"
+            :rules="[(v) => !!v || 'Nazwisko jest wymagane']"
           />
           <v-text-field
-            v-model="quantity"
-            label="Ilość"
-            :rules="[(v) => !!v || 'Ilość jest wymagana']"
+            v-model="password"
+            type="password"
+            label="Hasło"
+            :rules="[
+              (v) => !!v || 'Hasło jest wymagane',
+              (v) => v.length >= 4 || 'Hasło jest za krótkie',
+            ]"
+          />
+          <v-text-field
+            v-model="email"
+            label="E-mail"
+            :rules="[(v) => !!v || 'Email jest wymagany']"
+          />
+          <v-text-field
+            v-model="phoneNumber"
+            label="Numer telefonu"
+            :rules="[(v) => !!v || 'Numer telefonu jest wymagany']"
           />
         </v-form>
       </div>
@@ -50,13 +58,13 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "addItemDialog",
+  name: "addSquadDialog",
   data: () => ({
     name: "",
-    description: "",
-    categoryId: "",
-    qualityLevel: "",
-    quantity: "1",
+    lastName: "",
+    password: "",
+    email: "",
+    phoneNumber: "",
     isValid: false,
   }),
   props: {
@@ -69,18 +77,17 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
   },
   methods: {
-    ...mapActions("itemModule", ["addItem"]),
+    ...mapActions("squadModule", ["addSquad"]),
     async saveChanges() {
       const command = {
         name: this.name,
-        description: this.description,
-        categoryId: this.categoryId,
-        qualityLevel: this.qualityLevel,
-        quantity: this.quantity,
-        ownerId: this.authenticationResult.tokenOwner.id,
+        lastName: this.lastName,
+        password: this.password,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
       };
 
-      await this.addItem(command);
+      await this.addSquad(command);
 
       this.$emit("confirmed");
     },

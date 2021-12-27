@@ -4,9 +4,7 @@
       <v-col>
         <v-btn @click="onAddButtonClicked">+</v-btn>
       </v-col>
-      <v-col>
-        {{ squad.name }}
-      </v-col>
+      <v-spacer />
     </v-row>
     <add-squad-dialog
       :dialog-visibility="addSquadDialogVisibility"

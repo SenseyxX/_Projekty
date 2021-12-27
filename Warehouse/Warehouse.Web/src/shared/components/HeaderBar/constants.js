@@ -1,6 +1,6 @@
 export const MenuKeys = {
   Squad: "Squad",
-  Teams: "teams",
+  Teams: "Teams",
   Items: "Items",
   Dues: "Dues",
   AboutApplication: "AboutApplication",
