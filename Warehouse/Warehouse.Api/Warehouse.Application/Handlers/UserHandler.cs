@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Application.Contracts.Commands.User;
+using Warehouse.Application.Dtos.Item;
 using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Services;
 using Warehouse.Domain.User;
@@ -53,8 +54,16 @@ namespace Warehouse.Application.Handlers
             }
         }
 
-		  public async Task<FullUserDto> GetUserAsync(Guid id, CancellationToken cancellationToken)
-           => (FullUserDto)await _userRepository.GetAsync(id, cancellationToken);
+		  public async Task<FullUserDto> GetUserAsync(Guid userId, CancellationToken cancellationToken)
+           => (FullUserDto)await _userRepository.GetAsync(userId, cancellationToken);
+
+          public async Task<IEnumerable<ItemDto>> GetUserItemsAsync(
+              Guid userId,
+              CancellationToken cancellationToken)
+          {
+              var items = await _userRepository.GetUserItemsAsync(userId, cancellationToken);
+              return items.Select(item => (ItemDto) item);
+          }
 
           public async Task<IEnumerable<UserDto>> GetUsersAsync(CancellationToken cancellationToken)
         {

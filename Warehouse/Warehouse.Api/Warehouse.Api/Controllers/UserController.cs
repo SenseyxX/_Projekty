@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Application.Contracts.Commands.User;
+using Warehouse.Application.Dtos.Item;
 using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Handlers;
 using Warehouse.Infrastructure.Messaging.Authorization;
@@ -27,6 +28,15 @@ namespace Warehouse.Api.Controllers
             CancellationToken cancellationToken)
         {
             var result = await _userHandler.GetUsersAsync(cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet("{userId:guid}/items")]
+        public async Task<ActionResult<ItemDto>> GetUserItemsAsync(
+            [FromRoute] Guid userId,
+            CancellationToken cancellationToken)
+        {
+            var result = await _userHandler.GetUserItemsAsync(userId, cancellationToken);
             return Ok(result);
         }
 
