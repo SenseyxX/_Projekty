@@ -1,15 +1,16 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-row>
-      <v-col>
-        <v-btn @click="onAddButtonClicked">+</v-btn>
-      </v-col>
+      <action-panel
+        :panel-title="'Składy'"
+        @addedButtonClicked="changeSquadDialogVisibility(true)"
+      />
       <v-spacer />
     </v-row>
     <add-squad-dialog
       :dialog-visibility="addSquadDialogVisibility"
-      @canceled="closeAddSquadDialog"
-      @confirmed="closeAddSquadDialog"
+      @canceled="changeSquadDialogVisibility(false)"
+      @confirmed="changeSquadDialogVisibility(false)"
     ></add-squad-dialog>
   </section>
 </template>
@@ -18,11 +19,13 @@
 // import { Theme } from "@/shared/constants";
 import { mapGetters, mapActions } from "vuex";
 import AddSquadDialog from "./addSquadDialog";
+import ActionPanel from "@/shared/components/ActionPanel";
 
 export default {
   name: "SquadPage",
   components: {
     AddSquadDialog,
+    ActionPanel,
   },
   data() {
     return {
@@ -36,11 +39,8 @@ export default {
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
     ...mapActions("squadModule", ["getSquad", "addSquad"]),
-    onAddButtonClicked() {
-      this.addSquadDialogVisibility = true;
-    },
-    closeAddSquadDialog() {
-      this.addSquadDialogVisibility = false;
+    changeSquadDialogVisibility(visibility) {
+      this.addSquadDialogVisibility = visibility;
     },
   },
   async mounted() {
