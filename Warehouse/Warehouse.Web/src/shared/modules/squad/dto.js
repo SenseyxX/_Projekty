@@ -17,3 +17,14 @@ export class TeamDto {
     this.squadId = data.squadId;
   }
 }
+
+export class FullTeamDto {
+  constructor(data = {}) {
+    this.id = data.id;
+    this.name = data.name;
+    this.squadId = data.squadId;
+    this.teamOwnerId = data.teamOwnerId;
+    this.points = data.points;
+    //ToDo: add Users
+  }
+}

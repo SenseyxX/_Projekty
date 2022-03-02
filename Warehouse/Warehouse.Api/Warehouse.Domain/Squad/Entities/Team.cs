@@ -27,12 +27,12 @@ namespace Warehouse.Domain.Squad.Entities
 		  }
 
 		  public string Name { get; private set; }
-		  public Guid SquadId { get; } 
-		  public Guid TeamOwnerId { get; private set; } 
+		  public Guid SquadId { get; }
+		  public Guid TeamOwnerId { get; private set; }
 		  public string Description { get; private set; }
-		  public  int Points { get; private set; } 
+		  public  int Points { get; private set; }
 		  public State State { get; private set; }
-		public ICollection<User.Entities.User> Users { get; }
+          public ICollection<User.Entities.User> Users { get; }
 
 		  public bool UpdateName(string name)
 		  {

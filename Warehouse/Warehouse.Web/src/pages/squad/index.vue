@@ -1,51 +1,25 @@
 ﻿<template>
   <section class="text-center centerized">
-    <v-row>
-      <action-panel
-        :panel-title="'Drużyny'"
-        @addedButtonClicked="changeSquadDialogVisibility(true)"
-      />
-      <v-spacer />
-    </v-row>
-    <add-squad-dialog
-      :dialog-visibility="addSquadDialogVisibility"
-      @canceled="changeSquadDialogVisibility(false)"
-      @confirmed="changeSquadDialogVisibility(false)"
-    ></add-squad-dialog>
+    <squad-list />
   </section>
 </template>
 
 <script>
-// import { Theme } from "@/shared/constants";
-import { mapGetters, mapActions } from "vuex";
-import AddSquadDialog from "./addSquadDialog";
-import ActionPanel from "@/shared/components/ActionPanel";
+import SquadList from "@/pages/squad/squadList";
 
 export default {
   name: "SquadPage",
   components: {
-    AddSquadDialog,
-    ActionPanel,
+    SquadList,
   },
   data() {
     return {
       addSquadDialogVisibility: false,
     };
   },
-  computed: {
-    ...mapGetters("authenticationModule", ["authenticationResult"]),
-    ...mapGetters("squadModule", ["squad"]),
-  },
-  methods: {
-    ...mapActions("authenticationModule", ["authenticate"]),
-    ...mapActions("squadModule", ["getSquad", "addSquad"]),
-    changeSquadDialogVisibility(visibility) {
-      this.addSquadDialogVisibility = visibility;
-    },
-  },
-  async mounted() {
-    await this.getSquad(this.authenticationResult.tokenOwner.id);
-  },
+  computed: {},
+  methods: {},
+  async mounted() {},
 };
 </script>
 

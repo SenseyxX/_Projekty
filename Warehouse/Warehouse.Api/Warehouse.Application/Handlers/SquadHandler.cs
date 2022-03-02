@@ -66,13 +66,17 @@ namespace Warehouse.Application.Handlers
         public async Task<FullSquadDto> GetSquadAsync(Guid squadOwnerId, CancellationToken cancellationToken)
             => (FullSquadDto) await _squadRepository.GetByOwnerId(squadOwnerId, cancellationToken);
 
-        public async Task<FullTeamDto> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
-            => (FullTeamDto) await _squadRepository.GetTeamAsync(teamId, cancellationToken);
-
         public async Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken)
         {
             var result = await _squadRepository.GetRangeAsync(cancellationToken);
             return result.Select(squad => (SquadDto)squad);
+        }
+
+        public async Task<IEnumerable<FullTeamDto>> GetSquadTeamsAsync(Guid squadId, CancellationToken cancellationToken)
+        {
+            var squad = await _squadRepository.GetAsync(squadId, cancellationToken);
+
+            return squad.Teams.Select(team => (FullTeamDto) team);
         }
 
         public async Task UpdateSquadAsync(

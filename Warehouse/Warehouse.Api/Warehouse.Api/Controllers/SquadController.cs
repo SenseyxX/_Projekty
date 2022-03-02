@@ -22,28 +22,10 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SquadDto>>> GetSquadAsync(
+        public async Task<ActionResult<IEnumerable<SquadDto>>> GetSquadsAsync(
             CancellationToken cancellationToken)
         {
             var result = await _squadHandler.GetSquadsAsync(cancellationToken);
-            return Ok(result);
-        }
-
-        [HttpGet("{squadOwnerId:guid}")]
-        public async Task<ActionResult<FullSquadDto>> GetSquadAsync(
-            [FromRoute]Guid squadOwnerId,
-            CancellationToken cancellationToken)
-        {
-            var result = await _squadHandler.GetSquadAsync(squadOwnerId, cancellationToken);
-            return Ok(result);
-        }
-
-        [HttpGet("team/{teamId:guid}")]
-        public async Task<ActionResult<IEnumerable<FullTeamDto>>> GetTeamsAsync(
-            [FromRoute]Guid teamId,
-            CancellationToken cancellationToken)
-        {
-            var result = await _squadHandler.GetTeamAsync(teamId, cancellationToken);
             return Ok(result);
         }
 
@@ -56,16 +38,13 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [HttpPost("{squadId}/team")]
-        public async Task<ActionResult> AddTeamAsync(
-            [FromRoute] Guid squadId,
-            [FromBody] CreateTeamCommand createTeamCommand,
+        [HttpGet("{squadOwnerId:guid}")]
+        public async Task<ActionResult<FullSquadDto>> GetSquadAsync(
+            [FromRoute]Guid squadOwnerId,
             CancellationToken cancellationToken)
         {
-            createTeamCommand.SquadId = squadId;
-
-            await _squadHandler.CreateTeamAsync(createTeamCommand, cancellationToken);
-            return Ok();
+            var result = await _squadHandler.GetSquadAsync(squadOwnerId, cancellationToken);
+            return Ok(result);
         }
 
         [HttpPut("{squadId:guid}")]
@@ -80,6 +59,36 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
+        [HttpDelete("{squadId:guid}")]
+        public async Task<ActionResult> DeleteSquadAsync(
+            [FromRoute] Guid squadId,
+            CancellationToken cancellationToken)
+        {
+            await _squadHandler.DeleteSquadAsync(squadId, cancellationToken);
+            return Ok();
+        }
+
+        [HttpGet("{squadId:guid}/teams")]
+        public async Task<ActionResult<IEnumerable<FullTeamDto>>> GetTeamsAsync(
+            [FromRoute] Guid squadId,
+            CancellationToken cancellationToken)
+        {
+            var result = await _squadHandler.GetSquadTeamsAsync(squadId, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpPost("{squadId}/team")]
+        public async Task<ActionResult> AddTeamAsync(
+            [FromRoute] Guid squadId,
+            [FromBody] CreateTeamCommand createTeamCommand,
+            CancellationToken cancellationToken)
+        {
+            createTeamCommand.SquadId = squadId;
+
+            await _squadHandler.CreateTeamAsync(createTeamCommand, cancellationToken);
+            return Ok();
+        }
+
         [HttpPut("team/{teamId}")]
         public async Task<IActionResult> UpdateTeamAsync(
             [FromRoute] Guid teamId,
@@ -89,15 +98,6 @@ namespace Warehouse.Api.Controllers
             updateTeamCommand.TeamId = teamId;
 
             await _squadHandler.UpdateTeamAsync(updateTeamCommand, cancellationToken);
-            return Ok();
-        }
-
-        [HttpDelete("{squadId:guid}")]
-        public async Task<ActionResult> DeleteSquadAsync(
-            [FromRoute] Guid squadId,
-            CancellationToken cancellationToken)
-        {
-            await _squadHandler.DeleteSquadAsync(squadId, cancellationToken);
             return Ok();
         }
 

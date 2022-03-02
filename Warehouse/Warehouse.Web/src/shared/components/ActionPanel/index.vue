@@ -45,17 +45,13 @@ export default {
 </script>
 
 <style scoped>
-.actionPanel {
-  flex-flow: column;
-}
-
 .button {
-  margin: 50px;
+  margin-left: 50px;
   width: 5%;
 }
 
 .searchBar {
-  margin: 50px;
+  margin-left: 50px;
   max-width: 20%;
 }
 </style>

@@ -14,7 +14,7 @@ namespace Warehouse.Application.Dtos.Squad
                 State state,
                 IEnumerable<TeamDto> teams,
 			    IEnumerable<UserDto> users)
-			   :base(id,name,state)
+              : base(id,name,state)
 		  {
 			   Users = users;
 			   Teams = teams;

@@ -15,13 +15,13 @@ namespace Warehouse.Application.Dtos.Squad
 			   Guid teamOwnerId,
 			   int points,
 			   IEnumerable<UserDto> userDtos)
-			  :base(id,name,squadId)
+			  : base(id, name, squadId)
 		  {
 			   TeamOwnerId = teamOwnerId;
 			   Points = points;
 			   UserDtos = userDtos;
           }
-		  
+
 		  public Guid TeamOwnerId { get; }
 		  public int Points { get; }
 		  public IEnumerable<UserDto> UserDtos { get; }
