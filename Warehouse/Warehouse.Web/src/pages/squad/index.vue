@@ -2,7 +2,7 @@
   <section class="text-center centerized">
     <v-row>
       <action-panel
-        :panel-title="'Składy'"
+        :panel-title="'Drużyny'"
         @addedButtonClicked="changeSquadDialogVisibility(true)"
       />
       <v-spacer />

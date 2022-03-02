@@ -5,8 +5,7 @@
     </v-container>
     <v-container class="d-inline-flex pa-2">
       <v-btn class="button" @click="onAddButtonClicked">+</v-btn>
-      <v-btn class="button" @click="onEditButtonClicked">-</v-btn>
-      <v-btn class="button">Delete</v-btn>
+      <v-btn class="button" @click="onDeletedButtonClicked">-</v-btn>
       <v-text-field
         v-if="searchBarVisibility"
         v-model="searchResult"
@@ -38,8 +37,8 @@ export default {
     onAddButtonClicked() {
       this.$emit("addedButtonClicked");
     },
-    onEditButtonClicked() {
-      this.$emit("editButtonClicked");
+    onDeletedButtonClicked() {
+      this.$emit("deletedButtonClicked");
     },
   },
 };
