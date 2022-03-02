@@ -58,7 +58,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "addSquadDialog",
+  name: "registrationUserDialog",
   data: () => ({
     name: "",
     lastName: "",
@@ -77,7 +77,7 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
   },
   methods: {
-    ...mapActions("squadModule", ["addSquad"]),
+    ...mapActions("registrationModule", ["addUser"]),
     async saveChanges() {
       const command = {
         name: this.name,
@@ -87,7 +87,7 @@ export default {
         phoneNumber: this.phoneNumber,
       };
 
-      await this.addSquad(command);
+      await this.addUser(command);
 
       this.$emit("confirmed");
     },

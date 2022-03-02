@@ -23,7 +23,7 @@ namespace Warehouse.Application.Dtos.Squad
           }
 		  
 		  public Guid TeamOwnerId { get; }
-		  public int Points { get; set; }
+		  public int Points { get; }
 		  public IEnumerable<UserDto> UserDtos { get; }
 
 		  public static explicit operator FullTeamDto(Team team)

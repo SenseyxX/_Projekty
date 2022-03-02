@@ -1,17 +1,16 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-row>
-      <v-col>
-        <v-btn @click="onAddButtonClicked">+</v-btn>
-      </v-col>
-      <v-col>
-        {{ item.name }}
-      </v-col>
+      <action-panel
+        :panel-title="'Przedmioty'"
+        @addedButtonClicked="changeItemDialogVisibility(true)"
+      />
+      <v-spacer />
     </v-row>
     <add-item-dialog
       :dialog-visibility="addItemDialogVisibility"
-      @canceled="closeAddItemDialog"
-      @confirmed="closeAddItemDialog"
+      @canceled="changeItemDialogVisibility(false)"
+      @confirmed="changeItemDialogVisibility(false)"
     ></add-item-dialog>
   </section>
 </template>
@@ -19,11 +18,13 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AddItemDialog from "./addItemDialog";
+import ActionPanel from "@/shared/components/ActionPanel";
 
 export default {
   name: "ItemPage",
   components: {
     AddItemDialog,
+    ActionPanel,
   },
   data() {
     return {
@@ -37,14 +38,10 @@ export default {
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
     ...mapActions("itemModule", ["addItem", "getItem"]),
-    onAddButtonClicked() {
-      this.addItemDialogVisibility = true;
-    },
-    closeAddItemDialog() {
-      this.addItemDialogVisibility = false;
+    changeItemDialogVisibility(visibility) {
+      this.addItemDialogVisibility = visibility;
     },
   },
-
   async mounted() {
     await this.getItem(this.authenticationResult.tokenOwner.id);
   },

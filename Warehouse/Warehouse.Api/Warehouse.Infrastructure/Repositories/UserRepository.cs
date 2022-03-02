@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Warehouse.Application.Dtos.Item;
+using Warehouse.Domain.Item.Entities;
 using Warehouse.Domain.User;
 using Warehouse.Domain.User.Entities;
 using Warehouse.Infrastructure.Persistence.Context;
@@ -30,11 +32,22 @@ namespace Warehouse.Infrastructure.Repositories
             => await GetWithDependencies()
                 .ToListAsync(cancellationToken);
 
+        public async Task<IEnumerable<Item>> GetUserItemsAsync(
+            Guid userId,
+            CancellationToken cancellationToken)
+            => await DbContext
+                .Set<Item>()
+                .Include(item => item.OwnerId)
+                .Include(item => item.ActualOwnerId)
+                .Where(user => user.Id == userId)
+                .ToListAsync(cancellationToken);
+                    
         private IQueryable<User> GetWithDependencies()
             => DbContext
                 .Set<User>()
                 .Include(user => user.Dues)
                 .Include(user => user.OwnedItems)
                 .Include(user => user.StoredItems);
+        
     }
 }

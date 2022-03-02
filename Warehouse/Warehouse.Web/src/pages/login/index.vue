@@ -67,9 +67,11 @@ export default {
   },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
+    ...mapGetters("registrationModule", ["user"]),
   },
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
+    ...mapGetters("registrationModule", ["addUser"]),
     async onClick() {
       const command = {
         email: this.loginValue,
