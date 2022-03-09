@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Warehouse.Domain.Abstractions;
 using Warehouse.Domain.Category.Enumeration;
 
@@ -99,5 +100,15 @@ namespace Warehouse.Domain.Squad.Entities
 			   State = State.Deleted;
 			   return true;
 		  }
+
+          public void AddUser(User.Entities.User user)
+          {
+              if (Users.Any(u => u.Id == user.Id))
+              {
+                  throw new Exception();
+              }
+
+              Users.Add(user);
+          }
 	 }
 }

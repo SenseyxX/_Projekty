@@ -55,7 +55,7 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
   },
   methods: {
-    ...mapActions("teamModule", ["addTeam"]),
+    ...mapActions("squadModule", ["addTeam"]),
     async saveChanges() {
       const command = {
         name: this.name,
@@ -65,7 +65,7 @@ export default {
         squadId: this.authenticationResult.tokenOwner.squadId,
       };
 
-      await this.addItem(command);
+      await this.addTeam(command);
 
       this.$emit("confirmed");
     },

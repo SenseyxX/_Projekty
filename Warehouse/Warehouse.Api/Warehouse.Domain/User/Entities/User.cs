@@ -19,7 +19,8 @@ namespace Warehouse.Domain.User.Entities
             string phoneNumber,
             PermissionLevel permissionLevel,
             State state,
-            Guid? squadId)
+            Guid? squadId,
+            Guid? teamId)
             : base(id)
         {
             Name = name;
@@ -30,6 +31,7 @@ namespace Warehouse.Domain.User.Entities
             PermissionLevel = permissionLevel;
             State = state;
             SquadId = squadId;
+            TeamId = teamId;
             OwnedItems = new List<Item.Entities.Item>();
             StoredItems = new List<Item.Entities.Item>();
             Dues = new List<Due>();
@@ -43,6 +45,7 @@ namespace Warehouse.Domain.User.Entities
         public Guid? SquadId { get; private set; }
         public State State { get; private set; }
         public PermissionLevel PermissionLevel { get; }
+        public Guid? TeamId { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }
         public ICollection<Item.Entities.Item> StoredItems { get; }
         public ICollection<Due> Dues { get; }
@@ -134,7 +137,7 @@ namespace Warehouse.Domain.User.Entities
             SquadId = squadId;
             return true;
         }
-        
+
         public void AddDue(Half half, int amount)
         {
             var due = DueFactory.Create(Id, half, amount);
@@ -155,6 +158,6 @@ namespace Warehouse.Domain.User.Entities
                 ?? throw new NullReferenceException();
 
             due.UpdateAmount(amount);
-        } 
+        }
     }
 }

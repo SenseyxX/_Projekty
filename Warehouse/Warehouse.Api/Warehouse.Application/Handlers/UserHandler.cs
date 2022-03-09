@@ -36,7 +36,8 @@ namespace Warehouse.Application.Handlers
                 createUserCommand.Email,
                 createUserCommand.PhoneNumber,
                 createUserCommand.PermissionLevel,
-                createUserCommand.SquadId);
+                createUserCommand.SquadId,
+                createUserCommand.TeamId);
 
             await _userRepository.CreateAsync(user, cancellationToken);
             await _userRepository.SaveAsync(cancellationToken);

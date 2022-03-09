@@ -13,7 +13,8 @@ namespace Warehouse.Domain.User.Factories
             string email,
             string phoneNumber,
             PermissionLevel permissionLevel,
-            Guid? squadId)
+            Guid? squadId,
+            Guid? teamId)
             => new (
                 Guid.NewGuid(),
                 name,
@@ -23,6 +24,7 @@ namespace Warehouse.Domain.User.Factories
                 phoneNumber,
                 permissionLevel,
                 State.Active,
-                squadId);
+                squadId,
+                teamId);
     }
 }

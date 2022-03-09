@@ -33,8 +33,8 @@ const actions = {
     const result = await service.getSquadTeams(squadId);
     commit("setTeams", result);
   },
-  async addTeam({ dispatch }, command, squadId) {
-    await service.addTeam(squadId, command);
+  async addTeam({ dispatch }, command) {
+    await service.addTeam(command);
     await dispatch("getSquadTeams");
   },
 };

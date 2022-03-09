@@ -20,11 +20,10 @@ const service = {
   async getSquadTeams(squadId) {
     const resource = `squad/${squadId}/teams`;
     const response = await client.get(resource);
-    console.log(response);
     return response.data.map((team) => new FullTeamDto(team));
   },
-  async addTeam(squadId, command) {
-    const resource = `team/${squadId}`;
+  async addTeam(command) {
+    const resource = `squad/${command.squadId}/teams`;
     return await client.post(resource, command);
   },
 };
