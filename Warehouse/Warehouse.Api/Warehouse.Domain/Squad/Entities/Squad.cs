@@ -85,6 +85,18 @@ namespace Warehouse.Domain.Squad.Entities
             var team = TeamFactory.Create(teamName, teamOwnerId,Id, description);
             Teams.Add(team);
         }
+        
+        public bool AddUser(User.Entities.User user)
+        {
+            // ToDo: change to any
+            if (Users.Contains(user))
+            {
+                return false;
+            }
+            Users.Add(user);
+            return true;
+        }
+
 
         public void DeleteTeam(Guid teamId)
         {

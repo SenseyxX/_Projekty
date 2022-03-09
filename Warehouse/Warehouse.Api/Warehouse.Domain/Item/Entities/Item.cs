@@ -34,7 +34,7 @@ namespace Warehouse.Domain.Item.Entities
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public Guid CategoryId { get; } // Zdefiniowanie wartości która występuje w encji "Category"
+        public Guid CategoryId { get; private set; } // Zdefiniowanie wartości która występuje w encji "Category"
         public QualityLevel QualityLevel { get; private set; } // Zdefiniowanie wartości która występuje w enumie "QualityLevel".
         public int Quantity { get; private set; }
         public State State { get; private set; } // Zdefiniowanie wartości która występuje w enumie "State"
@@ -95,6 +95,17 @@ namespace Warehouse.Domain.Item.Entities
 
             LoanHistories.Add(loanHistory);
 
+            return true;
+        }
+        
+        public bool UpdateCategory(Guid categoryId)
+        {
+            if (CategoryId == categoryId)
+            {
+                return false;
+            }
+
+            CategoryId = categoryId;
             return true;
         }
 

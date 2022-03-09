@@ -34,7 +34,7 @@ namespace Warehouse.Domain.Squad.Entities
 		  public State State { get; private set; }
           public ICollection<User.Entities.User> Users { get; }
 
-		  public bool UpdateName(string name)
+          public bool UpdateName(string name)
 		  {
 			  if (Name == name)
 			  {

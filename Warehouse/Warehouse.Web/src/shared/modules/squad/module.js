@@ -1,15 +1,19 @@
 ﻿import service from "@/shared/modules/squad/service";
+//Todo: when uncomment insta error
+//import { Service } from "vuetify/src/services/service/index";
 
 const state = {
   squads: [],
   squad: {},
   teams: [],
+  team: {},
 };
 
 const getters = {
   squads: (state) => state.squads,
   squad: (state) => state.squad,
   teams: (state) => state.teams,
+  team: (state) => state.team,
 };
 
 const actions = {
@@ -28,6 +32,10 @@ const actions = {
   async getSquadTeams({ commit }, squadId) {
     const result = await service.getSquadTeams(squadId);
     commit("setTeams", result);
+  },
+  async addTeam({ dispatch }, command, squadId) {
+    await service.addTeam(squadId, command);
+    await dispatch("getSquadTeams");
   },
 };
 

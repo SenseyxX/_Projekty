@@ -39,7 +39,7 @@ export default {
   watch: {
     selectedSquad() {
       console.log(this.selectedSquad);
-    }
+    },
   },
   computed: {
     ...mapGetters("squadModule", ["squads"]),

@@ -40,7 +40,7 @@ namespace Warehouse.Domain.User.Entities
         public byte[] PasswordHash { get; private set; }
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
-        public Guid? SquadId { get; }
+        public Guid? SquadId { get; private set; }
         public State State { get; private set; }
         public PermissionLevel PermissionLevel { get; }
         public ICollection<Item.Entities.Item> OwnedItems { get; }
@@ -124,6 +124,17 @@ namespace Warehouse.Domain.User.Entities
             return true;
         }
 
+        public bool UpdateSquad(Guid squadId)
+        {
+            if (SquadId == squadId )
+            {
+                return false;
+            }
+
+            SquadId = squadId;
+            return true;
+        }
+        
         public void AddDue(Half half, int amount)
         {
             var due = DueFactory.Create(Id, half, amount);

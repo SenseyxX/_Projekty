@@ -110,5 +110,13 @@ namespace Warehouse.Application.Handlers
                 await _squadRepository.SaveAsync(cancellationToken);
             }
         }
+
+        public async Task AddUserToTeamAsync(
+            AddUserToTeamCommand addUserToTeamCommand,
+            CancellationToken cancellationToken)
+        {
+            var squad = await _squadRepository.GetAsync(addUserToTeamCommand.squadId,cancellationToken);
+            // squad.AddUser()
+        }
     }
 }

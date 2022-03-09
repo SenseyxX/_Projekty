@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Warehouse.Application.Contracts.Commands.Squad;
 using Warehouse.Application.Dtos.Squad;
 using Warehouse.Application.Handlers;
@@ -34,13 +33,13 @@ namespace Warehouse.Api.Controllers
             CreateSquadCommand createSquadCommand,
             CancellationToken cancellationToken)
         {
-            await _squadHandler.CreateSquadAsync(createSquadCommand,cancellationToken);
+            await _squadHandler.CreateSquadAsync(createSquadCommand, cancellationToken);
             return Ok();
         }
 
         [HttpGet("{squadOwnerId:guid}")]
         public async Task<ActionResult<FullSquadDto>> GetSquadAsync(
-            [FromRoute]Guid squadOwnerId,
+            [FromRoute] Guid squadOwnerId,
             CancellationToken cancellationToken)
         {
             var result = await _squadHandler.GetSquadAsync(squadOwnerId, cancellationToken);
@@ -86,6 +85,20 @@ namespace Warehouse.Api.Controllers
             createTeamCommand.SquadId = squadId;
 
             await _squadHandler.CreateTeamAsync(createTeamCommand, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("team/{teamId}/{userId}")]
+        public async Task<ActionResult> AddUserToTeamAsync(
+            [FromRoute] Guid teamId,
+            [FromRoute] Guid userId,
+            [FromBody] AddUserToTeamCommand addUserToTeamCommand,
+            CancellationToken cancellationToken)
+        {
+            addUserToTeamCommand.teamId = teamId;
+            addUserToTeamCommand.userId = userId;
+
+            await _squadHandler.AddUserToTeamAsync(addUserToTeamCommand, cancellationToken);
             return Ok();
         }
 

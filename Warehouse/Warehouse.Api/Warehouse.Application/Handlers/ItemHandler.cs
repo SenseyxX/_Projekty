@@ -54,8 +54,10 @@ namespace Warehouse.Application.Handlers
             var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
             var isUpdated = item.UpdateName(updateItemCommand.Name);
             isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
+            isUpdated = item.UpdateCategory(updateItemCommand.CategoryId) || isUpdated;
             isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
             isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
+            isUpdated = item.UpdateQuality(updateItemCommand.QualityLevel) || isUpdated;
 
             if (isUpdated)
             {

@@ -4,8 +4,12 @@
       <span>{{ panelTitle }}</span>
     </v-container>
     <v-container class="d-inline-flex pa-2">
-      <v-btn class="button" @click="onAddButtonClicked">+</v-btn>
-      <v-btn class="button" @click="onDeletedButtonClicked">-</v-btn>
+      <v-btn class="button" @click="onAddButtonClicked"
+        ><v-icon dark> mdi-plus-circle</v-icon></v-btn
+      >
+      <v-btn class="button" @click="onDeletedButtonClicked">
+        <v-icon dark> mdi-minus-circle</v-icon></v-btn
+      >
       <v-text-field
         v-if="searchBarVisibility"
         v-model="searchResult"
