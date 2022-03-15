@@ -1,4 +1,4 @@
-﻿export class ItemDto {
+﻿export class FullItemDto {
   constructor(data = {}) {
     this.id = data.id;
     this.name = data.name;

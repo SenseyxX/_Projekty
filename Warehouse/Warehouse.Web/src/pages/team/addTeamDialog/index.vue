@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     ...mapActions("squadModule", ["addTeam"]),
+
     async saveChanges() {
       const command = {
         name: this.name,
