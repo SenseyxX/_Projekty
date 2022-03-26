@@ -12,6 +12,9 @@
         <team-information :team="selectedTeam" />
       </v-col>
     </v-row>
+    <v-row>
+      <users-table :team="selectedTeam" />
+    </v-row>
     <add-team-dialog
       :dialog-visibility="addTeamDialogVisibility"
       @canceled="changeTeamDialogVisibility(false)"
@@ -26,6 +29,7 @@ import TeamList from "@/pages/team/teamList";
 import TeamInformation from "@/pages/team/teamInformation";
 import AddTeamDialog from "@/pages/team/addTeamDialog";
 import ActionPanel from "@/shared/components/ActionPanel";
+import UsersTable from "@/pages/team/usersTable";
 
 export default {
   name: "TeamPage",
@@ -34,6 +38,7 @@ export default {
     TeamInformation,
     AddTeamDialog,
     ActionPanel,
+    UsersTable,
   },
   data() {
     return {

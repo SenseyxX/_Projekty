@@ -1,12 +1,12 @@
 ﻿import client from "@/shared/http-client";
 import { FullUserDto } from "@/shared/modules/user/dto";
-import {FullItemDto} from "@/shared/modules/item/dto";
+import { FullItemDto } from "@/shared/modules/item/dto";
 
 const service = {
   async getUsers() {
     const resource = "user";
     const response = await client.get(resource);
-    return response.data.map((team) => new FullUserDto(team));
+    return response.data.map((user) => new FullUserDto(user));
   },
   async getUser(userId) {
     const resource = `user/${userId}`;
@@ -14,13 +14,13 @@ const service = {
     return new FullUserDto(response.data);
   },
   async addUser(command) {
-    const resource = "team";
+    const resource = "user";
     return await client.post(resource, command);
   },
   async getUserItems(userId) {
     const resource = `user/${userId}/items`;
     const response = await client.get(resource);
-    return response.data.map((team) => new FullItemDto(team));
+    return response.data.map((user) => new FullItemDto(user));
   },
 };
 

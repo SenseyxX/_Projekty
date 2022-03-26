@@ -11,10 +11,11 @@ namespace Warehouse.Application.Dtos.Squad
 		  private FullSquadDto(
                 Guid id,
                 string name,
+                Guid? squadOwnerId,
                 State state,
                 IEnumerable<TeamDto> teams,
 			    IEnumerable<UserDto> users)
-              : base(id,name,state)
+              : base(id,name,squadOwnerId,state)
 		  {
 			   Users = users;
 			   Teams = teams;
@@ -27,6 +28,7 @@ namespace Warehouse.Application.Dtos.Squad
 			   => new(
                    squad.Id,
                    squad.Name,
+                   squad.SquadOwnerId,
                    squad.State,
                    squad.Teams.Select(team => (TeamDto)team),
                    squad.Users.Select(user => (UserDto)user));

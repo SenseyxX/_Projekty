@@ -25,6 +25,7 @@ export default {
     selectedTeam() {
       if (this.selectedTeam) {
         this.$emit("teamSelected", this.selectedTeam);
+        console.log(this.selectedTeam());
       }
     },
   },

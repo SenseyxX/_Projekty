@@ -12,7 +12,7 @@ namespace Warehouse.Domain.Squad.Factories
 			   Guid squadId,
 			   string description)
 			   => new(
-				    Guid.Empty,
+				    Guid.NewGuid(),
 				    name,
 				    teamOwnerId,
 				    squadId,

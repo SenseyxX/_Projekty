@@ -1,4 +1,5 @@
 ﻿using System;
+using Warehouse.Domain.Squad.Entities;
 
 namespace Warehouse.Application.Dtos.User
 {
@@ -10,7 +11,8 @@ namespace Warehouse.Application.Dtos.User
             string lastName,
             string email,
             string phoneNumber,
-            Guid? squadId)
+            Guid? squadId,
+            Guid? teamId)
         {
             Id = id;
             Name = name;
@@ -18,6 +20,8 @@ namespace Warehouse.Application.Dtos.User
             Email = email;
             PhoneNumber = phoneNumber;
             SquadId = squadId;
+            TeamId = teamId;
+
         }
 
         public Guid Id { get; }
@@ -26,6 +30,7 @@ namespace Warehouse.Application.Dtos.User
         public string Email { get; }
         public string PhoneNumber { get;}
         public Guid? SquadId { get; }
+        public Guid? TeamId { get; }
 
         public static explicit operator UserDto(Domain.User.Entities.User user)
             => new (
@@ -34,6 +39,7 @@ namespace Warehouse.Application.Dtos.User
                 user.LastName,
                 user.Email,
                 user.PhoneNumber,
-                user.SquadId);
+                user.SquadId,
+                user.TeamId);
 	 }
 }

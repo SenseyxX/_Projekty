@@ -68,7 +68,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet("{squadId:guid}/teams")]
-        public async Task<ActionResult<IEnumerable<FullTeamDto>>> GetTeamsAsync(
+        public async Task<ActionResult<IEnumerable<TeamDto>>> GetTeamsAsync(
             [FromRoute] Guid squadId,
             CancellationToken cancellationToken)
         {
@@ -76,6 +76,7 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
+        //ToDo: verify why add users in same squad 
         [HttpPost("{squadId:guid}/teams")]
         public async Task<ActionResult> AddTeamAsync(
             [FromRoute] Guid squadId,

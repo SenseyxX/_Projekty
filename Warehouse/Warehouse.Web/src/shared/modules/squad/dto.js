@@ -1,14 +1,22 @@
 ﻿import { FullUserDto } from "@/shared/modules/user/dto";
 
-export class SquadDto {
+export class FullSquadDto {
   constructor(data = {}) {
     this.id = data.id;
     this.name = data.name;
+    this.squadOwnerId = data.squadOwnerId;
     this.state = data.state;
     this.teams = data.teams ? data.teams.map((team) => new TeamDto(team)) : [];
     this.users = data.users
       ? data.users.map((user) => new FullUserDto(user))
       : [];
+  }
+}
+export class SquadDto {
+  constructor(data = {}) {
+    this.id = data.id;
+    this.name = data.name;
+    this.squadOwnerId = data.squadOwnerId;
   }
 }
 

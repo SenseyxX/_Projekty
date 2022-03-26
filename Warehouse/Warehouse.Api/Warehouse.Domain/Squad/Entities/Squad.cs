@@ -83,8 +83,6 @@ namespace Warehouse.Domain.Squad.Entities
             Users.Add(user);
         }
 
-        // ToDo: Add deleting user.
-
         public void AddTeam(string teamName,
             Guid teamOwnerId,
             string description)

@@ -12,14 +12,15 @@
               label="Nazwa Zastępu"
               :rules="[(v) => !!v || 'Nazwa jest wymagana']"
             />
-            <!--ToDo: Add combobox to teamOwner with ppl with squadId same like squadOwner-->
+            <!--ToDo: verify why cant add team -->
             <v-select
               v-model="selectedUser"
-              :items="teams"
+              label=" Zastępowy"
+              :items="users"
               item-text="name"
+              :rules="[(v) => !!v || 'Nazwa jest wymagana']"
               return-object
             ></v-select>
-            <v-text-field v-model="teamOwnerId" label="Zastępowy" />
             <v-text-field v-model="description" label="Opis zastępu" />
           </v-form>
         </div>
@@ -31,10 +32,10 @@
               Anuluj
             </v-btn>
             <v-btn
-                @click="saveChanges"
-                color="primary"
-                class="mr-8"
-                :disabled="!isValid"
+              @click="saveChanges"
+              color="primary"
+              class="mr-8"
+              :disabled="!isValid"
             >
               Zapisz
             </v-btn>
@@ -72,9 +73,11 @@ export default {
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("squadModule", ["teams"]),
+    ...mapGetters("userModule", ["users"]),
   },
   methods: {
     ...mapActions("squadModule", ["addTeam"]),
+    ...mapActions("userModule", ["getUsers"]),
 
     async saveChanges() {
       const command = {
@@ -94,7 +97,7 @@ export default {
     },
   },
   async mounted() {
-    // ToDo: Add getting of users.
+    await this.getUsers();
   },
 };
 </script>

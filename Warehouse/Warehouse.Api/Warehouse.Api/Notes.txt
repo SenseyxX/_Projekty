@@ -2,8 +2,12 @@
 * Dodanie zdjęcia jako prop do encji itemu
 * Dodać autoryzacje do kontrolerów
 * Dodać Update password
-* Dodać walidacja unikalności adressu e-mail
+* Dodać walidacja unikalności adresu e-mail
 * Dodać controller Update SquadId 
+* Dodać unikalnośc propów (numer telefonu, email, nazwa zastępu w drużynie, nazwa drużyny)
+
+"WarehouseContext": "Data Source=10.90.0.201;Initial Catalog=Warehouse-2020;Integrated Security=True;"
+"WarehouseContext": "Data Source=10.90.0.201;Initial Catalog=Warehouse-2020;User id=electrolux;Password=etisoft1234;"
 
 
 * Następnie żeby utworzyć migracje musisz skorzystać z command line'a i użyć komendy:

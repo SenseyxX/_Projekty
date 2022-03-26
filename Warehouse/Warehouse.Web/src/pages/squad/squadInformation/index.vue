@@ -1,20 +1,18 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-list readonly>
-      <v-list-item>Nazwa: {{ team.name }}</v-list-item>
-      <v-list-item>Zastępowy: {{ team.teamOwnerId }}</v-list-item>
-      <v-list-item>Punkty: {{ team.points }}</v-list-item>
-      <v-list-item>Opis: {{ team.description }}</v-list-item>
+      <v-list-item>Nazwa: {{ squad.name }}</v-list-item>
+      <v-list-item>Zastępowy: {{ squad.teamOwnerId }}</v-list-item>
     </v-list>
   </section>
 </template>
 
 <script>
 export default {
-  name: "TeamInformation",
+  name: "SquadInformation",
   components: {},
   props: {
-    team: {
+    squad: {
       type: Object,
       defaultValue: null,
     },

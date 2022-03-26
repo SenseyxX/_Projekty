@@ -2,7 +2,7 @@
   <section class="text-center centerized">
     <v-data-table
       :headers="headers"
-      :items="teams"
+      :items="users"
       item-key="id"
     ></v-data-table>
   </section>
@@ -12,7 +12,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "TeamTable",
+  name: "UserTable",
   components: {},
   props: {
     team: {
@@ -23,27 +23,26 @@ export default {
   data() {
     return {
       headers: [
-        { text: "Nazwa", value: "name" },
-        { text: "Drużyna", value: "squadId" },
-        { text: "Zastępowy", value: "teamOwnerId" },
-        { text: "Punkty", value: "points" },
+        { text: "Imię", value: "name" },
+        { text: "Nazwisko", value: "lastName" },
+        { text: "E-mail", value: "email" },
+        { text: "Telefon", value: "phoneNumber" },
       ],
     };
   },
   computed: {
-    ...mapGetters("authenticationModule", ["authenticationResult"]),
-    ...mapGetters("squadModule", ["teams"]),
+    ...mapGetters("userModule", ["users"]),
     // filteredUsers() {
     //   return this.users.filter((user) => user.teamId === team.id);
     // },
   },
   methods: {
-    ...mapActions("squadModule", ["getSquadTeams"]),
+    ...mapActions("userModule", ["getUsers"]),
   },
 
   async mounted() {
-    await this.getSquadTeams(this.authenticationResult.tokenOwner.squadId);
-    console.log(this.teams);
+    await this.getUsers();
+    console.log(this.users);
   },
 };
 </script>

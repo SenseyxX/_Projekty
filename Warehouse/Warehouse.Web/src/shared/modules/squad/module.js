@@ -1,6 +1,4 @@
 ﻿import service from "@/shared/modules/squad/service";
-//Todo: when uncomment insta error
-//import { Service } from "vuetify/src/services/service/index";
 
 const state = {
   squads: [],

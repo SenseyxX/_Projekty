@@ -8,6 +8,5 @@ namespace Warehouse.Application.Contracts.Commands.Squad
 		  public Guid TeamOwnerId { get; init; }
 		  public Guid SquadId { get; set; }
 		  public string Description { get; init; }
-		  public int Points { get; init; }
 	 }
 }
