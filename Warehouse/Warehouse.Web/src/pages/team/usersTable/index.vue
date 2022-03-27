@@ -12,7 +12,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "UserTable",
+  name: "UsersTable",
   components: {},
   props: {
     team: {

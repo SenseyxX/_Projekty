@@ -18,7 +18,7 @@
               label=" Zastępowy"
               :items="users"
               item-text="name"
-              :rules="[(v) => !!v || 'Nazwa jest wymagana']"
+              :rules="[(v) => !!v || 'Zastępowy jest wymagany']"
               return-object
             ></v-select>
             <v-text-field v-model="description" label="Opis zastępu" />

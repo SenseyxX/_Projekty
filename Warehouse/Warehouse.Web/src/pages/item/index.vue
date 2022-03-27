@@ -7,11 +7,16 @@
       />
       <v-spacer />
     </v-row>
-    <add-item-dialog
-      :dialog-visibility="addItemDialogVisibility"
-      @canceled="changeItemDialogVisibility(false)"
-      @confirmed="changeItemDialogVisibility(false)"
-    ></add-item-dialog>
+    <v-row>
+      <add-item-dialog
+        :dialog-visibility="addItemDialogVisibility"
+        @canceled="changeItemDialogVisibility(false)"
+        @confirmed="changeItemDialogVisibility(false)"
+      ></add-item-dialog>
+    </v-row>
+    <v-row>
+      <items-table />
+    </v-row>
   </section>
 </template>
 
@@ -19,12 +24,14 @@
 import { mapGetters, mapActions } from "vuex";
 import AddItemDialog from "./addItemDialog";
 import ActionPanel from "@/shared/components/ActionPanel";
+import ItemsTable from "./itemsTable";
 
 export default {
   name: "ItemPage",
   components: {
     AddItemDialog,
     ActionPanel,
+    ItemsTable,
   },
   data() {
     return {

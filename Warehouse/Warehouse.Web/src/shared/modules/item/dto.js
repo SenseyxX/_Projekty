@@ -11,3 +11,13 @@
     this.actualOwner = data.actualOwner;
   }
 }
+
+export class LoanHistoryDto {
+  constructor(data = {}) {
+    this.id = data.id;
+    this.timestamp = data.timestamp;
+    this.itemId = data.itemId;
+    this.borrowerId = data.borrowerId;
+    this.receiverId = data.receiverId;
+  }
+}

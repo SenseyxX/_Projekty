@@ -10,21 +10,25 @@
             :rules="[(v) => !!v || 'Nazwa jest wymagana']"
           />
           <v-text-field v-model="description" label="Opis przedmiotu" />
-          <v-text-field
-            v-model="categoryId"
-            label="Kategoria przedmiotu"
+          <!--ToDo: Add category combobox-->
+          <v-select
+            v-model="selectedCategory"
+            label="Kategoria"
+            :items="category"
+            item-text="name"
             :rules="[(v) => !!v || 'Kategoria jest wymagana']"
-          />
-          <v-text-field
-            v-model="qualityLevel"
-            label="Jakość przedmiotu"
-            :rules="[(v) => !!v || 'Jakość jest wymagana']"
-          />
-          <v-text-field
-            v-model="quantity"
-            label="Ilość"
-            :rules="[(v) => !!v || 'Ilość jest wymagana']"
-          />
+            return-object
+          ></v-select>
+          <v-text-field v-model="quantity" label="Ilość" />
+          <!--ToDo: Add quantityLevel combobox-->
+          <v-select
+            v-model="selectedQuantityLevel"
+            label="Stan"
+            :items="qualityLevel"
+            item-text="name"
+            :rules="[(v) => !!v || 'Określenie stanu jest wymagane']"
+            return-object
+          ></v-select>
         </v-form>
       </div>
       <v-container>
@@ -55,7 +59,7 @@ export default {
     name: "",
     description: "",
     categoryId: "",
-    qualityLevel: "",
+    qualityLevel: ["Śmietnik", "Zły", "Umierkowany", "Dobry", "Świetny"],
     quantity: "1",
     isValid: false,
   }),
@@ -67,14 +71,17 @@ export default {
   },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
+    ...mapGetters("categoryModule", ["category"]),
   },
   methods: {
     ...mapActions("itemModule", ["addItem"]),
+    ...mapActions("categoryModule", ["getCategories"]),
     async saveChanges() {
       const command = {
         name: this.name,
         description: this.description,
         categoryId: this.categoryId,
+        //ToDo: change qualityLevel from name to id
         qualityLevel: this.qualityLevel,
         quantity: this.quantity,
         ownerId: this.authenticationResult.tokenOwner.id,
@@ -86,6 +93,9 @@ export default {
     },
     cancel() {
       this.$emit("canceled");
+    },
+    async mounted() {
+      await this.getCategories();
     },
   },
 };

@@ -3,15 +3,15 @@ import { FullUserDto } from "@/shared/modules/user/dto";
 import { FullItemDto } from "@/shared/modules/item/dto";
 
 const service = {
-  async getUsers() {
-    const resource = "user";
-    const response = await client.get(resource);
-    return response.data.map((user) => new FullUserDto(user));
-  },
   async getUser(userId) {
     const resource = `user/${userId}`;
     const response = await client.get(resource);
     return new FullUserDto(response.data);
+  },
+  async getUsers() {
+    const resource = "user";
+    const response = await client.get(resource);
+    return response.data.map((user) => new FullUserDto(user));
   },
   async addUser(command) {
     const resource = "user";

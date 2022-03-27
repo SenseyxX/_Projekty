@@ -5,10 +5,10 @@
       <div class="select-group">
         <v-form ref="form" v-model="isValid">
           <v-text-field v-model="name" label="Nazwa Przedmiotu" />
+          <v-text-field v-model="description" label="Opis przedmiotu" />
           <!--ToDo: Add category combobox-->
           <v-text-field v-model="quantity" label="Ilość" />
           <!--ToDo: Add quantityLevel combobox-->
-          <v-text-field v-model="description" label="Opis zastępu" />
         </v-form>
       </div>
       <v-container>

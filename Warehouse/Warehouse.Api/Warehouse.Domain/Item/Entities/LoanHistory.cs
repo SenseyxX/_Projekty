@@ -5,7 +5,8 @@ namespace Warehouse.Domain.Item.Entities
 {
     public sealed class LoanHistory : Entity
     {
-        public LoanHistory(Guid id,
+        public LoanHistory(
+            Guid id,
             DateTime timestamp,
             Guid itemId,
             Guid borrowerId,
