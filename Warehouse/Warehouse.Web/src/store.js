@@ -7,6 +7,7 @@ import squadModule from "@/shared/modules/squad/module";
 import itemModule from "@/shared/modules/item/module";
 import registrationModule from "@/shared/modules/registration/module";
 import userModule from "@/shared/modules/user/module";
+import categoryModule from "@/shared/modules/category/module";
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
     userModule,
     itemModule,
     registrationModule,
+    categoryModule,
   },
 });
 

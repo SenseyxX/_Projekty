@@ -2,7 +2,7 @@
   <section class="text-center centerized">
     <v-data-table
       :headers="headers"
-      :items="users"
+      :items="filteredUsers"
       item-key="id"
     ></v-data-table>
   </section>
@@ -32,9 +32,9 @@ export default {
   },
   computed: {
     ...mapGetters("userModule", ["users"]),
-    // filteredUsers() {
-    //   return this.users.filter((user) => user.teamId === team.id);
-    // },
+    filteredUsers() {
+      return this.users.filter((user) => user.teamId === this.team.id);
+    },
   },
   methods: {
     ...mapActions("userModule", ["getUsers"]),

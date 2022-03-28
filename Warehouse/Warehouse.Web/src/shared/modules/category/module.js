@@ -1,7 +1,7 @@
 ﻿import service from "@/shared/modules/category/service";
 
 const state = {
-  category: {},
+  category: [],
 };
 
 const getters = {

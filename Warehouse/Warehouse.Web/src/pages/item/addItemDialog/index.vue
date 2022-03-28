@@ -26,8 +26,8 @@
             label="Stan"
             :items="qualityLevel"
             item-text="name"
+            item-value="id"
             :rules="[(v) => !!v || 'Określenie stanu jest wymagane']"
-            return-object
           ></v-select>
         </v-form>
       </div>
@@ -59,7 +59,15 @@ export default {
     name: "",
     description: "",
     categoryId: "",
-    qualityLevel: ["Śmietnik", "Zły", "Umierkowany", "Dobry", "Świetny"],
+    selectedQuantityLevel: 2,
+    selectedCategory: null,
+    qualityLevel: [
+      { id: 0, name: "Śmietnik" },
+      { id: 1, name: "Zły" },
+      { id: 2, name: "Umiarkowany" },
+      { id: 3, name: "Dobry" },
+      { id: 4, name: "Świetny" },
+    ],
     quantity: "1",
     isValid: false,
   }),
@@ -77,12 +85,12 @@ export default {
     ...mapActions("itemModule", ["addItem"]),
     ...mapActions("categoryModule", ["getCategories"]),
     async saveChanges() {
+      console.log(this.selectedQuantityLevel);
       const command = {
         name: this.name,
         description: this.description,
         categoryId: this.categoryId,
-        //ToDo: change qualityLevel from name to id
-        qualityLevel: this.qualityLevel,
+        qualityLevel: this.selectedQuantityLevel,
         quantity: this.quantity,
         ownerId: this.authenticationResult.tokenOwner.id,
       };
@@ -94,9 +102,10 @@ export default {
     cancel() {
       this.$emit("canceled");
     },
-    async mounted() {
-      await this.getCategories();
-    },
+  },
+  async mounted() {
+    await this.getCategories();
+    console.log(this.category);
   },
 };
 </script>
