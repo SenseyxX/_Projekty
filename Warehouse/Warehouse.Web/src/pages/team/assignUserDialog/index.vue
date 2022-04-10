@@ -1,16 +1,12 @@
 ﻿<template>
-  <v-dialog persistent v-model="dialogVisibility">
+  <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card class="frame">
-      <p class="ma-4 text-h6">Zastępy</p>
-      <div class="select-group">
-        <v-form ref="form" v-model="isValid">
-          <v-text-field v-model="name" label="Imię" />
-          <v-text-field v-model="lastName" label="Nazwisko" />
-          <!--ToDo: Add checkbox with edit password -->
-          <v-text-field v-model="email" label="E-mail" />
-          <v-text-field v-model="phonenumber" label="Numer telefonu" />
-        </v-form>
-      </div>
+      <v-toolbar color="primary" dark>
+        <p class="ma-4 text-h6">Przypisywanie użytkowników do zastępu</p>
+      </v-toolbar>
+      <div class="select-group"></div>
+      Użytkownicy w zastępie
+      <!--ToDo: add multiple selects with all unassigned users to team on selected team-->
       <v-container>
         <v-row class="buttons-group" justify="end">
           <v-btn @click="cancel" text color="primary" outlined class="mr-8">
@@ -34,17 +30,20 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "addTeamDialog",
+  name: "assignUserDialog",
   data: () => ({
+    userId: "",
     name: "",
-    lastName: "",
-    password: "",
-    email: "",
-    phoneNumber: "",
+    teamId: "",
+    isValid: false,
   }),
   props: {
     dialogVisibility: {
       type: Boolean,
+      defaultValue: false,
+    },
+    selectedTeam: {
+      type: Object,
       defaultValue: false,
     },
   },
@@ -52,17 +51,17 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
   },
   methods: {
-    ...mapActions("teamModule", ["addTeam"]),
+    ...mapActions("userModule", ["getUsers"]),
+    //ToDo: add PUT user Endpoint
+    //ToDo: add method to filter chosen team
     async saveChanges() {
       const command = {
+        id: this.userId,
         name: this.name,
-        lastName: this.lastName,
-        password: this.password,
-        email: this.email,
-        phoneNumber: this.phoneNumber,
+        teamId: this.selectedTeam.id,
       };
 
-      await this.addItem(command);
+      await this.editUser(command);
 
       this.$emit("confirmed");
     },

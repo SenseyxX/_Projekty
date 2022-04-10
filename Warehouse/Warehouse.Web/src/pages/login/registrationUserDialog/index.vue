@@ -2,7 +2,7 @@
   <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card>
       <v-toolbar color="primary" dark>
-        <p class="ma-4 text-h6">Użytkownik</p>
+        <p class="ma-4 text-h6">Rejestracja</p>
       </v-toolbar>
       <v-card-text>
         <div class="select-group">
@@ -36,6 +36,14 @@
               label="Numer telefonu"
               :rules="[(v) => !!v || 'Numer telefonu jest wymagany']"
             />
+            <!--            <v-select-->
+            <!--              v-model="selectedSquad"-->
+            <!--              label=" Drużyna"-->
+            <!--              :items="squads"-->
+            <!--              item-text="name"-->
+            <!--              item-value="id"-->
+            <!--              :rules="[(v) => !!v || 'Drużyna jest wymagany']"-->
+            <!--            ></v-select>-->
           </v-form>
         </div>
         <v-container>
@@ -69,7 +77,9 @@ export default {
     password: "",
     email: "",
     phoneNumber: "",
+    squad: "",
     isValid: false,
+    selectedSquad: null,
   }),
   props: {
     dialogVisibility: {
@@ -79,9 +89,11 @@ export default {
   },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
+    ...mapGetters("squadModule", ["squads"]),
   },
   methods: {
     ...mapActions("registrationModule", ["addUser"]),
+    ...mapActions("squadModule", ["getSquads"]),
     async saveChanges() {
       const command = {
         name: this.name,
@@ -89,14 +101,19 @@ export default {
         password: this.password,
         email: this.email,
         phoneNumber: this.phoneNumber,
+        squadId: this.selectedSquad,
       };
 
       await this.addUser(command);
 
       this.$emit("confirmed");
+      this.$emit("canceled");
     },
     cancel() {
       this.$emit("canceled");
+    },
+    async mounted() {
+      await this.getSquads();
     },
   },
 };

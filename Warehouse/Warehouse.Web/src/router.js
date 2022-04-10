@@ -4,11 +4,18 @@ import squadRoutes from "@/pages/squad/router";
 import teamRoutes from "@/pages/team/router";
 import itemRoutes from "@/pages/item/router";
 import loginRoutes from "./pages/login/router";
+import profileRoutes from "@/pages/profile/router";
 import { AuthenticationResultStorageKey } from "@/shared/constants";
 
 Vue.use(Router);
 
-const routes = [squadRoutes, teamRoutes, itemRoutes, loginRoutes];
+const routes = [
+  squadRoutes,
+  teamRoutes,
+  itemRoutes,
+  loginRoutes,
+  profileRoutes,
+];
 
 const router = new Router({
   routes: routes,

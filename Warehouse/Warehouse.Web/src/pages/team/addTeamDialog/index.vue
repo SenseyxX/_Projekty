@@ -1,8 +1,8 @@
 ﻿<template>
-  <v-dialog persistent v-model="dialogVisibility">
+  <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card class="frame">
       <v-toolbar color="primary" dark>
-        <p class="ma-4 text-h6">Zastępy</p>
+        <p class="ma-4 text-h6">Tworzenie Zastępu</p>
       </v-toolbar>
       <v-card-text>
         <div class="select-group">
@@ -12,36 +12,35 @@
               label="Nazwa Zastępu"
               :rules="[(v) => !!v || 'Nazwa jest wymagana']"
             />
-            <!--ToDo: verify why cant add team -->
             <v-select
               v-model="selectedUser"
               label=" Zastępowy"
-              :items="users"
+              :items="filteredUser()"
               item-text="name"
+              item-value="id"
               :rules="[(v) => !!v || 'Zastępowy jest wymagany']"
-              return-object
             ></v-select>
             <v-text-field v-model="description" label="Opis zastępu" />
           </v-form>
         </div>
+        <v-card-actions justify="end">
+          <v-container>
+            <v-row class="buttons-group">
+              <v-btn @click="cancel" text color="primary" outlined class="mr-8">
+                Anuluj
+              </v-btn>
+              <v-btn
+                @click="saveChanges"
+                color="primary"
+                class="mr-8"
+                :disabled="!isValid"
+              >
+                Zapisz
+              </v-btn>
+            </v-row>
+          </v-container>
+        </v-card-actions>
       </v-card-text>
-      <v-card-actions justify="end">
-        <v-container>
-          <v-row class="buttons-group">
-            <v-btn @click="cancel" text color="primary" outlined class="mr-8">
-              Anuluj
-            </v-btn>
-            <v-btn
-              @click="saveChanges"
-              color="primary"
-              class="mr-8"
-              :disabled="!isValid"
-            >
-              Zapisz
-            </v-btn>
-          </v-row>
-        </v-container>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -78,13 +77,18 @@ export default {
   methods: {
     ...mapActions("squadModule", ["addTeam"]),
     ...mapActions("userModule", ["getUsers"]),
+    filteredUser() {
+      return this.users.filter(
+        (users) =>
+          users.squadId === this.authenticationResult.tokenOwner.squadId
+      );
+    },
 
     async saveChanges() {
       const command = {
         name: this.name,
-        teamOwnerId: this.teamOwnerId,
+        teamOwnerId: this.selectedUser,
         description: this.description,
-        points: this.points,
         squadId: this.authenticationResult.tokenOwner.squadId,
       };
 

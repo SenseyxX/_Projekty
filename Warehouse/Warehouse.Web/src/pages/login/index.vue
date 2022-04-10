@@ -2,7 +2,7 @@
   <section class="text-center centerized">
     <h6 class="title">Zaloguj się</h6>
     <p class="body-2 text-muted subtitle">
-      Wpisz poniżej swój login i hasło a następnie nacisnij "Start".
+      Wpisz poniżej swój login i hasło a następnie nacisnij "Zaloguj".
     </p>
     <v-btn text color="primary" @click="showRegistrationUserDialog"
       >Zarejestruj</v-btn
@@ -36,7 +36,7 @@
         :color="Theme.mainButtonBackgroundColor"
         :disabled="!isValid"
       >
-        Start
+        Zaloguj
       </v-btn>
     </v-row>
     <registration-user-dialog

@@ -25,6 +25,20 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "loanHistoryDialog",
+  props: {
+    selectedItem: {
+      type: Object,
+      defaultValue: null,
+    },
+    dialogVisibility: {
+      type: Boolean,
+      defaultValue: false,
+    },
+    loanHistory: {
+      type: Object,
+      defaultValue: null,
+    },
+  },
   data: () => ({
     name: "",
     isValid: false,
@@ -35,16 +49,6 @@ export default {
       { text: "Wypozyczający", value: "receiverId" },
     ],
   }),
-  props: {
-    dialogVisibility: {
-      type: Boolean,
-      defaultValue: false,
-    },
-    loanHistory: {
-      type: Object,
-      defaultValue: null,
-    },
-  },
   computed: {
     ...mapGetters("itemModule", ["loanhistory"]),
   },
@@ -54,10 +58,9 @@ export default {
       this.$emit("canceled");
     },
   },
-  // ToDo: add selected itemId to endpoint
-  // async mounted() {
-  //   await this.getItemLoanHistory(item.id);
-  // },
+  async mounted() {
+    await this.getItemLoanHistory(this.selectedItem.id);
+  },
 };
 </script>
 

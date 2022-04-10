@@ -32,9 +32,10 @@ namespace Warehouse.Infrastructure.Repositories
         private IQueryable<Squad> GetSquadDependencies()
             => DbContext
                 .Set<Squad>()
-                .AsNoTracking()
+                .AsNoTrackingWithIdentityResolution()
+                
                 .Include(squad => squad.Users)
                 .Include(squad => squad.Teams)
-                    .ThenInclude(team => team.Users);
+                .ThenInclude(team => team.Users);
     }
 }

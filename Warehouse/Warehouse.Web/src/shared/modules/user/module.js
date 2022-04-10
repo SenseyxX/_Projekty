@@ -19,13 +19,9 @@ const actions = {
     const result = await service.getUsers();
     commit("setUsers", result);
   },
-  async GetUserItems({ commit }, userId) {
-    const result = await service.getUserItems(userId);
-    commit("setUser", result);
-  },
   async addUser({ dispatch }, command) {
     await service.addUser(command);
-    await dispatch("getUser", command.id);
+    await dispatch(command.id);
   },
 };
 

@@ -20,6 +20,7 @@ namespace Warehouse.Application.Dtos.Squad
         public Guid Id { get; }
         public string Name { get;  }
         public Guid? SquadOwnerId { get; }
+        public string SquadOwnerName { get; set; }
         public State State { get;  }
 
         public static explicit operator SquadDto(Domain.Squad.Entities.Squad squad)

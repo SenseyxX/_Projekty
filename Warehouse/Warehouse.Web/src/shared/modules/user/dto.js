@@ -8,6 +8,6 @@
     this.squadId = data.squadId;
     this.teamId = data.teamId;
 
-    // ToDo: implement IEnumerable ownedItems and storedItems
+    // ToDo: implement IEnumerable ownedItems/storedItems and dues
   }
 }

@@ -1,19 +1,47 @@
 ﻿<template>
   <section class="text-center centerized">
-    <v-data-table
-      :headers="headers"
-      :items="filteredUsers"
-      item-key="id"
-    ></v-data-table>
+    <v-row>
+      <v-col md="3">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Szukaj"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-col>
+      <v-col>
+        <v-btn color="primary" @click="showAssignUserDialog"
+          >Przypisz do Zastępu</v-btn
+        >
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-data-table
+          :headers="headers"
+          :items="filteredUsers"
+          :search="search"
+          item-key="id"
+        ></v-data-table>
+      </v-col>
+    </v-row>
+    <assign-user-dialog
+      :dialog-visibility="assignUserDialogVisibility"
+      @canceled="hideAssignUserDialog"
+    />
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import AssignUserDialog from "@/pages/team/assignUserDialog";
 
 export default {
   name: "UsersTable",
-  components: {},
+  components: {
+    AssignUserDialog,
+  },
   props: {
     team: {
       type: Object,
@@ -22,6 +50,8 @@ export default {
   },
   data() {
     return {
+      search: "",
+      assignUserDialogVisibility: false,
       headers: [
         { text: "Imię", value: "name" },
         { text: "Nazwisko", value: "lastName" },
@@ -33,16 +63,21 @@ export default {
   computed: {
     ...mapGetters("userModule", ["users"]),
     filteredUsers() {
-      return this.users.filter((user) => user.teamId === this.team.id);
+      return this.users.filter((users) => users.teamId === this.team.id);
     },
   },
   methods: {
     ...mapActions("userModule", ["getUsers"]),
+    showAssignUserDialog() {
+      this.assignUserDialogVisibility = true;
+    },
+    hideAssignUserDialog() {
+      this.assignUserDialogVisibility = false;
+    },
   },
 
   async mounted() {
     await this.getUsers();
-    console.log(this.users);
   },
 };
 </script>

@@ -21,8 +21,11 @@ namespace Warehouse.Application.Dtos.Squad
 			   UserDtos = userDtos;
           }
 
+		  public string TeamOwnerName { get; set; }
+		  public string SquadName { get; set; }
 		  public int Points { get; }
 		  public IEnumerable<UserDto> UserDtos { get; }
+		  
 
 		  public static explicit operator FullTeamDto(Team team)
 			   =>new (

@@ -1,4 +1,5 @@
 export const MenuKeys = {
+  Profile: "Profile",
   Squad: "Squad",
   Team: "Team",
   Item: "Item",
@@ -8,6 +9,11 @@ export const MenuKeys = {
 };
 
 export const MenuOptions = [
+  {
+    key: MenuKeys.Profile,
+    title: "Profil",
+    icon: "mdi mdi-account",
+  },
   {
     key: MenuKeys.Squad,
     title: "Drużyny",

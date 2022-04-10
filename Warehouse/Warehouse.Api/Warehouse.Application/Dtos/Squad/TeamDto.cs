@@ -20,7 +20,9 @@ namespace Warehouse.Application.Dtos.Squad
         public Guid Id { get; }
         public string Name { get; }
         public Guid SquadId { get; }
+        public string SquadName { get; set; }
         public Guid? TeamOwnerId { get; }
+        public string TeamOwnerName { get; set; }
 
         public static explicit operator TeamDto(Team team)
             => new(

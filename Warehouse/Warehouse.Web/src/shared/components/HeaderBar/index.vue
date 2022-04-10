@@ -70,6 +70,9 @@ export default {
     ...mapActions("authenticationModule", ["logout"]),
     onMenuOptionSelected(key) {
       switch (key) {
+        case MenuKeys.Profile:
+          this.$router.push("/profile");
+          break;
         case MenuKeys.Squad:
           this.$router.push("/squad");
           break;

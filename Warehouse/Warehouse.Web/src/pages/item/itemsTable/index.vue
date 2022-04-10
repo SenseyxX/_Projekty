@@ -1,6 +1,30 @@
 ﻿<template>
   <section class="text-center centerized">
-    <v-data-table :headers="headers" :items="items" item-key="id" />
+    <v-row>
+      <v-col md="3">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Szukaj"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-data-table
+          :headers="headers"
+          :items="filteredItems"
+          :search="search"
+          item-key="id"
+        >
+          <template>
+            <v-icon>"mdi-delete"</v-icon>
+          </template>
+        </v-data-table>
+      </v-col>
+    </v-row>
   </section>
 </template>
 
@@ -10,40 +34,37 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "ItemsTable",
   components: {},
-  props: {
-    itemId: {
-      //ToDo: Change type, probably only id needed
-      type: Object,
-      defaultValue: null,
-    },
-  },
+  props: {},
   data() {
     return {
+      search: "",
       headers: [
         { text: "Nazwa", value: "name" },
-        { text: "Opis", value: "description" },
-        { text: "Kategoria", value: "categoryId" },
-        { text: "Stan", value: "qualityLevel" },
+        { text: "Opis", value: "description", sortable: false },
+        { text: "Kategoria", value: "categoryName" },
+        { text: "Stan", value: "qualityLevel" }, //ToDo: Change QualityLevel to QualityLevelName
         { text: "Ilośc", value: "quantity" },
-        { text: "Właściciel", value: "ownerId" },
-        { text: "Posiadacz", value: "actualOwnerId" },
+        { text: "Właściciel", value: "ownerName" },
+        { text: "Posiadacz", value: "actualOwnerName" },
+        { text: "Akcje", value: "actions", sortable: false },
       ],
     };
   },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
-    ...mapGetters("userModule", ["items"]),
-    // filteredUsers() {
-    //   return this.users.filter((user) => user.teamId === team.id);
-    // },
+    ...mapGetters("itemModule", ["items"]),
+    filteredItems() {
+      return this.items.filter(
+        (item) => item.ownerId === this.authenticationResult.tokenOwner.id
+      );
+    },
   },
   methods: {
     ...mapActions("itemModule", ["getItems"]),
   },
 
   async mounted() {
-    await this.GetUserItems(this.authenticationResult.tokenOwner.id);
-    console.log(this.GetUserItems(this.authenticationResult.tokenOwner.id));
+    await this.getItems();
   },
 };
 </script>

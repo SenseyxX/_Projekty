@@ -101,7 +101,6 @@ namespace Warehouse.Domain.Squad.Entities
             Teams.Add(team);
         }
 
-
         public void DeleteTeam(Guid teamId)
             => GetTeamById(teamId)
                 .Delete();

@@ -20,31 +20,33 @@ namespace Warehouse.Infrastructure.Repositories
         {
         }
 
-        public override async Task<User> GetAsync(Guid squadId, CancellationToken cancellationToken)
-            => await DbContext
-                .Set<User>()
-                .Include(user => user.Dues)
-                .Include(user => user.OwnedItems)
-                .Include(user => user.StoredItems)
-                .FirstOrDefaultAsync(user => user.Id == squadId, cancellationToken);
+        public override async Task<User> GetAsync(Guid userId, CancellationToken cancellationToken)
+            => await GetWithDependencies()
+                .FirstOrDefaultAsync(user => user.Id == userId, cancellationToken);
 
         public override async Task<ICollection<User>> GetRangeAsync(CancellationToken cancellationToken)
             => await GetWithDependencies()
                 .ToListAsync(cancellationToken);
-
+        
         public async Task<IEnumerable<Item>> GetUserItemsAsync(
             Guid userId,
             CancellationToken cancellationToken)
             => await DbContext
                 .Set<Item>()
+                .AsNoTracking()
                 .Include(item => item.OwnerId)
                 .Include(item => item.ActualOwnerId)
                 .Where(user => user.Id == userId)
                 .ToListAsync(cancellationToken);
-                    
+
+        public async Task<bool> IsEmailRegisteredAsync(string emailAddress, CancellationToken cancellationToken) =>
+            await DbContext.Set<User>()
+                .AnyAsync(user => user.Email == emailAddress, cancellationToken);
+
         private IQueryable<User> GetWithDependencies()
             => DbContext
                 .Set<User>()
+                .AsNoTracking()
                 .Include(user => user.Dues)
                 .Include(user => user.OwnedItems)
                 .Include(user => user.StoredItems);

@@ -1,6 +1,5 @@
 ﻿import client from "@/shared/http-client";
 import { FullUserDto } from "@/shared/modules/user/dto";
-import { FullItemDto } from "@/shared/modules/item/dto";
 
 const service = {
   async getUser(userId) {
@@ -16,11 +15,6 @@ const service = {
   async addUser(command) {
     const resource = "user";
     return await client.post(resource, command);
-  },
-  async getUserItems(userId) {
-    const resource = `user/${userId}/items`;
-    const response = await client.get(resource);
-    return response.data.map((user) => new FullItemDto(user));
   },
 };
 

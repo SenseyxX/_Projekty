@@ -12,10 +12,11 @@
         <team-information :team="selectedTeam" />
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="selectedTeam">
       <users-table :team="selectedTeam" />
     </v-row>
     <add-team-dialog
+      :team="selectedTeam"
       :dialog-visibility="addTeamDialogVisibility"
       @canceled="changeTeamDialogVisibility(false)"
       @confirmed="changeTeamDialogVisibility(false)"
@@ -58,8 +59,8 @@ export default {
     },
     onTeamSelected(team) {
       if (team) {
-        console.log(team);
         this.selectedTeam = team;
+        console.log(team);
       }
     },
   },

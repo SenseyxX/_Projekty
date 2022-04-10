@@ -84,8 +84,15 @@ namespace Warehouse.Application.Handlers
         public async Task<IEnumerable<FullTeamDto>> GetSquadTeamsAsync(Guid squadId, CancellationToken cancellationToken)
         {
             var squad = await _squadRepository.GetAsync(squadId, cancellationToken);
+            var users = await _userRepository.GetRangeAsync(cancellationToken);
 
-            return squad.Teams.Select(team => (FullTeamDto) team);
+            return squad.Teams.Select(team =>
+            {
+                var result = (FullTeamDto) team;
+                result.SquadName = squad.Name;
+                result.TeamOwnerName = users.FirstOrDefault(owner => owner.Id == team.TeamOwnerId)?.FullName();
+                return result;
+            });
         }
 
         public async Task UpdateSquadAsync(
@@ -93,7 +100,7 @@ namespace Warehouse.Application.Handlers
             CancellationToken cancellationToken)
         {
             var squad = await _squadRepository.GetAsync(updateSquadCommand.SquadId, cancellationToken);
-            var isUpdated = squad.UpdateName(updateSquadCommand.Name);
+            var isUpdated  = squad.UpdateName(updateSquadCommand.Name);
             isUpdated = squad.UpdateSquadOwnerId(updateSquadCommand.SquadOwnerId);
 
             if (isUpdated)

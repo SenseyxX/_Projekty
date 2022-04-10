@@ -76,7 +76,6 @@ namespace Warehouse.Api.Controllers
             return Ok(result);
         }
 
-        //ToDo: verify why add users in same squad 
         [HttpPost("{squadId:guid}/teams")]
         public async Task<ActionResult> AddTeamAsync(
             [FromRoute] Guid squadId,

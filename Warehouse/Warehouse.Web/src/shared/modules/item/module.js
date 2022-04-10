@@ -2,6 +2,7 @@
 
 const state = {
   item: {},
+  items: [],
 };
 
 const getters = {
@@ -16,11 +17,15 @@ const actions = {
   },
   async getItems({ commit }) {
     const result = await service.getItems();
-    commit("setItem", result);
+    commit("setItems", result);
   },
   async addItem({ dispatch }, command) {
     await service.addItem(command);
-    await dispatch("getItem", command.id);
+    await dispatch("getItems");
+  },
+  async editItem({ dispatch }, command) {
+    await service.editItem(command);
+    await dispatch("getItems");
   },
   async getItemLoanHistory({ commit }, itemId) {
     const result = await service.getItemLoanHistory(itemId);
@@ -35,6 +40,8 @@ const actions = {
 const mutations = {
   setItem(state, result) {
     state.item = result;
+  },
+  setItems(state, result) {
     state.items = result;
   },
 };

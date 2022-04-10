@@ -39,6 +39,13 @@ namespace Warehouse.Application.Handlers
                 createUserCommand.SquadId,
                 createUserCommand.TeamId);
 
+            var isEmailAlreadyRegistered = await _userRepository.IsEmailRegisteredAsync(user.Email, cancellationToken);
+
+            if (isEmailAlreadyRegistered)
+            {
+                throw new Exception();
+            }
+
             await _userRepository.CreateAsync(user, cancellationToken);
             await _userRepository.SaveAsync(cancellationToken);
         }
@@ -79,10 +86,21 @@ namespace Warehouse.Application.Handlers
             var user = await _userRepository.GetAsync(updateItemCommand.UserId, cancellationToken);
             var isUpdated = user.UpdateName(updateItemCommand.Name);
             isUpdated = user.UpdateLastName(updateItemCommand.LastName) || isUpdated;
-            isUpdated = user.UpdateEmail(updateItemCommand.Email) || isUpdated;
             isUpdated = user.UpdatePhoneNumber(updateItemCommand.PhoneNumber) || isUpdated;
 
-            if (isUpdated)
+            var isEmailUpdated = user.UpdateEmail(updateItemCommand.Email);
+
+            if (isEmailUpdated)
+            {
+                var isEmailAlreadyRegistered = await _userRepository.IsEmailRegisteredAsync(user.Email, cancellationToken);
+
+                if (isEmailAlreadyRegistered)
+                {
+                    throw new Exception();
+                }
+            }
+            
+            if (isUpdated || isEmailUpdated)
             {
                 _userRepository.Update(user);
                 await _userRepository.SaveAsync(cancellationToken);

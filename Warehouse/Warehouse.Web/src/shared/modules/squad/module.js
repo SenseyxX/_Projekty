@@ -15,13 +15,13 @@ const getters = {
 };
 
 const actions = {
-  async getSquads({ commit }) {
-    const result = await service.getSquads();
-    commit("setSquads", result);
-  },
   async getSquad({ commit }, squadOwnerId) {
     const result = await service.getSquad(squadOwnerId);
     commit("setSquad", result);
+  },
+  async getSquads({ commit }) {
+    const result = await service.getSquads();
+    commit("setSquads", result);
   },
   async addSquad({ dispatch }, command) {
     await service.addSquad(command);
@@ -43,6 +43,9 @@ const mutations = {
   },
   setSquads(state, result) {
     state.squads = result;
+  },
+  setTeam(state, result) {
+    state.team = result;
   },
   setTeams(state, result) {
     state.teams = result;

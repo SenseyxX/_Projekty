@@ -2,7 +2,7 @@
   <section class="text-center centerized">
     <v-list readonly>
       <v-list-item>Nazwa: {{ team.name }}</v-list-item>
-      <v-list-item>Zastępowy: {{ team.teamOwnerId }}</v-list-item>
+      <v-list-item>Zastępowy: {{ userName(team.teamOwnerId) }}</v-list-item>
       <v-list-item>Punkty: {{ team.points }}</v-list-item>
       <v-list-item>Opis: {{ team.description }}</v-list-item>
     </v-list>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "TeamInformation",
   components: {},
@@ -22,7 +24,20 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  computed: {
+    ...mapGetters("userModule", ["users"]),
+  },
+  methods: {
+    ...mapActions("userModule", ["getUsers"]),
+    userName(squadOwnerId) {
+      const user = this.users.find((user) => user.id === squadOwnerId);
+      return user.name + " " + user.lastName;
+    },
+
+    async mounted() {
+      await this.getUsers();
+    },
+  },
 };
 </script>
 

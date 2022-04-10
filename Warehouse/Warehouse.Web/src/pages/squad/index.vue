@@ -2,14 +2,14 @@
   <section class="text-center centerized">
     <v-row>
       <v-col>
-        <squad-list />
+        <squad-list @squadSelected="onSquadSelected" />
       </v-col>
-      <v-col v-if="selectedSquad">
-        <squad-information :squad="onSquadSelected" />
+      <v-col v-if="selectedSquad !== null">
+        <squad-information :selectedsquad="selectedSquad" />
       </v-col>
     </v-row>
-    <v-row>
-      <team-table />
+    <v-row v-if="selectedSquad !== null">
+      <team-table :selectedsquad="selectedSquad" />
     </v-row>
   </section>
 </template>
@@ -41,9 +41,8 @@ export default {
     ...mapActions("authenticationModule", ["authenticate"]),
     ...mapActions("squadModule", ["getSquad"]),
     onSquadSelected(squad) {
-      if (squad) {
+      if (squad !== null) {
         this.selectedSquad = squad;
-        console.log(squad);
       }
     },
   },

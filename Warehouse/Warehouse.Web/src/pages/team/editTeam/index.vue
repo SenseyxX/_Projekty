@@ -2,24 +2,48 @@
   <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card>
       <v-toolbar color="primary" dark>
-        <p class="ma-4 text-h6">Tworzenie Drużyny</p>
+        <p class="ma-4 text-h6">Edycja zastępu</p>
       </v-toolbar>
       <v-card-text>
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
-            <v-text-field
-              v-model="name"
-              label="Nazwa drużyny"
-              :rules="[(v) => !!v || 'Nazwa jest wymagana']"
-            />
-            <v-select
-              v-model="selectedUser"
-              label=" Drużynowy"
-              :items="users"
-              item-text="name"
-              item-value="id"
-              :rules="[(v) => !!v || 'Druzynowy jest wymagany']"
-            ></v-select>
+            <v-row>
+              <v-text-field
+                v-model="name"
+                label="Nazwa zastępu"
+                :rules="[(v) => !!v || 'Nazwa jest wymagana']"
+              />
+            </v-row>
+            <v-row>
+              <v-select
+                v-model="selectedUser"
+                label=" Zastępowy"
+                :items="filteredUsers"
+                item-text="name"
+                item-value="id"
+                :rules="[(v) => !!v || 'Druzynowy jest wymagany']"
+              ></v-select>
+            </v-row>
+            <v-row>
+              <v-slider
+                v-model="team.points"
+                class="align-center"
+                :max="max"
+                :min="min"
+                hide-details
+              >
+                <template v-slot:append>
+                  <v-text-field
+                    v-model="team.points"
+                    class="mt-0 pt-0"
+                    hide-details
+                    single-line
+                    type="number"
+                    style="width: 60px"
+                  ></v-text-field>
+                </template>
+              </v-slider>
+            </v-row>
           </v-form>
         </div>
         <v-container>
@@ -33,7 +57,7 @@
               class="mr-8"
               :disabled="!isValid"
             >
-              Zapis
+              Zapisz
             </v-btn>
           </v-row>
         </v-container>
@@ -48,12 +72,19 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "addSquadDialog",
   data: () => ({
+    min: 0,
+    max: 200,
+    slider: 40,
     name: "",
     squadOwnerId: "",
     isValid: false,
     selectedUser: null,
   }),
   props: {
+    selectedteam: {
+      type: Object,
+      defaultValue: null,
+    },
     dialogVisibility: {
       type: Boolean,
       defaultValue: false,
@@ -67,10 +98,16 @@ export default {
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("userModule", ["users"]),
+    ...mapGetters("squadModule", ["team"]),
+    filteredUsers() {
+      return this.users.filter(
+        (users) => users.squadId === this.selectedteam.squadId
+      );
+    },
   },
   methods: {
-    ...mapActions("squadModule", ["addSquad"]),
     ...mapActions("userModule", ["getUsers"]),
+    ...mapActions("squadModule", ["getSquadTeams"]),
     async saveChanges() {
       const command = {
         name: this.name,
@@ -87,6 +124,7 @@ export default {
   },
   async mounted() {
     await this.getUsers();
+    await this.getSquadTeams(this.selectedteam.id);
   },
 };
 </script>

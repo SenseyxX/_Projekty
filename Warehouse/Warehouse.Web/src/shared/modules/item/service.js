@@ -17,6 +17,10 @@ const service = {
     const resource = "item";
     return await client.post(resource, command);
   },
+  async editItem(command) {
+    const resource = `item/${command.id}`;
+    return await client.put(resource, command);
+  },
   async getItemLoanHistory(itemId) {
     const resource = `${itemId}/loan-history`;
     const response = await client.get(resource);

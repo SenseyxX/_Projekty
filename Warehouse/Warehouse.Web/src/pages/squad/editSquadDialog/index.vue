@@ -2,7 +2,7 @@
   <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card>
       <v-toolbar color="primary" dark>
-        <p class="ma-4 text-h6">Tworzenie Drużyny</p>
+        <p class="ma-4 text-h6">Edytowanie Drużyny</p>
       </v-toolbar>
       <v-card-text>
         <div class="select-group">
@@ -46,7 +46,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "addSquadDialog",
+  name: "editSquadDialog",
   data: () => ({
     name: "",
     squadOwnerId: "",
@@ -58,6 +58,10 @@ export default {
       type: Boolean,
       defaultValue: false,
     },
+    selectedSquad: {
+      type: Object,
+      defaultValue: null,
+    },
   },
   watch: {
     selectedUser() {
@@ -67,10 +71,11 @@ export default {
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("userModule", ["users"]),
+    ...mapGetters("squadModule", ["squad"]),
   },
   methods: {
-    ...mapActions("squadModule", ["addSquad"]),
-    ...mapActions("userModule", ["getUsers"]),
+    ...mapActions("squadModule", ["getSquad"]),
+    //ToDo: add PUT method
     async saveChanges() {
       const command = {
         name: this.name,
@@ -86,7 +91,7 @@ export default {
     },
   },
   async mounted() {
-    await this.getUsers();
+    await this.getUsers(this.selectedSquad.id);
   },
 };
 </script>

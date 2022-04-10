@@ -33,7 +33,9 @@ export class FullTeamDto {
     this.id = data.id;
     this.name = data.name;
     this.squadId = data.squadId;
+    this.squadName = data.squadName;
     this.teamOwnerId = data.teamOwnerId;
+    this.teamOwnerName = data.teamOwnerName;
     this.points = data.points;
     //ToDo: add Users
   }

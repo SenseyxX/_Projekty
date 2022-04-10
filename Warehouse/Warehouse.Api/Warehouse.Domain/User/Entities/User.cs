@@ -50,6 +50,12 @@ namespace Warehouse.Domain.User.Entities
         public ICollection<Item.Entities.Item> StoredItems { get; }
         public ICollection<Due> Dues { get; }
 
+        public string FullName()
+        {
+            string fullName = Name + " " + LastName;
+            return fullName;
+        }
+
         public bool UpdateName(string name)
         {
             if (Name == name || string.IsNullOrEmpty(name))
