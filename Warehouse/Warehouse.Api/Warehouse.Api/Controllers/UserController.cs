@@ -13,6 +13,8 @@ using Warehouse.Infrastructure.Messaging.Authorization;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
+    [Authorize]
+    
     [Route(RoutePattern)]
     public sealed class UserController : Controller
     {
@@ -67,6 +69,17 @@ namespace Warehouse.Api.Controllers
             updateUserCommand.UserId = userId;
 
             await _userHandler.UpdateUserAsync(updateUserCommand, cancellationToken);
+            return Ok();
+        }
+        
+        [HttpPut("{userId:guid}/password")]
+        public async Task<IActionResult> UpdateUserPasswordAsync(
+            [FromRoute] Guid userId,
+            [FromBody] UpdateUserPasswordCommand updateUserPasswordCommand,
+            CancellationToken cancellationToken)
+        {
+            updateUserPasswordCommand.UserId = userId;
+            await _userHandler.UpdateUserPasswordAsync(updateUserPasswordCommand, cancellationToken);
             return Ok();
         }
 

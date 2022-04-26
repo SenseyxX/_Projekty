@@ -32,9 +32,11 @@ namespace Warehouse.Application.Handlers
                 ?? throw new Exception();
 
             var squad = SquadFactory.Create(createSquadCommand.SquadOwnerId, createSquadCommand.Name);
+            await _squadRepository.CreateAsync(squad, cancellationToken);
+            await _squadRepository.SaveAsync(cancellationToken);
             squad.AddUser(user);
 
-            await _squadRepository.CreateAsync(squad, cancellationToken);
+            _squadRepository.Update(squad);
             await _squadRepository.SaveAsync(cancellationToken);
         }
 

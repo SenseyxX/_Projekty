@@ -107,6 +107,15 @@ namespace Warehouse.Application.Handlers
             }
         }
 
+          public async Task UpdateUserPasswordAsync(UpdateUserPasswordCommand updateUserPasswordCommand,
+              CancellationToken cancellationToken)
+          {
+              var user = await _userRepository.GetAsync(updateUserPasswordCommand.UserId, cancellationToken);
+
+              var updatedPassword = _encryptionService.EncodePassword(updateUserPasswordCommand.Password);
+              user.UpdatePasswordHash(updatedPassword);
+          }
+
           public async Task CreateUserDueAsync(CreateDueCommand createDueCommand, CancellationToken cancellationToken)
           {
               var user = await _userRepository.GetAsync(createDueCommand.UserId, cancellationToken);

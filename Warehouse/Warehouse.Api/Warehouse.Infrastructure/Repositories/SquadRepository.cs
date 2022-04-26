@@ -33,7 +33,6 @@ namespace Warehouse.Infrastructure.Repositories
             => DbContext
                 .Set<Squad>()
                 .AsNoTrackingWithIdentityResolution()
-                
                 .Include(squad => squad.Users)
                 .Include(squad => squad.Teams)
                 .ThenInclude(team => team.Users);

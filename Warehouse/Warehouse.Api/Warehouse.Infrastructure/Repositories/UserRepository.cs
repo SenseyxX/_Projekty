@@ -46,7 +46,7 @@ namespace Warehouse.Infrastructure.Repositories
         private IQueryable<User> GetWithDependencies()
             => DbContext
                 .Set<User>()
-                .AsNoTracking()
+                .AsNoTrackingWithIdentityResolution()
                 .Include(user => user.Dues)
                 .Include(user => user.OwnedItems)
                 .Include(user => user.StoredItems);

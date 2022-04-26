@@ -9,5 +9,6 @@ namespace Warehouse.Application.Contracts.Commands.User
         public string LastName { get; init; }
         public string Email { get; init; }
         public string PhoneNumber { get; init; }
+        
     }
 }
