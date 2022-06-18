@@ -7,11 +7,11 @@
       <v-card-text>
         <div class="select-group">
           <v-form ref="form">
-            <v-text-field v-model="name" label="Imię" />
-            <v-text-field v-model="lastName" label="Nazwisko" />
-            <!--ToDo: Add checkbox with edit password -->
-            <v-text-field v-model="email" label="E-mail" />
-            <v-text-field v-model="phoneNumber" label="Numer telefonu" />
+            <v-text-field v-model="name" label="Nowe imię" />
+            <v-text-field v-model="lastName" label="Nowe nazwisko" />
+            <v-text-field v-model="password" label="Nowe hasło" />
+            <v-text-field v-model="email" label="Nowy E-mail" />
+            <v-text-field v-model="phoneNumber" label="Nowy numer telefonu" />
           </v-form>
         </div>
         <v-container>

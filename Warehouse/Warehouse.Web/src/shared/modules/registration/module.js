@@ -9,7 +9,6 @@ const getters = {
 };
 
 const actions = {
-  // eslint-disable-next-line no-unused-vars
   async addUser({ state }, command) {
     await service.addUser(command);
   },

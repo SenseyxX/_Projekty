@@ -13,8 +13,6 @@ using Warehouse.Infrastructure.Messaging.Authorization;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
-    [Authorize]
-    
     [Route(RoutePattern)]
     public sealed class UserController : Controller
     {

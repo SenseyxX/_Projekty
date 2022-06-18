@@ -6,8 +6,7 @@
     this.email = data.email;
     this.phoneNumber = data.phoneNumber;
     this.squadId = data.squadId;
-    this.teamId = data.teamId;
-
+    this.teamId = data.teamId;    
     // ToDo: implement IEnumerable ownedItems/storedItems and dues
   }
 }

@@ -16,6 +16,10 @@ const service = {
     const resource = "user";
     return await client.post(resource, command);
   },
+  async updateUser(command) {
+    const resource = "user"; // ToDo: check endpoint
+    return await client.put(resource, command);
+  }
 };
 
 export default service;
