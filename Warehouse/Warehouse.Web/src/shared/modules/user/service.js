@@ -17,7 +17,7 @@ const service = {
     return await client.post(resource, command);
   },
   async updateUser(command) {
-    const resource = "user"; // ToDo: check endpoint
+    const resource = `user/${command.id}`;
     return await client.put(resource, command);
   }
 };

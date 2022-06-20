@@ -53,8 +53,7 @@ export default {
     ...mapGetters("userModule", ["user"]),
   },
   methods: {
-    ...mapActions("userModule", ["getUser"]),
-    //ToDo: add PUT Endpoint at save
+    ...mapActions("userModule", ["getUser", "updateUser"]),
     async saveChanges() {
       const command = {
         id: this.authenticationResult.tokenOwner.id,
@@ -65,7 +64,7 @@ export default {
         phoneNumber: this.phoneNumber,
       };
 
-      await this.editUser(command);
+      await this.updateUser(command);
 
       this.$emit("confirmed");
       this.$emit("canceled");

@@ -23,10 +23,11 @@ const actions = {
     await service.addUser(command);
     await dispatch(command.id);
   },
-  async updateUser({ commit }, command){
-    commit (command);
-  }
-}
+  async updateUser({ dispatch }, command) {
+    await service.updateUser(command);
+    await dispatch("getUser", command.id);
+  },
+};
 
 const mutations = {
   setUser(state, result) {

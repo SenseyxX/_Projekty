@@ -15,7 +15,7 @@
         >Edytuj Profil</v-btn
       >
     </div>
-    <edit-Profile-dialog
+    <edit-profile-dialog
       :dialog-visibility="editProfileDialogVisibility"
       @canceled="hideEditProfileDialog"
     />
@@ -47,7 +47,11 @@ export default {
     ...mapActions("squadModule", ["getSquads"]),
     squadName(squadId) {
       const squad = this.squads.find((squad) => squad.id === squadId);
-      return squad.name;
+      if (squad) {
+        return squad.name;
+      }
+
+      return "";
     },
     showEditProfileDialog() {
       this.editProfileDialogVisibility = true;

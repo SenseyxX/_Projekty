@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Application.Contracts.Commands.Squad;
-using Warehouse.Application.Contracts.Commands.User;
 using Warehouse.Application.Dtos.Squad;
 using Warehouse.Application.Handlers;
 

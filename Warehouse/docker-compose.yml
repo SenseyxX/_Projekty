@@ -1,0 +1,23 @@
+﻿version: "3.9"
+services:
+  warehouse_mssql:
+    image: mcr.microsoft.com/mssql/server:2019-CU11-ubuntu-20.04
+    container_name: warehouse_mssql
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /usr/share/zoneinfo/Europe/Warsaw:/etc/localtime:ro
+      - ./docker/data/mssql/data:/var/opt/mssql/data
+      - ./docker/data/mssql/secrets:/var/opt/mssql/secrets
+      - ./docker/logs/mssql:/var/opt/mssql/log
+    ports:
+      - "8010:1433"
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=etiSZOPq03m2fges@()325cgftwRQ"
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: docker-development

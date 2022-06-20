@@ -4,12 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Warehouse.Application.Dtos.Item;
 using Warehouse.Domain.Item.Entities;
 using Warehouse.Domain.User;
 using Warehouse.Domain.User.Entities;
 using Warehouse.Infrastructure.Persistence.Context;
-using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Infrastructure.Repositories
 {

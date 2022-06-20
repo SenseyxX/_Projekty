@@ -1,5 +1,4 @@
 ﻿using System;
-using Warehouse.Domain.Squad.Entities;
 
 namespace Warehouse.Application.Dtos.User
 {

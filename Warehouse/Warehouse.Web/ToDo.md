@@ -43,3 +43,5 @@
 <li><p>Errors - fix error notification</p></li>
 </ul>
 
+- czyszczenie pól w polu edycji
+- aktualne dane w polu edycji
