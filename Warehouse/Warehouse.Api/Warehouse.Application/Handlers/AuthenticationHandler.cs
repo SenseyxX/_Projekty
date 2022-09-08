@@ -27,12 +27,16 @@ namespace Warehouse.Application.Handlers
 
             var isAuthenticated = _encryptionService.VerifyPassword(user.PasswordHash, password);
 
-            return new AuthenticationResultDto
+            if (isAuthenticated == true)
             {
-                IsAuthenticated = isAuthenticated,
-                Jwt = _tokenService.GenerateToken(user.Id),
-                TokenOwner = (UserDto) user,
-            };
+                return new AuthenticationResultDto
+                {
+                    IsAuthenticated = isAuthenticated,
+                    Jwt = _tokenService.GenerateToken(user.Id),
+                    TokenOwner = (UserDto) user,
+                };
+            }
+            return new AuthenticationResultDto{IsAuthenticated = isAuthenticated};
         }
     }
 }

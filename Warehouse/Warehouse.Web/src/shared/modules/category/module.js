@@ -17,9 +17,8 @@ const actions = {
     const result = await service.getCategories();
     commit("setCategory", result);
   },
-  async addCategory({ dispatch }, command) {
+  async addCategory(command) {
     await service.addCategory(command);
-    await dispatch("getCategory", command.id);
   },
 };
 

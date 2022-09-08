@@ -95,6 +95,7 @@ export default {
       await this.addTeam(command);
 
       this.$emit("confirmed");
+      this.$emit("canceled");
     },
     cancel() {
       this.$emit("canceled");

@@ -27,6 +27,10 @@ const actions = {
     await service.updateUser(command);
     await dispatch("getUser", command.id);
   },
+  async updatePassword({ dispatch }, command) {
+    await service.updatePassword(command);
+    await dispatch("getUser", command.id);
+  },
 };
 
 const mutations = {

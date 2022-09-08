@@ -17,7 +17,7 @@ const service = {
     const resource = "item";
     return await client.post(resource, command);
   },
-  async editItem(command) {
+  async updateItem(command) {
     const resource = `item/${command.id}`;
     return await client.put(resource, command);
   },

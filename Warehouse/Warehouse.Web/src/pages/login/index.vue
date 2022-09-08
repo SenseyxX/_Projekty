@@ -38,6 +38,7 @@
       >
         Zaloguj
       </v-btn>
+      <input @keyup.50="onClick()" />
     </v-row>
     <registration-user-dialog
       :dialog-visibility="registrationUserDialogVisibility"

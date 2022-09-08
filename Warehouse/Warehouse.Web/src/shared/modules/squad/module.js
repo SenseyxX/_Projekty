@@ -27,6 +27,10 @@ const actions = {
     await service.addSquad(command);
     await dispatch("getSquads");
   },
+  async updateSquad({ dispatch }, command) {
+    await service.updateSquad(command);
+    await dispatch("getSquads", command.id);
+  },
   async getSquadTeams({ commit }, squadId) {
     const result = await service.getSquadTeams(squadId);
     commit("setTeams", result);
@@ -34,6 +38,10 @@ const actions = {
   async addTeam({ dispatch }, command) {
     await service.addTeam(command);
     await dispatch("getSquadTeams");
+  },
+  async updateTeam({ dispatch }, command) {
+    await service.updateTeam(command);
+    await dispatch("getSquads", command.id);
   },
 };
 

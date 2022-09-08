@@ -51,7 +51,7 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
   },
   methods: {
-    ...mapActions("userModule", ["getUsers"]),
+    ...mapActions("userModule", ["getUsers", "updateUser"]),
     //ToDo: add PUT user Endpoint
     //ToDo: add method to filter chosen team
     async saveChanges() {
@@ -61,9 +61,10 @@ export default {
         teamId: this.selectedTeam.id,
       };
 
-      await this.editUser(command);
+      await this.up(command);
 
       this.$emit("confirmed");
+      this.$emit("canceled");
     },
     cancel() {
       this.$emit("canceled");

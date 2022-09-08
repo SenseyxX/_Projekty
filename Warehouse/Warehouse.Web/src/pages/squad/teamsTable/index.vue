@@ -1,6 +1,7 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-row>
+      <v-col />
       <v-col md="3">
         <v-text-field
           v-model="search"

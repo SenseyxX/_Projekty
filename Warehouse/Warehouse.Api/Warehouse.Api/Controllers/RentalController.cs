@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Application.Contracts.Commands.Rental;
 using Warehouse.Application.Dtos.Rental;
@@ -10,6 +11,7 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route(RoutePattern)]
     public class RentalController : Controller
     {

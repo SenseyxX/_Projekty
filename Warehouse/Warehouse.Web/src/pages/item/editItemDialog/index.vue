@@ -10,7 +10,6 @@
             <v-text-field
               v-model="name"
               label="Nazwa przedmiotu"
-              :rules="[(v) => !!v || 'Nazwa jest wymagana']"
             />
             <v-text-field v-model="description" label="Opis przedmiotu" />
             <v-select
@@ -19,7 +18,6 @@
               :items="category"
               item-text="name"
               item-value="id"
-              :rules="[(v) => !!v || 'Kategoria jest wymagana']"
             ></v-select>
             <v-text-field v-model="quantity" label="Ilość" />
             <v-select
@@ -28,7 +26,6 @@
               :items="qualityLevel"
               item-text="name"
               item-value="id"
-              :rules="[(v) => !!v || 'Określenie stanu jest wymagane']"
             ></v-select>
           </v-form>
         </div>
@@ -97,7 +94,6 @@ export default {
         ownerId: this.authenticationResult.tokenOwner.id,
         actualOwnerId: this.actualOwnerId,
       };
-      console.log(command);
       await this.editItem(command);
 
       this.$emit("confirmed");

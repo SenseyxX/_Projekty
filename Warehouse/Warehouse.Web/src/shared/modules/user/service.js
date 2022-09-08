@@ -19,7 +19,11 @@ const service = {
   async updateUser(command) {
     const resource = `user/${command.id}`;
     return await client.put(resource, command);
-  }
+  },
+  async updatePassword(command) {
+    const resource = `user/${command.id}/password`;
+    return await client.put(resource, command);
+  },
 };
 
 export default service;

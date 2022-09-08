@@ -11,9 +11,8 @@
       </v-list>
     </div>
     <div>
-      <v-btn text color="primary" @click="showEditProfileDialog"
-        >Edytuj Profil</v-btn
-      >
+      <v-btn color="primary" @click="showEditProfileDialog"
+        >Edytuj Profil</v-btn>      
     </div>
     <edit-profile-dialog
       :dialog-visibility="editProfileDialogVisibility"

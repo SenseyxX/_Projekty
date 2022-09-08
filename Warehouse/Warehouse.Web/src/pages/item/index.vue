@@ -1,20 +1,6 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-row>
-      <action-panel
-        :panel-title="'Przedmioty'"
-        @addedButtonClicked="changeItemDialogVisibility(true)"
-      />
-      <v-spacer />
-    </v-row>
-    <v-row>
-      <add-item-dialog
-        :dialog-visibility="addItemDialogVisibility"
-        @canceled="changeItemDialogVisibility(false)"
-        @confirmed="changeItemDialogVisibility(false)"
-      ></add-item-dialog>
-    </v-row>
-    <v-row>
       <items-table />
     </v-row>
   </section>
@@ -22,15 +8,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import AddItemDialog from "./addItemDialog";
-import ActionPanel from "@/shared/components/ActionPanel";
 import ItemsTable from "./itemsTable";
 
 export default {
   name: "ItemPage",
   components: {
-    AddItemDialog,
-    ActionPanel,
     ItemsTable,
   },
   data() {
@@ -45,9 +27,6 @@ export default {
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
     ...mapActions("itemModule", ["addItem", "getItem"]),
-    changeItemDialogVisibility(visibility) {
-      this.addItemDialogVisibility = visibility;
-    },
   },
   async mounted() {
     await this.getItem(this.authenticationResult.tokenOwner.id);

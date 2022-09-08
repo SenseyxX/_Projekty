@@ -114,6 +114,9 @@ namespace Warehouse.Application.Handlers
 
               var updatedPassword = _encryptionService.EncodePassword(updateUserPasswordCommand.Password);
               user.UpdatePasswordHash(updatedPassword);
+              
+              _userRepository.Update(user);
+              await _userRepository.SaveAsync(cancellationToken);
           }
 
           public async Task CreateUserDueAsync(CreateDueCommand createDueCommand, CancellationToken cancellationToken)

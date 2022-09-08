@@ -1,10 +1,6 @@
 ﻿<template>
   <section class="text-center centerized">
-    <action-panel
-      :panel-title="'Drużyny'"
-      @addedButtonClicked="changeAddSquadDialogVisibility(true)"
-      @editedButtonClicked="changeEditSquadDialogVisibility(true)"
-    />
+    <v-btn color="primary" @click="showAddSquadDialog">Dodaj Drużynę</v-btn>
     <v-list>
       <v-list-item-group v-model="selectedSquad" color="primary">
         <v-list-item v-for="item in squads" :key="item.id">
@@ -14,8 +10,7 @@
     </v-list>
     <add-squad-dialog
       :dialog-visibility="addSquadDialogVisibility"
-      @canceled="changeAddSquadDialogVisibility(false)"
-      @confirmed="changeAddSquadDialogVisibility(false)"
+      @canceled="hideAddSquadDialog"
     ></add-squad-dialog>
     <edit-squad-dialog
       :dialog-visibility="editSquadDialogVisibility"
@@ -30,14 +25,12 @@
 import { mapGetters, mapActions } from "vuex";
 import AddSquadDialog from "../addSquadDialog";
 import EditSquadDialog from "../editSquadDialog";
-import ActionPanel from "@/shared/components/ActionPanel";
 
 export default {
   name: "SquadList",
   components: {
     AddSquadDialog,
     EditSquadDialog,
-    ActionPanel,
   },
   data() {
     return {
@@ -57,11 +50,11 @@ export default {
   },
   methods: {
     ...mapActions("squadModule", ["getSquads", "addSquad"]),
-    changeAddSquadDialogVisibility(visibility) {
-      this.addSquadDialogVisibility = visibility;
+    showAddSquadDialog() {
+      this.addSquadDialogVisibility = true;
     },
-    changeEditSquadDialogVisibility(visibility) {
-      this.editSquadDialogVisibility = visibility;
+    hideAddSquadDialog() {
+      this.addSquadDialogVisibility = false;
     },
   },
   async mounted() {

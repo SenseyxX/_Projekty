@@ -1,6 +1,12 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-row>
+      <v-col />
+      <v-col>
+        <v-btn color="primary" @click="showAssignUserDialog"
+          >Przypisz do Zastępu</v-btn
+        >
+      </v-col>
       <v-col md="3">
         <v-text-field
           v-model="search"
@@ -9,11 +15,6 @@
           single-line
           hide-details
         ></v-text-field>
-      </v-col>
-      <v-col>
-        <v-btn color="primary" @click="showAssignUserDialog"
-          >Przypisz do Zastępu</v-btn
-        >
       </v-col>
     </v-row>
     <v-row>

@@ -6,7 +6,6 @@
 <ul>
 <li><p>#RegisterDialog - add select with existing Squads</p></li>
 <li><p>ProfileView - add dues table</p></li>
-<li><p>#ProfileView - add PUT in at save values in  profileDialog</p></li>
 <li><p>UserDto - implement IEnumerable ownedItems/storedItems and dues</p></li>
 <li><p>UsersView - add UsersView for SquadOwners</p></li>
 <li><p>UsersView - add dues options</p></li>
@@ -21,7 +20,7 @@
 <li><p>TeamView - add multiple selects in assignUserDialog</p></li>
 <li><p>ItemView - add delete item function</p></li>
 <li><p>ItemView - add Import/Export to csv</p></li>
-<li><p>ItemView - implement loanHistory dialog</p></li>
+<li><p>ItemView - implement loanHistoryDialog</p></li>
 <li><p>ItemView - implement edit itemDialog</p></li>
 <li><p>#ItemView - add combine addCategoryDialog with addItem</p></li>
 <li><p>ItemView - add table with items from all users in yours squad for squadOwners, show all items for admin</p></li>
@@ -43,5 +42,4 @@
 <li><p>Errors - fix error notification</p></li>
 </ul>
 
-- czyszczenie pól w polu edycji
 - aktualne dane w polu edycji

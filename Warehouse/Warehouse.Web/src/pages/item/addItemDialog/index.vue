@@ -21,7 +21,7 @@
               item-value="id"
               :rules="[(v) => !!v || 'Kategoria jest wymagana']"
             ></v-select>
-            <v-text-field v-model="quantity" label="Ilość" />
+            <v-text-field v-model="quantity" label="Ilość [szt]" />
             <v-select
               v-model="selectedQuantityLevel"
               label="Stan"
@@ -62,14 +62,14 @@ export default {
     description: "",
     categoryId: "",
     actualOwnerId: "",
-    selectedQuantityLevel: 2,
+    selectedQuantityLevel: 3,
     selectedCategory: null,
     qualityLevel: [
-      { id: 0, name: "Śmietnik" },
-      { id: 1, name: "Zły" },
-      { id: 2, name: "Umiarkowany" },
-      { id: 3, name: "Dobry" },
-      { id: 4, name: "Świetny" },
+      { id: 1, name: "Śmietnik" },
+      { id: 2, name: "Zły" },
+      { id: 3, name: "Umiarkowany" },
+      { id: 4, name: "Dobry" },
+      { id: 5, name: "Świetny" },
     ],
     quantity: "1",
     isValid: false,
@@ -97,10 +97,10 @@ export default {
         ownerId: this.authenticationResult.tokenOwner.id,
         actualOwnerId: this.actualOwnerId,
       };
-      console.log(command);
       await this.addItem(command);
 
       this.$emit("confirmed");
+      this.$emit("canceled");
     },
     cancel() {
       this.$emit("canceled");

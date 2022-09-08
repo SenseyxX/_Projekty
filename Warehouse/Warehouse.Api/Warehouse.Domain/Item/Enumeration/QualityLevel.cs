@@ -2,6 +2,7 @@
 {
     public enum QualityLevel
     {
+        dupa,
         Terrible,
         Bad,
         Normal,

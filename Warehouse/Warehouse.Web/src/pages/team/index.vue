@@ -1,9 +1,5 @@
 ﻿<template>
   <section class="text-center centerized">
-    <action-panel
-      :panel-title="'Zastępy'"
-      @addedButtonClicked="changeTeamDialogVisibility(true)"
-    />
     <v-row>
       <v-col>
         <team-list @teamSelected="onTeamSelected" />
@@ -15,12 +11,6 @@
     <v-row v-if="selectedTeam">
       <users-table :team="selectedTeam" />
     </v-row>
-    <add-team-dialog
-      :team="selectedTeam"
-      :dialog-visibility="addTeamDialogVisibility"
-      @canceled="changeTeamDialogVisibility(false)"
-      @confirmed="changeTeamDialogVisibility(false)"
-    ></add-team-dialog>
   </section>
 </template>
 
@@ -28,8 +18,6 @@
 import { mapGetters, mapActions } from "vuex";
 import TeamList from "@/pages/team/teamList";
 import TeamInformation from "@/pages/team/teamInformation";
-import AddTeamDialog from "@/pages/team/addTeamDialog";
-import ActionPanel from "@/shared/components/ActionPanel";
 import UsersTable from "@/pages/team/usersTable";
 
 export default {
@@ -37,13 +25,10 @@ export default {
   components: {
     TeamList,
     TeamInformation,
-    AddTeamDialog,
-    ActionPanel,
     UsersTable,
   },
   data() {
     return {
-      addTeamDialogVisibility: false,
       selectedTeam: null,
     };
   },
@@ -54,9 +39,6 @@ export default {
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
     ...mapActions("squadModule", ["getSquadTeams"]),
-    changeTeamDialogVisibility(visibility) {
-      this.addTeamDialogVisibility = visibility;
-    },
     onTeamSelected(team) {
       if (team) {
         this.selectedTeam = team;

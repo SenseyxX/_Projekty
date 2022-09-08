@@ -1,12 +1,14 @@
 ﻿ToDo:
+https://trello.com/b/G1GSw7yO/warehouse
 
-* Dodać autoryzacje do kontrolerów
-
+* Dodać prop "Type" do encjii items 
 * Dodanie zdjęcia jako prop do encji itemu
-* Dodać controller Update SquadId 
+* Dodać controller Update SquadId ????
 * Dodać unikalnośc propów (numer telefonu, email, nazwa zastępu w drużynie, nazwa drużyny)
 * Dodać getUserDue 
 * Dodać Picking history
+* Dodać logikę importu/exportu excela/csv dla items/users
+
 
 ------------------------------------------
 * Dodać userId do category Entity (Do przemyślenia)

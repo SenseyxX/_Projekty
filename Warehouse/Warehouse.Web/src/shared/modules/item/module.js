@@ -23,9 +23,9 @@ const actions = {
     await service.addItem(command);
     await dispatch("getItems");
   },
-  async editItem({ dispatch }, command) {
-    await service.editItem(command);
-    await dispatch("getItems");
+  async updateItem({ dispatch }, command) {
+    await service.updateItem(command);
+    await dispatch("getItems", command.id);
   },
   async getItemLoanHistory({ commit }, itemId) {
     const result = await service.getItemLoanHistory(itemId);

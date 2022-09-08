@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Warehouse.Application.Contracts.Commands.Category;
 using Warehouse.Application.Dtos.Category;
 using Warehouse.Application.Handlers;
@@ -10,7 +11,7 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
-    // [Authorize(Roles = "AdminRequirement")]
+    [Authorize]
     [Route(RoutePattern)]
     public class CategoryController : Controller
     {
