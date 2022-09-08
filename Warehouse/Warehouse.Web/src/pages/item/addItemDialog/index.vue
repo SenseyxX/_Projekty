@@ -100,7 +100,6 @@ export default {
       await this.addItem(command);
 
       this.$emit("confirmed");
-      this.$emit("canceled");
     },
     cancel() {
       this.$emit("canceled");

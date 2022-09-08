@@ -7,10 +7,7 @@
       <v-card-text>
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
-            <v-text-field
-              v-model="name"
-              label="Nazwa przedmiotu"
-            />
+            <v-text-field v-model="name" label="Nazwa przedmiotu" />
             <v-text-field v-model="description" label="Opis przedmiotu" />
             <v-select
               v-model="selectedCategory"
@@ -21,7 +18,7 @@
             ></v-select>
             <v-text-field v-model="quantity" label="Ilość" />
             <v-select
-              v-model="selectedQuantityLevel"
+              v-model="selectedQualityLevel"
               label="Stan"
               :items="qualityLevel"
               item-text="name"
@@ -54,12 +51,25 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "editItemDialog",
+  watch: {
+    item() {
+      if (this.item === null) {
+        return;
+      }
+
+      this.name = this.item.name;
+      this.description = this.item.description;
+      this.selectedCategory = this.item.categoryId;
+      this.quantity = this.item.quantity;
+      this.selectedQualityLevel = this.item.qualityLevel;
+    },
+  },
   data: () => ({
     name: "",
     description: "",
     categoryId: "",
     actualOwnerId: "",
-    selectedQuantityLevel: 2,
+    selectedQualityLevel: 2,
     selectedCategory: null,
     qualityLevel: [
       { id: 0, name: "Śmietnik" },
@@ -72,6 +82,10 @@ export default {
     isValid: false,
   }),
   props: {
+    item: {
+      type: Object,
+      defaultValue: {},
+    },
     dialogVisibility: {
       type: Boolean,
       defaultValue: false,
@@ -89,7 +103,7 @@ export default {
         name: this.name,
         description: this.description,
         categoryId: this.selectedCategory,
-        qualityLevel: this.selectedQuantityLevel,
+        qualityLevel: this.selectedQualityLevel,
         quantity: this.quantity,
         ownerId: this.authenticationResult.tokenOwner.id,
         actualOwnerId: this.actualOwnerId,

@@ -29,19 +29,31 @@
           :search="search"
           item-key="id"
         >
-          <template>
-            <v-icon>"mdi-delete"</v-icon>
+          <template v-slot:item.actions="{ item }">
+            <v-btn icon @click="editItem(item)">
+              <v-icon small dakr>mdi-pencil-outline</v-icon>
+            </v-btn>
+            <v-btn icon @click="deleteItem(item)">
+              <v-icon small color="red">mdi-delete</v-icon>
+            </v-btn>
           </template>
         </v-data-table>
       </v-col>
     </v-row>
     <add-item-dialog
       :dialog-visibility="addItemDialogVisibility"
+      @confirmed="hideAddItemDialog"
       @canceled="hideAddItemDialog"
     />
     <add-category-dialog
       :dialog-visibility="addCategoryDialogVisibility"
       @canceled="hideAddCategoryDialog"
+    />
+    <edit-item-dialog
+      :dialog-visibility="editItemDialogVisibility"
+      :item="selectedItem"
+      @confirmed="hideEditItemDialog"
+      @canceled="hideEditItemDialog"
     />
   </section>
 </template>
@@ -50,12 +62,14 @@
 import { mapGetters, mapActions } from "vuex";
 import addCategoryDialog from "@/pages/item/addCategoryDialog";
 import addItemDialog from "@/pages/item/addItemDialog";
+import editItemDialog from "@/pages/item/editItemDialog";
 
 export default {
   name: "ItemsTable",
   components: {
     addItemDialog,
     addCategoryDialog,
+    editItemDialog,
   },
   props: {},
   data() {
@@ -73,6 +87,8 @@ export default {
       ],
       addItemDialogVisibility: false,
       addCategoryDialogVisibility: false,
+      editItemDialogVisibility: false,
+      selectedItem: {},
     };
   },
   computed: {
@@ -98,6 +114,19 @@ export default {
     },
     hideAddCategoryDialog() {
       this.addCategoryDialogVisibility = false;
+    },
+    showEditItemDialog() {
+      this.editItemDialogVisibility = true;
+    },
+    hideEditItemDialog() {
+      this.editItemDialogVisibility = false;
+    },
+    deleteItem(item) {
+      console.log(item);
+    },
+    editItem(item) {
+      this.selectedItem = item;
+      this.showEditItemDialog();
     },
   },
 
