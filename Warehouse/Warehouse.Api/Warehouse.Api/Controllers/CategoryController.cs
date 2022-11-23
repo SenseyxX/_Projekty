@@ -11,7 +11,7 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
-    // [Authorize(Roles = "AdminRequirement")]
+    [Authorize]
     [Route(RoutePattern)]
     public class CategoryController : Controller
     {

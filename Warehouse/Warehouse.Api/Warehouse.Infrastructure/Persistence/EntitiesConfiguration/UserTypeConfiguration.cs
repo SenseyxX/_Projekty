@@ -63,6 +63,12 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                 .IsRequired();
 
             entityTypeBuilder
+                .Property(nameof(User.TeamId))
+                .HasColumnName(nameof(User.TeamId))
+                .HasDefaultValue(null)
+                .IsRequired(false);
+
+            entityTypeBuilder
                 .HasMany(user => user.OwnedItems)
                 .WithOne()
                 .HasForeignKey(item => item.ActualOwnerId)

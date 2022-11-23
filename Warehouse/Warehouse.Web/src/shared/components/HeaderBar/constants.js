@@ -1,7 +1,8 @@
 export const MenuKeys = {
+  Profile: "Profile",
   Squad: "Squad",
-  Teams: "Teams",
-  Items: "Items",
+  Team: "Team",
+  Item: "Item",
   Dues: "Dues",
   AboutApplication: "AboutApplication",
   Logout: "Logout",
@@ -9,12 +10,17 @@ export const MenuKeys = {
 
 export const MenuOptions = [
   {
+    key: MenuKeys.Profile,
+    title: "Profil",
+    icon: "mdi mdi-account",
+  },
+  {
     key: MenuKeys.Squad,
     title: "Drużyny",
     icon: "mdi mdi-account-group",
   },
   {
-    key: MenuKeys.Teams,
+    key: MenuKeys.Team,
     title: "Zastępy",
     icon: "mdi mdi-human-queue",
   },
@@ -24,7 +30,7 @@ export const MenuOptions = [
     icon: "mdi mdi-cash-multiple",
   },
   {
-    key: MenuKeys.Items,
+    key: MenuKeys.Item,
     title: "Przedmioty",
     icon: "mdi mdi-hammer-screwdriver",
   },

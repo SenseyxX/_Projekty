@@ -11,6 +11,7 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route(RoutePattern)]
     public class RentalController : Controller
     {

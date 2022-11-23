@@ -18,12 +18,12 @@ namespace Warehouse.Domain.Squad.Entities
         {
             SquadOwnerId = squadOwnerId;
             Name = name;
-            State = state; 
+            State = state;
             Teams = new List<Team>();
             Users = new List<User.Entities.User>();
         }
 
-        public Guid? SquadOwnerId { get; private set; }          
+        public Guid? SquadOwnerId { get; private set; }
         public string Name { get; private set; }
         public State State { get;private set; }
         public ICollection<Team> Teams { get; }
@@ -73,85 +73,64 @@ namespace Warehouse.Domain.Squad.Entities
             return true;
         }
 
+        public void AddUser(User.Entities.User user)
+        {
+            if (Users.Any(u => u.Id == user.Id))
+            {
+                throw new Exception();
+            }
+
+            Users.Add(user);
+        }
+
         public void AddTeam(string teamName,
-                            Guid teamOwnerId,
-                            string description)
+            Guid teamOwnerId,
+            string description)
         {
             if (Teams.Any(team => team.Name == teamName))
             {
                 throw new Exception();
             }
 
+            var user = Users.FirstOrDefault(user => user.Id == teamOwnerId)
+                ?? throw new Exception();
+
             var team = TeamFactory.Create(teamName, teamOwnerId,Id, description);
+
+            team.AddUser(user);
             Teams.Add(team);
         }
 
         public void DeleteTeam(Guid teamId)
-        {
-            if (Teams.Any(team => team.Id != teamId && team.State != State.Active))
-            {
-                throw new Exception();
-            }
-
-            Teams
-                .First(team => team.Id == teamId)
+            => GetTeamById(teamId)
                 .Delete();
-        }
-        
-        public bool UpdateTeamPoints(Guid teamId, int points)
-        {
-            if (Teams.Any(team => team.Id != teamId ))
-            {
-                throw new Exception();
-            }
 
-            Teams
-                .First(team => team.Id == teamId)
+        public bool UpdateTeamPoints(Guid teamId, int points)
+            => GetTeamById(teamId)
                 .UpdatePoints(points);
 
-            return true;
-        }
-        
         public bool UpdateTeamDescription(Guid teamId, string description)
-        {
-            if (Teams.Any(team => team.Id != teamId))
-            {
-                throw new Exception();
-            }
-
-            Teams
-                .First(team => team.Id == teamId)
+            => GetTeamById(teamId)
                 .UpdateDescription(description);
 
-            return true;
-        }
-        
         public bool UpdateTeamName(Guid teamId, string name)
-        {
-            if (Teams.Any(team => team.Id != teamId))
-            {
-                throw new Exception();
-            }
-
-            Teams
-                .First(team => team.Id == teamId)
+            => GetTeamById(teamId)
                 .UpdateName(name);
-            
-            return true;
-        }
-        
-        public bool UpdateTeamOwner(Guid teamId, Guid teamOwnerId)
-        {
-            if (Teams.Any(team => team.Id != teamId))
-            {
-                throw new Exception();
-            }
 
-            Teams
-                .First(team => team.Id == teamId)
+        public bool UpdateTeamOwner(Guid teamId, Guid teamOwnerId)
+            => GetTeamById(teamId)
                 .UpdateTeamOwner(teamOwnerId);
-            
-            return true;
+
+        // ToDo: Wystarczy podać userId, wybrać użytkownika ze składu
+        public void AddTeamUser(Guid teamId, User.Entities.User user)
+        {
+            var team = GetTeamById(teamId);
+
+            team.AddUser(user);
         }
+
+        private Team GetTeamById(Guid teamId)
+            => Teams.FirstOrDefault(team => team.Id == teamId)
+                ?? throw new Exception();
     }
 }

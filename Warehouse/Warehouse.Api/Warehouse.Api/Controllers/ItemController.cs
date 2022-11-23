@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Warehouse.Application.Contracts.Commands.Item;
 using Warehouse.Application.Dtos.Item;
 using Warehouse.Application.Handlers;
 
 namespace Warehouse.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route(RoutePattern)]
     public class ItemController : Controller

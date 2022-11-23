@@ -29,11 +29,11 @@ namespace Warehouse.Application.Dtos.Item
                         state,
                         ownerId,
                         actualOwnerId)
-            {
-                  LoanHistoryDto = loanHistoryDto;
-            }
+        {
+            LoanHistoryDto = loanHistoryDto;
+        }
 
-            public IEnumerable<LoanHistoryDto> LoanHistoryDto { get; }
+        public IEnumerable<LoanHistoryDto> LoanHistoryDto { get; }
 
             public static explicit operator FullItemDto(Domain.Item.Entities.Item item)
                 => new(

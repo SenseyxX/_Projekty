@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,7 @@ namespace Warehouse.Infrastructure.Repositories
         }
 
         public override async Task<Squad> GetAsync(Guid squadId, CancellationToken cancellationToken)
-            => await DbContext
-                .Set<Squad>()
-                .Include(squad => squad.Teams)
+            => await GetSquadDependencies()
                 .FirstOrDefaultAsync(squad => squad.Id == squadId, cancellationToken);
 
         public async Task<Team> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
@@ -27,9 +26,15 @@ namespace Warehouse.Infrastructure.Repositories
                 .FirstOrDefaultAsync(team => team.Id == teamId);
 
         public async Task<Squad> GetByOwnerId(Guid squadOwnerId, CancellationToken cancellationToken)
-            => await DbContext
-                .Set<Squad>()
-                .Include(squad => squad.Teams)
+            => await GetSquadDependencies()
                 .FirstOrDefaultAsync(squad => squad.SquadOwnerId == squadOwnerId, cancellationToken);
+
+        private IQueryable<Squad> GetSquadDependencies()
+            => DbContext
+                .Set<Squad>()
+                .AsNoTrackingWithIdentityResolution()
+                .Include(squad => squad.Users)
+                .Include(squad => squad.Teams)
+                .ThenInclude(team => team.Users);
     }
 }

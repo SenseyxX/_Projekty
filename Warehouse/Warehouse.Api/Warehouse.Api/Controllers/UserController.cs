@@ -8,7 +8,6 @@ using Warehouse.Application.Contracts.Commands.User;
 using Warehouse.Application.Dtos.Item;
 using Warehouse.Application.Dtos.User;
 using Warehouse.Application.Handlers;
-using Warehouse.Infrastructure.Messaging.Authorization;
 
 namespace Warehouse.Api.Controllers
 {
@@ -24,6 +23,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersAsync(
             CancellationToken cancellationToken)
         {
@@ -32,6 +32,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet("{userId:guid}/items")]
+        [Authorize]
         public async Task<ActionResult<ItemDto>> GetUserItemsAsync(
             [FromRoute] Guid userId,
             CancellationToken cancellationToken)
@@ -50,6 +51,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpGet("{userId:guid}")]
+        [Authorize]
         public async Task<ActionResult<UserDto>> GetUserAsync(
             [FromRoute]Guid userId,
             CancellationToken cancellationToken)
@@ -59,6 +61,7 @@ namespace Warehouse.Api.Controllers
         }
         
         [HttpPut("{userId:guid}")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserAsync(
             [FromRoute] Guid userId,
             [FromBody] UpdateUserCommand updateUserCommand,
@@ -69,8 +72,21 @@ namespace Warehouse.Api.Controllers
             await _userHandler.UpdateUserAsync(updateUserCommand, cancellationToken);
             return Ok();
         }
+        
+        [HttpPut("{userId:guid}/password")]
+        [Authorize]
+        public async Task<IActionResult> UpdateUserPasswordAsync(
+            [FromRoute] Guid userId,
+            [FromBody] UpdateUserPasswordCommand updateUserPasswordCommand,
+            CancellationToken cancellationToken)
+        {
+            updateUserPasswordCommand.UserId = userId;
+            await _userHandler.UpdateUserPasswordAsync(updateUserPasswordCommand, cancellationToken);
+            return Ok();
+        }
 
         [HttpDelete("{userId:guid}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUserAsync(
             [FromRoute] Guid userId,
             CancellationToken cancellationToken)
@@ -80,6 +96,7 @@ namespace Warehouse.Api.Controllers
         }
         
         [HttpPost("{userId:guid}/dues")]
+        [Authorize]
         public async Task<IActionResult> CreateUserDueAsync(
             [FromRoute] Guid userId,
             [FromBody] CreateDueCommand createDueCommand,
@@ -92,6 +109,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpPut("{userId:guid}/{dueId:guid}")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserDueAsync(
             [FromRoute] Guid userId,
             [FromRoute] Guid dueId,
@@ -106,6 +124,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpPut("{userId:guid}/{dueId:guid}/pay")]
+        [Authorize]
         public async Task<IActionResult> PayUserDueAsync(
             [FromRoute] Guid userId,
             [FromRoute] Guid dueId,

@@ -1,35 +1,36 @@
 ﻿<template>
   <section class="text-center centerized">
     <v-row>
-      <action-panel
-        :panel-title="'Drużyny'"
-        @addedButtonClicked="changeSquadDialogVisibility(true)"
-      />
-      <v-spacer />
+      <v-col>
+        <squad-list @squadSelected="onSquadSelected" />
+      </v-col>
+      <v-col v-if="selectedSquad !== null">
+        <squad-information :selectedsquad="selectedSquad" />
+      </v-col>
     </v-row>
-    <add-squad-dialog
-      :dialog-visibility="addSquadDialogVisibility"
-      @canceled="changeSquadDialogVisibility(false)"
-      @confirmed="changeSquadDialogVisibility(false)"
-    ></add-squad-dialog>
+    <v-row v-if="selectedSquad !== null">
+      <team-table :selectedsquad="selectedSquad" />
+    </v-row>
   </section>
 </template>
 
 <script>
-// import { Theme } from "@/shared/constants";
-import { mapGetters, mapActions } from "vuex";
-import AddSquadDialog from "./addSquadDialog";
-import ActionPanel from "@/shared/components/ActionPanel";
+import SquadList from "@/pages/squad/squadList";
+import TeamTable from "@/pages/squad/teamsTable";
+import SquadInformation from "@/pages/squad/squadInformation";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "SquadPage",
   components: {
-    AddSquadDialog,
-    ActionPanel,
+    SquadList,
+    TeamTable,
+    SquadInformation,
   },
   data() {
     return {
       addSquadDialogVisibility: false,
+      selectedSquad: null,
     };
   },
   computed: {
@@ -38,14 +39,14 @@ export default {
   },
   methods: {
     ...mapActions("authenticationModule", ["authenticate"]),
-    ...mapActions("squadModule", ["getSquad", "addSquad"]),
-    changeSquadDialogVisibility(visibility) {
-      this.addSquadDialogVisibility = visibility;
+    ...mapActions("squadModule", ["getSquad"]),
+    onSquadSelected(squad) {
+      if (squad !== null) {
+        this.selectedSquad = squad;
+      }
     },
   },
-  async mounted() {
-    await this.getSquad(this.authenticationResult.tokenOwner.id);
-  },
+  async mounted() {},
 };
 </script>
 

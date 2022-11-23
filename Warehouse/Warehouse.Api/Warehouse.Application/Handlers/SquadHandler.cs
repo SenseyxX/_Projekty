@@ -7,6 +7,7 @@ using Warehouse.Application.Contracts.Commands.Squad;
 using Warehouse.Application.Dtos.Squad;
 using Warehouse.Domain.Squad;
 using Warehouse.Domain.Squad.Factories;
+using Warehouse.Domain.User;
 
 namespace Warehouse.Application.Handlers
 {
@@ -14,19 +15,28 @@ namespace Warehouse.Application.Handlers
     {
         private readonly ISquadRepository _squadRepository;
         private readonly TeamDomainService _teamDomainService;
+        private readonly IUserRepository _userRepository;
 
-        public SquadHandler(ISquadRepository squadRepository, TeamDomainService teamDomainService)
+        public SquadHandler(ISquadRepository squadRepository, TeamDomainService teamDomainService, IUserRepository userRepository)
         {
             _squadRepository = squadRepository;
             _teamDomainService = teamDomainService;
+            _userRepository = userRepository;
         }
 
         public async Task CreateSquadAsync(
             CreateSquadCommand createSquadCommand,
             CancellationToken cancellationToken)
         {
+            var user = await _userRepository.GetAsync(createSquadCommand.SquadOwnerId, cancellationToken)
+                ?? throw new Exception();
+
             var squad = SquadFactory.Create(createSquadCommand.SquadOwnerId, createSquadCommand.Name);
             await _squadRepository.CreateAsync(squad, cancellationToken);
+            await _squadRepository.SaveAsync(cancellationToken);
+            squad.AddUser(user);
+
+            _squadRepository.Update(squad);
             await _squadRepository.SaveAsync(cancellationToken);
         }
 
@@ -35,10 +45,11 @@ namespace Warehouse.Application.Handlers
             CancellationToken cancellationToken)
         {
             var squad = await _teamDomainService.CreateTeamAsync(createTeamCommand.Name,
-                                                                createTeamCommand.TeamOwnerId,
-                                                                createTeamCommand.SquadId,
-                                                                createTeamCommand.Description,
-                                                                cancellationToken);
+                createTeamCommand.TeamOwnerId,
+                createTeamCommand.SquadId,
+                createTeamCommand.Description,
+                cancellationToken);
+
              _squadRepository.Update(squad);
             await _squadRepository.SaveAsync(cancellationToken);
         }
@@ -66,13 +77,24 @@ namespace Warehouse.Application.Handlers
         public async Task<FullSquadDto> GetSquadAsync(Guid squadOwnerId, CancellationToken cancellationToken)
             => (FullSquadDto) await _squadRepository.GetByOwnerId(squadOwnerId, cancellationToken);
 
-        public async Task<FullTeamDto> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
-            => (FullTeamDto) await _squadRepository.GetTeamAsync(teamId, cancellationToken);
-
         public async Task<IEnumerable<SquadDto>> GetSquadsAsync(CancellationToken cancellationToken)
         {
             var result = await _squadRepository.GetRangeAsync(cancellationToken);
             return result.Select(squad => (SquadDto)squad);
+        }
+
+        public async Task<IEnumerable<FullTeamDto>> GetSquadTeamsAsync(Guid squadId, CancellationToken cancellationToken)
+        {
+            var squad = await _squadRepository.GetAsync(squadId, cancellationToken);
+            var users = await _userRepository.GetRangeAsync(cancellationToken);
+
+            return squad.Teams.Select(team =>
+            {
+                var result = (FullTeamDto) team;
+                result.SquadName = squad.Name;
+                result.TeamOwnerName = users.FirstOrDefault(owner => owner.Id == team.TeamOwnerId)?.FullName();
+                return result;
+            });
         }
 
         public async Task UpdateSquadAsync(
@@ -80,7 +102,7 @@ namespace Warehouse.Application.Handlers
             CancellationToken cancellationToken)
         {
             var squad = await _squadRepository.GetAsync(updateSquadCommand.SquadId, cancellationToken);
-            var isUpdated = squad.UpdateName(updateSquadCommand.Name);
+            var isUpdated  = squad.UpdateName(updateSquadCommand.Name);
             isUpdated = squad.UpdateSquadOwnerId(updateSquadCommand.SquadOwnerId);
 
             if (isUpdated)
@@ -105,6 +127,19 @@ namespace Warehouse.Application.Handlers
                 _squadRepository.Update(team);
                 await _squadRepository.SaveAsync(cancellationToken);
             }
+        }
+
+        public async Task AddUserToTeamAsync(
+            AddUserToTeamCommand addUserToTeamCommand,
+            CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetAsync(addUserToTeamCommand.userId, cancellationToken);
+            var squad = await _squadRepository.GetAsync(addUserToTeamCommand.squadId,cancellationToken);
+
+            squad.AddTeamUser(addUserToTeamCommand.teamId, user);
+
+            _squadRepository.Update(squad);
+            await _squadRepository.SaveAsync(cancellationToken);
         }
     }
 }

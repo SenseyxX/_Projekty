@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -25,11 +24,13 @@ namespace Warehouse.Infrastructure.Repositories
             => await DbContext
                 .Set<Item>()
                 .Include(item => item.LoanHistories)
+                .AsNoTrackingWithIdentityResolution()
                 .FirstOrDefaultAsync(item => item.Id == squadId, cancellationToken);
 
         public async Task<Item> GetByCodeAsync(string itemCode, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Item>()
+                .AsNoTrackingWithIdentityResolution()
                 .Include(item => item.LoanHistories)
                 .FirstOrDefaultAsync(item => item.Name == itemCode, cancellationToken);
 
@@ -37,6 +38,7 @@ namespace Warehouse.Infrastructure.Repositories
             => await DbContext
                 .Set<Item>()
                 .Include(item => item.LoanHistories)
+                .AsNoTrackingWithIdentityResolution()
                 .Where(item => item.OwnerId == userId)
                 .ToListAsync(cancellationToken);
         

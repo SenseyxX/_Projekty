@@ -5,8 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Warehouse.Application.Contracts.Commands.Item;
 using Warehouse.Application.Dtos.Item;
+using Warehouse.Domain.Category;
 using Warehouse.Domain.Item;
 using Warehouse.Domain.Item.Factories;
+using Warehouse.Domain.User;
 
 namespace Warehouse.Application.Handlers
 {
@@ -14,11 +16,15 @@ namespace Warehouse.Application.Handlers
     {
         private readonly IItemRepository _itemRepository;
         private readonly ItemDomainService _itemDomainService;
-
-        public ItemHandler(IItemRepository itemRepository, ItemDomainService itemDomainService)
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUserRepository _userRepository;
+        
+        public ItemHandler(IItemRepository itemRepository, ItemDomainService itemDomainService, ICategoryRepository categoryRepository, IUserRepository userRepository)
         {
             _itemRepository = itemRepository;
             _itemDomainService = itemDomainService;
+            _categoryRepository = categoryRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken) // Pobieranie Itemu o podanym Id
@@ -29,8 +35,18 @@ namespace Warehouse.Application.Handlers
         
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken) // Pobranie wszystkich Itemów
         {
+            var categories = await _categoryRepository.GetRangeAsync(cancellationToken);
+            var users = await _userRepository.GetRangeAsync(cancellationToken);
             var items = await _itemRepository.GetRangeAsync(cancellationToken);
-            return items.Select(item => (ItemDto) item);
+
+            return items.Select(item =>
+            {
+                var result = (ItemDto) item;
+                result.CategoryName = categories.FirstOrDefault(category => category.Id == item.CategoryId)?.Name;
+                result.OwnerName = users.FirstOrDefault(owner => owner.Id == item.OwnerId)?.FullName();
+                result.ActualOwnerName = users.FirstOrDefault(actualOwner => actualOwner.Id == item.ActualOwnerId)?.FullName();
+                return result;
+            });
         }
 
         public async Task CreateItemAsync(CreateItemCommand createItemCommand, CancellationToken cancellationToken) // Stworznie nowego Itemu
@@ -54,8 +70,10 @@ namespace Warehouse.Application.Handlers
             var item = await _itemRepository.GetAsync(updateItemCommand.ItemId, cancellationToken);
             var isUpdated = item.UpdateName(updateItemCommand.Name);
             isUpdated = item.UpdateOwner(updateItemCommand.OwnerId) || isUpdated;
+            isUpdated = item.UpdateCategory(updateItemCommand.CategoryId) || isUpdated;
             isUpdated = item.UpdateQuantity(updateItemCommand.Quantity) || isUpdated;
             isUpdated = item.UpdateDescription(updateItemCommand.Description) || isUpdated;
+            isUpdated = item.UpdateQuality(updateItemCommand.QualityLevel) || isUpdated;
 
             if (isUpdated)
             {

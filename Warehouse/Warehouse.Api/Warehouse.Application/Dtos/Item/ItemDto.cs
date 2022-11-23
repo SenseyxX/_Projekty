@@ -32,11 +32,15 @@ namespace Warehouse.Application.Dtos.Item
         public string Name { get; }
         public string Description { get; }
 	    public Guid CategoryId { get;}
+        public  string CategoryName { get; set; }
 	    public QualityLevel QualityLevel { get; }
+        public string QualityLevelName { get; set; }
         public int Quantity { get; }
         public State State { get; }
         public Guid? OwnerId { get; }
+        public string OwnerName { get; set; }
         public Guid ActualOwnerId { get;}
+        public string ActualOwnerName { get; set; }
 
         public static explicit operator ItemDto(Domain.Item.Entities.Item item)
                 => new (

@@ -18,6 +18,7 @@ namespace Warehouse.Application.Dtos.User
             PermissionLevel permissionLevel,
             State state,
             Guid? squadId,
+            Guid? teamId,
             IEnumerable<ItemDto> ownedItems,
             IEnumerable<ItemDto> storedItems)
             :base (id,
@@ -25,7 +26,8 @@ namespace Warehouse.Application.Dtos.User
                    lastName,
                    email,
                    phoneNumber,
-                   squadId)
+                   squadId,
+                   teamId)
             {
                 PermissionLevel = permissionLevel;
                 State = state;
@@ -48,6 +50,7 @@ namespace Warehouse.Application.Dtos.User
                          user.PermissionLevel,
                          user.State,
                          user.SquadId,
+                         user.TeamId,
                          user.OwnedItems.Select(ownedItems => (ItemDto) ownedItems),
                          user.StoredItems.Select(storesItems => (ItemDto) storesItems));
     }

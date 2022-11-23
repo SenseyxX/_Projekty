@@ -2,10 +2,12 @@
 
 const state = {
   item: {},
+  items: [],
 };
 
 const getters = {
   item: (state) => state.item,
+  items: (state) => state.items,
 };
 
 const actions = {
@@ -13,15 +15,38 @@ const actions = {
     const result = await service.getItem(id);
     commit("setItem", result);
   },
+  async getItems({ commit }) {
+    const result = await service.getItems();
+    commit("setItems", result);
+  },
   async addItem({ dispatch }, command) {
     await service.addItem(command);
-    await dispatch("getItem", command.id);
+    await dispatch("getItems");
+  },
+  async updateItem({ dispatch }, command) {
+    await service.updateItem(command);
+    await dispatch("getItems", command.id);
+  },
+  async getItemLoanHistory({ commit }, itemId) {
+    const result = await service.getItemLoanHistory(itemId);
+    commit("setItem", result);
+  },
+  // async deleteItem({ commit }, id) {
+  //   const result = await service.deleteItem(id);
+  //   commit("getItem", result);
+  // },
+  async loanItem({ dispatch }, itemId) {
+    await service.loanItem(itemId);
+    await dispatch("getItemLoanHistory", itemId);
   },
 };
 
 const mutations = {
   setItem(state, result) {
     state.item = result;
+  },
+  setItems(state, result) {
+    state.items = result;
   },
 };
 

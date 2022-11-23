@@ -311,7 +311,8 @@ namespace Warehouse.Infrastructure.Migrations
                         .HasColumnName("State");
 
                     b.Property<Guid?>("TeamId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TeamId");
 
                     b.HasKey("Id");
 
@@ -383,7 +384,8 @@ namespace Warehouse.Infrastructure.Migrations
                 {
                     b.HasOne("Warehouse.Domain.Squad.Entities.Squad", null)
                         .WithMany("Users")
-                        .HasForeignKey("SquadId");
+                        .HasForeignKey("SquadId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Warehouse.Domain.Squad.Entities.Team", null)
                         .WithMany("Users")

@@ -1,4 +1,4 @@
-﻿export class UserDto {
+﻿export class FullUserDto {
   constructor(data = {}) {
     this.id = data.id;
     this.name = data.name;
@@ -6,7 +6,14 @@
     this.email = data.email;
     this.phoneNumber = data.phoneNumber;
     this.squadId = data.squadId;
+    this.teamId = data.teamId;
+    // ToDo: implement IEnumerable ownedItems/storedItems and dues
+  }
+}
 
-    // ToDo: implement IEnumerable ownedItems and storedItems
+export class UserPasswordDto {
+  constructor(data = {}) {
+    this.id = data.id;
+    this.password = data.password;
   }
 }

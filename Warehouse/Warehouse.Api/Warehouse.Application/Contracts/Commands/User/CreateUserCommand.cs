@@ -11,6 +11,7 @@ namespace Warehouse.Application.Contracts.Commands.User
         public string Email { get; init; }
         public string PhoneNumber { get; init; }
         public Guid? SquadId { get; init; }
+        public Guid? TeamId { get; init; }
         public PermissionLevel PermissionLevel { get; init; }
     }
 }
