@@ -73,7 +73,9 @@ export default {
       };
 
       await this.updateUser(command);
-      await this.updatePassword(passwordCommand);
+      if (passwordCommand.password !== "") {
+        await this.updatePassword(passwordCommand);
+      }
 
       this.$emit("confirmed");
       this.$emit("canceled");

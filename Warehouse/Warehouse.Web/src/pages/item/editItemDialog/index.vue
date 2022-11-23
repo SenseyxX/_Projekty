@@ -56,7 +56,7 @@ export default {
       if (this.item === null) {
         return;
       }
-
+      this.id = this.item.id;
       this.name = this.item.name;
       this.description = this.item.description;
       this.selectedCategory = this.item.categoryId;
@@ -65,6 +65,7 @@ export default {
     },
   },
   data: () => ({
+    id: "",
     name: "",
     description: "",
     categoryId: "",
@@ -96,10 +97,11 @@ export default {
     ...mapGetters("categoryModule", ["category"]),
   },
   methods: {
-    ...mapActions("itemModule", ["editItem"]),
+    ...mapActions("itemModule", ["updateItem"]),
     ...mapActions("categoryModule", ["getCategories"]),
     async saveChanges() {
       const command = {
+        id: this.id,
         name: this.name,
         description: this.description,
         categoryId: this.selectedCategory,
@@ -108,8 +110,7 @@ export default {
         ownerId: this.authenticationResult.tokenOwner.id,
         actualOwnerId: this.actualOwnerId,
       };
-      await this.editItem(command);
-
+      await this.updateItem(command);
       this.$emit("confirmed");
     },
     cancel() {

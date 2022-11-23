@@ -55,6 +55,12 @@
       @confirmed="hideEditItemDialog"
       @canceled="hideEditItemDialog"
     />
+    <delete-item-dialog
+      :dialog-visibility="deleteItemDialogVisibility"
+      :item="selectedItem"
+      @confirmed="hideDeleteItemDialog"
+      @canceled="hideDeleteItemDialog"
+    />
   </section>
 </template>
 
@@ -63,6 +69,7 @@ import { mapGetters, mapActions } from "vuex";
 import addCategoryDialog from "@/pages/item/addCategoryDialog";
 import addItemDialog from "@/pages/item/addItemDialog";
 import editItemDialog from "@/pages/item/editItemDialog";
+import deleteItemDialog from "@/pages/item/deleteItemDialog";
 
 export default {
   name: "ItemsTable",
@@ -70,6 +77,7 @@ export default {
     addItemDialog,
     addCategoryDialog,
     editItemDialog,
+    deleteItemDialog,
   },
   props: {},
   data() {
@@ -88,6 +96,7 @@ export default {
       addItemDialogVisibility: false,
       addCategoryDialogVisibility: false,
       editItemDialogVisibility: false,
+      deleteItemDialogVisibility: false,
       selectedItem: {},
     };
   },
@@ -121,8 +130,15 @@ export default {
     hideEditItemDialog() {
       this.editItemDialogVisibility = false;
     },
+    showDeleteItemDialog() {
+      this.deleteItemDialogVisibility = true;
+    },
+    hideDeleteItemDialog() {
+      this.deleteItemDialogVisibility = false;
+    },
     deleteItem(item) {
-      console.log(item);
+      this.selectedItem = item;
+      this.showDeleteItemDialog();
     },
     editItem(item) {
       this.selectedItem = item;

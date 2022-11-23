@@ -24,12 +24,33 @@
           :items="filteredUsers"
           :search="search"
           item-key="id"
-        ></v-data-table>
+        >
+          <template v-slot:item.actions="{ user }">
+            <v-btn icon @click="editUser(user)">
+              <v-icon small dakr>mdi-pencil-outline</v-icon>
+            </v-btn>
+            <v-btn icon @click="deleteUser(user)">
+              <v-icon small color="red">mdi-delete</v-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
     <assign-user-dialog
       :dialog-visibility="assignUserDialogVisibility"
       @canceled="hideAssignUserDialog"
+    />
+    <edit-user-dialog
+      :dialog-visibility="editUserDialogVisibility"
+      :item="selectedUser"
+      @confirmed="hideEditUserDialog"
+      @canceled="hideEditUserDialog"
+    />
+    <delete-user-dialog
+      :dialog-visibility="deleteUserDialogVisibility"
+      :item="selectedUser"
+      @confirmed="hideDeleteUserDialog"
+      @canceled="hideDeleteUserDialog"
     />
   </section>
 </template>
@@ -37,11 +58,15 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AssignUserDialog from "@/pages/team/assignUserDialog";
+import EditUserDialog from "@/pages/team/editUserDialog";
+import DeleteUserDialog from "@/pages/team/deleteUserDialog";
 
 export default {
   name: "UsersTable",
   components: {
     AssignUserDialog,
+    EditUserDialog,
+    DeleteUserDialog,
   },
   props: {
     team: {
@@ -52,13 +77,17 @@ export default {
   data() {
     return {
       search: "",
-      assignUserDialogVisibility: false,
       headers: [
         { text: "Imię", value: "name" },
         { text: "Nazwisko", value: "lastName" },
         { text: "E-mail", value: "email" },
         { text: "Telefon", value: "phoneNumber" },
+        { text: "Akcje", value: "actions", sortable: false },
       ],
+      assignUserDialogVisibility: false,
+      editUserDialogVisibility: false,
+      deleteUserDialogVisibility: false,
+      selectedUser: {},
     };
   },
   computed: {
@@ -74,6 +103,26 @@ export default {
     },
     hideAssignUserDialog() {
       this.assignUserDialogVisibility = false;
+    },
+    showEditUserDialog() {
+      this.editUserDialogVisibility = true;
+    },
+    hideEditUserDialog() {
+      this.editUserDialogVisibility = false;
+    },
+    showDeleteUserDialog() {
+      this.deleteUserDialogVisibility = true;
+    },
+    hideDeleteUserDialog() {
+      this.deleteUserDialogVisibility = false;
+    },
+    deleteUser(user) {
+      this.selectedUser = user;
+      this.showDeleteItemDialog();
+    },
+    editUser(user) {
+      this.selectedUser = user;
+      this.showEditUserDialog();
     },
   },
 

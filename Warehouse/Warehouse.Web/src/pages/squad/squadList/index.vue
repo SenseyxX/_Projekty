@@ -12,30 +12,21 @@
       :dialog-visibility="addSquadDialogVisibility"
       @canceled="hideAddSquadDialog"
     ></add-squad-dialog>
-    <edit-squad-dialog
-      :dialog-visibility="editSquadDialogVisibility"
-      :selectedSquad="selectedSquad"
-      @canceled="changeEditSquadDialogVisibility(false)"
-      @confirmed="changeEditSquadDialogVisibility(false)"
-    />
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AddSquadDialog from "../addSquadDialog";
-import EditSquadDialog from "../editSquadDialog";
 
 export default {
   name: "SquadList",
   components: {
     AddSquadDialog,
-    EditSquadDialog,
   },
   data() {
     return {
       addSquadDialogVisibility: false,
-      editSquadDialogVisibility: false,
       selectedSquad: null,
     };
   },

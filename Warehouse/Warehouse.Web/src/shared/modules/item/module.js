@@ -31,6 +31,10 @@ const actions = {
     const result = await service.getItemLoanHistory(itemId);
     commit("setItem", result);
   },
+  // async deleteItem({ commit }, id) {
+  //   const result = await service.deleteItem(id);
+  //   commit("getItem", result);
+  // },
   async loanItem({ dispatch }, itemId) {
     await service.loanItem(itemId);
     await dispatch("getItemLoanHistory", itemId);

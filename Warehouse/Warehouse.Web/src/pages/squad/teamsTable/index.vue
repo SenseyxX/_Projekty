@@ -19,18 +19,43 @@
           :items="filteredTeams"
           :search="search"
           item-key="id"
-        ></v-data-table>
+        >
+          <template v-slot:item.actions="{ team }">
+            <v-btn icon @click="editTeam(team)">
+              <v-icon small dakr>mdi-pencil-outline</v-icon>
+            </v-btn>
+            <v-btn icon @click="deleteTeam(team)">
+              <v-icon small color="red">mdi-delete</v-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
+    <edit-team-dialog
+      :dialog-visibility="editTeamDialogVisibility"
+      :item="selectedTeam"
+      @confirmed="hideEditTeamDialog"
+      @canceled="hideEditTeamDialog"
+    />
+    <delete-Team-dialog
+      :dialog-visibility="deleteTeamDialogVisibility"
+      :item="selectedTeam"
+      @confirmed="hideDeleteTeamDialog"
+      @canceled="hideDeleteTeamDialog"
+    />
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
+import editTeamDialog from "@/pages/team/editTeamDialog";
+import deleteTeamDialog from "@/pages/team/deleteTeamDialog";
 export default {
   name: "TeamTable",
-  components: {},
+  components: {
+    editTeamDialog,
+    deleteTeamDialog,
+  },
   props: {
     selectedsquad: {
       type: Object,
@@ -45,7 +70,11 @@ export default {
         { text: "Drużyna", value: "squadName" },
         { text: "Zastępowy", value: "teamOwnerName" },
         { text: "Punkty", value: "points" },
+        { text: "Akcje", value: "actions", sortable: false },
       ],
+      editTeamDialogVisibility: false,
+      deleteTeamDialogVisibility: false,
+      selectedTeam: {},
     };
   },
   computed: {
@@ -63,6 +92,27 @@ export default {
     userName(squadOwnerId) {
       const user = this.users.find((user) => user.id === squadOwnerId);
       return user.name + " " + user.lastName;
+    },
+    showEditTeamDialog() {
+      this.editTeamDialogVisibility = true;
+    },
+    hideEditTeamDialog() {
+      this.editTeamDialogVisibility = false;
+    },
+    showDeleteTeamDialog() {
+      this.deleteTeamDialogVisibility = true;
+    },
+    hideDeleteTeamDialog() {
+      this.deleteTeamDialogVisibility = false;
+    },
+    deleteTeam(team) {
+      this.selectedTeam = team;
+      this.showDeleteTeamDialog();
+    },
+    editTeam(team) {
+      this.selectedTeam = team;
+      console.log("edycja zastępu");
+      this.showEditTeamDialog();
     },
   },
 

@@ -9,37 +9,37 @@
           <v-form ref="form" v-model="isValid">
             <v-row>
               <v-text-field
-                v-model="name"
-                label="Nazwa zastępu"
-                :rules="[(v) => !!v || 'Nazwa jest wymagana']"
+                  v-model="name"
+                  label="Nazwa zastępu"
+                  :rules="[(v) => !!v || 'Nazwa jest wymagana']"
               />
             </v-row>
             <v-row>
               <v-select
-                v-model="selectedUser"
-                label=" Zastępowy"
-                :items="filteredUsers"
-                item-text="name"
-                item-value="id"
-                :rules="[(v) => !!v || 'Druzynowy jest wymagany']"
+                  v-model="selectedUser"
+                  label=" Zastępowy"
+                  :items="filteredUsers"
+                  item-text="name"
+                  item-value="id"
+                  :rules="[(v) => !!v || 'Druzynowy jest wymagany']"
               ></v-select>
             </v-row>
             <v-row>
               <v-slider
-                v-model="team.points"
-                class="align-center"
-                :max="max"
-                :min="min"
-                hide-details
+                  v-model="team.points"
+                  class="align-center"
+                  :max="max"
+                  :min="min"
+                  hide-details
               >
                 <template v-slot:append>
                   <v-text-field
-                    v-model="team.points"
-                    class="mt-0 pt-0"
-                    hide-details
-                    single-line
-                    type="number"
-                    style="width: 60px"
+                      v-model="team.points"
+                      class="mt-0 pt-0"
+                      hide-details
+                      single-line
+                      type="number"
+                      style="width: 60px"
                   ></v-text-field>
                 </template>
               </v-slider>
@@ -52,10 +52,10 @@
               Anuluj
             </v-btn>
             <v-btn
-              @click="saveChanges"
-              color="primary"
-              class="mr-8"
-              :disabled="!isValid"
+                @click="saveChanges"
+                color="primary"
+                class="mr-8"
+                :disabled="!isValid"
             >
               Zapisz
             </v-btn>
@@ -70,7 +70,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "addSquadDialog",
+  name: "editTeamDialog",
   data: () => ({
     min: 0,
     max: 200,
@@ -101,7 +101,7 @@ export default {
     ...mapGetters("squadModule", ["team"]),
     filteredUsers() {
       return this.users.filter(
-        (users) => users.squadId === this.selectedteam.squadId
+          (users) => users.squadId === this.selectedteam.squadId
       );
     },
   },

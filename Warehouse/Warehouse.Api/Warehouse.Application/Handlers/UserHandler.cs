@@ -112,11 +112,16 @@ namespace Warehouse.Application.Handlers
           {
               var user = await _userRepository.GetAsync(updateUserPasswordCommand.UserId, cancellationToken);
 
+              if (updateUserPasswordCommand.Password == "")
+              { 
+                  throw new Exception(); 
+              }
               var updatedPassword = _encryptionService.EncodePassword(updateUserPasswordCommand.Password);
               user.UpdatePasswordHash(updatedPassword);
-              
+
               _userRepository.Update(user);
               await _userRepository.SaveAsync(cancellationToken);
+
           }
 
           public async Task CreateUserDueAsync(CreateDueCommand createDueCommand, CancellationToken cancellationToken)
