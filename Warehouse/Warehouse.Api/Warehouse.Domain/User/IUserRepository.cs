@@ -7,9 +7,11 @@ using Warehouse.Domain.Abstractions;
 namespace Warehouse.Domain.User
 {
     public interface IUserRepository : IRepository<Entities.User>
-    {       
+    {
         Task<IEnumerable<Item.Entities.Item>> GetUserItemsAsync(Guid userId, CancellationToken cancellationToken);
 
         Task<bool> IsEmailRegisteredAsync(string emailAddress, CancellationToken cancellationToken);
+
+        Task<ICollection<Entities.User>> GetUsersAsync(IEnumerable<string> userEmails, CancellationToken cancellationToken);
     }
 }

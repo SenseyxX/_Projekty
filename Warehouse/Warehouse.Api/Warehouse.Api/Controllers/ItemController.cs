@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using CsvHelper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Warehouse.Application.Contracts.Commands.Item;
 using Warehouse.Application.Dtos.Item;
 using Warehouse.Application.Handlers;
+using Warehouse.Domain.Item;
 
 namespace Warehouse.Api.Controllers
 {
@@ -45,6 +50,26 @@ namespace Warehouse.Api.Controllers
         CancellationToken cancellationToken)
         {
             await _itemHandler.CreateItemAsync(createItemCommand, cancellationToken);
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("import")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateItemsAsync(
+            IFormFile file,
+            CancellationToken cancellationToken)
+        {
+            using var streamReader = new StreamReader(file.OpenReadStream());
+            var reader = new CsvReader(streamReader, CultureInfo.InvariantCulture);
+            var records = reader.GetRecords<ItemModel>();
+
+            var command = new CreateItemsCommand
+            {
+                Models = records
+            };
+
+            await _itemHandler.CreateItemsAsync(command, cancellationToken);
             return Ok();
         }
 

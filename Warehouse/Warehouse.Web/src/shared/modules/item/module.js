@@ -31,10 +31,11 @@ const actions = {
     const result = await service.getItemLoanHistory(itemId);
     commit("setItem", result);
   },
-  // async deleteItem({ commit }, id) {
-  //   const result = await service.deleteItem(id);
-  //   commit("getItem", result);
-  // },
+  async deleteItem({ dispatch }, id) {
+    console.log(2, id);
+    await service.deleteItem(id);
+    await dispatch("getItems");
+  },
   async loanItem({ dispatch }, itemId) {
     await service.loanItem(itemId);
     await dispatch("getItemLoanHistory", itemId);
