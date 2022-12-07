@@ -31,15 +31,6 @@ const client = {
       showErrorMessage(exception);
     }
   },
-  async ImportCSV(resource, data, params) {
-    const config = this.createConfig(params);
-
-    try {
-      return await api.post(resource, data, config);
-    } catch (exception) {
-      showErrorMessage(exception);
-    }
-  },
   async put(resource, data, params) {
     const config = this.createConfig(params);
 
@@ -54,6 +45,30 @@ const client = {
 
     try {
       return await api.delete(resource, config);
+    } catch (exception) {
+      showErrorMessage(exception);
+    }
+  },
+  async getFile(resource, params) {
+    const config = this.createConfig(params);
+    config.responseType = "blob";
+
+    try {
+      return await api.get(resource, config);
+    } catch (exception) {
+      showErrorMessage(exception);
+    }
+  },
+  async file(resource, data, params) {
+    const config = this.createConfig(params);
+
+    config.headers["Content-Type"] = "multipart/form-data";
+
+    let formData = new FormData();
+    formData.append("file", data);
+
+    try {
+      return await api.post(resource, formData, config);
     } catch (exception) {
       showErrorMessage(exception);
     }

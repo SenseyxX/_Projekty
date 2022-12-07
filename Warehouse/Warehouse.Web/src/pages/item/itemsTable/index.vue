@@ -19,8 +19,13 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-file-input hide-input prepend-icon="mdi-upload"></v-file-input>
-        <v-btn>
+        <v-file-input
+          v-model="file"
+          hide-input
+          prepend-icon="mdi-upload"
+          @change="onFileUploaded"
+        ></v-file-input>
+        <v-btn icon @click="onExportItems">
           <v-icon small dark>mdi-pencil-outline</v-icon>
         </v-btn>
       </v-col>
@@ -102,6 +107,7 @@ export default {
       editItemDialogVisibility: false,
       deleteItemDialogVisibility: false,
       selectedItem: {},
+      file: null,
     };
   },
   computed: {
@@ -114,7 +120,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("itemModule", ["getItems"]),
+    ...mapActions("itemModule", ["getItems", "importItems", "exportItems"]),
 
     showAddItemDialog() {
       this.addItemDialogVisibility = true;
@@ -147,6 +153,12 @@ export default {
     editItem(item) {
       this.selectedItem = item;
       this.showEditItemDialog();
+    },
+    async onFileUploaded() {
+      await this.importItems(this.file);
+    },
+    async onExportItems() {
+      await this.exportItems();
     },
   },
 

@@ -27,7 +27,6 @@ const service = {
     return new LoanHistoryDto(response.data);
   },
   async deleteItem(itemId) {
-    console.log(3, itemId);
     const resource = `item/${itemId}`;
     return await client.delete(resource);
   },
@@ -35,6 +34,30 @@ const service = {
     const resource = `${itemId}/loan`;
     return await client.post(resource, itemId);
   },
+  async importItems(file) {
+    const resource = "item/import";
+    return await client.file(resource, file);
+  },
+  async exportItems() {
+    const resource = "item/export";
+    const result = await client.get(resource);
+    const currentDate = new Date().toISOString().split("T")[0];
+    createDownloadFileUrl(result, `items-${currentDate}.csv`);
+  },
 };
+
+function createDownloadFileUrl(result, fileName) {
+  const blob = new Blob([result.data]);
+  const fileUrl = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  document.body.appendChild(a);
+  a.setAttribute("download", "file");
+  a.style = "display: none";
+  a.href = fileUrl;
+  a.download = fileName;
+  a.click();
+  window.URL.revokeObjectURL(fileUrl);
+  document.body.removeChild(a);
+}
 
 export default service;

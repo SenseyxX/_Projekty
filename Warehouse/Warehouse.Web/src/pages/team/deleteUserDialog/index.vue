@@ -41,6 +41,7 @@ export default {
   name: "deleteUserDialog",
   watch: {
     user() {
+      console.log(this.user);
       if (this.user === null) {
         return;
       }

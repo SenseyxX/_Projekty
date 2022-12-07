@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -45,7 +46,7 @@ namespace Warehouse.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateItemAsync(
+        public async Task<IActionResult> CreateItemAsync(
         [FromBody] CreateItemCommand createItemCommand,
         CancellationToken cancellationToken)
         {
@@ -53,7 +54,6 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
         [HttpPost("import")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateItemsAsync(
@@ -71,6 +71,22 @@ namespace Warehouse.Api.Controllers
 
             await _itemHandler.CreateItemsAsync(command, cancellationToken);
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("export")]
+        public async Task<FileResult> ExportItemsAsync(CancellationToken cancellationToken)
+        {
+            var result = await _itemHandler.GetItemsAsync(cancellationToken);
+
+            using var memoryStream = new MemoryStream();
+            await using var writer = new StreamWriter(memoryStream);
+            await using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+
+            await csv.WriteRecordsAsync((IEnumerable)result, cancellationToken);
+
+            var serializedData = memoryStream.ToArray();
+            return File(serializedData, "text/csv", $"items-{DateTime.Now:yyyy-MM-dd hh:mm}");
         }
 
         [HttpDelete("{itemId:guid}")]

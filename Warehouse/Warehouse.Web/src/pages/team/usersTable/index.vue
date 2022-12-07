@@ -25,11 +25,11 @@
           :search="search"
           item-key="id"
         >
-          <template v-slot:item.actions="{ user }">
-            <v-btn icon @click="editUser(user)">
+          <template v-slot:item.actions="{ item }">
+            <v-btn icon @click="editUser(item)">
               <v-icon small dakr>mdi-pencil-outline</v-icon>
             </v-btn>
-            <v-btn icon @click="deleteUser(user)">
+            <v-btn icon @click="deleteUser(item)">
               <v-icon small color="red">mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -48,7 +48,7 @@
     />
     <delete-user-dialog
       :dialog-visibility="deleteUserDialogVisibility"
-      :item="selectedUser"
+      :user="selectedUser"
       @confirmed="hideDeleteUserDialog"
       @canceled="hideDeleteUserDialog"
     />
@@ -117,6 +117,7 @@ export default {
       this.deleteUserDialogVisibility = false;
     },
     deleteUser(user) {
+      console.log(user);
       this.selectedUser = user;
       this.showDeleteUserDialog();
     },

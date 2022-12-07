@@ -32,13 +32,19 @@ const actions = {
     commit("setItem", result);
   },
   async deleteItem({ dispatch }, id) {
-    console.log(2, id);
     await service.deleteItem(id);
     await dispatch("getItems");
   },
   async loanItem({ dispatch }, itemId) {
     await service.loanItem(itemId);
     await dispatch("getItemLoanHistory", itemId);
+  },
+  async importItems({ dispatch }, file) {
+    await service.importItems(file);
+    await dispatch("getItems");
+  },
+  async exportItems() {
+    await service.exportItems();
   },
 };
 
