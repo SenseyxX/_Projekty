@@ -31,6 +31,15 @@ const client = {
       showErrorMessage(exception);
     }
   },
+  async ImportCSV(resource, data, params) {
+    const config = this.createConfig(params);
+
+    try {
+      return await api.post(resource, data, config);
+    } catch (exception) {
+      showErrorMessage(exception);
+    }
+  },
   async put(resource, data, params) {
     const config = this.createConfig(params);
 

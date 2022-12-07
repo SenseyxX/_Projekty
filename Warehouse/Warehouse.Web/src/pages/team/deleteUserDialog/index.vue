@@ -8,7 +8,9 @@
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
             <p class="body-4 text-muted subtitle">
-              Czy jesteś pewien że chcesz usunąć tego użytkownika "{{ this.name }}"?
+              Czy jesteś pewien że chcesz usunąć tego użytkownika "{{
+                this.name
+              }}"?
             </p>
           </v-form>
         </div>
@@ -18,7 +20,7 @@
               NIE
             </v-btn>
             <v-btn
-              @click="deleteItem"
+              @click="confirmUser"
               color="primary"
               class="mr-8"
               :disabled="!isValid"
@@ -66,11 +68,10 @@ export default {
   },
   methods: {
     ...mapActions("userModule", ["deleteUser"]),
-    async deleteItem() {
-      console.log("Usunięto użytkowanika:");
-      // console.log(this.name);
-      // console.log(this.id);
-      // await this.deleteUser(this.id);
+    // Todo: change delate to put to clear assigned teamId
+    async confirmUser() {
+      console.log(1, this.id);
+      await this.deleteUser(this.id);
       this.$emit("confirmed");
     },
     cancel() {

@@ -8,7 +8,9 @@
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
             <p class="body-4 text-muted subtitle">
-              Czy jesteś pewien że chcesz usunąć ten przedmiot "{{ this.name }}"?
+              Czy jesteś pewien że chcesz usunąć ten przedmiot "{{
+                this.name
+              }}"?
             </p>
           </v-form>
         </div>
@@ -18,7 +20,7 @@
               NIE
             </v-btn>
             <v-btn
-              @click="deleteItem"
+              @click="confirmItem"
               color="primary"
               class="mr-8"
               :disabled="!isValid"
@@ -66,11 +68,9 @@ export default {
   },
   methods: {
     ...mapActions("itemModule", ["deleteItem"]),
-    async deleteItem() {
-      console.log("Usunięto przedmiot:");
-      console.log(this.name);
-      console.log(this.id);
-      // await this.deleteItem(this.id);
+    async confirmItem() {
+      console.log(1, this.id);
+      await this.deleteItem(this.id);
       this.$emit("confirmed");
     },
     cancel() {

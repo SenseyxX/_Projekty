@@ -19,6 +19,10 @@
           single-line
           hide-details
         ></v-text-field>
+        <v-file-input hide-input prepend-icon="mdi-upload"></v-file-input>
+        <v-btn>
+          <v-icon small dark>mdi-pencil-outline</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -31,7 +35,7 @@
         >
           <template v-slot:item.actions="{ item }">
             <v-btn icon @click="editItem(item)">
-              <v-icon small dakr>mdi-pencil-outline</v-icon>
+              <v-icon small dark>mdi-pencil-outline</v-icon>
             </v-btn>
             <v-btn icon @click="deleteItem(item)">
               <v-icon small color="red">mdi-delete</v-icon>

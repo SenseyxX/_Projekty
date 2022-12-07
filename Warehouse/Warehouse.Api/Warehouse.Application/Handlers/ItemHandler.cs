@@ -18,13 +18,20 @@ namespace Warehouse.Application.Handlers
         private readonly ItemDomainService _itemDomainService;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IUserRepository _userRepository;
-        
-        public ItemHandler(IItemRepository itemRepository, ItemDomainService itemDomainService, ICategoryRepository categoryRepository, IUserRepository userRepository)
+        private readonly ItemFactory _itemFactory;
+
+        public ItemHandler(
+            IItemRepository itemRepository,
+            ItemDomainService itemDomainService,
+            ICategoryRepository categoryRepository,
+            IUserRepository userRepository,
+            ItemFactory itemFactory)
         {
             _itemRepository = itemRepository;
             _itemDomainService = itemDomainService;
             _categoryRepository = categoryRepository;
             _userRepository = userRepository;
+            _itemFactory = itemFactory;
         }
 
         public async Task<FullItemDto> GetItemAsync(Guid id, CancellationToken cancellationToken) // Pobieranie Itemu o podanym Id
@@ -32,7 +39,7 @@ namespace Warehouse.Application.Handlers
             var item = await _itemRepository.GetAsync(id, cancellationToken);
             return (FullItemDto) item;
         }
-        
+
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(CancellationToken cancellationToken) // Pobranie wszystkich Itemów
         {
             var categories = await _categoryRepository.GetRangeAsync(cancellationToken);
@@ -60,6 +67,12 @@ namespace Warehouse.Application.Handlers
                 createItemCommand.OwnerId);
 
             await _itemRepository.CreateAsync(item, cancellationToken);
+            await _itemRepository.SaveAsync(cancellationToken);
+        }
+
+        public async Task CreateItemsAsync(CreateItemsCommand command, CancellationToken cancellationToken)
+        {
+            var _ = await _itemFactory.CreateAsync(command.Models.ToList(), cancellationToken);
             await _itemRepository.SaveAsync(cancellationToken);
         }
 

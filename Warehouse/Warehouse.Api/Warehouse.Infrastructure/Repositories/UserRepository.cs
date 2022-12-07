@@ -25,7 +25,7 @@ namespace Warehouse.Infrastructure.Repositories
         public override async Task<ICollection<User>> GetRangeAsync(CancellationToken cancellationToken)
             => await GetWithDependencies()
                 .ToListAsync(cancellationToken);
-        
+
         public async Task<IEnumerable<Item>> GetUserItemsAsync(
             Guid userId,
             CancellationToken cancellationToken)
@@ -41,6 +41,12 @@ namespace Warehouse.Infrastructure.Repositories
             await DbContext.Set<User>()
                 .AnyAsync(user => user.Email == emailAddress, cancellationToken);
 
+        public async Task<ICollection<User>> GetUsersAsync(IEnumerable<string> userEmails, CancellationToken cancellationToken) =>
+            await DbContext.Set<User>()
+            .AsNoTracking()
+            .Where(user => userEmails.Any(email => user.Email == email))
+            .ToListAsync(cancellationToken);
+
         private IQueryable<User> GetWithDependencies()
             => DbContext
                 .Set<User>()
@@ -48,6 +54,6 @@ namespace Warehouse.Infrastructure.Repositories
                 .Include(user => user.Dues)
                 .Include(user => user.OwnedItems)
                 .Include(user => user.StoredItems);
-        
+
     }
 }

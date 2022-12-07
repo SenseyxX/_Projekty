@@ -26,10 +26,11 @@ const service = {
     const response = await client.get(resource);
     return new LoanHistoryDto(response.data);
   },
-  // async deleteItem(itemId) {
-  //   const resource = `item/${itemId.id}`;
-  //   return await client.delete(resource, itemId);
-  // },
+  async deleteItem(itemId) {
+    console.log(3, itemId);
+    const resource = `item/${itemId}`;
+    return await client.delete(resource);
+  },
   async loanItem(itemId) {
     const resource = `${itemId}/loan`;
     return await client.post(resource, itemId);

@@ -13,7 +13,7 @@ https://trello.com/b/G1GSw7yO/warehouse
 ------------------------------------------
 * Dodać userId do category Entity (Do przemyślenia)
 
-"WarehouseContext": "Data Source=.\SQLEXPRESS;Initial Catalog=Warehouse;Integrated Security=True"
+"WarehouseContext": "Data Source=.\\SQLEXPRESS;Initial Catalog=Warehouse;Integrated Security=True"
 "WarehouseContext": "Data Source=10.90.0.201;Initial Catalog=Warehouse-2020;Integrated Security=True;"
 "WarehouseContext": "Data Source=10.90.0.201;Initial Catalog=Warehouse-2020;User id=electrolux;Password=etisoft1234;"
 "WarehouseContext": "Data Source=localhost, 8010;Initial Catalog=Warehouse;User id=sa;Password=etiSZOPq03m2fges@()325cgftwRQ;"
