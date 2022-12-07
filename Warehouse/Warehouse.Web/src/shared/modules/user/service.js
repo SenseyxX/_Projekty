@@ -24,6 +24,11 @@ const service = {
     const resource = `user/${command.id}/password`;
     return await client.put(resource, command);
   },
+  async deleteUser(userId) {
+    console.log(3, userId);
+    const resource = `user/${userId}`;
+    return await client.delete(resource);
+  },
 };
 
 export default service;

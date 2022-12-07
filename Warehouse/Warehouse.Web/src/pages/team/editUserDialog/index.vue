@@ -68,6 +68,7 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("userModule", ["user"]),
     ...mapGetters("squadModule", ["squads"]),
+    ...mapGetters("squadModule", ["teams"]),
   },
   methods: {
     ...mapActions("userModule", ["getUser", "updateUser"]),

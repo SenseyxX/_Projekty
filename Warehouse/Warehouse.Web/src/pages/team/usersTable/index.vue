@@ -118,7 +118,7 @@ export default {
     },
     deleteUser(user) {
       this.selectedUser = user;
-      this.showDeleteItemDialog();
+      this.showDeleteUserDialog();
     },
     editUser(user) {
       this.selectedUser = user;

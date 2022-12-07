@@ -20,7 +20,7 @@
               NIE
             </v-btn>
             <v-btn
-              @click="confirm"
+              @click="confirmItem"
               color="primary"
               class="mr-8"
               :disabled="!isValid"
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions("itemModule", ["deleteItem"]),
-    async confirm() {
+    async confirmItem() {
       console.log(1, this.id);
       await this.deleteItem(this.id);
       this.$emit("confirmed");
