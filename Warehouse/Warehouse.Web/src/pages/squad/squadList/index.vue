@@ -5,6 +5,14 @@
       <v-list-item-group v-model="selectedSquad" color="primary">
         <v-list-item v-for="item in squads" :key="item.id">
           {{ item.name }}
+          <template v-slot:item.actions="{ team }">
+            <v-btn icon @click="editSquad(team)">
+              <v-icon small dark>mdi-pencil-outline</v-icon>
+            </v-btn>
+            <v-btn icon @click="deleteSquad(team)">
+              <v-icon small color="red">mdi-delete</v-icon>
+            </v-btn>
+          </template>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -27,6 +35,8 @@ export default {
   data() {
     return {
       addSquadDialogVisibility: false,
+      editSquadDialogVisibility: false,
+      deleteSquadDialogVisibility: false,
       selectedSquad: null,
     };
   },
@@ -46,6 +56,26 @@ export default {
     },
     hideAddSquadDialog() {
       this.addSquadDialogVisibility = false;
+    },
+    showEditSquadDialog() {
+      this.editSquadDialogVisibility = true;
+    },
+    hideEditSquadDialog() {
+      this.editSquadDialogVisibility = false;
+    },
+    showDeleteSquadDialog() {
+      this.deleteSquadDialogVisibility = true;
+    },
+    hideDeleteSquadDialog() {
+      this.deleteSquadDialogVisibility = false;
+    },
+    deleteSquad(squad) {
+      this.selectedSquad = squad;
+      this.showDeleteSquadDialog();
+    },
+    editSquad(squad) {
+      this.selectedSquad = squad;
+      this.showEditSquadDialog();
     },
   },
   async mounted() {

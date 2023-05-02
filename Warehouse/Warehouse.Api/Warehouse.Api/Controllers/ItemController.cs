@@ -73,8 +73,7 @@ namespace Warehouse.Api.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
-        [HttpGet("export")]
+        [HttpGet("{squadID:guid}/export")]
         public async Task<FileResult> ExportItemsAsync(CancellationToken cancellationToken)
         {
             var result = await _itemHandler.GetItemsAsync(cancellationToken);

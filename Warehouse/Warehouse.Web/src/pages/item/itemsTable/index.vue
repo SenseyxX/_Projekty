@@ -25,8 +25,10 @@
           prepend-icon="mdi-upload"
           @change="onFileUploaded"
         ></v-file-input>
+      </v-col>
+      <v-col>
         <v-btn icon @click="onExportItems">
-          <v-icon small dark>mdi-pencil-outline</v-icon>
+          <v-icon small dark>mdi-download</v-icon>
         </v-btn>
       </v-col>
     </v-row>

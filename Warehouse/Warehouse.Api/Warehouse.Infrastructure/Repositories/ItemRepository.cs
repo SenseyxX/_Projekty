@@ -41,6 +41,5 @@ namespace Warehouse.Infrastructure.Repositories
                 .AsNoTrackingWithIdentityResolution()
                 .Where(item => item.OwnerId == userId)
                 .ToListAsync(cancellationToken);
-        
-    }
+        }
 }
