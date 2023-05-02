@@ -32,7 +32,7 @@ namespace Warehouse.Application.Handlers
                 return new AuthenticationResultDto
                 {
                     IsAuthenticated = isAuthenticated,
-                    Jwt = _tokenService.GenerateToken(user.Id),
+                    Jwt = _tokenService.GenerateToken(user),
                     TokenOwner = (UserDto) user,
                 };
             }

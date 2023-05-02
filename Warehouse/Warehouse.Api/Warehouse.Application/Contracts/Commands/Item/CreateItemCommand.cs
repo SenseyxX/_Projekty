@@ -5,6 +5,7 @@ namespace Warehouse.Application.Contracts.Commands.Item
 {
     public sealed class CreateItemCommand
     {
+		public Guid SquadId { get; set; }
         public string Name { get; init; }
         public string Description { get; init; }
         public Guid CategoryId { get; init; }

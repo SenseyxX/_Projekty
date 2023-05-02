@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using CsvHelper;
@@ -13,6 +14,7 @@ using Warehouse.Application.Contracts.Commands.Item;
 using Warehouse.Application.Dtos.Item;
 using Warehouse.Application.Handlers;
 using Warehouse.Domain.Item;
+using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Api.Controllers
 {
@@ -49,7 +51,8 @@ namespace Warehouse.Api.Controllers
         public async Task<IActionResult> CreateItemAsync(
         [FromBody] CreateItemCommand createItemCommand,
         CancellationToken cancellationToken)
-        {
+		{
+			createItemCommand.SquadId = GetSquadId();
             await _itemHandler.CreateItemAsync(createItemCommand, cancellationToken);
             return Ok();
         }
@@ -66,6 +69,7 @@ namespace Warehouse.Api.Controllers
 
             var command = new CreateItemsCommand
             {
+				SquadId = GetSquadId(),
                 Models = records
             };
 

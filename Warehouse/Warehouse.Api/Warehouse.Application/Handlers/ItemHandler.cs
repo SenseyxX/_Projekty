@@ -57,14 +57,16 @@ namespace Warehouse.Application.Handlers
         }
 
         public async Task CreateItemAsync(CreateItemCommand createItemCommand, CancellationToken cancellationToken) // Stworznie nowego Itemu
-        {
-            var item = ItemFactory.Create(
-                createItemCommand.Name,
-                createItemCommand.Description,
-                createItemCommand.CategoryId,
-                createItemCommand.QualityLevel,
-                createItemCommand.Quantity,
-                createItemCommand.OwnerId);
+		{
+			var item = await _itemFactory.CreateAsync(
+				createItemCommand.SquadId,
+				createItemCommand.Name,
+				createItemCommand.Description,
+				createItemCommand.CategoryId,
+				createItemCommand.QualityLevel,
+				createItemCommand.Quantity,
+				createItemCommand.OwnerId,
+				cancellationToken);
 
             await _itemRepository.CreateAsync(item, cancellationToken);
             await _itemRepository.SaveAsync(cancellationToken);
@@ -72,7 +74,11 @@ namespace Warehouse.Application.Handlers
 
         public async Task CreateItemsAsync(CreateItemsCommand command, CancellationToken cancellationToken)
         {
-            var _ = await _itemFactory.CreateAsync(command.Models.ToList(), cancellationToken);
+            var _ = await _itemFactory.CreateAsync(
+				command.SquadId,
+				command.Models.ToList(),
+				cancellationToken);
+
             await _itemRepository.SaveAsync(cancellationToken);
         }
 

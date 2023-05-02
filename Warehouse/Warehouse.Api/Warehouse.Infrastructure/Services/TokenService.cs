@@ -7,12 +7,15 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Warehouse.Application.Services;
 using Warehouse.Application.Settings;
+using Warehouse.Domain.User.Entities;
 
 namespace Warehouse.Infrastructure.Services
 {
     public sealed class TokenService : ITokenService
     {
-        public const string TokenOwnerKey = "TokenOwner";
+        public const string TokenOwnerIdKey = "TokenOwner";
+		public const string TokenSquadIdKey = "SquadId";
+
         internal const string SecretKey = "jalhdkagASdlh212312";
 
         private readonly TokenSettings _tokenSettings;
@@ -22,13 +25,14 @@ namespace Warehouse.Infrastructure.Services
             _tokenSettings = tokenSettings.Value;
         }
 
-        public string GenerateToken(Guid ownerId)
+        public string GenerateToken(User user)
         {
             var secretKey = Encoding.ASCII.GetBytes(SecretKey);
             var validityTimeInHours = Convert.ToDouble(_tokenSettings.ValidityTimeInHours);
             var claims = new List<Claim>
             {
-                new (TokenOwnerKey, ownerId.ToString()),
+                new (TokenOwnerIdKey, user.Id.ToString()),
+				new (TokenSquadIdKey, user.SquadId.ToString()),
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor

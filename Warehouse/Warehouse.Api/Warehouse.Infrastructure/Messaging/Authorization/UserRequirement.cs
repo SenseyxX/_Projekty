@@ -59,7 +59,7 @@ namespace Warehouse.Infrastructure.Messaging.Authorization
 
         private static Guid GetUserIdClaim(ClaimsPrincipal claimsPrincipal)
         {
-            var claim = claimsPrincipal.Claims.FirstOrDefault(claim => claim.Type == TokenService.TokenOwnerKey)
+            var claim = claimsPrincipal.Claims.FirstOrDefault(claim => claim.Type == TokenService.TokenOwnerIdKey)
                 ?.Value;
 
             if (claim is null)

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Warehouse.Domain.User.Entities;
 
 namespace Warehouse.Application.Services
 {
     public interface ITokenService
     {
-        string GenerateToken(Guid ownerId);
+        string GenerateToken(User user);
     }
 }
