@@ -33,13 +33,13 @@
     </v-row>
     <edit-team-dialog
       :dialog-visibility="editTeamDialogVisibility"
-      :item="selectedTeam"
+      :team="selectedTeam"
       @confirmed="hideEditTeamDialog"
       @canceled="hideEditTeamDialog"
     />
     <delete-Team-dialog
       :dialog-visibility="deleteTeamDialogVisibility"
-      :item="selectedTeam"
+      :team="selectedTeam"
       @confirmed="hideDeleteTeamDialog"
       @canceled="hideDeleteTeamDialog"
     />
@@ -106,12 +106,12 @@ export default {
       this.deleteTeamDialogVisibility = false;
     },
     deleteTeam(team) {
+      console.log(team);
       this.selectedTeam = team;
       this.showDeleteTeamDialog();
     },
     editTeam(team) {
       this.selectedTeam = team;
-      console.log("edycja zastępu");
       this.showEditTeamDialog();
     },
   },

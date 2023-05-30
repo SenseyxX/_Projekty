@@ -8,9 +8,7 @@
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
             <p class="body-4 text-muted subtitle">
-              Czy jesteś pewien że chcesz usunąć tą drużynę "{{
-                this.name
-              }}"?
+              Czy jesteś pewien że chcesz usunąć tą drużynę "{{ this.name }}"?
             </p>
           </v-form>
         </div>
@@ -20,7 +18,7 @@
               NIE
             </v-btn>
             <v-btn
-              @click="confirmItem"
+              @click="confirmSquad"
               color="primary"
               class="mr-8"
               :disabled="!isValid"
@@ -67,10 +65,10 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
   },
   methods: {
-    ...mapActions("squadModule", ["squadItem"]),
-    async confirmItem() {
+    ...mapActions("squadModule", ["deleteSquad"]),
+    async confirmSquad() {
       console.log(1, this.id);
-      await this.deleteItem(this.id);
+      // await this.Squad(this.id);
       this.$emit("confirmed");
     },
     cancel() {

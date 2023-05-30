@@ -38,8 +38,8 @@ const service = {
     const resource = "item/import";
     return await client.file(resource, file);
   },
-  async exportItems() {
-    const resource = "item/export";
+  async exportItems(squadId) {
+    const resource = `item/${squadId}/export`;
     const result = await client.get(resource);
     const currentDate = new Date().toISOString().split("T")[0];
     createDownloadFileUrl(result, `items-${currentDate}.csv`);

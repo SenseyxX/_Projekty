@@ -160,7 +160,8 @@ export default {
       await this.importItems(this.file);
     },
     async onExportItems() {
-      await this.exportItems();
+      console.log(this.authenticationResult.tokenOwner.squadId);
+      await this.exportItems(this.authenticationResult.tokenOwner.squadId);
     },
   },
 

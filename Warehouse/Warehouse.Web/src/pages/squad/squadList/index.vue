@@ -1,36 +1,52 @@
-﻿<template>
+﻿<template v-slot:item.actions="{ squad }">
   <section class="text-center centerized">
     <v-btn color="primary" @click="showAddSquadDialog">Dodaj Drużynę</v-btn>
     <v-list>
       <v-list-item-group v-model="selectedSquad" color="primary">
         <v-list-item v-for="item in squads" :key="item.id">
           {{ item.name }}
-          <template v-slot:item.actions="{ team }">
-            <v-btn icon @click="editSquad(team)">
-              <v-icon small dark>mdi-pencil-outline</v-icon>
-            </v-btn>
-            <v-btn icon @click="deleteSquad(team)">
-              <v-icon small color="red">mdi-delete</v-icon>
-            </v-btn>
-          </template>
+          <v-btn icon @click="editSquad(squad)">
+            <v-icon small dark>mdi-pencil-outline</v-icon>
+          </v-btn>
+          <v-btn icon @click="deleteSquad(squad)">
+            <v-icon small color="red">mdi-delete</v-icon>
+          </v-btn>
         </v-list-item>
       </v-list-item-group>
     </v-list>
     <add-squad-dialog
       :dialog-visibility="addSquadDialogVisibility"
+      :squad="selectedSquad"
+      @confirm="hideAddSquadDialog"
       @canceled="hideAddSquadDialog"
     ></add-squad-dialog>
+    <edit-squad-dialog
+      :dialog-visibility="editSquadDialogVisibility"
+      :squad="selectedSquad"
+      @confirm="hideEditSquadDialog"
+      @canceled="hideEditSquadDialog"
+    ></edit-squad-dialog>
+    <delete-squad-dialog
+      :dialog-visibility="deleteSquadDialogVisibility"
+      :squad="selectedSquad"
+      @confirm="hideDeleteSquadDialog"
+      @canceled="hideDeleteSquadDialog"
+    ></delete-squad-dialog>
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AddSquadDialog from "../addSquadDialog";
+import EditSquadDialog from "../editSquadDialog";
+import DeleteSquadDialog from "@/pages/squad/deleteSquadDialog";
 
 export default {
   name: "SquadList",
   components: {
     AddSquadDialog,
+    EditSquadDialog,
+    DeleteSquadDialog,
   },
   data() {
     return {

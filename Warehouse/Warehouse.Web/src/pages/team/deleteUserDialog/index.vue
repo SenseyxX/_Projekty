@@ -69,7 +69,6 @@ export default {
   },
   methods: {
     ...mapActions("userModule", ["deleteUser"]),
-    // Todo: change delate to put to clear assigned teamId
     async confirmUser() {
       console.log(1, this.id);
       await this.deleteUser(this.id);

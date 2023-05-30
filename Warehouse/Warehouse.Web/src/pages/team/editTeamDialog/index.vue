@@ -2,7 +2,7 @@
   <v-dialog persistent v-model="dialogVisibility" max-width="650">
     <v-card class="frame">
       <v-toolbar color="primary" dark>
-        <p class="ma-4 text-h6">Tworzenie Zastępu</p>
+        <p class="ma-4 text-h6">Edytowanie Zastępu</p>
       </v-toolbar>
       <v-card-text>
         <div class="select-group">
@@ -10,7 +10,6 @@
             <v-text-field
               v-model="name"
               label="Nazwa Zastępu"
-              :rules="[(v) => !!v || 'Nazwa jest wymagana']"
             />
             <v-select
               v-model="selectedUser"
@@ -18,8 +17,8 @@
               :items="filteredUser()"
               item-text="name"
               item-value="id"
-              :rules="[(v) => !!v || 'Zastępowy jest wymagany']"
             ></v-select>
+            <v-text-field v-model="points" label="Punkty zastępu" />
             <v-text-field v-model="description" label="Opis zastępu" />
           </v-form>
         </div>
@@ -49,7 +48,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "addTeamDialog",
+  name: "editTeamDialog",
   data: () => ({
     name: "",
     teamOwnerId: "",
@@ -64,19 +63,12 @@ export default {
       defaultValue: false,
     },
   },
-  watch: {
-    selectedUser() {
-      console.log(this.selectedUser);
-    },
-  },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("squadModule", ["teams"]),
-    ...mapGetters("userModule", ["users"]),
   },
   methods: {
-    ...mapActions("squadModule", ["addTeam"]),
-    ...mapActions("userModule", ["getUsers"]),
+    ...mapActions("squadModule", ["updateTeam"]),
     filteredUser() {
       return this.users.filter(
         (users) =>
@@ -88,6 +80,7 @@ export default {
       const command = {
         name: this.name,
         teamOwnerId: this.selectedUser,
+        points: this.points,
         description: this.description,
         squadId: this.authenticationResult.tokenOwner.squadId,
       };

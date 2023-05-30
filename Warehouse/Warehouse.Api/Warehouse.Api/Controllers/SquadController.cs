@@ -11,7 +11,6 @@ using Warehouse.Application.Handlers;
 namespace Warehouse.Api.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route(RoutePattern)]
     public sealed class SquadController : Controller
     {

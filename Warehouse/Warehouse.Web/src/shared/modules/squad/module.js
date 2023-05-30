@@ -31,6 +31,10 @@ const actions = {
     await service.updateSquad(command);
     await dispatch("getSquads", command.id);
   },
+  async deleteSquad({ dispatch }, id) {
+    await service.deleteSquad(id);
+    await dispatch("getSquads");
+  },
   async getSquadTeams({ commit }, squadId) {
     const result = await service.getSquadTeams(squadId);
     commit("setTeams", result);
@@ -43,6 +47,10 @@ const actions = {
     await service.updateTeam(command);
     await dispatch("getSquads", command.id);
   },
+  async deleteTeam({ dispatch }, id) {
+    await service.deleteTeam(id);
+    await dispatch("getSquadTeams");
+},
 };
 
 const mutations = {

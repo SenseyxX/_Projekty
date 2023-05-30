@@ -43,8 +43,9 @@ const actions = {
     await service.importItems(file);
     await dispatch("getItems");
   },
-  async exportItems() {
-    await service.exportItems();
+  async exportItems({ dispatch }, squadId) {
+    await service.exportItems(squadId);
+    await dispatch("getItems");
   },
 };
 

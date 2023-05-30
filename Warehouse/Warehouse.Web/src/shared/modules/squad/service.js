@@ -21,6 +21,10 @@ const service = {
     const resource = `squad/${command.id}`;
     return await client.put(resource, command);
   },
+  async deleteSquad(squadId) {
+    const resource = `squad/${squadId}`;
+    return await client.delete(resource);
+  },
   async getSquadTeams(squadId) {
     const resource = `squad/${squadId}/teams`;
     const response = await client.get(resource);
@@ -33,6 +37,10 @@ const service = {
   async updateTeam(command) {
     const resource = `team/${command.id}`;
     return await client.put(resource, command);
+  },
+  async deleteTeam(squadId, teamId) {
+    const resource = `squad/${squadId}/team/${teamId}`;
+    return await client.delete(resource);
   },
 };
 
