@@ -8,7 +8,7 @@
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
             <p class="body-4 text-muted subtitle">
-              Czy jesteś pewien że chcesz usunąć tą drużynę "{{ this.name }}"?
+              Czy jesteś pewien że chcesz usunąć tą drużynę "{{ name }}"?
             </p>
           </v-form>
         </div>
@@ -37,22 +37,13 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "deleteSquadDialog",
-  watch: {
-    item() {
-      if (this.item === null) {
-        return;
-      }
-      this.id = this.item.id;
-      this.name = this.item.name;
-    },
-  },
   data: () => ({
     id: "",
     name: "",
     isValid: false,
   }),
   props: {
-    item: {
+    squad: {
       type: Object,
       defaultValue: {},
     },
@@ -67,15 +58,17 @@ export default {
   methods: {
     ...mapActions("squadModule", ["deleteSquad"]),
     async confirmSquad() {
-      console.log(1, this.id);
-      // await this.Squad(this.id);
+      await this.deleteSquad(this.id);
       this.$emit("confirmed");
     },
     cancel() {
       this.$emit("canceled");
     },
   },
-  async mounted() {},
+  async mounted() {
+    this.id = this.squad.id;
+    this.name = this.squad.name;
+  },
 };
 </script>
 

@@ -32,12 +32,14 @@
       </v-col>
     </v-row>
     <edit-team-dialog
+      v-if="editTeamDialogVisibility"
       :dialog-visibility="editTeamDialogVisibility"
       :team="selectedTeam"
       @confirmed="hideEditTeamDialog"
       @canceled="hideEditTeamDialog"
     />
     <delete-Team-dialog
+      v-if="deleteTeamDialogVisibility"
       :dialog-visibility="deleteTeamDialogVisibility"
       :team="selectedTeam"
       @confirmed="hideDeleteTeamDialog"
@@ -115,7 +117,6 @@ export default {
       this.showEditTeamDialog();
     },
   },
-
   async mounted() {
     await this.getSquadTeams(this.selectedsquad.id);
     await this.getUsers();

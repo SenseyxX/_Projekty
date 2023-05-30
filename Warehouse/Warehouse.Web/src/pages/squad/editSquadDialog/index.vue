@@ -58,11 +58,6 @@ export default {
       defaultValue: null,
     },
   },
-  watch: {
-    selectedUser() {
-      console.log(this.selectedUser);
-    },
-  },
   computed: {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("userModule", ["users"]),
@@ -85,6 +80,7 @@ export default {
     },
   },
   async mounted() {
+    console.log("Selected user changed:", this.selectedUser);
     // await this.getUsers();
   },
 };

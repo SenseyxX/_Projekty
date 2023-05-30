@@ -18,7 +18,7 @@ export default {
   props: {
     selectedsquad: {
       type: Object,
-      defaultValue: null,
+      defaultValue: {},
     },
   },
   data() {
@@ -31,7 +31,11 @@ export default {
     ...mapActions("userModule", ["getUsers"]),
     userName(squadOwnerId) {
       const user = this.users.find((user) => user.id === squadOwnerId);
-      return user.name + " " + user.lastName;
+
+      if (user) {
+        return user.name + " " + user.lastName;
+      }
+      return "";
     },
   },
   async mounted() {

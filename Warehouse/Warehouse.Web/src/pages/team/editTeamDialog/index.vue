@@ -7,10 +7,7 @@
       <v-card-text>
         <div class="select-group">
           <v-form ref="form" v-model="isValid">
-            <v-text-field
-              v-model="name"
-              label="Nazwa Zastępu"
-            />
+            <v-text-field v-model="name" label="Nazwa Zastępu" />
             <v-select
               v-model="selectedUser"
               label=" Zastępowy"
@@ -69,6 +66,7 @@ export default {
   },
   methods: {
     ...mapActions("squadModule", ["updateTeam"]),
+    ...mapActions("userModule", ["getUsers"]),
     filteredUser() {
       return this.users.filter(
         (users) =>

@@ -1,32 +1,35 @@
-﻿<template v-slot:item.actions="{ squad }">
+﻿<template>
   <section class="text-center centerized">
     <v-btn color="primary" @click="showAddSquadDialog">Dodaj Drużynę</v-btn>
     <v-list>
-      <v-list-item-group v-model="selectedSquad" color="primary">
+      <v-list-item-group v-model="selectedSquadId" color="primary">
         <v-list-item v-for="item in squads" :key="item.id">
           {{ item.name }}
-          <v-btn icon @click="editSquad(squad)">
+          <v-btn icon @click="editSquad(item)">
             <v-icon small dark>mdi-pencil-outline</v-icon>
           </v-btn>
-          <v-btn icon @click="deleteSquad(squad)">
+          <v-btn icon @click="deleteSquad(item)">
             <v-icon small color="red">mdi-delete</v-icon>
           </v-btn>
         </v-list-item>
       </v-list-item-group>
     </v-list>
     <add-squad-dialog
+      v-if="addSquadDialogVisibility"
       :dialog-visibility="addSquadDialogVisibility"
       :squad="selectedSquad"
       @confirm="hideAddSquadDialog"
       @canceled="hideAddSquadDialog"
     ></add-squad-dialog>
     <edit-squad-dialog
+      v-if="editSquadDialogVisibility"
       :dialog-visibility="editSquadDialogVisibility"
       :squad="selectedSquad"
       @confirm="hideEditSquadDialog"
       @canceled="hideEditSquadDialog"
     ></edit-squad-dialog>
     <delete-squad-dialog
+      v-if="deleteSquadDialogVisibility"
       :dialog-visibility="deleteSquadDialogVisibility"
       :squad="selectedSquad"
       @confirm="hideDeleteSquadDialog"
@@ -54,11 +57,13 @@ export default {
       editSquadDialogVisibility: false,
       deleteSquadDialogVisibility: false,
       selectedSquad: null,
+      selectedSquadId: null,
     };
   },
   watch: {
-    selectedSquad() {
-      const selected = this.squads.at(this.selectedSquad);
+    selectedSquadId() {
+      const selected = this.squads.at(this.selectedSquadId);
+      this.selectedSquad = selected;
       this.$emit("squadSelected", selected);
     },
   },
