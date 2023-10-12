@@ -91,6 +91,13 @@ export default {
     ...mapGetters("authenticationModule", ["authenticationResult"]),
     ...mapGetters("squadModule", ["squads"]),
   },
+  watch: {
+    dialogVisibility() {
+      if (this.dialogVisibility === true) {
+        this.clean();
+      }
+    },
+  },
   methods: {
     ...mapActions("registrationModule", ["addUser"]),
     ...mapActions("squadModule", ["getSquads"]),
@@ -112,8 +119,17 @@ export default {
     cancel() {
       this.$emit("canceled");
     },
-    async mounted() {
-      await this.getSquads();
+    clean() {
+      this.name = "";
+      this.lastName = "";
+      this.password = "";
+      this.email = "";
+      this.phoneNumber = "";
+      this.squad = "";
+      this.isValid = false;
+      this.selectedSquad = null;
+
+      this.$refs.form.resetValidation();
     },
   },
 };

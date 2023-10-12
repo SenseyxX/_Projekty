@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Security.Claims;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CsvHelper;
@@ -87,6 +88,7 @@ namespace Warehouse.Api.Controllers
             await using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
 
             await csv.WriteRecordsAsync((IEnumerable)result, cancellationToken);
+            await writer.FlushAsync();
 
             var serializedData = memoryStream.ToArray();
             return File(serializedData, "text/csv", $"items-{DateTime.Now:yyyy-MM-dd hh:mm}");
