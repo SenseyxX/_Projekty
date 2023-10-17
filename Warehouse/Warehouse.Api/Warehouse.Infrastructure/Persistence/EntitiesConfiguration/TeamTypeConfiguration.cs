@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Warehouse.Domain.Category.Enumeration;
 using Warehouse.Domain.Squad.Entities;
@@ -42,6 +43,36 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                    .HasForeignKey(user => user.TeamId);
 
 			   entityTypeBuilder.HasQueryFilter(team => team.State != State.Deleted);
+			   
+			   entityTypeBuilder.HasData(
+				   new Team(
+					   Guid.Parse("296f60db-9f13-48f3-853f-343de5ebdd20"),
+					   "Zastęp Oskara",
+					   Guid.Parse("eab0a7ad-8542-4e1a-8dd3-a8391edbf5f4"),
+					   Guid.Parse("1a0e19f9-8e92-41a1-9e92-09c587caef05"),
+					   "Opis zastępu Oskara",
+					   0,
+					   State.Active
+				   ),   
+				   new Team(
+					   Guid.Parse("f7921a66-83b4-451d-8556-893882233118"),
+					   "Zastęp Szymka",
+					   Guid.Parse("fa797f3e-b77a-4b92-a7e3-5aeba9aa4675"),
+					   Guid.Parse("6251c1dc-58b9-43fa-bf01-098037d53bb6"),
+					   "Opis zastępu Szymka",
+					   0,
+					   State.Active
+				   ),   
+				   new Team(
+					   Guid.Parse("d1401039-21d8-4a83-97e1-67dd2201e4a1"),
+					   "Zastęp Olka",
+					   Guid.Parse("321a719b-b778-485f-8432-11f0f038cbce"), 
+					   Guid.Parse("c7d09645-cf24-4aca-93c1-96e8c97e4286"),
+					   "Opis zastępu Olka",
+					   0,
+					   State.Active
+				   )   
+			   );
 		  }
 	 }
 }
