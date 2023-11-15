@@ -45,7 +45,6 @@ namespace Warehouse.Infrastructure.Persistence
             databaseContext
                 .Database
                 .Migrate();
-
             return applicationBuilder;
         }
     }

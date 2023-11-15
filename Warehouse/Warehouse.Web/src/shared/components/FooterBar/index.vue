@@ -4,11 +4,11 @@
       <span class="logo coloured"> {{ Names.applicationName }} </span>
       <div class="info-bar_detail">
         <span class="detail-label"> WERSJA 1.0.0 </span>
-        <span class="detail-label">OSTATNIA AKTUALIZACJA: 05.11.2021 </span>
+        <span class="detail-label">OSTATNIA AKTUALIZACJA: 05.11.2023 </span>
       </div>
     </div>
     <div>
-      <span class="mr-5 detail-label">&copy;2021 ETISOFT SMART SOLUTIONS</span>
+      <span class="mr-5 detail-label">&copy;2023 OG SOLUTIONS</span>
     </div>
   </v-footer>
 </template>

@@ -93,6 +93,22 @@ export default {
     ...mapActions("userModule", ["getUsers", "updateUser"]),
     //ToDo: add PUT user Endpoint
     //ToDo: add method to filter chosen team
+
+    getUserInSquad() {
+      return this.users.filter(
+          (users) =>
+              users.squadId === this.authenticationResult.tokenOwner.squadId &&
+              users.teamId === this.selectedTeam.teamId            
+      );
+    },
+    getUsersNotInSquad() {
+      return this.users.filter(
+          (users) =>
+              users.squadId === this.authenticationResult.tokenOwner.squadId &&
+              users.teamId !== this.selectedTeam.teamId
+      );
+    },    
+    
     onRightArrowClick() {
       let removedItems = [];
 
@@ -123,6 +139,9 @@ export default {
       this.$emit("canceled");
     },
   },
+  async mounted(){
+    await this.getUsers()
+  }
 };
 </script>
 
@@ -162,3 +181,35 @@ export default {
   height: 50px;
 }
 </style>
+
+
+import axios from 'axios';
+
+export default {
+data() {
+return {
+usersWithAdditionalField: [],
+};
+},
+methods: {
+async fetchDataAndModify() {
+try {
+const response = await axios.get('adres_endpointu_uzytkownicy');
+const modifiedData = this.addAdditionalField(response.data);
+this.usersWithAdditionalField = modifiedData;
+} catch (error) {
+console.error('Błąd podczas pobierania danych:', error);
+}
+},
+addAdditionalField(data) {
+return data.map(item => {
+return { ...item, additionalField: 'wartosc_pola' }; // Dodanie pola o wartości 'wartosc_pola'
+});
+},
+},
+async mounted() {
+await this.fetchDataAndModify();
+// Pozostała logika
+// ...
+}
+};

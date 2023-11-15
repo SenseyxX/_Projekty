@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Warehouse.Application.Services;
 using Warehouse.Domain.Category.Entities;
 using Warehouse.Domain.Item.Entities;
 using Warehouse.Domain.Rental.Entities;
@@ -11,7 +15,6 @@ namespace Warehouse.Infrastructure.Persistence.Context
     public sealed class WarehouseContext : DbContext
     {
         public const string DefaultSchemaName = "Warehouse";
-
         public WarehouseContext(DbContextOptions<WarehouseContext> options)
             : base(options)
         {
@@ -41,5 +44,6 @@ namespace Warehouse.Infrastructure.Persistence.Context
                 .ApplyConfiguration(new SquadTypeConfiguration())
                 .ApplyConfiguration(new TeamTypeConfiguration())
                 .ApplyConfiguration(new UserTypeConfiguration());
+        // .SeedInitialData();
     }
 }

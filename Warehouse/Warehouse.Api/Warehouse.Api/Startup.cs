@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Application;
@@ -6,6 +7,7 @@ using Warehouse.Domain;
 using Warehouse.Infrastructure;
 using Warehouse.Infrastructure.Messaging;
 using Warehouse.Infrastructure.Persistence;
+using Warehouse.Infrastructure.Persistence.EntitiesConfiguration;
 
 namespace Warehouse.Api
 {
@@ -35,5 +37,6 @@ namespace Warehouse.Api
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(builder => builder.MapControllers());
+
     }
 }
