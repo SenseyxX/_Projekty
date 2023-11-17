@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Infrastructure.Messaging;
 using Warehouse.Infrastructure.Persistence;
+using Warehouse.Infrastructure.Persistence.EntitiesConfiguration;
 using Warehouse.Infrastructure.Repositories;
 using Warehouse.Infrastructure.Services;
 

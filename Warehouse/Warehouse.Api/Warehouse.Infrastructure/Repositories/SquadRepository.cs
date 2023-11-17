@@ -16,9 +16,9 @@ namespace Warehouse.Infrastructure.Repositories
         {
         }
 
-        public override async Task<Squad> GetAsync(Guid squadId, CancellationToken cancellationToken)
+        public override async Task<Squad> GetAsync(Guid id, CancellationToken cancellationToken)
             => await GetSquadDependencies()
-                .FirstOrDefaultAsync(squad => squad.Id == squadId, cancellationToken);
+                .FirstOrDefaultAsync(squad => squad.Id == id, cancellationToken);
 
         public async Task<Team> GetTeamAsync(Guid teamId, CancellationToken cancellationToken)
             => await DbContext

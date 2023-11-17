@@ -2,22 +2,28 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Warehouse.Application.Services;
+using Warehouse.Application.Settings;
 using Warehouse.Domain.Category.Entities;
 using Warehouse.Domain.Item.Entities;
 using Warehouse.Domain.Rental.Entities;
 using Warehouse.Domain.Squad.Entities;
 using Warehouse.Domain.User.Entities;
 using Warehouse.Infrastructure.Persistence.EntitiesConfiguration;
+using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Infrastructure.Persistence.Context
 {
     public sealed class WarehouseContext : DbContext
     {
+        private readonly IEncryptionService _encryptionService;
         public const string DefaultSchemaName = "Warehouse";
-        public WarehouseContext(DbContextOptions<WarehouseContext> options)
+
+        public WarehouseContext(DbContextOptions<WarehouseContext> options, IEncryptionService encryptionService)
             : base(options)
         {
+            _encryptionService = encryptionService;
         }
 
         // Inicjowanie encji w context
@@ -34,7 +40,8 @@ namespace Warehouse.Infrastructure.Persistence.Context
 
         // Inicjowanie plików konfiguracyjnych encje
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder
+        {
+            modelBuilder
                 .ApplyConfiguration(new CategoryTypeConfiguration())
                 .ApplyConfiguration(new DueTypeConfiguration())
                 .ApplyConfiguration(new ItemTypeConfiguration())
@@ -43,7 +50,8 @@ namespace Warehouse.Infrastructure.Persistence.Context
                 .ApplyConfiguration(new RentalItemTypeConfiguration())
                 .ApplyConfiguration(new SquadTypeConfiguration())
                 .ApplyConfiguration(new TeamTypeConfiguration())
-                .ApplyConfiguration(new UserTypeConfiguration());
-        // .SeedInitialData();
+                .ApplyConfiguration(new UserTypeConfiguration())
+                .SeedInitialData(_encryptionService);
+        }
     }
 }

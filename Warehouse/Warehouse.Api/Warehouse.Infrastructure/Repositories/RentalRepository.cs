@@ -17,9 +17,9 @@ namespace Warehouse.Infrastructure.Repositories
         {
         }
 
-        public override async Task<Rental> GetAsync(Guid squadId, CancellationToken cancellationToken)
+        public override async Task<Rental> GetAsync(Guid id, CancellationToken cancellationToken)
             => await GetWithDependencies()
-                .FirstOrDefaultAsync(rentalItem => rentalItem.Id == squadId, cancellationToken);
+                .FirstOrDefaultAsync(rentalItem => rentalItem.Id == id, cancellationToken);
 
         public override async Task<ICollection<Rental>> GetRangeAsync(CancellationToken cancellationToken)
             => await GetWithDependencies()

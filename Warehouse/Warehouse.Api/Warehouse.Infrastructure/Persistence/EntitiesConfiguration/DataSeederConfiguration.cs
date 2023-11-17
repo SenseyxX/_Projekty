@@ -1,16 +1,20 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Warehouse.Application.Services;
+using Warehouse.Application.Settings;
 using Warehouse.Domain.Category.Enumeration;
 using Warehouse.Domain.Squad.Entities;
 using Warehouse.Domain.User.Entities;
+using Warehouse.Domain.User.Enumeration;
+using Warehouse.Infrastructure.Services;
 
 namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 {
     public static class DataSeeder
     {
-        public static ModelBuilder SeedInitialData(this ModelBuilder modelBuilder)
+        public static ModelBuilder SeedInitialData(this ModelBuilder modelBuilder, IEncryptionService encryptionService)
         {
-            var passwordhash = "0x269AA306E232A5C55D061A62810AA7BCCD25345A402E23D706610633CAAD7F8B810ACABB5EE0C0E6F976DD78A645D34A0EAE3908C07AD293BB9D1013E4FD568FA3FCDB9B88E3BE3E27346CD5BE6BD5F07931EAF9D391D0C965B2491CC47DB7A2D2F8228DA75E98CD22B7B17FE8B864117A2077058B3D4CDDC1AA56E13F8D4F34";
             var users = new object[]
             {
                 new
@@ -18,10 +22,10 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                     Id = Guid.Parse("eab0a7ad-8542-4e1a-8dd3-a8391edbf5f4"),
                     Name = "Oskar",
                     LastName = "Gacki",
-                    PaswordHash = passwordhash,
+                    PasswordHash = encryptionService.EncodePassword("1234"),
                     Email = "ogacki",
                     PhoneNumber = "888888888",
-                    PermissionLevel = 0,
+                    PermissionLevel = PermissionLevel.Admin,
                     State = State.Active,
                     SquadId = Guid.Parse("1a0e19f9-8e92-41a1-9e92-09c587caef05"),
                     TeamId = Guid.Parse("296f60db-9f13-48f3-853f-343de5ebdd20")
@@ -30,10 +34,10 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                     Id = Guid.Parse("fa797f3e-b77a-4b92-a7e3-5aeba9aa4675"), 
                     Name = "Szymon",
                     LastName = "Katryniok",
-                    PaswordHash = passwordhash,
+                    PasswordHash = encryptionService.EncodePassword("1234"),
                     Email = "skatryniok",
                     PhoneNumber = "999999999",
-                    PermissionLevel = 0,
+                    PermissionLevel = PermissionLevel.Admin,
                     State = State.Active,
                     SquadId = Guid.Parse("6251c1dc-58b9-43fa-bf01-098037d53bb6"), 
                     TeamId = Guid.Parse("f7921a66-83b4-451d-8556-893882233118")
@@ -42,10 +46,10 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                     Id = Guid.Parse("321a719b-b778-485f-8432-11f0f038cbce"), 
                     Name = "Aleksander",
                     LastName = "Kijowski",
-                    PaswordHash = passwordhash,
+                    PasswordHash = encryptionService.EncodePassword("1234"),
                     Email = "akijowski",
                     PhoneNumber =  "777777777",
-                    PermissionLevel = 0,
+                    PermissionLevel = PermissionLevel.Admin,
                     State = State.Active,
                     SquadId = Guid.Parse("c7d09645-cf24-4aca-93c1-96e8c97e4286"), 
                     TeamId = Guid.Parse("d1401039-21d8-4a83-97e1-67dd2201e4a1")
@@ -54,10 +58,10 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                     Id = Guid.Parse("071c18c6-93e1-40ef-ae43-bdb3c8f2aab6"), 
                     Name = "Wojtek",
                     LastName ="Patoń",
-                    PaswordHash = passwordhash,
+                    PasswordHash = encryptionService.EncodePassword("1234"),
                     Email = "akijowski",
                     PhoneNumber = "666666666",
-                    PermissionLevel = 0,
+                    PermissionLevel = PermissionLevel.Admin,
                     State = State.Active,
                     SquadId = Guid.Parse("1a0e19f9-8e92-41a1-9e92-09c587caef05"), 
                     TeamId = Guid.Parse("296f60db-9f13-48f3-853f-343de5ebdd20")
@@ -66,16 +70,18 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             var teams = new object[]
             {
-                new {
+                new 
+                {
                     Id = Guid.Parse("296f60db-9f13-48f3-853f-343de5ebdd20"),
                     Name ="Zastęp Oskara",
                     TeamOwnerId = Guid.Parse("eab0a7ad-8542-4e1a-8dd3-a8391edbf5f4"),
                     SquadId = Guid.Parse("1a0e19f9-8e92-41a1-9e92-09c587caef05"),
                     Description = "Opis zastępu Oskara",
-                    Point = 1,
+                    Points = 1,
                     State = State.Active
-                    },   
-                new {
+                },   
+                new 
+                {
                     Id = Guid.Parse("f7921a66-83b4-451d-8556-893882233118"),
                     Name = "Zastęp Szymka",
                     TeamOwnerId = Guid.Parse("fa797f3e-b77a-4b92-a7e3-5aeba9aa4675"),
@@ -84,7 +90,8 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
                     Points = 1,
                     State = State.Active
                 },   
-                new {
+                new 
+                {
                     Id = Guid.Parse("d1401039-21d8-4a83-97e1-67dd2201e4a1"),
                     Name = "Zastęp Olka",
                     TeamOwnerId = Guid.Parse("321a719b-b778-485f-8432-11f0f038cbce"), 
@@ -119,11 +126,13 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             modelBuilder.Entity<User>()
                 .HasData(users);
+
             modelBuilder.Entity<Team>()
                 .HasData(teams);
+
             modelBuilder.Entity<Squad>()
                 .HasData(squads);
-            
+
             return modelBuilder;
         }
     }

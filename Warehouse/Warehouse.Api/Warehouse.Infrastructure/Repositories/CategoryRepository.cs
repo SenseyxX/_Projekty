@@ -16,10 +16,10 @@ namespace Warehouse.Infrastructure.Repositories
         }
 
         // Jeśli była by potrzeba zmienić coś w zględem base repo
-        public override async Task<Category> GetAsync(Guid squadId, CancellationToken cancellationToken)
+        public override async Task<Category> GetAsync(Guid id, CancellationToken cancellationToken)
             => await DbContext
                 .Set<Category>()
                 .Include(category => category.Items)
-                .FirstOrDefaultAsync(entity => entity.Id == squadId, cancellationToken);
+                .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
     }
 }
