@@ -16,7 +16,7 @@ namespace Warehouse.Infrastructure.Persistence
             this IServiceCollection serviceCollection,
             IConfiguration configuration)
             => serviceCollection.AddDbContext<WarehouseContext>(
-                options => options.UseSqlServer(
+                options => options.UseNpgsql(
                     configuration.GetConnectionString(WarehouseContextSectionKey),
                     migrationsConfiguration => migrationsConfiguration.MigrationsAssembly(
                         Assembly.GetExecutingAssembly().FullName)));

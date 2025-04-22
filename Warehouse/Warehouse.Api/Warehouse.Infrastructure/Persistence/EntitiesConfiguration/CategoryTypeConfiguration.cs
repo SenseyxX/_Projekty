@@ -29,7 +29,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property(nameof(Category.State))
-                .HasColumnType("tinyint")
+                .HasColumnType("smallint")
                 .HasColumnName(nameof(Category.State))
                 .IsRequired();
 

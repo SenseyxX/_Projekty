@@ -31,7 +31,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property(nameof(Item.QualityLevel))
-                .HasColumnType("tinyint") // Zdefiniowanie typu komórki tinyint wartości od 0-255
+                .HasColumnType("smallint") // Zdefiniowanie typu komórki tinyint wartości od 0-255
                 .HasColumnName(nameof(Item.QualityLevel))
                 .IsRequired();
 
@@ -42,7 +42,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property(nameof(Item.State))
-                .HasColumnType("tinyint")
+                .HasColumnType("smallint")
                 .HasColumnName(nameof(Item.State))
                 .IsRequired();
 

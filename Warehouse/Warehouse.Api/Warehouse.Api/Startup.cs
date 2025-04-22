@@ -28,12 +28,12 @@ namespace Warehouse.Api
 
         public void Configure(IApplicationBuilder app)
             => app
-                .UseMigrationsOfContext()
-                .UseSwaggerMiddleware(_configuration)
                 .UseRouting()
                 .UseCorsMiddleware()
                 .UseAuthentication()
                 .UseAuthorization()
+                .UseMigrationsOfContext()
+                .UseSwaggerMiddleware(_configuration)
                 .UseEndpoints(builder => builder.MapControllers());
     }
 }

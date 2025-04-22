@@ -22,19 +22,19 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
 			   entityTypeBuilder
 				  .Property(nameof(Due.Half))
-				  .HasColumnType("tinyint")
+				  .HasColumnType("smallint")
 				  .HasColumnName(nameof(Due.Half))
 				  .IsRequired();
 
 			   entityTypeBuilder
                    .Property(nameof(Due.Amount))
-				  .HasColumnType("int")
+				  .HasColumnType("smallint")
 				  .HasColumnName(nameof(Due.Amount))
 				  .IsRequired();
 
 			   entityTypeBuilder
 				  .Property(nameof(Due.DueStatus))
-				  .HasColumnType("tinyint")
+				  .HasColumnType("smallint")
 				  .HasColumnName(nameof(Due.DueStatus))
 				  .IsRequired();
 		  }

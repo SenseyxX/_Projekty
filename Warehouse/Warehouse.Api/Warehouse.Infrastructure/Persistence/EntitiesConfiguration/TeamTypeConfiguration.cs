@@ -33,7 +33,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
 			   entityTypeBuilder
 				    .Property(nameof(Team.Points))
-				    .HasColumnType("tinyint")
+				    .HasColumnType("smallint")
 				    .HasColumnName(nameof(Team.Points));
 
                entityTypeBuilder

@@ -34,6 +34,7 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property<byte[]>(nameof(User.PasswordHash))
+                .HasColumnType("bytea")
                 .HasMaxLength(256)
                 .HasColumnName(nameof(User.PasswordHash))
                 .IsRequired();
@@ -52,13 +53,13 @@ namespace Warehouse.Infrastructure.Persistence.EntitiesConfiguration
 
             entityTypeBuilder
                 .Property(nameof(User.State))
-                .HasColumnType("tinyint")
+                .HasColumnType("smallint")
                 .HasColumnName(nameof(User.State))
                 .IsRequired();
 
             entityTypeBuilder
                 .Property(nameof(User.PermissionLevel))
-                .HasColumnType("tinyint")
+                .HasColumnType("smallint")
                 .HasColumnName(nameof(User.PermissionLevel))
                 .IsRequired();
 

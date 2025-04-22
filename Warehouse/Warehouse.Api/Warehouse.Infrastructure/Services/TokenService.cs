@@ -13,7 +13,7 @@ namespace Warehouse.Infrastructure.Services
     public sealed class TokenService : ITokenService
     {
         public const string TokenOwnerKey = "TokenOwner";
-        internal const string SecretKey = "jalhdkagASdlh212312";
+        internal const string SecretKey = "jalhdkagASdlh212312_EXTENDED_SECRET_KEY_TO_HAVE_AT_LEAST_32_CHARS";
 
         private readonly TokenSettings _tokenSettings;
 
